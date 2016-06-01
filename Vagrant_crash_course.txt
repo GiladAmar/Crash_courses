@@ -1,0 +1,6 @@
+vagrant init hashicorp/precise64
+vagrant box add hashicorp/precise64   -         (https://atlas.hashicorp.com/boxes/search)
+vagrant up
+vagrant ssh	-ssh into machine, no gui
+vagrant destroy	-	terminate machine
+vagrant box remove	-	completely remove box
