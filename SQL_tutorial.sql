@@ -2,23 +2,44 @@
 	WELCOME TO THE SQL INTRODUCTORY CODE.
 	This is part of a multi-linecomment. 
 */
+ /* Warning: the following pseudo-code will make you cry
+ 	A safety pig has been provided for your benefit:
+ _._ _..._ .-',     _.._(`))
+'-. `     '  /-._.-'    ',/
+   )         \            '.
+  / _    _    |             \
+ |  a    a    /              |
+ \   .-.                     ;  
+  '-('' ).-'       ,'       ;
+     '-;           |      .'
+        \           \    /
+        | 7  .__  _.-\   \
+        | |  |  ``/  /`  /
+       /,_|  |   /,_/   /
+          /,_/      '`-'
+*/
 
-	-- This is a single line comment
+-- This is a single line comment
 
-/*
-DATA TYPES:
+
+--DATA TYPES:
 	String	VARCHAR(1024)	-- Any characters, with a maximum field length of 1024 characters.
 	Date/Time	TIMESTAMP	-- Stores year, month, day, hour, minute and second values as YYYY-MM-DD hh:mm:ss.
 	Number DOUBLE PRECISION -- Numerical, with up to 17 significant digits decimal precision. 
 							-- Does not support commas, or currency symbols.
 	Boolean	BOOLEAN			-- Only TRUE or FALSE values
 
-Columns can be cast to another type(within reason) with:
+--Columns can be cast to another type(within reason) with:
 	CAST (expression AS [data type])
 	column_name::[data type]
 	convert([data type], expression)
-*/
 
+--TODO Items:
+	-- NULLIF(x,0)
+	-- Partition by and rank over
+	-- dynamic SQL
+	-- pivoting
+	
 ------------------------------Query Types------------------------------
 ------------------------------SELECT------------------------------
 SELECT [ TOP x ] <fields> 			-- STANDARD SELECT STRUCTURE	
@@ -51,16 +72,14 @@ ON table_name (LastName, FirstName)
 
 CREATE OR REPLACE VIEW view_name AS 	-- Create an on-the-fly view of a table 
 										-- (OR REPLACE will recreate if already view by that name)
-SELECT column_name(s)
-FROM table_name
-WHERE condition
+
 ------------------------------INSERT------------------------------
 INSERT 	INTO tblPlayers 			-- Add values in row to table
 			(firstName, lastName) 
 		VALUES (‘Douglas’, ‘Adams’);
 
 ------------------------------ALTER------------------------------
-ALTER TABLE table_name					-- Change the structure of a table (fields)
+ALTER TABLE table_name					-- Change the structure of a table (fields)u
 	ADD column_name data_type 			-- Add a column of a certain datatype
 	DROP COLUMN column_name 			-- Delete column
 	ALTER COLUMN column_name data_type 	-- Change column datatype
@@ -116,12 +135,20 @@ SELECT TOP 100 * + (5 * 2)/ 2.5 ,year, month 	-- Can use arithmetic operations (
 		ROUND(Price,0),							-- Round column to 0 decimals
 		COALESCE(UnitsOnOrder,0),				-- Returns first non null argument (here used to replace nulls with zero)
 		STDEV(group_members) AS std_dev_members,-- Standard Deviation
-		VAR(group_members) AS variance_members	-- Variance
-
+		VAR(group_members) AS variance_members,	-- Variance
+		CASE
+    		
+    		ELSE  'We Do Not Have Records For This Customer'
+    		END AS 'result';
 
 		CASE WHEN weight > 250 THEN 'over 250' 	-- IF THEN ELSE statement 
              WHEN weight > 200 AND weight <= 250 THEN '201-250'
              WHEN weight > 175 AND weight <= 200 THEN '176-200'
+             WHEN EXISTS(
+        				SELECT 1 FROM call_records
+        				WHERE account = @accountnumber
+    					) 
+             	THEN  'We Have Records of this Customer'
              ELSE '175 or under' 				-- ELSE is optional
              END AS weight_group
 
@@ -242,6 +269,31 @@ IIF(handicap <= 15, ‘Good’, ‘Bad’)
 
 
 ------------------------------DATE AND TIME QUERIES------------------------------
+
+
+DATEPART(datepart,date): Returns part, defined by abbrev. below, of the date
+		year			yy, yyyy
+		quarter			qq, q
+		month			mm, m
+		dayofyear		dy, y
+		day				dd, d
+		week			wk, ww
+		weekday			dw, w
+		hour			hh
+		minute			mi, n
+		second			ss, s
+		millisecond		ms
+		microsecond		mcs
+		nanosecond		ns
+
+
+
+
+
+
+
+
+
 ADDDATE()								-- Adds dates
 ADDTIME()								-- Adds time
 CONVERT_TZ()							-- Converts from one timezone to another
