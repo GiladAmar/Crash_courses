@@ -1,0 +1,83 @@
+case sensitive
+
+
+\d : digit 0-9
+\D : non-digit
+. : single wildcard so to match peroid \.
+[abc]: single wildcrad of specified list in []
+	[a-z]: single wildcard in whole char range
+	[3-9]: ""
+
+[^abc]: single wildcard NOT in list [^ ]
+\w metacharacter which is equivalent to the character range [A-Za-z0-9_] and often used to match characters in English text.
+\W : non-alphanumeric (eg. punctuation) and underscore equivalent to [a-zA-Z0-9_]
+
+a{3}: makes 3 repitions of a
+a{1-3}: some engines allowa specified range of repetitions
+[wxy]{5}: five characters of either wxy
+.{2,6}: any two to six characters
+
+c*: 0 or more c's
+c+: one or more c's
+\d+: one or more difit
+[abc]+ one or more of a, b or c.
+special characters dont have meaning inside of a set e.g. [*+] means where it matches * or +
+ab?c: b is optional, may or may not be there
+
+. - Matches anything except a newline
+' ' - space
+\t - tab
+\n - newline
+\r - carriage return
+\b boundary between word and non word
+\s: matches ALL space types
+\S: non-whitepspace
+
+^___________$ whole line must match exactly this ^ is the start and $ is the end
+
+(___)..... : whole string is matched but only part in () is returned 
+
+(___(....)): Can capture multiple, even nested items
+
+(cat|dog): the OR operator
+
+
+The solution is to use Python’s raw string notation for regular expressions; backslashes are not handled in any special way in a string literal prefixed with 'r', so r"\n" is a two-character string containing '\' and 'n', while "\n" is a one-character string containing a newline. Regular expressions will often be written in Python code using this raw string notation.
+Import re
+re.match(pattern, string):
+
+This method finds match if it occurs at start of the string. For example, calling match() on the string ‘AV Analytics AV’ and looking for a pattern ‘AV’ will match. However, if we look for only Analytics, the pattern will not match. Let’s perform it in python now.
+
+
+re.search(pattern, string):
+
+It is similar to match() but it doesn’t restrict us to find matches at the beginning of the string only. Unlike previous method, here searching for pattern ‘Analytics’ will return a match.
+
+
+re.findall (pattern, string):
+
+It helps to get a list of all matching patterns. It has no constraints of searching from start or end. If we will use method findall to search ‘AV’ in given string it will return both occurrence of AV. While searching a string, I would recommend you to use re.findall() always, it can work like re.search() and re.match() both.
+
+
+re.split(pattern, string, [maxsplit=0]):
+
+This methods helps to split string by the occurrences of given pattern.
+
+
+
+re.sub(pattern, repl, string):
+
+It helps to search a pattern and replace with a new sub string. If the pattern is not found, string is returned unchanged.
+
+
+re.compile(pattern, repl, string):
+
+We can combine a regular expression pattern into pattern objects, which can be used for pattern matching. It also helps to search a pattern again without rewriting it.
+
+
+
+
+
+
+
+
