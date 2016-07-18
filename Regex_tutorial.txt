@@ -1,45 +1,87 @@
+#############################################
+Author 			= "Gilad Amar"				#
+Email 			= "giladamar@gmail.com"		#
+Created 		= "28/06/2016"				#
+Last_Modified  	= "04/07/2016"				#
+#############################################
+/* 
+	WELCOME TO THE REGEX INTRODUCTORY CODE.
+*/
+/* 	Warning: the following pseudo-code will make you cry
+ 	A safety pig has been provided for your benefit:
+ _._ _..._ .-',     _.._(`))
+'-. `     '  /-._.-'    ',/
+   )         \            '.
+  / _    _    |             \
+ |  a    a    /              |
+ \   .-.                     ;  
+  '-('' ).-'       ,'       ;
+     '-;           |      .'
+        \           \    /
+        | 7  .__  _.-\   \
+        | |  |  ``/  /`  /
+       /,_|  |   /,_/   /
+          /,_/      '`-'
+*/
+/* 
+	TODO
+	Regex in python std.
+	Regex in Pandas
+	Regex in bash
+	Regex in R
+*/
+
+
 case sensitive
 
 
-\d : digit 0-9
-\D : non-digit
-. : single wildcard so to match peroid \.
-[abc]: single wildcrad of specified list in []
+\d : 	digit 0-9
+\D : 	non-digit
+.:	 	single wildcard so to match peroid \.
+[abc]: 	single wildcrad of specified list in []
 	[a-z]: single wildcard in whole char range
 	[3-9]: ""
 
 [^abc]: single wildcard NOT in list [^ ]
-\w metacharacter which is equivalent to the character range [A-Za-z0-9_] and often used to match characters in English text.
-\W : non-alphanumeric (eg. punctuation) and underscore equivalent to [a-zA-Z0-9_]
+\w:		metacharacter which is equivalent to the character range [A-Za-z0-9_] and often used to match characters in English text.
+\W: 	non-alphanumeric (eg. punctuation) and underscore equivalent to [a-zA-Z0-9_]
 
-a{3}: makes 3 repitions of a
-a{1-3}: some engines allowa specified range of repetitions
-[wxy]{5}: five characters of either wxy
-.{2,6}: any two to six characters
+a{3}: 		makes 3 repitions of a
+a{1-3}: 	some engines allowa specified range of repetitions
+[wxy]{5}: 	five characters of either wxy
+.{2,6}: 	any two to six characters
 
-c*: 0 or more c's
-c+: one or more c's
-\d+: one or more difit
-[abc]+ one or more of a, b or c.
+c*: 	0 or more c's
+c+: 	one or more c's
+\d+: 	one or more difit
+[abc]+: one or more of a, b or c.
+ab?c: 	b is optional, may or may not be there
 special characters dont have meaning inside of a set e.g. [*+] means where it matches * or +
-ab?c: b is optional, may or may not be there
 
-. - Matches anything except a newline
-' ' - space
-\t - tab
-\n - newline
-\r - carriage return
-\b boundary between word and non word
-\s: matches ALL space types
-\S: non-whitepspace
 
-^___________$ whole line must match exactly this ^ is the start and $ is the end
+.: 		Matches anything except a newline
+' ': 	space
+\t: 	tab
+\n: 	newline
+\r: 	carriage return
+\b:		boundary between word and non word
+\s: 	matches ALL space types
+\S: 	non-whitepspace
 
-(___)..... : whole string is matched but only part in () is returned 
 
-(___(....)): Can capture multiple, even nested items
+^_________$: 	whole line must match exactly this ^ is the start and $ is the end
 
-(cat|dog): the OR operator
+(___)..... : 	whole string is matched but only part in () is returned 
+
+(___(....)):	Can capture multiple, even nested items
+
+(cat|dog): 		the OR operator
+
+
+
+...............................................................................
+				INCOMPLETE SECTION BELOW, COPY PASTED.
+...............................................................................
 
 
 The solution is to use Python’s raw string notation for regular expressions; backslashes are not handled in any special way in a string literal prefixed with 'r', so r"\n" is a two-character string containing '\' and 'n', while "\n" is a one-character string containing a newline. Regular expressions will often be written in Python code using this raw string notation.
