@@ -2,7 +2,7 @@
 Author 			= "Gilad Amar"				#
 Email 			= "giladamar@gmail.com"		#
 Created 		= "2016"				#
-Last_Modified  	= "18/07/2016"				#
+Last_Modified  	= "30/09/2016"				#
 #############################################
 
 /* 
@@ -41,7 +41,38 @@ Last_Modified  	= "18/07/2016"				#
 
 --TODO Items:
 	-- Partition by and rank over
-	
+SELECT * FROM EMPLOYEE
+MINUS
+SELECT * FROM EMPLOYEE WHERE ID > 2
+--
+SELECT * FROM EMPLOYEE WHERE ID IN (2, 3, 5)
+INTERSECT
+SELECT * FROM EMPLOYEE WHERE ID IN (1, 2, 4, 5)
+
+--Cannot compare nulls
+effectively True, False AND NULL
+NULL is NULL
+anything evaluated WITH NULL results IN 'Unknown'
+
+--
+SELECT nth ighest
+	SELECT TOP (1) Salary FROM
+	(
+	    SELECT DISTINCT TOP (10) Salary FROM Employee ORDER BY Salary DESC
+	) AS Emp ORDER BY Salary
+
+-- Cant use alias to order group etc 
+-- Group functions can be nested to a depth of two.
+
+--IN ANY All
+--Can insert NULL of just not insert if cell should be emptyu
+
+
+--The MERGE statement allows conditional update or insertion of data into a database table. It performs an UPDATE if the rows exists, or an INSERT if the row does not exist.
+
+-- A DROP TABLE statement cannot be rolled back.
+
+
 ------------------------------Query Types------------------------------
 ------------------------------SELECT------------------------------
 SELECT [ TOP x ] <fields> 			-- STANDARD SELECT STRUCTURE	
@@ -121,9 +152,9 @@ DROP view 							-- Drop a view
 
 ------------------------------COMPLETE SELECT SAMPLE STATEMENT------------------------------
 
-SELECT TOP 100 * + (5 * 2)/ 2.5 ,year, month 	-- Can use arithmetic operations (+, - ,* ,/ ) with columns BODMAS brackets
-		
-							AS newName,			-- Give column new name, can be used later in query. Use AS "Title with Spaces" for spaces.
+SELECT TOP 100 * + (5 * 2)/ 2.5 ,year, month,	-- Can use arithmetic operations (+, - ,* ,/ ) with columns BODMAS brackets
+		a.*,									-- Select all columns from Table alias a
+		name 				AS newName,			-- Give column new name, can be used later in query. Use AS "Title with Spaces" for spaces.
 		COUNT(artist) 		AS num_artists, 	-- Counts no. in artist column NOT nulls.
 		SUM(earnings) 		AS profit,			-- Sums column, treats nulls as 0.
 		AVG(group_members) 	AS avg_band_size	-- Find column average, completely ignores nulls (doesn't treat like zeros).
@@ -131,14 +162,16 @@ SELECT TOP 100 * + (5 * 2)/ 2.5 ,year, month 	-- Can use arithmetic operations (
 		MAX(albums_sold) 	AS max_sold,		-- Column maximumn. Handles dates, numbers and strings
 		DISTINCT(month)  	AS uniq_months,		-- DISTINCT returns unique entries in month column.
 												-- DISTINCT(year, month) will return unique pairs.
+												-- "SELECT DISTINCT * ..." will return unique rows.
 												-- DISTINCT performs slowly.
 		UPPER(),								-- Return string in uppercase
 		LOWER(),								-- Return string in lowercase
 		ROUND(Price,0),							-- Round column to 0 decimals
 		COALESCE(UnitsOnOrder,0),				-- Returns first non null argument (here used to replace nulls with zero)
+		ISNULL(UnitsOnOrder,0),					-- Returns 0 if UnitsOnOrder is NULL
 		STDEV(group_members) AS std_dev_members,-- Standard Deviation
 		VAR(group_members) AS variance_members,	-- Variance
-		ISNULL(UnitsOnOrder,0),					-- Returns 0 if UnitsOnOrder is NULL			
+
 		CASE
     		
     		ELSE  'We Do Not Have Records For This Customer'
@@ -156,8 +189,8 @@ SELECT TOP 100 * + (5 * 2)/ 2.5 ,year, month 	-- Can use arithmetic operations (
              END AS weight_group
 
 	-- FROM song_schema.song_data as artists
-	FROM songs_schema.songs songs
-	  	JOIN artist_schema.artist earnings
+	FROM songs_schema.songs songs a 	--Can be given an alias, here just "a".
+	  	JOIN artist_schema.artist earnings b
 	    	ON songs.artist = earnings.artist
 	    	AND companies.name = investments.company_name 					-- Joining on more than one key, even if unneccesary is much faster.
 	    	AND acquisitions.company_permalink != '/company/1000memories', 	-- Additional condition for merger --EVALUATED BEFORE where
@@ -251,6 +284,7 @@ GROUP BY 1
  FROM tutorial.crunchbase_investments_part2
 
 ------------------------------STRING_EXPRESSIONS------------------------------
+LEN(string_var),									-- Return the length of the string
 LEFT(string_var,index), 							-- Take from char 1 to index
 MID(string_var), 									-- Take mid char
 RIGHT(string_var,index), 							-- Take from char 1 to index
@@ -260,7 +294,7 @@ TRIM( [ [LOCATION] [remstr] FROM ] str) 			-- [LOCATION] can be either LEADING, 
 													-- If remstr pattern is not gieven white spaces are removed.
 CONCAT (str1, str2, str3, ...)						-- Concat all strings
 substring(Res_QnA.Question_str, index_1, index_2) 	-- Take substring between index_1 and index_2
-
+CHARINDEX('-',QnA.Question_str)						-- Find Position of character in string
 
 ------------------------------MATHEMATICAL_EXPRESSIONS------------------------------
 IGN(x)		-- Sign of input x as -1, 0, or 1
@@ -350,6 +384,7 @@ DATEPART(datepart,date): Returns part, defined by abbrev. below, of the date
 		millisecond		ms
 		microsecond		mcs
 		nanosecond		ns
+		NOW()		
 
 
 

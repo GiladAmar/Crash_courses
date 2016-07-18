@@ -1,0 +1,45 @@
+#############################################
+Author 			= "Gilad Amar"				    #
+Email 			= "giladamar@gmail.com"		#
+Created 		= "12/07/2016"				    #
+Last_Modified  	= "12/07/2016"				#
+#############################################
+/* 
+	WELCOME TO THE VBA INTRODUCTORY CODE.
+*/
+/* 	Warning: the following pseudo-code will make you cry
+ 	A safety pig has been provided for your benefit:
+ _._ _..._ .-',     _.._(`))
+'-. `     '  /-._.-'    ',/
+   )         \            '.
+  / _    _    |             \
+ |  a    a    /              |
+ \   .-.                     ;  
+  '-('' ).-'       ,'       ;
+     '-;           |      .'
+        \           \    /
+        | 7  .__  _.-\   \
+        | |  |  ``/  /`  /
+       /,_|  |   /,_/   /
+          /,_/      '`-'
+*/
+
+Alt + F11
+
+
+Modules
+1. Modules is the area where code is written. This is a new Workbook hence there aren't any Modules.
+
+The two main types of Procedures are Sub and Function.
+
+  Function
+  A function is a group of reusable code which can be called anywhere in your program.
+
+  Apart from inbuilt Functions, VBA allows us to write user-defined functions as well and statements are written between Function and End Function
+
+  Sub Procedures
+  Sub Procedures work similar to functions while Sub procedures DONOT Return a value while functions may or may not return a value. Sub procedures Can be called without call keyword. Sub procedures are always enclosed within Sub and End Sub statements.
+
+  COMMENTS:
+  ' This is a comment
+  REM This is also a comment
