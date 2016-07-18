@@ -5,7 +5,25 @@ Email = "giladamar@gmail.com"				#
 Created = "19/05/2016"						#
 Last_Modified  =  "19/05/2016"				#
 #############################################
-
+/* 
+	WELCOME TO THE GIT INTRODUCTORY CODE.
+*/
+/* 	Warning: the following pseudo-code will make you cry
+ 	A safety pig has been provided for your benefit:
+ _._ _..._ .-',     _.._(`))
+'-. `     '  /-._.-'    ',/
+   )         \            '.
+  / _    _    |             \
+ |  a    a    /              |
+ \   .-.                     ;  
+  '-('' ).-'       ,'       ;
+     '-;           |      .'
+        \           \    /
+        | 7  .__  _.-\   \
+        | |  |  ``/  /`  /
+       /,_|  |   /,_/   /
+          /,_/      '`-'
+*/
 # GIT STRUCTURE #TODO Improve representation
 											
 											

@@ -1,3 +1,10 @@
+#############################################
+Author 			= "Gilad Amar"				#
+Email 			= "giladamar@gmail.com"		#
+Created 		= "2016"				#
+Last_Modified  	= "18/07/2016"				#
+#############################################
+
 /* 
 	WELCOME TO THE SQL INTRODUCTORY CODE.
 	This is part of a multi-linecomment. 
@@ -19,8 +26,6 @@
           /,_/      '`-'
 */
 
--- This is a single line comment
-
 
 --DATA TYPES:
 	String	VARCHAR(1024)	-- Any characters, with a maximum field length of 1024 characters.
@@ -35,10 +40,7 @@
 	convert([data type], expression)
 
 --TODO Items:
-	-- NULLIF(x,0)
 	-- Partition by and rank over
-	-- dynamic SQL
-	-- pivoting
 	
 ------------------------------Query Types------------------------------
 ------------------------------SELECT------------------------------
@@ -120,7 +122,7 @@ DROP view 							-- Drop a view
 ------------------------------COMPLETE SELECT SAMPLE STATEMENT------------------------------
 
 SELECT TOP 100 * + (5 * 2)/ 2.5 ,year, month 	-- Can use arithmetic operations (+, - ,* ,/ ) with columns BODMAS brackets
-	
+		
 							AS newName,			-- Give column new name, can be used later in query. Use AS "Title with Spaces" for spaces.
 		COUNT(artist) 		AS num_artists, 	-- Counts no. in artist column NOT nulls.
 		SUM(earnings) 		AS profit,			-- Sums column, treats nulls as 0.
@@ -136,6 +138,7 @@ SELECT TOP 100 * + (5 * 2)/ 2.5 ,year, month 	-- Can use arithmetic operations (
 		COALESCE(UnitsOnOrder,0),				-- Returns first non null argument (here used to replace nulls with zero)
 		STDEV(group_members) AS std_dev_members,-- Standard Deviation
 		VAR(group_members) AS variance_members,	-- Variance
+		ISNULL(UnitsOnOrder,0),					-- Returns 0 if UnitsOnOrder is NULL			
 		CASE
     		
     		ELSE  'We Do Not Have Records For This Customer'
@@ -171,6 +174,14 @@ SELECT TOP 100 * + (5 * 2)/ 2.5 ,year, month 	-- Can use arithmetic operations (
 FOR OUTER JOIN - 	Can return unmatched rows from either set (LEFT/RIGHT JOIN) 
 					or FULL OUTER JOIN returns unmatched rows from both.
 FOR FULL OUTER JOIN - Returns a left, inner and right join.
+*/
+/*
+--To exclude some rows where they appear in another table 
+	SELECT Table_1.* FROM Table_1
+	LEFT JOIN Table_2
+	ON Table_1.id = Table_2.id
+	WHERE Table_2.id IS NULL
+	-- Can be used similarly to ONLY Take shared rows with IS NOT NULL
 */
 
 		tutorial.crunchbase_companies companies
@@ -267,7 +278,61 @@ IS NULL
 IS NOT Null  
 IIF(handicap <= 15, ‘Good’, ‘Bad’)
 
+------------------------------PIVOTING-----------------------------------------
+--WHERE Year is categorical column, and Salesamount is to be aggregated.
+--Static
 
+SELECT   [Country], [2005],   [2006], [2007],   [2008], [2009],   [2010]
+FROM   [dbo].[PivotExample] 
+PIVOT
+(
+       SUM(SalesAmount)
+       FOR [Year] IN ([2005], [2006], [2007], [2008], [2009], [2010])
+) AS P
+
+
+--Dynamic
+
+
+	--Declare necessary variables
+	DECLARE   @SQLQuery AS NVARCHAR(MAX)
+	DECLARE   @PivotColumns AS NVARCHAR(MAX)
+	 
+	--Get unique values of pivot column  
+	SELECT   @PivotColumns= COALESCE(@PivotColumns + ',','') + QUOTENAME(Year)
+	FROM (SELECT DISTINCT Year FROM [dbo].[PivotExample]) AS PivotExample
+	 
+	--Create the dynamic query with all the values for 
+	--pivot column at runtime
+	SET   @SQLQuery = 
+	    N'SELECT Country, ' +   @PivotColumns + '
+	    FROM [dbo].[PivotExample] 
+	    PIVOT( SUM(SalesAmount) 
+	          FOR Year IN (' + @PivotColumns + ')) AS P'
+
+	--Execute dynamic query
+	EXEC sp_executesql @SQLQuery
+
+-----------------------------------Dynamic SQL ---------------------------
+BEGIN 
+	--Declaring variables
+	DECLARE @source_table varchar(max)
+			,@start_date DATETIME
+			,@data_threshold numeric
+
+	SET	@source_table 	= '[db_ucg].[dbo].[tbl_data_dictionary_201602]'
+	SET @table_name 	= '[Gil].[dbo].[tbl_Processed_Data_testFeb]'
+	SET @start_date 	= '2016-02-01 00:00:00.000'							
+	SET @data_threshold = SELECT 1024/10      -- CAN USE SQL HERE
+
+	BEGIN
+		--Make command String
+		SET @cmd = 'SELECT * INTO ' + @table_name + ' FROM ' + @source_table 
+		-- Execute comman string with neccesary input. "string of parameters", parameter_1, parameter_2, ...
+		exec sp_executesql @cmd,N'@table_name nvarchar(50), @start_date DATETIME, @data_threshold numeric', 
+								@table_name, @start_date, @data_threshold
+	END
+END
 ------------------------------DATE AND TIME QUERIES------------------------------
 
 
