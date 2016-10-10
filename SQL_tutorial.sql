@@ -72,7 +72,7 @@ SELECT nth ighest
 
 -- A DROP TABLE statement cannot be rolled back.
 
-
+-- dividing ints to make float
 ------------------------------Query Types------------------------------
 ------------------------------SELECT------------------------------
 SELECT [ TOP x ] <fields> 			-- STANDARD SELECT STRUCTURE	
