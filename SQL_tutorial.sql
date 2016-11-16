@@ -2,7 +2,7 @@
 Author 			= "Gilad Amar"				#
 Email 			= "giladamar@gmail.com"		#
 Created 		= "2016"				#
-Last_Modified  	= "30/09/2016"				#
+Last_Modified  	= "04/11/2016"				#
 #############################################
 
 /* 
@@ -26,7 +26,6 @@ Last_Modified  	= "30/09/2016"				#
           /,_/      '`-'
 */
 
-
 --DATA TYPES:
 	String	VARCHAR(1024)	-- Any characters, with a maximum field length of 1024 characters.
 	Date/Time	TIMESTAMP	-- Stores year, month, day, hour, minute and second values as YYYY-MM-DD hh:mm:ss.
@@ -35,51 +34,85 @@ Last_Modified  	= "30/09/2016"				#
 	Boolean	BOOLEAN			-- Only TRUE or FALSE values
 
 --Columns can be cast to another type(within reason) with:
-	CAST (expression AS [data type])
+	CAST(expression AS [data type])
 	column_name::[data type]
-	convert([data type], expression)
+	CONVERT([data type], expression)
 
 --TODO Items:
 	-- Partition by and rank over
+
+-----------------
+
+	USE [Handover]
+-----------------
+	CREATE PROCEDURE [dbo].[stp_run_feature_generator]
+		AS
+	BEGIN 
+		sql_script_here
+	END
+
+----------------------
+
 SELECT * FROM EMPLOYEE
 MINUS
 SELECT * FROM EMPLOYEE WHERE ID > 2
---
+-----------------
 SELECT * FROM EMPLOYEE WHERE ID IN (2, 3, 5)
 INTERSECT
 SELECT * FROM EMPLOYEE WHERE ID IN (1, 2, 4, 5)
-
+-----------------
 --Cannot compare nulls
 effectively True, False AND NULL
 NULL is NULL
 anything evaluated WITH NULL results IN 'Unknown'
 
---
+-----------------
 SELECT nth ighest
 	SELECT TOP (1) Salary FROM
 	(
-	    SELECT DISTINCT TOP (10) Salary FROM Employee ORDER BY Salary DESC
+	    SELECT DISTINCT TOP (10) Salary 
+	    FROM Employee 
+	    ORDER BY Salary DESC
 	) AS Emp ORDER BY Salary
-
+-----------------
 -- Cant use alias to order group etc 
+-----------------
 -- Group functions can be nested to a depth of two.
-
+-----------------
 --IN ANY All
+-----------------
 --Can insert NULL of just not insert if cell should be emptyu
-
-
+-----------------
 --The MERGE statement allows conditional update or insertion of data into a database table. It performs an UPDATE if the rows exists, or an INSERT if the row does not exist.
-
+-----------------
 -- A DROP TABLE statement cannot be rolled back.
-
+-----------------
+-- Avoid division by 0
+COALESCE(dividend / NULLIF(divisor, 0), 0)
+-----------------
+--SQL INJECTION
+print("With Hack: \n")
+Name = "Robert'; DROP TABLE students;--"
+print("SELECT * FROM students WHERE Name = '%s'" % Name)
+-----------------
 -- dividing ints to make float
+	SELECT 2 / 3
+	-> 0
+	SELECT 2 * 1.0 / 3
+	-> 0.666666
+	SELECT AVG(numbers) FROM table_name
+	-> 2.0
+	SELECT AVG(numbers * 1.0) FROM table_name
+	-> 1.8
+-----------------
 ------------------------------Query Types------------------------------
 ------------------------------SELECT------------------------------
 SELECT [ TOP x ] <fields> 			-- STANDARD SELECT STRUCTURE	
 									-- Can also select the top 50%
 									-- SELECT TOP 50 PERCENT
 FROM <table> 
-[ INNER JOIN <table> ON <fields> ]
+[ INNER JOIN <table> 
+	ON <fields> ]
 [ WHERE <condition> ]				-- Restricts records before the groups are summarised.
 [ GROUP BY <field> 		
 [ HAVING <condition> ] ]			-- Restricts summarised records after the groups are summarised.
@@ -91,8 +124,8 @@ CREATE TABLE table_name				-- Create a new table or view
 (
 	column_name1 data_type(size),  										-- Create column of datatype and size
 	LastName varchar(255) NOT NULL, 									-- Cannot have null values
-	P_Id int NOT NULL CHECK (P_Id>0) IDENTITY(1,1) UNIQUE PRIMARY KEY,	-- Create a unique Primary Key that must be >0 and not null
-																		-- the key automatically increase by one from IDENTITY(1,1)
+	P_Id int NOT NULL CHECK (P_Id>  0) IDENTITY(1, 1) UNIQUE PRIMARY KEY,	-- Create a unique Primary Key that must be >0 and not null
+																		-- the key automatically increase by one from IDENTITY(1, 1)
 	CONSTRAINT pk_PersonID PRIMARY KEY (P_Id,LastName)					-- Add a named constraint, pk_Person_ID, such that list of columns forms Primary Key
 	FOREIGN KEY (P_Id) REFERENCES Persons(P_Id)							-- Ensure local key must exist as primary key on foreign table
 	City varchar(255) DEFAULT 'Sandnes'									-- Set default values for column
@@ -107,9 +140,9 @@ CREATE OR REPLACE VIEW view_name AS 	-- Create an on-the-fly view of a table
 										-- (OR REPLACE will recreate if already view by that name)
 
 ------------------------------INSERT------------------------------
-INSERT 	INTO tblPlayers 			-- Add values in row to table
+INSERT INTO tblPlayers 			-- Add values in row to table
 			(firstName, lastName) 
-		VALUES (‘Douglas’, ‘Adams’);
+	   VALUES (‘Douglas’, ‘Adams’);
 
 ------------------------------ALTER------------------------------
 ALTER TABLE table_name					-- Change the structure of a table (fields)u
@@ -119,16 +152,16 @@ ALTER TABLE table_name					-- Change the structure of a table (fields)u
 	ADD PRIMARY KEY (P_Id) 				-- Add a Primary key
 	DROP PRIMARY KEY 					-- Remove a Primary Key
 
-	ADD CONSTRAINT pk_PersonID PRIMARY KEY (P_Id,LastName)		-- Make Primary key from list of columns (constraint named "pk_PersonID")
-	ADD CONSTRAINT chk_Person CHECK (P_Id>0 AND City='Sandnes')	-- Add constraints to multiple columns
-	ADD CONSTRAINT uc_PersonID UNIQUE (P_Id,LastName) 			-- Add Uniqueness constraint to list of columns
-	DROP CONSTRAINT uc_PersonID									-- Delete a constraint
+	ADD CONSTRAINT pk_PersonID PRIMARY KEY (P_Id, LastName)			-- Make Primary key from list of columns (constraint named "pk_PersonID")
+	ADD CONSTRAINT chk_Person CHECK (P_Id > 0 AND City = 'Sandnes')	-- Add constraints to multiple columns
+	ADD CONSTRAINT uc_PersonID UNIQUE (P_Id, LastName) 				-- Add Uniqueness constraint to list of columns
+	DROP CONSTRAINT uc_PersonID										-- Delete a constraint
 
-	ADD FOREIGN KEY (P_Id)										-- Require that key column in table is in foreign table too
+	ADD FOREIGN KEY (P_Id)											-- Require that key column in table is in foreign table too
 		REFERENCES Persons(P_Id)
 
-	ALTER COLUMN City SET DEFAULT 'SANDNES'						-- Add a default value for a column
-	ALTER COLUMN City DROP DEFAULT 								-- Delete default value for a column
+	ALTER COLUMN City SET DEFAULT 'SANDNES'							-- Add a default value for a column
+	ALTER COLUMN City DROP DEFAULT 									-- Delete default value for a column
 
 ------------------------------UPDATE------------------------------
 UPDATE tblPlayers					-- Change values in Table
@@ -148,11 +181,11 @@ IF OBJECT_ID('ETL.Respondent_Data', 'U') IS NOT NULL
 
 DROP INDEX table_name.index_name	-- Drop index from a table
 
-DROP view 							-- Drop a view
+DROP VIEW 							-- Drop a view
 
 ------------------------------COMPLETE SELECT SAMPLE STATEMENT------------------------------
 
-SELECT TOP 100 * + (5 * 2)/ 2.5 ,year, month,	-- Can use arithmetic operations (+, - ,* ,/ ) with columns BODMAS brackets
+SELECT TOP 100 * + (5 * 2) / 2.5 ,year, month,	-- Can use arithmetic operations (+, - ,* ,/ ) with columns BODMAS brackets
 		a.*,									-- Select all columns from Table alias a
 		name 				AS newName,			-- Give column new name, can be used later in query. Use AS "Title with Spaces" for spaces.
 		COUNT(artist) 		AS num_artists, 	-- Counts no. in artist column NOT nulls.
@@ -166,9 +199,9 @@ SELECT TOP 100 * + (5 * 2)/ 2.5 ,year, month,	-- Can use arithmetic operations (
 												-- DISTINCT performs slowly.
 		UPPER(),								-- Return string in uppercase
 		LOWER(),								-- Return string in lowercase
-		ROUND(Price,0),							-- Round column to 0 decimals
-		COALESCE(UnitsOnOrder,0),				-- Returns first non null argument (here used to replace nulls with zero)
-		ISNULL(UnitsOnOrder,0),					-- Returns 0 if UnitsOnOrder is NULL
+		ROUND(Price, 0),						-- Round column to 0 decimals
+		COALESCE(UnitsOnOrder, 0),				-- Returns first non null argument (here used to replace nulls with zero)
+		ISNULL(UnitsOnOrder, 0),				-- Returns 0 if UnitsOnOrder is NULL
 		STDEV(group_members) AS std_dev_members,-- Standard Deviation
 		VAR(group_members) AS variance_members,	-- Variance
 
@@ -181,7 +214,8 @@ SELECT TOP 100 * + (5 * 2)/ 2.5 ,year, month,	-- Can use arithmetic operations (
              WHEN weight > 200 AND weight <= 250 THEN '201-250'
              WHEN weight > 175 AND weight <= 200 THEN '176-200'
              WHEN EXISTS(
-        				SELECT 1 FROM call_records
+        				SELECT 1 
+        				FROM call_records
         				WHERE account = @accountnumber
     					) 
              	THEN  'We Have Records of this Customer'
@@ -211,8 +245,8 @@ FOR FULL OUTER JOIN - Returns a left, inner and right join.
 /*
 --To exclude some rows where they appear in another table 
 	SELECT Table_1.* FROM Table_1
-	LEFT JOIN Table_2
-	ON Table_1.id = Table_2.id
+		LEFT JOIN Table_2
+			ON Table_1.id = Table_2.id
 	WHERE Table_2.id IS NULL
 	-- Can be used similarly to ONLY Take shared rows with IS NOT NULL
 */
@@ -231,7 +265,7 @@ FOR FULL OUTER JOIN - Returns a left, inner and right join.
 										-- 'day' LIKE 'Mo_day' 	_ is a single wildcard character.
 		OR 'day' LIKE '[mtw]%day'		-- [charlist]  Sets range of characters to match eg. [abc] or [a-c]
 										-- [!charlist] Set range of characters to not match eg. [!abc]
-		AND 'artist' IN ('Taylor Swift','Ludacris',1,2,3)
+		AND 'artist' IN ('Taylor Swift', 'Ludacris', 1, 2, 3)
 		AND year BETWEEN 1999 AND 2016 	-- BETWEEN is inclusive of bounds. 
 										-- Can use NOT BETWEEN to get outside range
 		AND band IS NOT NULL 			-- band != NULL Won't work(arithmetic on a str)
@@ -267,7 +301,7 @@ SELECT CASE WHEN year = 'FR' THEN 'FR'
             WHEN year = 'JR' THEN 'JR'
             WHEN year = 'SR' THEN 'SR'
             ELSE 'No Year Data' 
-            END AS year_group,
+        	END AS year_group,
         COUNT(1) AS count
 FROM benn.college_football_players
 GROUP BY 1
@@ -284,32 +318,32 @@ GROUP BY 1
  FROM tutorial.crunchbase_investments_part2
 
 ------------------------------STRING_EXPRESSIONS------------------------------
-LEN(string_var),									-- Return the length of the string
-LEFT(string_var,index), 							-- Take from char 1 to index
-MID(string_var), 									-- Take mid char
-RIGHT(string_var,index), 							-- Take from char 1 to index
-LENGTH("stringy")									-- Get length of string
-Replace (str1, str2, str3) 							-- In str1, find where str2 occurs, and replace it with str3.
-TRIM( [ [LOCATION] [remstr] FROM ] str) 			-- [LOCATION] can be either LEADING, TRAILING, or BOTH. 
-													-- If remstr pattern is not gieven white spaces are removed.
+LEN(string_var)										-- Return the length of the string
+LEFT(string_var, index) 							-- Take from char 1 to index
+MID(string_var) 									-- Take mid char
+RIGHT(string_var, index) 							-- Take from char 1 to index
+LENGTH('stringy')									-- Get length of string
+REPLACE (str1, str2, str3) 							-- In str1, find where str2 occurs, and replace it with str3.
+TRIM( [ <LOCATION> [remstr] FROM ] str) 			-- <LOCATION> can be either LEADING, TRAILING, or BOTH. 
+													-- If <remstr> pattern is not gieven white spaces are removed.
 CONCAT (str1, str2, str3, ...)						-- Concat all strings
-substring(Res_QnA.Question_str, index_1, index_2) 	-- Take substring between index_1 and index_2
-CHARINDEX('-',QnA.Question_str)						-- Find Position of character in string
+SUBSTRING(Res_QnA.Question_str, index_1, index_2) 	-- Take substring between index_1 and index_2
+CHARINDEX('-', QnA.Question_str)						-- Find Position of character in string
 
 ------------------------------MATHEMATICAL_EXPRESSIONS------------------------------
 IGN(x)		-- Sign of input x as -1, 0, or 1
-MOD(x,y)	-- (same as x%y)
+MOD(x, y)	-- (same as x%y)
 FLOOR(x)	-- Largest integer value that is less than or equal to x
 CEIL(x)		-- Smallest integer value that is greater than or equal to x
-POWER(x,y)	-- x raised to the power of y
+POWER(x, y)	-- x raised to the power of y
 ROUND(x)	-- x rounded to the nearest whole integer
-ROUND(x,d)	-- x rounded to the d number of decimal
+ROUND(x, d)	-- x rounded to the d number of decimal
 SQRT(x)		-- Square-root value of x
 
 
 ------------------------------LOGICAL EXPRESSIONS------------------------------
 IS NULL 
-IS NOT Null  
+IS NOT NULL  
 IIF(handicap <= 15, ‘Good’, ‘Bad’)
 
 ------------------------------PIVOTING-----------------------------------------
@@ -333,7 +367,7 @@ PIVOT
 	DECLARE   @PivotColumns AS NVARCHAR(MAX)
 	 
 	--Get unique values of pivot column  
-	SELECT   @PivotColumns= COALESCE(@PivotColumns + ',','') + QUOTENAME(Year)
+	SELECT   @PivotColumns= COALESCE(@PivotColumns + ',', '') + QUOTENAME(Year)
 	FROM (SELECT DISTINCT Year FROM [dbo].[PivotExample]) AS PivotExample
 	 
 	--Create the dynamic query with all the values for 
@@ -357,7 +391,7 @@ BEGIN
 	SET	@source_table 	= '[db_ucg].[dbo].[tbl_data_dictionary_201602]'
 	SET @table_name 	= '[Gil].[dbo].[tbl_Processed_Data_testFeb]'
 	SET @start_date 	= '2016-02-01 00:00:00.000'							
-	SET @data_threshold = SELECT 1024/10      -- CAN USE SQL HERE
+	SET @data_threshold = SELECT 1024 / 10      -- CAN USE SQL HERE
 
 	BEGIN
 		--Make command String
@@ -370,7 +404,7 @@ END
 ------------------------------DATE AND TIME QUERIES------------------------------
 
 
-DATEPART(datepart,date): Returns part, defined by abbrev. below, of the date
+DATEPART(datepart, date): Returns part, defined by abbrev. below, of the date
 		year			yy, yyyy
 		quarter			qq, q
 		month			mm, m
