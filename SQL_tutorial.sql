@@ -40,7 +40,8 @@ Last_Modified  	= "04/11/2016"				#
 
 --TODO Items:
 	-- Partition by and rank over
-
+	--
+decimal(10,5)
 -----------------
 
 	USE [Handover]
