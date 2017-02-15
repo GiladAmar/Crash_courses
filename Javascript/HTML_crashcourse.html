@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+<title>Page Title</title>
+
+
+<base href="http://www.w3schools.com/images/" target="_blank"> <!--base link to which all relative links refer -->
+
+
+<!--STYLE used for entire page -->
+<style>
+body {background-color: lightgrey;} <!--page background colour -->
+h1   {color: black;}
+p#unique_element_id    	{						<!--apply to paragraph of id= unique_element_id-->
+						color: black;
+						border: 1px solid grey;	<!--paragraph border -->
+						padding: 10px;			<!--paragraph padding -->
+						margin: 30px;			<!--paragraph margin -->
+						}
+p.error {										<!--Applies only to elements given class="error" -->
+    color: red;
+}
+
+a:link {								<!--link colouring etc... -->
+    color: green;
+    background-color: transparent;
+    text-decoration: none;
+}
+a:visited {								<!--visitied link color etc... -->
+    color: pink;
+    background-color: transparent;
+    text-decoration: none;
+}
+a:hover {								<!--links colour on hover -->
+    color: red;
+    background-color: transparent;
+    text-decoration: underline;
+}
+a:active {								<!--colour while operating/active -->
+    color: yellow;
+    background-color: transparent;
+    text-decoration: underline;
+}
+table, th, td {							<!--Table -->
+    border: 1px solid black;			<!-- borderss -->
+    border-collapse: collapse;			<!-- collapsable borders -->
+	border-spacing: 5px;				<!-- table border spacing, no effect if collapsable borders -->
+	background-color:black 				<!--background colour, can use hex colours -->#f1f1c1;
+	}
+th, td {								
+    padding: 15px;						<!--table elements padding -->
+	text-align: left;					<!--column heading text allignment -->
+}
+
+thead {color:green;}					<!--Table  header colour-->
+tbody {color:blue;}						<!--Table  body colour-->
+tfoot {color:red;}						<!--Table  footer colour-->
+
+ul#menu {								<!--list options-->
+    padding: 0;
+}
+
+ul#menu li {							<!--horizontal list-->
+    display: inline;
+}
+
+ul#menu li a {							<!--alter lists hyperlink properties-->
+    background-color: black;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 4px 4px 0 0;
+}
+
+ul#menu li a:hover {
+    background-color: orange;
+}
+
+
+div.cities {							<!--Sets style for divs of class cities-->
+    background-color:black;
+    color:white;
+    margin:20px;
+    padding:20px;
+} 
+
+
+span.note {font-size:120%;color:red;}	<!--Sets style for spans of class cities-->
+
+
+<!--
+HTML5 offers new semantic elements that define different parts of a web page:
+HTML5 Semantic Elements	
+
+header - Defines a header for a document or a section
+nav - Defines a container for navigation links
+section - Defines a section in a document
+article - Defines an independent self-contained article
+aside - Defines content aside from the content (like a sidebar)
+footer - Defines a footer for a document or a section
+details - Defines additional details
+summary - Defines a heading for the 'details' element
+-->
+#header {
+    background-color:black;
+    color:white;
+    text-align:center;
+    padding:5px;
+}
+#nav {
+    line-height:30px;
+    background-color:#eeeeee;
+    height:300px;
+    width:100px;
+    float:left;
+    padding:5px; 
+}
+#section {
+    width:350px;
+    float:left;
+    padding:10px; 
+}
+#footer {
+    background-color:black;
+    color:white;
+    clear:both;
+    text-align:center;
+    padding:5px; 
+}
+
+<!--DONT USE TABLES TO STYLE A WEBPAGE-->
+
+
+<!--
+So Structure can be easily styled and done by placing elements between elements.
+
+<body>
+
+<header>
+<h1>City Gallery</h1>
+</header>
+
+<nav>
+London<br>
+Paris<br>
+Tokyo
+</nav>
+
+<section>
+<h1>London</h1>
+<p>London is the capital city of England. It is the most populous city in the United Kingdom,
+with a metropolitan area of over 13 million inhabitants.</p>
+</section>
+
+<footer>
+Copyright © W3Schools.com
+</footer>
+
+</body>
+
+
+-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<body>
+
+<header>
+<h1>City Gallery</h1>
+</header>
+
+<nav>
+London<br>
+Paris<br>
+Tokyo
+</nav>
+
+<section>
+<h1>London</h1>
+<p>London is the capital city of England. It is the most populous city in the United Kingdom,
+with a metropolitan area of over 13 million inhabitants.</p>
+<p>Standing on the River Thames, London has been a major settlement for two millennia,
+its history going back to its founding by the Romans, who named it Londinium.</p>
+</section>
+
+<footer>
+Copyright © W3Schools.com
+</footer>
+
+</body>
+
+
+</style>
+
+<!-- Used this to link to another style file rather <link rel="stylesheet" href="styles.css">  -->
+
+<meta charset="UTF-8">
+<meta name="author" content="Gilad Amar">
+<meta name="description" content="Free Web tutorials on HTML and CSS">
+<meta name="keywords" content="HTML,CSS,XML,JavaScript">
+<meta http-equiv="refresh" content="30">		<!--How often to refresh-->
+
+
+</head>
+
+<body style="background-color:lightgrey;">
+
+<p class="error">I am an "error" class message</p>
+
+<p><a href="#unique_element_id">This jumps to the unique id paragraph</a></p>
+
+
+<address>
+Written by <abbr title="full text">abbr</abbr>.<br> 
+Visit us at:<br>
+Example.com<br>
+Gotham, Gauteng<br>
+SA
+</address>
+
+
+
+
+
+
+<h1 style="color:red;" style="text-align:center;">This is a bold centered red <b> Heading</b></h1>
+
+<p style="font-family:verdana;">This verdana font paragraph has forced <br> pagebreaks <br> in it</p>
+<!--These comments won't be displayed-->
+
+<hr>
+
+<h2>This is an italic <i>heading</i> 2</h2>
+
+<pre>
+   This       line
+   Has it's spaces and line breaks preserved in the webpage
+</pre>
+
+
+<p id="unique_element_id" style="font-size:300%;" title="Display this on hovering above paragraph">This is a 300% larger font paragraph paragraph.</p>
+
+<a href="http://www.w3schools.com" 
+target="_blank">							<!--opens on new black window/tab -->
+This is a link with a full link address</a>
+<pre>
+target=""
+_blank	Opens the linked document in a new window or tab
+_self	Opens the linked document in the same frame as it was clicked (this is default)
+_parent	Opens the linked document in the parent frame
+_top	Opens the linked document in the full body of the window
+framename	Opens the linked document in a named frame 
+</pre>
+
+<a href="http://www.w3schools.com">This is a link with a full link address</a>
+<a href="html_images.asp">This is a link relative to this webpage</a>
+
+<img src="w3schools.jpg" alt="text to display if element fails" width="104" height="142" 
+style="float:left;width:42px;height:42px;border:0"> <!--change img style, border 0 makes sure older browsers don't give border -->
+	<!--can do gifs as well-->
+	<!-- float:left means it will float left of text-->
+<p>It is better to use the style attribute (instead of the width and height attributes), because it prevents 
+internal or external styles sheets to change the original size of an image:</p>
+
+<p>
+<a href="mailto:someone@example.com?cc=someoneelse@example.com&bcc=andsomeoneelse@example.comSubject=Subject%20here&body=You%20are%20invited%20to%20a%20big%20summer%20party!" target="_top">
+This is an email link</a>
+</p>
+
+<h2>HTML 
+<small>Small</small> 
+<mark>Marked</mark> 
+<del>deleted</del> 
+<ins>underlined</ins> 
+<sub>subscripted</sub> 
+<sup>superscripted</sup>
+<q>Quoted</q> 
+Formatting</h2>
+
+
+<blockquote cite="www.sayswho.com">
+"Long block quote gets indented" - Einstein
+</blockquote>
+
+<bdo dir="rtl">This line will be written from right to left</bdo>
+
+<p><kbd>File | Open...</kbd></p>
+
+<samp>
+Represents machine output text
+</samp>
+
+
+<code>
+#Programming Code Example
+var x = 5;
+var y = 6;
+document.getElementById("demo").innerHTML = x + y;
+Does not preserve formatting like pagebreaks
+</code>
+
+<p>Equation text follows: <var>E</var> = <var>m</var><var>c</var><sup>2</sup>.</p>
+
+
+
+<!--[if IE 5]>Conditional display: This is IE 5<br><![endif]-->
+<!--[if IE 6]>Conditional display: This is IE 6<br><![endif]-->
+
+<!-- Withhold this from being used, useful for debugging
+<img border="0" src="pic_mountain.jpg" alt="Mountain">
+-->
+
+
+
+
+
+
+
+
+
+
+
+
+<img src="planets.gif" alt="Planets" usemap="#planetmap" <!-- Uses a map of clickable areas named planetmap-->
+style="width:145px;height:126px;">
+
+
+<map name="planetmap">
+  <area shape="rect" coords="0,0,82,126" alt="Sun" href="sun.htm">
+  <area shape="circle" coords="90,58,3" alt="Mercury" href="mercur.htm">
+  <area shape="circle" coords="124,58,8" alt="Venus" href="venus.htm">
+</map>
+
+
+
+
+
+
+
+
+<!--Table -->
+<table border="1" 			<!--border around all boxes -->
+style="width:100%">
+<caption>Monthly savings</caption> <!--table caption -->
+  <tr>
+    <th>Heading 1</th>
+    <th>Heading 2</th>		
+    <th>Heading 3</th>
+  </tr>
+  <tr>
+    <tr>Name</r>
+    <tr colspan="2">Telephone</tr>		<!--span more than one column -->
+  </tr>
+    <tr>
+    <th rowspan="2">Telephone:</th>		<!--span more than one row -->
+    <td>555 77 854</td>
+  </tr>
+  <tr>
+    <td>John</td>
+    <td>Smith</td> 
+    <td>50</td>
+  </tr>
+  <tr>
+    <td>Eve</td>
+    <td>Jackson</td> 
+    <td>94</td>
+  </tr>
+</table>
+
+
+<!--Unordered list -->
+<ul style="list-style-type:none">
+  <li>Coffee</li>
+  <li>Tea</li>
+  <li>Milk</li>
+</ul>
+<pre>
+list-style-type:disc
+list-style-type:circle
+list-style-type:square
+list-style-type:none
+</pre>
+
+
+<!--Ordered list -->
+<ol type="1">
+  <li>Coffee</li>
+  <li>Tea</li>
+  <li>Milk</li>
+</ol>
+<pre>
+type="1"	The list items will be numbered with numbers (default)
+type="A"	The list items will be numbered with uppercase letters
+type="a"	The list items will be numbered with lowercase letters
+type="I"	The list items will be numbered with uppercase roman numbers
+type="i"	The list items will be numbered with lowercase roman numbers
+
+</pre>
+
+
+
+<!--Description List -->
+
+<dl>
+  <dt>Coffee</dt>
+  <dd>- black hot drink</dd>
+  <dt>Milk</dt>
+  <dd>- white cold drink</dd>
+</dl>
+
+
+<!-- 'Menu Like' List of hyperlinks-->
+<ul id="menu">
+  <li><a href="/html/default.asp">HTML</a></li>
+  <li><a href="/css/default.asp">CSS</a></li>
+  <li><a href="/js/default.asp">JavaScript</a></li>
+  <li><a href="/php/default.asp">PHP</a></li>
+</ul> 
+
+
+
+
+<div style="background-color:black; color:white; padding:20px;">
+
+<h2>London</h2>
+<p>London is the capital city of England. It is the most populous city in the United Kingdom, with a metropolitan area of over 13 million inhabitants.</p>
+
+</div>
+
+
+
+<h1>My <span style="color:red">Important</span> Heading</h1>
+
+
+<div class="cities">
+<h2>London</h2>
+<p>London is the capital city of England. It is the most populous city in the United Kingdom, with a metropolitan area of over 13 million inhabitants.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+<!--An iframe is used to display a web page within a web page. -->
+
+<iframe src="URL" width="200" height="200" style="border:5px dotted red"></iframe>
+
+<!--Use iframe to be the page that connects to link -->
+<iframe src="demo_iframe.htm" name="iframe_a"></iframe>
+<p><a href="http://www.w3schools.com" target="iframe_a">W3Schools.com</a></p>
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+function myFunction() {
+    document.getElementById("demo").innerHTML = "Hello JavaScript!";
+}
+</script>
+<noscript>Sorry, your browser does not support JavaScript!</noscript>
+
+<p id="demo">A Paragraph</p>
+
+<button type="button" onclick="myFunction()">Try it</button>
+
+<pre>
+document.getElementById("demo").style.fontSize = "25px";
+document.getElementById("image").src = "picture.gif";
+</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+<form>
+  First name:<br>
+  <input type="text" name="firstname" value="default value"><br> <!-- one-line input field-->
+  Last name:<br>
+  <input type="text" name="lastname" value="default value">
+  <input type="submit" value="Submit">		<!-- submit button-->
+</form>
+
+
+
+<form>										<!-- radio buttons-->
+  <input type="radio" name="gender" value="male" checked> Male<br>
+  <input type="radio" name="gender" value="female"> Female<br>
+  <input type="radio" name="gender" value="other"> Other
+</form>
+
+
+
+
+<select name="cars">						<!-- drop down list-->
+  <option value="volvo">Volvo</option>
+  <option value="saab">Saab</option>
+  <option value="fiat" selected>Fiat</option> 	 <!-- default selection-->
+  <option value="audi">Audi</option>
+</select>
+
+
+<textarea name="message" rows="10" cols="30">		<!-- test box-->
+The cat was playing in the garden.
+</textarea>
+
+
+<button type="button" onclick="alert('Hello World!')">Click Me!</button>  <!--  button-->
+
+
+
+</body>
+</html>
+
+
+
+
+
