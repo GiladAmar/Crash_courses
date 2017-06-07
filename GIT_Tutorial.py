@@ -82,7 +82,21 @@ git add --all 		# Adds everything in directory
 		a.txt b.txt # Adds list of files
 		docs/		# Adds all files within directory
 		"*.txt" 	# Add all txt files within entire project
+git ls-files
+    --other
+    --ignored
+    --exclude-standard
+.gitignore
 
+git rm # delete and stage deletion
+git rm --cached # remove from version control but DONT deletr
+git mv # chnage file name and prep for commit
+
+# Stashing
+git stash       # temporarily stroes all modified tracked files
+git stash pop   # restores most recently stashed files
+git stash list  # lists all chngaed changesets
+git stash drop  # discards most recently stashed changeset
 
 # SEE THE CURRENT STATUS
 git status 			# See what has changed since last commit
@@ -97,6 +111,7 @@ git log
 --stat 
 --graph
 --oneline
+-n <num_of_commits>
 
 # SEE CHNAGES IN FILE SINCE LAST COMMIT
 git diff <filename>                 # compare working dir file to staging are
@@ -115,7 +130,7 @@ git reset HEAD <filename>			# Go back to file state at last commit
 			<1st 7 letters of SHA> 	# Restore entire state of last commit
 git reset <filename>
 
-*--hard
+*--hard <commit_id>
 
 
 # BRANCHING
@@ -131,8 +146,10 @@ git branch -d <branch name>							# Destroy branch
 git clone remote_location <clone_name>	# Download origin project
 git remote -v							# See all remote projects
 git fetch								# Update local origin branch from remote origin
-git merge origin/master					# Merge local origin with master branch
-git push origin <your_branch_name>		# Push up changes to remote origin for review
 
-*So if you have branch1 checked out, and you run git merge branch2 branch3, the merged version will combine branch1 as well as branch2 and branch3.
+git merge origin/master					# Merge local origin with master branch
 git merge --abort # revers to state before the merge
+
+git push origin <your_branch_name>		# Push up changes to remote origin for review
+git pull                                # downloads bookmark history and incorporates changes
+*So if you have branch1 checked out, and you run git merge branch2 branch3, the merged version will combine branch1 as well as branch2 and branch3.
