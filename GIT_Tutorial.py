@@ -66,6 +66,8 @@ git config --global push.default upstream
 git config --global merge.conflictstyle diff3
 
 git config --global core.autocrlf true
+git config --system core.longpaths true.
+
 # Configure Git on Windows to properly handle line endings
     # Save these in ~
     https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash
@@ -126,6 +128,7 @@ git show HEAD
 # REVERT CHANGES BY 
 git checkout HEAD <file name> 		# Go back to file state at last commit 
 git checkout <commit_id>
+
 git reset HEAD <filename>			# Go back to file state at last commit 
 			<1st 7 letters of SHA> 	# Restore entire state of last commit
 git reset <filename>
@@ -136,6 +139,7 @@ git reset <filename>
 # BRANCHING
 git branch 											# See what the current branch is
 git branch <new branch name>						# Create a new branch
+
 git checkout <branch name>							# Move to this branch
 <run on recipient branch> git merge <changed branch># Merge changes together
 													# May need to resolve conflicts
@@ -144,12 +148,20 @@ git branch -d <branch name>							# Destroy branch
 
 # REMOTE REPOSITORIES
 git clone remote_location <clone_name>	# Download origin project
+
+*forking is cloning only on github
+
 git remote -v							# See all remote projects
-git fetch								# Update local origin branch from remote origin
+git remote add <def_name: origin> <url>
+
+git fetch <remote name>								# Update local origin branch from remote origin
 
 git merge origin/master					# Merge local origin with master branch
 git merge --abort # revers to state before the merge
-
-git push origin <your_branch_name>		# Push up changes to remote origin for review
-git pull                                # downloads bookmark history and incorporates changes
 *So if you have branch1 checked out, and you run git merge branch2 branch3, the merged version will combine branch1 as well as branch2 and branch3.
+        - resolve conflicts
+        - then commit
+git push  <remote name> <local branch_name>	# Push up changes to remote origin for review
+
+git pull  <remote> <branch>                 # downloads bookmark history and incorporates changes
+* pull is just git fetch + git merge

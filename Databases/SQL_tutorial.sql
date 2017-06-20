@@ -7,7 +7,7 @@ Last_Modified  	= "04/11/2016"				#
 
 /* 
 	WELCOME TO THE SQL INTRODUCTORY CODE.
-	This is part of a multi-linecomment. 
+	This is part of a multi-line comment. 
 */
  /* Warning: the following pseudo-code will make you cry
  	A safety pig has been provided for your benefit:
@@ -68,7 +68,7 @@ NULL is NULL
 anything evaluated WITH NULL results IN 'Unknown'
 
 -----------------
-SELECT nth ighest
+SELECT nth highest
 	SELECT TOP (1) Salary FROM
 	(
 	    SELECT DISTINCT TOP (10) Salary 
@@ -82,7 +82,7 @@ SELECT nth ighest
 -----------------
 --IN ANY All
 -----------------
---Can insert NULL of just not insert if cell should be emptyu
+--Can insert NULL of just not insert if cell should be empty
 -----------------
 --The MERGE statement allows conditional update or insertion of data into a database table. It performs an UPDATE if the rows exists, or an INSERT if the row does not exist.
 -----------------
@@ -149,11 +149,11 @@ INSERT INTO tblPlayers 			-- Add values in row to table
 ALTER TABLE table_name					-- Change the structure of a table (fields)u
 	ADD column_name data_type 			-- Add a column of a certain datatype
 	DROP COLUMN column_name 			-- Delete column
-	ALTER COLUMN column_name data_type 	-- Change column datatype
+	ALTER COLUMN column_name data_type 		-- Change column datatype
 	ADD PRIMARY KEY (P_Id) 				-- Add a Primary key
 	DROP PRIMARY KEY 					-- Remove a Primary Key
 
-	ADD CONSTRAINT pk_PersonID PRIMARY KEY (P_Id, LastName)			-- Make Primary key from list of columns (constraint named "pk_PersonID")
+	ADD CONSTRAINT pk_PersonID PRIMARY KEY (P_Id, LastName)		-- Make Primary key from list of columns (constraint named "pk_PersonID")
 	ADD CONSTRAINT chk_Person CHECK (P_Id > 0 AND City = 'Sandnes')	-- Add constraints to multiple columns
 	ADD CONSTRAINT uc_PersonID UNIQUE (P_Id, LastName) 				-- Add Uniqueness constraint to list of columns
 	DROP CONSTRAINT uc_PersonID										-- Delete a constraint
@@ -192,8 +192,8 @@ SELECT TOP 100 * + (5 * 2) / 2.5 ,year, month,	-- Can use arithmetic operations 
 		COUNT(artist) 		AS num_artists, 	-- Counts no. in artist column NOT nulls.
 		SUM(earnings) 		AS profit,			-- Sums column, treats nulls as 0.
 		AVG(group_members) 	AS avg_band_size	-- Find column average, completely ignores nulls (doesn't treat like zeros).
-		MIN(year) 			AS earliest_year,	-- Column minimumn. Handles dates, numbers and strings.
-		MAX(albums_sold) 	AS max_sold,		-- Column maximumn. Handles dates, numbers and strings
+		MIN(year) 			AS earliest_year,	-- Column minimum. Handles dates, numbers and strings.
+		MAX(albums_sold) 	AS max_sold,		-- Column maximum. Handles dates, numbers and strings
 		DISTINCT(month)  	AS uniq_months,		-- DISTINCT returns unique entries in month column.
 												-- DISTINCT(year, month) will return unique pairs.
 												-- "SELECT DISTINCT * ..." will return unique rows.
@@ -319,7 +319,7 @@ GROUP BY 1
  FROM tutorial.crunchbase_investments_part2
 
 ------------------------------STRING_EXPRESSIONS------------------------------
-LEN(string_var)										-- Return the length of the string
+LEN(string_var)									-- Return the length of the string
 LEFT(string_var, index) 							-- Take from char 1 to index
 MID(string_var) 									-- Take mid char
 RIGHT(string_var, index) 							-- Take from char 1 to index

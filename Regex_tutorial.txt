@@ -38,7 +38,7 @@ case sensitive
 \d : 	digit 0-9
 \D : 	non-digit
 .:	 	single wildcard so to match peroid \.
-[abc]: 	single wildcrad of specified list in []
+[abc]: 	single wildcard of specified list in []
 	[a-z]: single wildcard in whole char range
 	[3-9]: ""
 
@@ -46,8 +46,8 @@ case sensitive
 \w:		metacharacter which is equivalent to the character range [A-Za-z0-9_] and often used to match characters in English text.
 \W: 	non-alphanumeric (eg. punctuation) and underscore equivalent to [a-zA-Z0-9_]
 
-a{3}: 		makes 3 repitions of a
-a{1-3}: 	some engines allowa specified range of repetitions
+a{3}: 		makes 3 repetitions of a
+a{1-3}: 	some engines allow a specified range of repetitions
 [wxy]{5}: 	five characters of either wxy
 .{2,6}: 	any two to six characters
 
@@ -66,7 +66,7 @@ special characters dont have meaning inside of a set e.g. [*+] means where it ma
 \r: 	carriage return
 \b:		boundary between word and non word
 \s: 	matches ALL space types
-\S: 	non-whitepspace
+\S: 	non-whitespace
 
 
 ^_________$: 	whole line must match exactly this ^ is the start and $ is the end
