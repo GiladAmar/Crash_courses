@@ -1,0 +1,253 @@
+﻿sudo apt-get update
+sudo apt-get dist-upgrade
+
+- Move Unity launcher to bottom
+	gsettings set com.canonical.Unity.Launcher launcher-position Bottom
+
+- minimize window on con click
+	gsettings set org.compiz.unityshell:/org/compiz/profiles/unity/plugins/unityshell/ launcher-minimize-window true
+
+--  Codecs and encrypted DVD pl;ayback
+	sudo apt install ubuntu-restricted-extras libavcodec-extra libdvd-pkg
+
+-- OPeNJRE
+	sudo apt install openjdk-8-jdk
+
+-- Unity Tweak Tool
+	sudo apt install unity-tweak-tool
+
+-- GIMP
+	sudo add-apt-repository ppa:otto-kesselgulasch/gimp
+	sudo apt-get update
+	sudo apt-get install gimp gimp-data gimp-plugin-registry gimp-data-extras
+
+-- VLC
+	sudo apt-get install vlc browser-plugin-vlc
+
+-- Google Chrome
+	wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add - 
+	sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list'
+	sudo apt-get update 
+	sudo apt-get install google-chrome-stable
+-- Deluge
+
+-- Dropbox
+	sudo apt install nautilus-dropbox
+
+-- Skype
+	sudo apt install skype
+	sudo apt install gtk2-engines-murrine:i386 gtk2-engines-pixbuf:i386
+
+-- Shutter
+	sudo add-apt-repository ppa:shutter/ppa
+	sudo apt-get update && sudo apt-get install shutter
+
+-- Flash
+	sudo apt-get install flashplugin-installer
+
+-- BleachBit
+
+-- Synaptic
+	sudo apt install synaptic
+
+-- Install geb files
+	sudo apt install gdebi
+
+-- ppa manager
+	sudo add-apt-repository ppa:webupd8team/y-ppa-manager
+	sudo apt update && sudo apt install y-ppa-manager
+
+-- Weather Indicator
+	sudo add-apt-repository ppa:atareao/atareao
+	sudo apt update && sudo apt install my-weather-indicator
+
+-- Variety Desktop Backgrounds
+	sudo apt install variety
+
+-- Firewall
+	sudo apt-get install gufw
+
+-- Cinnamon
+	sudo add-apt-repository ppa:gwendal-lebihan-dev/cinnamon-nightly
+	sudo apt-get update && sudo apt install cinnamon
+	gsettings set org.cinnamon.desktop.session settings-daemon-uses-logind true
+	gsettings set org.cinnamon.desktop.session session-manager-uses-logind true
+	gsettings set org.cinnamon.desktop.session screensaver-uses-logind false
+
+-- Kate
+	sudo apt-get install kate
+
+-- Clementine
+	sudo add-apt-repository ppa:me-davidsansome/clementine
+	sudo apt-get update && sudo apt-get install clementine
+
+-- rapidminer
+
+-- toggl
+
+-- git
+	sudo apt-get install git
+
+-- R
+	sudo apt-get install r-base
+
+-- R studio
+	sudo gedit /etc/apt/sources.list
+	deb https://cloud.r-project.org//bin/linux/ubuntu xenial/
+	sudo apt-get update && sudo apt-get install r-base
+
+-- Teamviewer
+
+-- Pycharm
+
+-- RAR
+	sudo apt-get install rar
+
+-- LibreOffice
+	sudo apt-get install libreoffice-common
+
+-- GParted
+	sudo apt-get install gparted
+
+sudo apt-get install classicmenu-indicator
+
+sudo apt-get remove yelp thunderbird rhythmbox eog
+
+TOR
+	sudo add-apt-repository ppa:webupd8team/tor-browser
+	sudo apt-get update
+	sudo apt-get install tor-browser
+
+TERMINATOR
+	sudo apt-get install terminator
+
+# Reaver
+	sudo apt-get install reaver
+	sudo apt install aircrack-ng
+
+
+
+texmaker
+
+htop
+disk usage analyzer
+wps office
+foxit reader
+firewall
+timeshift
+vim
+nano
+openarena
+
+PYTHON PACKAGES
+
+	virtualenv
+	numpy
+	pandas
+	matplotlib
+	scipy
+	sympy
+	cython
+	ipython
+	jupyter notebook
+	scikit-learn
+	scikit-feature
+	statsmodels
+	patsy
+	astropy
+	scikit-image
+	numba
+	tsne
+	pymatbridge
+	oct2py
+	xgboost
+	tpot
+	hdbscan
+	theano
+	tensorflow
+	keras
+	sqlalchemy
+	pymssql
+	tqdm
+	pymc3
+	nltk
+	h5py
+	bokeh
+	scarpy
+	pillow
+	opencv
+	virtualenv
+	virtualenvwrapper
+	seaborn
+	ggplot
+	plotly
+	pydot
+	colorama
+	python-progressbar
+	orange
+	spyder3
+sudo apt-get install libglu1-mesa libxi-dev libxmu-dev -y
+sudo apt-get — yes install build-essential
+sudo apt-get install python-pip python-dev -y
+sudo apt-get install python-numpy python-scipy -y
+sudo apt-get install python-yaml -y
+sudo apt-get install libhdf5-serial-dev -y
+sudo apt-get install python-nose g++ libopenblas-dev git
+pip install tensorflow theano keras scipy scikit-learn jupyter ipython scikit-image h5py matplotlib numpy pandas virtualenv	
+
+# The Fuck
+	sudo -H pip3 install thefuck
+	eval "$(thefuck --alias)"
+
+# wps fonts
+	cd /tmp
+	git clone https://github.com/iamdh4/ttf-wps-fonts.git
+	sudo mkdir /usr/share/fonts/wps-fonts
+	sudo mv ttf-wps-fonts/* /usr/share/fonts/wps-fonts
+	sudo chmod 644 /usr/share/fonts/wps-fonts/*
+	sudo fc-cache -vfs
+	rm -rf /tmp/ttf-wps-fonts
+
+# openshot:
+	sudo add-apt-repository ppa:openshot.developers/ppa
+	sudo apt-get update
+	sudo apt-get install openshot-qt
+
+# 7zip
+	sudo apt-get install p7zip-full
+
+dconf-editor 
+midnight commander
+notes
+
+# Notepad++
+	sudo add-apt-repository ppa:notepadqq-team/notepadqq
+	sudo apt=get update
+	sudo apt-get install notepadqq
+
+# LaTeX
+	sudo apt-get install texlive-full
+	sudo apt-get install texmaker
+
+nbconvert
+
+sudo apt-get install synapse
+# Wine
+	sudo apt-get install wine
+
+# Sublime
+	sudo add-apt-repository ppa:webupd8team/sublime-text-3
+	sudo apt-get update
+	sudo apt-get install sublime-text-installer
+
+# Powertop
+	sudo apt-get install powertop
+
+dropbox stop && DBUS_SESSION_BUS_ADDRESS="" dropbox start
+
+sudo apt-get install ncdu -y
+
+sudo apt install tree
+
+
+ADD BASH SCRIPT TO SET UP NVIDIA DRIVERS AND CUDA, then install tensorflow

@@ -1,0 +1,196 @@
+# pre-processing:
+    # Data Analysis Visualization:
+        pandas-profiling
+        pytables
+        pandassql
+        descriptive stats
+        hypertools
+        mayavi
+        Dask
+        Blaze
+        networkx
+        plotly
+        kepler-mapper
+        seaborn
+        dora
+
+    # Data Preparation:
+        data validation
+        one-to-one, many to many etc relationships
+        merging sources
+        one-hot encoder/embedding
+        fix missing values
+        missing num
+        remove outliers
+
+    # Feature Generation:
+        polynomial features (interaction only)
+        scikit-feature
+
+        # Time-series:
+            pyflux
+            speech_feature_extraction
+            python_speech_features
+            tsfresh
+            prophet
+            pyAudioAnalysis
+            speech_recognition
+            librosa
+
+        # Dates:
+            maya
+            
+        # Images:
+            scikit-image
+            
+        # Text:
+            conceptnet-numberbatch
+            word2vec emb - fastText_multilingual
+            glove
+            NeuroNER
+            textblob
+            gensim
+            nltk
+            spaCy
+            pattern
+            vader sentiment
+            fuzzyset
+            syntax-net
+            character embedding
+        
+    # Data Reduction:
+        removing redundant columns
+        correlation pearson and normal
+        PCA
+        Kernel PCA
+        LDA
+        SVD
+        dictionary learning
+        ICA
+        greedy feature selection
+        *Feature Selection Methods
+
+    # Normalization:
+        whitening
+        changing distributions if non-gaussian
+        standardization
+
+    # Manifold learning:
+        tsne (multicore tsne)
+        isomap
+        local linear embedding
+        spectral embedding
+        MDS
+        knotter(TDA, pyTDA)
+        kepler-mapper
+        scitkit-kge 
+        holographic-embeddings
+
+# Imbalance:
+    SMOTE
+    imbalanced-learn
+
+# Cross-validation:
+    cross validation
+    k-fold (stratified)
+    adversarial-validation
+    data augmentation
+
+# Clustering:
+    faiss
+    k-means
+    HDBSCAN
+    hierachical clustering
+    spectral clusterng
+    GMMs
+    # Cluster scoring:
+        normalized_mutual_info_score
+        adjusted_rand
+        silhoutee coefficients
+
+# Recommendation Models:
+    graphlab
+    recsys
+    triplet_recommendations_keras
+    crab
+    surprise
+    keras-recommendation
+    
+        
+# Modelling:
+    Logistic Regression
+        Ridge Regression
+        lasso
+    adaboost
+    passive-aggresive
+    KNNs
+        annoy
+    Naive Bayes
+    SVMs
+    Nearest neighbours
+    gaussian processes
+    RF
+        deep forest
+        regularized greedy forest
+    xgb
+        lightgbm
+        infiniteboost
+    Vowpal Wabbit
+    edward
+    Hmmlearn
+    statsmodels
+    metric-learn
+    # ANNS
+        extreme learning machines
+        NNs + SNNS:
+        keras
+        tensorflow
+        num_layers
+        num_neurons
+        init
+        activations
+        loss_function
+        gradient_clipping/norm
+        optimization_method
+        layer_types
+        weight averaging
+    # Auto
+        TPOT
+        Auto-sklearn
+        auto-ml
+    # Evolutionary/Genetic
+        gplearn
+        deap
+        Karoo_GP
+        sklearn-deap
+
+# Regularization
+
+# Tuning:
+    devol
+    hyperas
+    hyperopt + sklearn
+    optomatic
+    sklearn -gridsearch
+
+# Scoring:
+    confusion matrix and associated scores
+    ROC
+    AUC
+    precision vs recall
+
+# Ensembling:
+    Emsembling Methods*
+    pyensemble
+    heamy
+
+# Explaining:
+    Skater
+    CNN-Vis
+    LSTM-Vis
+    Quiver
+    Clustering on embeddings
+    business add vs thresholds
+    probability callibration
+    lime
+    picasso
