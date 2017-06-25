@@ -82,6 +82,9 @@
         spectral embedding
         MDS
         knotter(TDA, pyTDA)
+        kohonen
+        mapper
+        dionysus
         kepler-mapper
         scitkit-kge 
         holographic-embeddings
@@ -188,6 +191,7 @@
     Skater
     CNN-Vis
     LSTM-Vis
+    keras-vis
     Quiver
     Clustering on embeddings
     business add vs thresholds
