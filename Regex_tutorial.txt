@@ -2,7 +2,7 @@
 Author 			= "Gilad Amar"				#
 Email 			= "giladamar@gmail.com"		#
 Created 		= "28/06/2016"				#
-Last_Modified  	= "04/07/2016"				#
+Last_Modified  	= "27/06/2017"				#
 #############################################
 /* 
 	WELCOME TO THE REGEX INTRODUCTORY CODE.
@@ -31,7 +31,6 @@ Last_Modified  	= "04/07/2016"				#
 	Regex in R
 */
 
-
 case sensitive
 
 
@@ -53,11 +52,10 @@ a{1-3}: 	some engines allow a specified range of repetitions
 
 c*: 	0 or more c's
 c+: 	one or more c's
-\d+: 	one or more difit
+\d+: 	one or more digit
 [abc]+: one or more of a, b or c.
 ab?c: 	b is optional, may or may not be there
 special characters dont have meaning inside of a set e.g. [*+] means where it matches * or +
-
 
 .: 		Matches anything except a newline
 ' ': 	space
@@ -72,12 +70,9 @@ special characters dont have meaning inside of a set e.g. [*+] means where it ma
 ^_________$: 	whole line must match exactly this ^ is the start and $ is the end
 
 (___)..... : 	whole string is matched but only part in () is returned 
-
 (___(....)):	Can capture multiple, even nested items
 
 (cat|dog): 		the OR operator
-
-
 
 ...............................................................................
 				INCOMPLETE SECTION BELOW, COPY PASTED.

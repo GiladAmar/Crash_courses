@@ -36,6 +36,7 @@
             pyAudioAnalysis
             speech_recognition
             librosa
+            kapre
 
         # Dates:
             maya
@@ -57,6 +58,10 @@
             fuzzyset
             syntax-net
             character embedding
+            spelling:
+                autocorrect
+                pyenchant
+            tesserocr
         
     # Data Reduction:
         removing redundant columns
@@ -140,6 +145,7 @@
     Hmmlearn
     statsmodels
     metric-learn
+    rulefit
     # ANNS
         extreme learning machines
         NNs + SNNS:
@@ -194,3 +200,4 @@
     probability callibration
     lime
     picasso
+    keras-attention
