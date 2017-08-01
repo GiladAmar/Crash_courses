@@ -40,8 +40,21 @@ Last_Modified  	= "04/11/2016"				#
 
 --TODO Items:
 	-- Partition by and rank over
-	--
-decimal(10,5)
+	-- date function parameters and string formats
+	-- transactions
+	BEGIN TRAN
+		<sql_script_here>
+	IF @@ERROR <> 0 
+		BEGIN 
+			ROLLBACK TRAN 
+			return 11 
+		END
+	COMMIT TRAN
+	GO
+
+-- To set automatic rollbacks on transactions: 
+	SET XACT_ABORT ON
+-- decimal(10,5)
 -----------------
 
 	USE [Handover]
@@ -49,7 +62,7 @@ decimal(10,5)
 	CREATE PROCEDURE [dbo].[stp_run_feature_generator]
 		AS
 	BEGIN 
-		sql_script_here
+		<sql_script_here>
 	END
 
 ----------------------
@@ -125,7 +138,7 @@ CREATE TABLE table_name				-- Create a new table or view
 (
 	column_name1 data_type(size),  										-- Create column of datatype and size
 	LastName varchar(255) NOT NULL, 									-- Cannot have null values
-	P_Id int NOT NULL CHECK (P_Id>  0) IDENTITY(1, 1) UNIQUE PRIMARY KEY,	-- Create a unique Primary Key that must be >0 and not null
+	P_Id int NOT NULL CHECK (P_Id>  0) IDENTITY(1, 1) UNIQUE PRIMARY KEY,-- Create a unique Primary Key that must be >0 and not null
 																		-- the key automatically increase by one from IDENTITY(1, 1)
 	CONSTRAINT pk_PersonID PRIMARY KEY (P_Id,LastName)					-- Add a named constraint, pk_Person_ID, such that list of columns forms Primary Key
 	FOREIGN KEY (P_Id) REFERENCES Persons(P_Id)							-- Ensure local key must exist as primary key on foreign table

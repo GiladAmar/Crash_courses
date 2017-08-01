@@ -1,5 +1,28 @@
+Machine Learning Resources
+#############################################
+Author = "Gilad Amar"                       #
+Email = "giladamar@gmail.com"               #
+#############################################
+
+''' A safety pig has been provided for your benefit:
+ _._ _..._ .-',     _.._(`))
+'-. `     '  /-._.-'    ',/
+   )         \            '.
+  / _    _    |             \
+ |  a    a    /              |
+ \   .-.                     ;  
+  '-('' ).-'       ,'       ;
+     '-;           |      .'
+        \           \    /
+        | 7  .__  _.-\   \
+        | |  |  ``/  /`  /
+       /,_|  |   /,_/   /
+          /,_/      '`-'
+'''
+
 # pre-processing:
     # Data Analysis Visualization:
+        scibox
         pandas-profiling
         pytables
         pandassql
@@ -9,10 +32,13 @@
         Dask
         Blaze
         networkx
+        networkit
+        graph-tool
         plotly
         kepler-mapper
         seaborn
         dora
+        mpl-scatter-density - high D scatter/density plots
 
     # Data Preparation:
         data validation
@@ -37,16 +63,21 @@
             speech_recognition
             librosa
             kapre
+            pydub(audio manipulation)
 
         # Dates:
             maya
             
         # Images:
             scikit-image
-            
+            pyssim - structural similarity
+            facenet
+            neural-enhance
+
         # Text:
             conceptnet-numberbatch
-            word2vec emb - fastText_multilingual
+            neuralcoref
+            word2vec emb - fastText_multilingual\
             glove
             NeuroNER
             textblob
@@ -58,11 +89,21 @@
             fuzzyset
             syntax-net
             character embedding
+                minimaxir/char-embeddings
             spelling:
                 autocorrect
                 pyenchant
+                pyhunspell
             tesserocr
-        
+            ocropy
+            wmd (word movers distance)
+            InferSent
+            skip-thoughts
+            keras-emoji-embeddings
+            deep-simplification
+        #Video
+            autosub - generate subtitles
+
     # Data Reduction:
         removing redundant columns
         correlation pearson and normal
@@ -93,6 +134,7 @@
         kepler-mapper
         scitkit-kge 
         holographic-embeddings
+        umap
 
 # Imbalance:
     SMOTE
@@ -102,7 +144,8 @@
     cross validation
     k-fold (stratified)
     adversarial-validation
-    data augmentation
+    data augmentation:
+        augmenter - images
 
 # Clustering:
     faiss
@@ -123,6 +166,8 @@
     crab
     surprise
     keras-recommendation
+    Graph Based Recommendations - arxiv: 1707.01250
+    polara
     
         
 # Modelling:
@@ -137,9 +182,11 @@
     SVMs
     Nearest neighbours
     gaussian processes
+        george package
     RF
         deep forest
         regularized greedy forest
+        forest-confidence-interval
     xgb
         lightgbm
         infiniteboost
@@ -167,11 +214,14 @@
         TPOT
         Auto-sklearn
         auto-ml
+        AutoML5
+        MLBox
     # Evolutionary/Genetic
         gplearn
         deap
         Karoo_GP
         sklearn-deap
+    keras-language-modeling
 
 # Regularization
 
@@ -192,6 +242,8 @@
     Emsembling Methods*
     pyensemble
     heamy
+    mlens
+    pycobra
 
 # Explaining:
     Skater
@@ -205,3 +257,5 @@
     lime
     picasso
     keras-attention
+    apriori-python
+    eli5

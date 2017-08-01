@@ -2,7 +2,6 @@
 Author 			= "Gilad Amar"				#
 Email 			= "giladamar@gmail.com"		#
 Created 		= "28/06/2016"				#
-Last_Modified  	= "27/06/2017"				#
 #############################################
 /* 
 	WELCOME TO THE REGEX INTRODUCTORY CODE.
@@ -28,7 +27,13 @@ Last_Modified  	= "27/06/2017"				#
 	Regex in python std.
 	Regex in Pandas
 	Regex in bash
-	Regex in R
+  Test regex at https://regex101.com/
+  Symbol  Description
+  ?=  Positive Lookahead : must have (?= <..regex here..>) afterward eg [T|t]he(?=\sfat)
+  ?!  Negative Lookahead : must NOT have (?! <..regex here..>) afterward eg [T|t]he(?=\sfat)
+  ?<= Positive Lookbehind : must have (?<= <..regex here..>) before eg [T|t]he(?=\sfat)
+  ?<! Negative Lookbehind : must NOT have (?<! <..regex here..>) before eg [T|t]he(?=\sfat)
+  * look behind/aheads in parenthesis is not returned
 */
 
 case sensitive
@@ -38,7 +43,7 @@ case sensitive
 \D : 	non-digit
 .:	 	single wildcard so to match peroid \.
 [abc]: 	single wildcard of specified list in []
-	[a-z]: single wildcard in whole char range
+	[A-Za-z]: single wildcard in whole char range
 	[3-9]: ""
 
 [^abc]: single wildcard NOT in list [^ ]

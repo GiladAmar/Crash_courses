@@ -91,14 +91,14 @@ git ls-files
 .gitignore
 
 git rm # delete and stage deletion
-git rm --cached # remove from version control but DONT deletr
-git mv # chnage file name and prep for commit
+git rm --cached # Remove from version control but DONT deletr
+git mv          # Change file name and prep for commit
 
 # Stashing
-git stash       # temporarily stroes all modified tracked files
-git stash pop   # restores most recently stashed files
-git stash list  # lists all chngaed changesets
-git stash drop  # discards most recently stashed changeset
+git stash       # Temporarily stroes all modified tracked files
+git stash pop   # Restores most recently stashed files
+git stash list  # Lists all chngaed changesets
+git stash drop  # Discards most recently stashed changeset
 
 # SEE THE CURRENT STATUS
 git status 			# See what has changed since last commit
@@ -116,8 +116,8 @@ git log
 -n <num_of_commits>
 
 # SEE CHNAGES IN FILE SINCE LAST COMMIT
-git diff <filename>                 # compare working dir file to staging are
-git diff --staged                   # compare staged to most recent commit
+git diff <filename>                 # Compare working dir file to staging are
+git diff --staged                   # Compare staged to most recent commit
 git diff <commit_id1> <commit_id2>
 
 
@@ -128,6 +128,7 @@ git show HEAD
 # REVERT CHANGES BY 
 git checkout HEAD <file name> 		# Go back to file state at last commit 
 git checkout <commit_id>
+git checkout <commit_id> <filename> # Reset only that file to commit_id
 
 git reset HEAD <filename>			# Go back to file state at last commit 
 			<1st 7 letters of SHA> 	# Restore entire state of last commit
