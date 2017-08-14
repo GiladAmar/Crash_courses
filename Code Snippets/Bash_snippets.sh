@@ -1,0 +1,1 @@
+aria2c -x 16 -s 16 [url] # Download from URL in parallel

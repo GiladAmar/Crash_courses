@@ -256,6 +256,8 @@ Email = "giladamar@gmail.com"               #
     probability callibration
     lime
     picasso
+    keras_weight_animator
     keras-attention
     apriori-python
     eli5
+    influence-release
