@@ -1,7 +1,7 @@
 Machine Learning Resources
 #############################################
-Author = "Gilad Amar"                       #
-Email = "giladamar@gmail.com"               #
+Author  = "Gilad Amar"                       #
+Email   = "giladamar@gmail.com"               #
 #############################################
 
 ''' A safety pig has been provided for your benefit:
@@ -73,6 +73,7 @@ Email = "giladamar@gmail.com"               #
             pyssim - structural similarity
             facenet
             neural-enhance
+            random_obstructions in images
 
         # Text:
             conceptnet-numberbatch
