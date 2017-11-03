@@ -21,16 +21,22 @@ Email   = "giladamar@gmail.com"               #
 '''
 
 # pre-processing:
+    # Data Creation:
+        Image Labelling:
+            pychetlabeller
+
     # Data Analysis Visualization:
-        scibox
         pandas-profiling
-        pytables
-        pandassql
-        descriptive stats
-        hypertools
-        mayavi
         Dask
         Blaze
+        pytables
+        pandassql
+
+        descriptive stats
+        hypertools
+        
+        mayavi
+
         networkx
         networkit
         graph-tool
@@ -39,6 +45,7 @@ Email   = "giladamar@gmail.com"               #
         seaborn
         dora
         mpl-scatter-density - high D scatter/density plots
+        SpiralBarcodes
 
     # Data Preparation:
         data validation
@@ -72,6 +79,7 @@ Email   = "giladamar@gmail.com"               #
             scikit-image
             pyssim - structural similarity
             facenet
+            mxnet-face//mxnet_mtcnn_face_detection
             neural-enhance
             random_obstructions in images
 
@@ -102,6 +110,7 @@ Email   = "giladamar@gmail.com"               #
             skip-thoughts
             keras-emoji-embeddings
             deep-simplification
+            anago - sequence labelling/pos
         #Video
             autosub - generate subtitles
 
@@ -124,6 +133,7 @@ Email   = "giladamar@gmail.com"               #
 
     # Manifold learning:
         tsne (multicore tsne)
+            LION-tSNE
         isomap
         local linear embedding
         spectral embedding
@@ -153,7 +163,7 @@ Email   = "giladamar@gmail.com"               #
     k-means
     HDBSCAN
     hierachical clustering
-    spectral clusterng
+    spectral clustering
     GMMs
     # Cluster scoring:
         normalized_mutual_info_score
@@ -169,6 +179,9 @@ Email   = "giladamar@gmail.com"               #
     keras-recommendation
     Graph Based Recommendations - arxiv: 1707.01250
     polara
+    spotlight
+    tensorrec
+    tffm/python-libffm/libffm-python
     
         
 # Modelling:
@@ -176,7 +189,7 @@ Email   = "giladamar@gmail.com"               #
         Ridge Regression
         lasso
     adaboost
-    passive-aggresive
+    passive-aggressive
     KNNs
         annoy
     Naive Bayes
@@ -189,10 +202,12 @@ Email   = "giladamar@gmail.com"               #
         regularized greedy forest
         forest-confidence-interval
     xgb
+        catboost
         lightgbm
         infiniteboost
     Vowpal Wabbit
     edward
+    zhusuan
     Hmmlearn
     statsmodels
     metric-learn
@@ -245,6 +260,7 @@ Email   = "giladamar@gmail.com"               #
     heamy
     mlens
     pycobra
+    infiniteboost
 
 # Explaining:
     Skater
@@ -254,9 +270,9 @@ Email   = "giladamar@gmail.com"               #
     Quiver
     Clustering on embeddings
     business add vs thresholds
-    probability callibration
+    probability calibration
     lime
-    picasso
+    Picasso
     keras_weight_animator
     keras-attention
     apriori-python

@@ -23,38 +23,75 @@ Created     = "28/06/2016"                  #
           /,_/      '`-'
 */
 /* 
-  TODO
-  Regex in python std.
-  Regex in Pandas
-  Regex in bash
-  Test regex at https://regex101.com/
+          TODO
+          Regex in python std.
+          Regex in Pandas
+          Regex in bash
+          Test regex at https://regex101.com/
 
-  +----------------------------+
-  |Symbol|    Description      |
-  +------+---------------------+  
-  | ?=   | Positive Lookahead  |  
-  | ?!   | Negative Lookahead  |  
-  | ?<=  | Positive Lookbehind |  
-  | ?<!  | Negative Lookbehind | 
-  +----------------------------+
-  * look behind/aheads in parenthesis is not returned
 
-  +--------+--------+
-  | Greedy |  Lazy  |
-  +--------+--------+
-  | *      | *?     |
-  | +      | +?     |
-  | ?      | ??     |
-  | {n}    | {n}?   |
-  | {n,}   | {n,}?  |
-  | {n,m}  | {n,m}? |
-  +--------+--------+
-Add a ? to a quantifier to make it ungreedy i.e lazy.
-Example:
-  test string: stackoverflow
-    greedy : s.*o  -> stackoverflo
-    lazy   : s.*?o -> stacko
-*/
+          \b(0?[1-9]|[12]\d|3[01])([\/\-])(0?[1-9]|1[012])\2(\d{4})
+          The only new concept here is that we're using \2 to match the second capture group, which is the divider (/ or -).
+
+          "\b(?:19|20)\d{2}\b" - match all years between 1900 and 2099
+
+
+        is email?
+          (?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])
+
+        #find urls:
+          (https?:\/\/)(www\.)?(?<domain>[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6})(?<path>\/[-a-zA-Z0-9@:%_\/+.~#?&=]*)?
+
+        # replace date formats
+          import re
+          regex = r'\b(0?[1-9]|[12]\d|3[01])([ \/\-])(0?[1-9]|1[012])\2(\d{4})'
+          test_str = "Today's date is 18/09/2017"
+          subst = r'\3\2\1\2\4'
+          result = re.sub(regex, subst, test_str)
+          print(result)
+
+
+        #named capture groups
+          import re
+          import urllib.request
+
+          html = str(urllib.request.urlopen("https://moz.com/top500").read())
+          regex = r"(https?:\/\/)(www\.)?(?P<domain>[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6})(?P<path>\/[-a-zA-Z0-9@:%_\/+.~#?&=]*)?"
+          matches = re.finditer(regex, html)
+
+          for match in matches:
+            print(match.group('domain'))
+
+
+
+        #make the next sequence case-insensitive
+        (?i) - Signifies that the next sequence is case-insensitive.
+          +----------------------------+
+          |Symbol|    Description      |
+          +------+---------------------+
+          | ?=   | Positive Lookahead  |
+          | ?!   | Negative Lookahead  |
+          | ?<=  | Positive Lookbehind |
+          | ?<!  | Negative Lookbehind |
+          +----------------------------+
+          * look behind/aheads in parenthesis is not returned
+
+          +--------+--------+
+          | Greedy |  Lazy  |
+          +--------+--------+
+          | *      | *?     |
+          | +      | +?     |
+          | ?      | ??     |
+          | {n}    | {n}?   |
+          | {n,}   | {n,}?  |
+          | {n,m}  | {n,m}? |
+          +--------+--------+
+        Add a ? to a quantifier to make it ungreedy i.e lazy.
+        Example:
+          test string: stackoverflow
+            greedy : s.*o  -> stackoverflo
+            lazy   : s.*?o -> stacko
+        */
 
 case sensitive
 
