@@ -125,6 +125,7 @@ special characters dont have meaning inside of a set e.g. [*+] means where it ma
 \n:   newline
 \r:   carriage return
 \b:   boundary between word and non word
+\B:   not word boundary (e.g. never at the end of a sentence)
 \s:   matches ALL space types
 \S:   non-whitespace
 

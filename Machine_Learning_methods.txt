@@ -111,6 +111,7 @@ Email   = "giladamar@gmail.com"               #
             keras-emoji-embeddings
             deep-simplification
             anago - sequence labelling/pos
+            TextTeaser - Summarizer
         #Video
             autosub - generate subtitles
 
@@ -148,7 +149,7 @@ Email   = "giladamar@gmail.com"               #
         umap
 
 # Imbalance:
-    SMOTE
+    SMOTE/kmeans_smote
     imbalanced-learn
 
 # Cross-validation:
@@ -157,6 +158,8 @@ Email   = "giladamar@gmail.com"               #
     adversarial-validation
     data augmentation:
         augmenter - images
+        imaug
+        GAN-generation
 
 # Clustering:
     faiss
@@ -237,6 +240,7 @@ Email   = "giladamar@gmail.com"               #
         deap
         Karoo_GP
         sklearn-deap
+        tensorlow-neat
     keras-language-modeling
 
 # Regularization

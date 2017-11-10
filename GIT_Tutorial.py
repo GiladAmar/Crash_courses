@@ -200,3 +200,9 @@ git push  <remote name> <local branch_name> # Push up changes to remote origin f
 
 git pull  <remote> <branch>                 # downloads bookmark history and incorporates changes
 * pull is just git fetch + git merge
+
+
+
+
+# TODOs
+    Make a file rename its own commit (so as not to confuse git)
