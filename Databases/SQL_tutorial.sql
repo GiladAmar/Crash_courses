@@ -26,11 +26,11 @@ Created         = "2016"                    #
 */
 
 -- DATA TYPES:
-    String    VARCHAR(1024)     -- Any characters, with a maximum field length of 1024 characters.
-    Date/Time    TIMESTAMP      -- Stores year, month, day, hour, minute and second values as YYYY-MM-DD hh:mm:ss.
-    Number DOUBLE PRECISION     -- Numerical, with up to 17 significant digits decimal precision.
-                                -- Does not support commas, or currency symbols.
-    Boolean    BOOLEAN          -- Only TRUE or FALSE values
+    String      VARCHAR(1024)   -- Any characters with a maximum field length of 1024 characters.
+    Date/Time   TIMESTAMP       -- Stores year, month, day, hour, minute and second values as YYYY-MM-DD hh:mm:ss.
+    number      DOUBLE PRECISION-- Numerical, with up to 17 significant digits decimal precision.
+                                -- Does not support commas or currency symbols.
+    Boolean     BOOLEAN         -- Only TRUE or FALSE values
 
 -- Columns can be cast to another type(within reason) with:
     CAST(expression AS [data type])
@@ -48,8 +48,8 @@ FROM <Table1>
 [ WHERE <condition> ]       -- Restricts records before the groups are summarised.
 [ GROUP BY <field>
 [ HAVING <condition> ] ]    -- Restricts summarised records after the groups are summarised.
-[ ORDER BY <fields> ];
-[ LIMIT y]
+[ ORDER BY <fields> ]
+[ LIMIT y];
 
 ------------------------------CREATE------------------------------
 CREATE TABLE Table_name                 -- Create a new table or view
@@ -69,7 +69,7 @@ CREATE TABLE Table_name                 -- Create a new table or view
     
     FOREIGN KEY (p_id) 
         REFERENCES Persons(p_id)        -- Ensure local key must exist as primary key on foreign table     
-);
+)
 
 CREATE UNIQUE INDEX index_name          -- Create an index for a table (does not have to be unique)
     ON Table_name (last_name, first_name)
@@ -80,7 +80,7 @@ CREATE OR REPLACE VIEW View_name AS     -- Create an on-the-fly view of a table
 
 ------------------------------INSERT------------------------------
 INSERT INTO Tbl_Players(first_name, last_name)             -- Add values in row to table
-     VALUES (‘Douglas’, ‘Adams’);
+     VALUES (‘Douglas’, ‘Adams’)
 
 ------------------------------ALTER------------------------------
 ALTER TABLE Table_name                  -- Change the structure of a table (fields)u
@@ -115,15 +115,16 @@ ALTER TABLE Table_name                  -- Change the structure of a table (fiel
 ------------------------------UPDATE------------------------------
 UPDATE Tbl_players              -- Change values in Table
     SET handicap = 17
-    WHERE memb_no = 2;
+    WHERE memb_no = 2
 
 ------------------------------DELETE------------------------------
 DELETE FROM Tbl_Players         -- Delete rows from table
-    WHERE memb_expire < NOW();
+    WHERE memb_expire < NOW()
+
 TRUNCATE TABLE Customers        -- Empty the  Table
 
 ------------------------------DROP--------------------------------
-DROP TABLE IF EXISTS Table_name;-- Delete table if it exists
+DROP TABLE IF EXISTS Table_name -- Delete table if it exists
                                     -- (Some SQL versions only)
                                    
 DROP TABLE Table_name           -- Otherwise
@@ -135,14 +136,14 @@ DROP VIEW                       -- Drop a view
 
 ----------------COMPLETE SELECT SAMPLE STATEMENT------------------
 
-SELECT TOP 100 * + (5 * 2) / 2.5 ,year, month,  -- Can use arithmetic operations (+, - ,* ,/ ) with columns BODMAS brackets
+SELECT TOP 100 * + (5 * 2) / 2.5 , year, month, -- Can use arithmetic operations (+, -, *, /) with columns BODMAS brackets
     a.*,                                        -- Select all columns from Table alias a
     name                    AS new_name,        -- Give column new name, can be used later in query. 
                                                 -- Use AS "Title with Spaces" for spaces.
     -- Numerical
     COUNT(artist)           AS num_artists,     -- Counts no. in artist column NOT nulls.
     SUM(earnings)           AS profit,          -- Sums column, treats nulls as 0.
-    AVG(group_members)      AS avg_band_size    -- Find column average, completely ignores nulls (doesn't treat like zeros).
+    AVG(group_members)      AS avg_band_size,   -- Find column average, completely ignores nulls (doesn't treat like zeros).
     MIN(year)               AS earliest_year,   -- Column minimum. Handles dates, numbers and strings.
     MAX(albums_sold)        AS max_sold,        -- Column maximum. Handles dates, numbers and strings
     STDEV(group_members)    AS std_dev_members, -- Standard Deviation
@@ -164,7 +165,7 @@ SELECT TOP 100 * + (5 * 2) / 2.5 ,year, month,  -- Can use arithmetic operations
     CASE
 
         ELSE  'We Do Not Have Records For This Customer'
-        END AS 'result';
+        END AS 'result',
 
     CASE WHEN weight > 250                      -- IF THEN ELSE statement
             THEN 'over 250'                     
@@ -187,7 +188,7 @@ FROM songs_schema.songs songs a                 -- Can be given an alias, here j
     JOIN artist_schema.artist earnings b
         ON songs.artist = earnings.artist
         AND companies.name = investments.company_name                   -- Joining on more than one key, even if unnecessary is much faster.
-        AND acquisitions.company_permalink != '/company/1000memories',  -- Additional condition for merger 
+        AND acquisitions.company_permalink != '/company/1000memories'  -- Additional condition for merger 
                                                                         -- EVALUATED BEFORE where
 /*FOR INNER JOIN - returns only overlap in data
     If multiple matches, all matches will be returned as separate rows
@@ -223,7 +224,7 @@ FOR FULL OUTER JOIN - Returns a left, inner and right join.
     In this join, companies data is either left alone or added to.
     It is a CONVENTION to use LEFT JOIN over JOIN, not logically necessary.
 */
-WHERE month = 1                     -- =, !=, >, <, >=, <=
+WHERE month = 1                     -- =, !=, >, <, >=, and <=
                                     -- or month = 'January' in single quotes, operators now refer to alphabetic order.
     AND 'day' LIKE '%day'           -- Case-sensitive.
     OR 'day' ILIKE '%dAY'           -- Case-insensitive, "%"" is a multi-wildcard character.
@@ -291,7 +292,7 @@ LENGTH('stringy')                       -- Get length of string
 REPLACE (str1, str2, str3)              -- In str1, find where str2 occurs, and replace it with str3.
 TRIM( [ <LOCATION> [remstr] FROM ] str) -- <LOCATION> can be either LEADING, TRAILING, or BOTH.
                                         -- If <remstr> pattern is not given white spaces are removed.
-CONCAT (str1, str2, str3, ...)          -- Concatenate all strings
+CONCAT(str1, str2, str3, ...)           -- Concatenate all strings
 SUBSTRING(stringy, index_1, index_2)    -- Take substring between index_1 and index_2
 CHARINDEX('-', stringy)                 -- Find Position of character in string
 
@@ -348,8 +349,8 @@ FROM Table
 BEGIN
     -- Declaring variables
     DECLARE @Source_table varchar(max)
-          ,@start_date DATETIME
-          ,@data_threshold numeric
+           ,@start_date DATETIME
+           ,@data_threshold numeric
 
     SET @Source_table   = '[db_ucg].[dbo].[source_table]'
     SET @Table_name     = '[db_ucg].[dbo].[target_table]'
@@ -418,11 +419,11 @@ END
         WHERE product_id IN (SELECT product_id
                              FROM Ordered_items)
 
-        =>    SELECT *
-                FROM Products p
-                WHERE EXISTS (SELECT *
-                              FROM Ordered_items o
-                              WHERE o.product_id = p.product_id)
+        =>  SELECT *
+            FROM Products p
+            WHERE EXISTS (  SELECT *
+                            FROM Ordered_items o
+                            WHERE o.product_id = p.product_id)
 
     -- Avoid unnecessary computation in WHERE clauses.
        eg. WHERE height + 1 = 10
@@ -444,11 +445,13 @@ END
     -- Index the database.
 
     -- Don't do in multiple selects what can be done in one.
-        SELECT <something> FROM Users
+        SELECT <something> 
+        FROM Users
         UNION
-        SELECT <something else> FROM Users
+        SELECT <something_else> 
+        FROM Users
 
-    -- Favour using >, <, <=, >= over NOT when possible.
+    -- Favour using >, <, <=, and >= over NOT when possible.
 
     -- Favour between over < and > range.
         SELECT *
@@ -563,7 +566,7 @@ YEARWEEK()                              -- Returns the year and week
     CREATE INDEX Idx3 
         ON FruitsForSale(fruit, state)
     # Faster for multiple AND connect terms in where clause
-    # Slows down DML operations like INSERT, UPDATE, DELETE
+    # Slows down DML operations like INSERT, UPDATE and DELETE
     # Use indexes only on columns which are used to search the table frequently.
 
 -- OVER (PARTITION BY ..)
@@ -585,7 +588,7 @@ YEARWEEK()                              -- Returns the year and week
 
 -- PERMISSIONS
     # System privileges - CREATE, ALTER, or DROP database objects. 
-    # Object privileges - EXECUTE, SELECT, INSERT, UPDATE, or DELETE data.
+    # Object privileges - EXECUTE, SELECT, INSERT, UPDATE or DELETE data.
 
     GRANT privilege_name 
         ON object_name 
@@ -618,9 +621,9 @@ YEARWEEK()                              -- Returns the year and week
 
 
 
---CREATE DATABASE university;
-SHOW DATABASES;
-DROP DATABASE <database_name>;
+--CREATE DATABASE university
+SHOW DATABASES
+DROP DATABASE <database_name>
 SHOW TABLES
 DESCRIBE Table_name
 
@@ -632,13 +635,13 @@ DESCRIBE Table_name
     FROM dept d 
     WHERE EXISTS (  SELECT 'X' 
                     FROM employee e 
-                    WHERE e.dept = d.dept);
+                    WHERE e.dept = d.dept)
 
     Instead of:
 
     SELECT DISTINCT d.dept_id, d.dept 
     FROM dept d,employee e 
-    WHERE e.dept = e.dept;
+    WHERE e.dept = e.dept
 
 
 SHOW PROCESSLIST
