@@ -71,6 +71,7 @@ Email   = "giladamar@gmail.com"               #
             librosa
             kapre
             pydub(audio manipulation)
+            pywavelets
 
         # Dates:
             maya
@@ -172,6 +173,7 @@ Email   = "giladamar@gmail.com"               #
         normalized_mutual_info_score
         adjusted_rand
         silhoutee coefficients
+    mst_clustering
 
 # Recommendation Models:
     graphlab
