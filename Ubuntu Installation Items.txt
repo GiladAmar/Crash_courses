@@ -1,205 +1,201 @@
-﻿sudo apt-get update
-sudo apt-get dist-upgrade
+sudo apt update && sudo apt dist-upgrade && sudo apt autoremove
 
-- Move Unity launcher to bottom
-	gsettings set com.canonical.Unity.Launcher launcher-position Bottom
+--  copy some of .bashrc
 
-- minimize window on con click
-	gsettings set org.compiz.unityshell:/org/compiz/profiles/unity/plugins/unityshell/ launcher-minimize-window true
+--  headers:
+    sudo apt install -y gcc make linux-headers-$(uname -r) dkms
+    sudo apt install -y linux-image-generic linux-image-extra-virtual
+    sudo apt install -y linux-source linux-headers-generic
 
---  Codecs and encrypted DVD pl;ayback
-	sudo apt install ubuntu-restricted-extras libavcodec-extra libdvd-pkg
+--  htop
+    sudo apt install -y htop
 
--- OPeNJRE
-	sudo apt install openjdk-8-jdk
+--  Recursive nautilus search
+    gsettings set org.gnome.nautilus.preferences enable-interactive-search false
 
--- Unity Tweak Tool
-	sudo apt install unity-tweak-tool
+--  Disable Guest Sessions:
+    [Disable Guest Session on Unity]
+    sudo sh -c "echo 'allow-guest=false' >> /usr/share/lightdm/lightdm.conf.d/50-ubuntu.conf"
 
--- GIMP
-	sudo add-apt-repository ppa:otto-kesselgulasch/gimp
-	sudo apt-get update
-	sudo apt-get install gimp gimp-data gimp-plugin-registry gimp-data-extras
+--  Move Unity launcher to bottom
+    gsettings set com.canonical.Unity.Launcher launcher-position Bottom
 
--- VLC
-	sudo apt-get install vlc browser-plugin-vlc
+--  minimize window on on click
+    gsettings set org.compiz.unityshell:/org/compiz/profiles/unity/plugins/unityshell/ launcher-minimize-window true
 
--- Google Chrome
-	wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add - 
-	sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list'
-	sudo apt-get update 
-	sudo apt-get install google-chrome-stable
--- Deluge
+--  Fortran
+    sudo apt install -y gfortran
 
--- Dropbox
-	sudo apt install nautilus-dropbox
+--  Google Chrome
+    wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add - 
+    sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list'
+    sudo apt update && sudo apt install -y google-chrome-stable
 
--- Skype
-	sudo apt install skype
-	sudo apt install gtk2-engines-murrine:i386 gtk2-engines-pixbuf:i386
+--  Dropbox
+    sudo apt install -y nautilus-dropbox
 
--- Shutter
-	sudo add-apt-repository ppa:shutter/ppa
-	sudo apt-get update && sudo apt-get install shutter
+--  git
+    sudo apt install -y git
+        copy git-completion
+        copy git_prompt
 
--- Flash
-	sudo apt-get install flashplugin-installer
+--  gdebi
+    sudo apt install -y gdebi
+    
+--  Timeshift
+    sudo apt-add-repository -y ppa:teejee2008/ppa
+    sudo apt update
+    sudo apt install -y timeshift
 
--- BleachBit
+--  python3.6
+    cd /opt
+    wget https://www.python.org/ftp/python/3.6.3/Python-3.6.3.tgz
+    tar -xvf Python-3.6.3.tgz
+    cd Python-3.6.3
+    make 
+    make install
 
--- Synaptic
-	sudo apt install synaptic
+NVIDIA DRIVERS AND CUDA
+    Nvidia:
+        sudo add-apt-repository -y ppa:graphics-drivers/ppa
+        sudo apt update
+        sudo apt install -y libcupti-dev
+        sudo apt install -y build-essential
+        sudo apt install -y nvidia-387
+        sudo apt install -y mesa-common-dev
+        sudo apt install -y freeglut3-dev
 
--- Install geb files
-	sudo apt install gdebi
+    CUDA:
+        sudo sh cuda_8.0.61_375.26_linux-run
+        (don't install driver when asked)
+        export PATH=/usr/local/cuda-8.0/bin${PATH:+:${PATH}}
+        export LD_LIBRARY_PATH=/usr/local/cuda-8.0/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
 
--- ppa manager
-	sudo add-apt-repository ppa:webupd8team/y-ppa-manager
-	sudo apt update && sudo apt install y-ppa-manager
+    cuDNN:
+        cd ~/Downloads
+        tar -zxvf cudnn-8.0-linux-x64-v6.0-ga.tgz
+        sudo cp cuda/include/cudnn.h /usr/local/cuda/include/
+        sudo cp cuda/lib64/libcudnn* /usr/local/cuda/lib64/
+        sudo chmod a+r /usr/local/cuda/include/cudnn.h
+        sudo chmod a+r /usr/local/cuda/lib64/libcudnn*
 
--- Weather Indicator
-	sudo add-apt-repository ppa:atareao/atareao
-	sudo apt update && sudo apt install my-weather-indicator
+--  ppa manager
+    sudo add-apt-repository -y ppa:webupd8team/y-ppa-manager
+    sudo apt update && sudo apt install -y y-ppa-manager
 
--- Variety Desktop Backgrounds
-	sudo apt install variety
+--  Codecs and encrypted DVD playback
+	sudo apt install -y ubuntu-restricted-extras libavcodec-extra libdvd-pkg
 
--- Firewall
-	sudo apt-get install gufw
+--  TLP (power saving)
+    sudo apt install -y tlp tlp-rdw
+    sudo tlp start
 
--- Cinnamon
-	sudo add-apt-repository ppa:gwendal-lebihan-dev/cinnamon-nightly
-	sudo apt-get update && sudo apt install cinnamon
+--  OPeNJRE
+	sudo apt install -y  icedtea-8-plugin openjdk-8-jdk
+
+--  Unity Tweak Tool
+	sudo apt install -y unity-tweak-tool
+
+--  GIMP
+	sudo add-apt-repository -y ppa:otto-kesselgulasch/gimp
+	sudo apt update && sudo apt install -y gimp gimp-data gimp-plugin-registry gimp-data-extras
+
+--  VLC
+	sudo apt install -y vlc browser-plugin-vlc
+
+--  Skype
+	sudo apt install -y skype
+	sudo apt install -y gtk2-engines-murrine:i386 gtk2-engines-pixbuf:i386
+
+--  Shutter
+	sudo add-apt-repository -y ppa:shutter/ppa
+	sudo apt update && sudo apt install -y shutter
+
+--  Flash
+	sudo apt install -y flashplugin-installer
+    sudo apt install -y adobe-flashplugin
+
+--  Synaptic
+	sudo apt install -y synaptic
+
+--  Weather Indicator
+	sudo add-apt-repository -y ppa:atareao/atareao
+	sudo apt update && sudo apt install -y my-weather-indicator
+
+--  Variety Desktop Backgrounds
+	sudo add-apt-repository -y ppa:peterlevi/ppa
+    sudo apt update && sudo apt install -y variety
+
+--  Firewall
+	sudo apt install -y gufw
+
+--  Cinnamon
+	sudo add-apt-repository -y ppa:gwendal-lebihan-dev/cinnamon-nightly
+	sudo apt update && sudo apt install -y cinnamon
 	gsettings set org.cinnamon.desktop.session settings-daemon-uses-logind true
 	gsettings set org.cinnamon.desktop.session session-manager-uses-logind true
 	gsettings set org.cinnamon.desktop.session screensaver-uses-logind false
 
--- Kate
-	sudo apt-get install kate
+--  Kate
+	sudo apt install -y kate
 
--- Clementine
-	sudo add-apt-repository ppa:me-davidsansome/clementine
-	sudo apt-get update && sudo apt-get install clementine
+--  Clementine
+	sudo apt install -y clementine
 
--- rapidminer
+--  R
+	sudo apt install -y r-base
 
--- toggl
-
--- git
-	sudo apt-get install git
-
--- R
-	sudo apt-get install r-base
-
--- R studio
+--  R studio
 	sudo gedit /etc/apt/sources.list
 	deb https://cloud.r-project.org//bin/linux/ubuntu xenial/
-	sudo apt-get update && sudo apt-get install r-base
+	sudo apt update && sudo apt install -y r-base
 
--- Teamviewer
+--  Teamviewer
+    Manual deb/rpm
 
--- Pycharm
+--  Pycharm
+    sudo snap install [pycharm-professional]
 
--- RAR
-	sudo apt-get install rar
+--  RAR
+	sudo apt install -y rar
 
--- LibreOffice
-	sudo apt-get install libreoffice-common
+--  LibreOffice
+	sudo apt install -y libreoffice-common
 
--- GParted
-	sudo apt-get install gparted
+--  GParted
+	sudo apt install -y gparted
 
-sudo apt-get install classicmenu-indicator
+--  TOR
+	sudo add-apt-repository -y ppa:webupd8team/tor-browser
+	sudo apt update && sudo apt install -y tor-browser
 
-sudo apt-get remove yelp thunderbird rhythmbox eog
+--  TERMINATOR
+	sudo apt install -y terminator
 
-TOR
-	sudo add-apt-repository ppa:webupd8team/tor-browser
-	sudo apt-get update
-	sudo apt-get install tor-browser
+--  Reaver
+	sudo apt install -y reaver
+	sudo apt install -y aircrack-ng
 
-TERMINATOR
-	sudo apt-get install terminator
+--  adobe_acrobat reader
+    sudo add-apt-repository -y "deb http://archive.canonical.com/ precise partner"
+    sudo apt update && sudo apt install -y adobereader-enu
+    
+--  vim
+    sudo apt install -y vim
 
-# Reaver
-	sudo apt-get install reaver
-	sudo apt install aircrack-ng
+--  nano
+    sudo apt install -y nano
 
+--  openarena
+    sudo apt install -y openarena
 
+--  atlas
+    sudo apt install -y libatlas-base-dev 
 
-texmaker
+--  blas
+    sudo apt install -y libblas-dev liblapack-dev
 
-htop
-disk usage analyzer
-wps office
-foxit reader
-firewall
-timeshift
-vim
-nano
-openarena
-
-PYTHON PACKAGES
-
-	virtualenv
-	numpy
-	pandas
-	matplotlib
-	scipy
-	sympy
-	cython
-	ipython
-	jupyter notebook
-	scikit-learn
-	scikit-feature
-	statsmodels
-	patsy
-	astropy
-	scikit-image
-	numba
-	tsne
-	pymatbridge
-	oct2py
-	xgboost
-	tpot
-	hdbscan
-	theano
-	tensorflow
-	keras
-	sqlalchemy
-	pymssql
-	tqdm
-	pymc3
-	nltk
-	h5py
-	bokeh
-	scarpy
-	pillow
-	opencv
-	virtualenv
-	virtualenvwrapper
-	seaborn
-	ggplot
-	plotly
-	pydot
-	colorama
-	python-progressbar
-	orange
-	spyder3
-sudo apt-get install libglu1-mesa libxi-dev libxmu-dev -y
-sudo apt-get — yes install build-essential
-sudo apt-get install python-pip python-dev -y
-sudo apt-get install python-numpy python-scipy -y
-sudo apt-get install python-yaml -y
-sudo apt-get install libhdf5-serial-dev -y
-sudo apt-get install python-nose g++ libopenblas-dev git
-pip install tensorflow theano keras scipy scikit-learn jupyter ipython scikit-image h5py matplotlib numpy pandas virtualenv	
-
-# The Fuck
-	sudo -H pip3 install thefuck
-	eval "$(thefuck --alias)"
-
-# wps fonts
+--  wps fonts
 	cd /tmp
 	git clone https://github.com/iamdh4/ttf-wps-fonts.git
 	sudo mkdir /usr/share/fonts/wps-fonts
@@ -208,46 +204,202 @@ pip install tensorflow theano keras scipy scikit-learn jupyter ipython scikit-im
 	sudo fc-cache -vfs
 	rm -rf /tmp/ttf-wps-fonts
 
-# openshot:
-	sudo add-apt-repository ppa:openshot.developers/ppa
-	sudo apt-get update
-	sudo apt-get install openshot-qt
+--  openshot:
+	sudo add-apt-repository -y ppa:openshot.developers/ppa
+	sudo apt update && sudo apt install -y openshot-qt
 
-# 7zip
-	sudo apt-get install p7zip-full
+--  7zip
+	sudo apt install -y p7zip-rar p7zip-full unace unrar zip unzip sharutils rar uudeview mpack arj cabextract file-roller
 
-dconf-editor 
-midnight commander
-notes
+--  Notepad++
+	sudo add-apt-repository -y ppa:notepadqq-team/notepadqq
+	sudo apt update && sudo apt install -y notepadqq
 
-# Notepad++
-	sudo add-apt-repository ppa:notepadqq-team/notepadqq
-	sudo apt=get update
-	sudo apt-get install notepadqq
+--  LaTeX
+	sudo apt install -y texlive-full
+	sudo apt install -y texmaker
 
-# LaTeX
-	sudo apt-get install texlive-full
-	sudo apt-get install texmaker
+--  Wine
+	wget https://dl.winehq.org/wine-builds/Release.key
+    sudo apt-key add -y Release.key
+    sudo apt-add-repository -y 'https://dl.winehq.org/wine-builds/ubuntu/'
+    sudo apt install -y --install-recommends winehq-stable
 
-nbconvert
+--  Sublime
+	sudo add-apt-repository -y ppa:webupd8team/sublime-text-3
+	sudo apt update && sudo apt install -y sublime-text-installer
 
-sudo apt-get install synapse
-# Wine
-	sudo apt-get install wine
+--  Powertop
+	sudo apt install -y powertop
 
-# Sublime
-	sudo add-apt-repository ppa:webupd8team/sublime-text-3
-	sudo apt-get update
-	sudo apt-get install sublime-text-installer
+--  dupe guru
+    sudo add-apt-repository -y ppa:hsoft/ppa
+    sudo apt update && sudo apt install -y dupeguru-se
 
-# Powertop
-	sudo apt-get install powertop
+--  slack 
+    sudo snap install -y slack --classic
 
-dropbox stop && DBUS_SESSION_BUS_ADDRESS="" dropbox start
+---------------------
+---------TODO--------
+--  Bazel
+    sudo apt install -y software-properties-common swig
+    sudo add-apt-repository -y ppa:webupd8team/java
+    sudo apt update && sudo apt install -y oracle-java8-installer
+    echo "deb http://storage.googleapis.com/bazel-apt stable jdk1.8" | sudo tee /etc/apt/sources.list.d/bazel.list
+    curl https://storage.googleapis.com/bazel-apt/doc/apt-key.pub.gpg | sudo apt-key add -
+    sudo apt update && sudo apt install -y bazel
 
-sudo apt-get install ncdu -y
+--  OpenCV:
+    -apparently makes the rest redundant
+        pip install opencv-contrib-python
+    
 
-sudo apt install tree
+    Prerequisites:
+    sudo apt install -y build-essential cmake pkg-config git
+    sudo apt install -y ffmpeg qtbase5-dev python-dev python3-dev python-numpy python3-numpy
+    sudo apt install -y libopencv-dev libgtk-3-dev libdc1394-22 libdc1394-22-dev  libdc1394-utils libjpeg-dev libpng12-dev libtiff5-dev libjasper-dev
+    sudo apt install -y libavcodec-dev libavformat-dev libswscale-dev libxine2-dev libgstreamer0.10-0-dbg libgstreamer0.10-0 libgstreamer0.10-dev libgstreamer-plugins-base0.10-dev libgstreamer-plugins-base0.10-dev
+    sudo apt install -y libv4l-dev libtbb-dev libfaac-dev libmp3lame-dev libopencore-amrnb-dev libopencore-amrwb-dev libtheora-dev
+    sudo apt install -y libunicap2 libunicap2-dev libdc1394-22 libdc1394-22-dev libdc1394-utils libv4l-0 libv4l-dev
+    sudo apt install -y libvorbis-dev libxvidcore-dev v4l-utils vtk6
+    sudo apt install -y liblapacke-dev libopenblas-dev libgdal-dev checkinstall
+    sudo apt install -y libopenexr-dev libeigen3-dev
+    
+    sudo apt install -y x264 
+    sudo apt install -y libprotobuf-dev protobuf-compiler
+    sudo apt install -y libgoogle-glog-dev libgflags-dev
+    sudo apt install -y libgphoto2-dev
 
+    OpenCV:
+    https://github.com/BVLC/caffe/wiki/Ubuntu-16.04-Installation-Guide#the-gpu-support-prerequisites
 
-ADD BASH SCRIPT TO SET UP NVIDIA DRIVERS AND CUDA, then install tensorflow
+    download: https://github.com/opencv/opencv/archive/3.3.0.zip
+
+    mkdir build
+    cd build/    
+    cmake -D CMAKE_BUILD_TYPE=RELEASE -D CMAKE_INSTALL_PREFIX=/usr/local -D FORCE_VTK=ON -D WITH_TBB=ON -D WITH_V4L=ON -D WITH_QT=ON -D WITH_OPENGL=ON -D WITH_CUBLAS=ON -D CUDA_NVCC_FLAGS="-D_FORCE_INLINES" -D WITH_GDAL=ON -D WITH_XINE=ON -D BUILD_EXAMPLES=ON ..
+    make -j $(($(nproc) + 1))
+    You will need to change the CUDA_NVCC_FLAGS to the following if you have CUDA Toolkit 9.0:
+        CUDA_NVCC_FLAGS="-D_FORCE_INLINES --expt-relaxed-constexpr"
+
+--  notes
+    sudo apt install -y xpad
+
+--  Space explorer
+    sudo apt install -y ncdu
+
+--  Recursive directory viewer
+    sudo apt install -y tree
+
+--  BleachBit
+    sudo apt install -y bleachbit
+
+--  Menu
+    sudo apt install -y classicmenu-indicator
+
+--  toggl
+    sudo add-apt-repository -y ppa:official-toggl/ppa
+    sudo apt update && sudo apt install -y desktop-Toggl 
+
+--  wps office
+    download package - http://wps-community.org/download.html
+
+--  foxit reader
+    download_package - https://www.foxitsoftware.com/pdf-reader/
+
+INTEL (MKL DAAL optimised Python etc)
+    https://software.intel.com/en-us/articles/installing-intel-free-libs-and-python-apt-repo
+    Tensorflow:
+        Intel: pip install https://anaconda.org/intel/tensorflow/1.2.1/download/tensorflow-1.2.1-cp36-cp36m-linux_x86_64.whl
+
+PYTHON PACKAGES
+    venv
+    virtualenv
+    virtualenvwrapper
+    sympy
+    cython
+    scikit-feature
+    statsmodels
+    patsy
+    astropy
+    scikit-image
+    numba
+    tsne
+    pymatbridge
+    oct2py
+    xgboost
+    tpot
+    hdbscan
+    sqlalchemy
+    pymssql
+    tqdm
+    pymc3
+    nltk
+    h5py
+    bokeh
+    scarpy
+    pillow
+    opencv
+    seaborn
+    ggplot
+    plotly
+    pydot
+    colorama
+    python-progressbar
+    orange
+    spyder3
+sudo apt install -y libglu1-mesa libxi-dev libxmu-dev
+sudo apt install -y libhdf5-serial-dev
+sudo apt install -y python-nose g++ libopenblas-dev git
+sudo apt install -y build-essential
+sudo apt install -y python-pip python-dev
+sudo apt install -y python-numpy python-scipy
+sudo apt install -y python-yaml 
+
+pip install virtualenv
+
+< In any Venv>
+-- Set up base VM of p2 and p3.7
+    pip install numpy matplotlib scipy numba pandas tensorflow keras scikit-learn ipython jupyter scikit-image h5py --upgrade 
+
+# The Fuck
+    sudo -H pip install thefuck
+    eval "$(thefuck --alias)"
+
+-- Synapse
+    sudo apt install -y synapse
+
+--  Docker
+    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+    sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+    sudo apt update
+    apt-cache policy docker-ce
+    sudo apt install -y docker-ce
+
+--  Stacer (optimizer and cleaner)
+    wget https://github.com/oguzhaninan/Stacer/releases/download/v1.0.4/Stacer_1.0.4_amd64.deb
+    sudo dpkg --install Stacer_1.0.4_amd64.deb
+    Stacer
+
+--  LPM -power management
+    sudo apt install -y laptop-mode-tools
+
+--  Flux
+    sudo add-apt-repository -y ppa:nathan-renniewaldock/flux
+    sudo apt update && sudo apt install -y fluxgui
+
+--  Aria2 Download Manager
+    sudo apt install -y aria2
+
+--  virtualbox
+    sudo apt install -y bcc iasl xsltproc xalan libxalan110-dev uuid-dev zlib1g-dev libidl-dev libsdl1.2-dev libxcursor-dev libqt3-headers libqt3-mt-dev libasound2-dev libstdc++5 linux-headers-`uname -r` build-essential
+    <manual deb>
+
+    wget -q https://www.virtualbox.org/download/oracle_vbox_2016.asc -O- | sudo apt-key add -
+    wget -q https://www.virtualbox.org/download/oracle_vbox.asc -O- | sudo apt-key add -
+    sudo sh -c 'echo "deb http://download.virtualbox.org/virtualbox/debian $(lsb_release -sc) contrib" >> /etc/apt/sources.list'
+    sudo apt update && sudo apt install -y virtualbox-5.2
+
+    Extension Pack:
+    curl -O http://download.virtualbox.org/virtualbox/5.2.0/Oracle_VM_VirtualBox_Extension_Pack-5.2.0-118431.vbox-extpack
+    sudo VBoxManage extpack install Oracle_VM_VirtualBox_Extension_Pack-5.2.0-118431.vbox-extpack

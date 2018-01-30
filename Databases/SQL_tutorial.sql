@@ -165,6 +165,7 @@ SELECT TOP 100 * + (5 * 2) / 2.5 , year, month, -- Can use arithmetic operations
                                                     -- Handles dates, numbers and strings
     MAX(albums_sold)        AS max_sold,        -- Column maximum
                                                     -- Handles dates, numbers and strings
+    ABS(cost)               AS abs_cost         -- Absolute Value
     STDEV(group_members)    AS std_dev_members, -- Standard Deviation
     VAR(group_members)      AS variance_members,-- Variance
     ROUND(price, 0),                            -- Round column to 0 decimals
@@ -357,13 +358,13 @@ SUBSTRING(stringy, index_1, index_2)    -- Take substring between index_1 and in
 CHARINDEX('-', stringy)                 -- Find Position of character in string
 
 ------------------------------MATHEMATICAL_EXPRESSIONS------------------------
+ABS(x)      -- Absolute value of x
 IGN(x)      -- Sign of input x as -1, 0, or 1
 MOD(x, y)   -- (same as x%y)
 FLOOR(x)    -- Largest integer value that is less than or equal to x
 CEIL(x)     -- Smallest integer value that is greater than or equal to x
 POWER(x, y) -- x raised to the power of y
-ROUND(x)    -- x rounded to the nearest whole integer
-ROUND(x, d) -- x rounded to the d number of decimal
+ROUND(x, d=0) -- x rounded to the d number of decimal
 SQRT(x)     -- Square-root value of x
 
 ------------------------------LOGICAL EXPRESSIONS-----------------------------
@@ -372,16 +373,16 @@ IS NOT NULL
 IIF(handicap <= 15, ‘Good’, ‘Bad’)
 
 -- Cannot compare nulls and values
-    +----------------+--------+
-    |   Comparison   | Result |
-    +----------------+--------+
-    |     1 = 1      |  TRUE  |
-    |     1 = 0      |  FALSE |
-    |     1 = NULL   |  NULL  |
-    |    1 != NULL   |  NULL  |
-    |    1 IS NULL   |  FALSE |
-    | 1 IS NOT NULL  |  TRUE  |
-    +----------------+--------+
+    +---------------+--------+
+    |  Comparison   | Result |
+    +---------------+--------+
+    | 1 = 1         |  TRUE  |
+    | 1 = 0         |  FALSE |
+    | 1 = NULL      |  NULL  |
+    | 1 != NULL     |  NULL  |
+    | 1 IS NULL     |  FALSE |
+    | 1 IS NOT NULL |  TRUE  |
+    +---------------+--------+
 
 ------------------------------PIVOTING-----------------------------------------
 -- WHERE Year is categorical column, and Salesamount is to be aggregated
@@ -562,10 +563,10 @@ END
 NOW()                                   -- Returns the current date and time
 CURTIME()/CURRENT_TIME()                -- Returns the current time
 CURDATE()/CURRENT_DATE()                -- Returns the current date
-CURRENT_TIMESTAMP()                     -- Synonyms for NOW()
+CURRENT_TIMESTAMP()                     -- Synonym for NOW()
+LOCALTIME()/LOCALTIMESTAMP()            -- Synonym for NOW()
 SYSDATE()                               -- Returns the time at which the function executes
-LOCALTIME()/LOCALTIMESTAMP()                -- Synonym for NOW()
-UTC_DATE() / UTC_TIME() /UTC_TIMESTAMP()-- Returns the current UTC date
+UTC_DATE()/ UTC_TIME()/UTC_TIMESTAMP()  -- Returns the current UTC date
 
 -- Date Algebra
 DATEDIFF()      -- Subtracts two dates
@@ -605,23 +606,23 @@ YEAR()                      -- Returns the year
 DATE()                      -- Extracts the date part of a date or datetime expression
 EXTRACT                     -- Extracts part of a date
 DATEPART(datepart, date)    -- Returns part, defined by abbreviation below, of the date
-    +---------------+---------+
-    |   Datepart    |   code  |
-    +---------------+---------+
-    |      year     | yy, yyyy|
-    |     quarter   |  qq, q  |
-    |     month     |  mm, m  |
-    |    dayofyear  |  dy, y  |
-    |      day      |  dd, d  |
-    |      week     |  wk, ww |
-    |    weekday    |  dw, w  |
-    |      hour     |   hh    |
-    |     minute    |  mi, n  |
-    |     second    |  ss, s  |
-    |  millisecond  |   ms    |
-    |  microsecond  |   mcs   |
-    |   nanosecond  |   ns    |
-    +---------------+---------+
+    +-------------+---------+
+    |   Datepart  |   code  |
+    +-------------+---------+
+    | year        | yy, yyyy|
+    | quarter     | qq, q   |
+    | month       | mm, m   |
+    | dayofyear   | dy, y   |
+    | day         | dd, d   |
+    | week        | wk, ww  |
+    | weekday     | dw, w   |
+    | hour        | hh      |
+    | minute      | mi, n   |
+    | second      | ss, s   |
+    | millisecond | ms      |
+    | microsecond | mcs     |
+    | nanosecond  | ns      |
+    +-------------+---------+
 
 -- Formating
 DATE_FORMAT()   -- Formats date as specified
@@ -663,7 +664,13 @@ MAKEDATE()      -- Creates a date from the year and day of year
             TO user1
 
         DROP ROLE role_name
+-- Processes:
 
+SHOW PROCESSLIST
+KILL <p_id>
+
+--
+ SHOW COLUMNS FROM table_name
 -- Transactions
     BEGIN TRAN
         <sql_script_here>
@@ -740,3 +747,41 @@ MAKEDATE()      -- Creates a date from the year and day of year
     SELECT AVG(numbers * 1.0) 
     FROM Table_name
         -> 1.8
+
+
+# TODO:
+-- Time complexities 
+    http://www.dalibo.org/_media/understanding_explain.pdf
+
+    SELECT * FROM <>        O(N)
+    COUNT()                 O(N)
+    WHERE on non-indexed    O(N)
+    WHERE on indexed        O(log(N))
+
+    MERGE JOIN
+    +-------------+--------------+-------------------+
+    |  A (size M) |  B (size N)  |  Time Complexity  | 
+    +-------------+--------------+-------------------+
+    |      X      |      X       |       M + N       | 
+    |             |      X       |   M*log(M) + N    |
+    |      X      |              |    M + N*log(N)   |
+    |             |              |M*log(M) + N*log(N)|
+    +-------------+--------------+-------------------+
+
+    NESTED JOIN generally O(MN)
+
+
+
+    SELECT * 
+    FROM item, author 
+    WHERE item.i_a_id = author.a_id 
+    O(Nlog(N)) < between < O(N^2) depending on indicies
+
+-- 
+    SELECT * 
+    FROM Table
+    WHERE 1=1
+        AND column_name = 'James'
+        AND column_surname = 'Jones'
+    - Easy to comment out first criteria
+    - Easy to reorder

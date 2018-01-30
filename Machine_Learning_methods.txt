@@ -24,6 +24,7 @@ Email   = "giladamar@gmail.com"               #
     # Data Creation:
         Image Labelling:
             pychetlabeller
+            sloth
 
     # Data Analysis Visualization:
         pandas-profiling
@@ -46,6 +47,10 @@ Email   = "giladamar@gmail.com"               #
         dora
         mpl-scatter-density - high D scatter/density plots
         SpiralBarcodes
+        qgrid
+
+        yellowbrick
+        fast-histogram
 
     # Data Preparation:
         data validation
@@ -54,7 +59,10 @@ Email   = "giladamar@gmail.com"               #
         one-hot encoder/embedding
         fix missing values
         missing num
-        remove outliers
+        remove outliers/ Anomaly Detection
+            scikit-sos
+            PyNomaly
+            kenchi
 
     # Feature Generation:
         polynomial features (interaction only)
@@ -65,6 +73,7 @@ Email   = "giladamar@gmail.com"               #
             speech_feature_extraction
             python_speech_features
             tsfresh
+            tslearn
             prophet
             pyAudioAnalysis
             speech_recognition
@@ -113,8 +122,11 @@ Email   = "giladamar@gmail.com"               #
             deep-simplification
             anago - sequence labelling/pos
             TextTeaser - Summarizer
+            MatchZoo - text matching
+            keras-text
         #Video
             autosub - generate subtitles
+            scikit-video
 
     # Data Reduction:
         removing redundant columns
@@ -127,6 +139,18 @@ Email   = "giladamar@gmail.com"               #
         ICA
         greedy feature selection
         *Feature Selection Methods
+        sklearn-genetic
+        scikit-mdr
+
+        {variance
+        forward selection
+        backward elimination
+        stepwise
+        lasso
+        tree-based
+        too many misisng
+        target correlation
+        cluster analysis}
 
     # Normalization:
         whitening
@@ -187,7 +211,13 @@ Email   = "giladamar@gmail.com"               #
     spotlight
     tensorrec
     tffm/python-libffm/libffm-python
+
+    flurs - alg agnostic, incremental
     
+        {collaborative filtering
+        svd
+        matrix factorization
+        }
         
 # Modelling:
     Logistic Regression
@@ -199,9 +229,11 @@ Email   = "giladamar@gmail.com"               #
         annoy
     Naive Bayes
     SVMs
+        Thundersvm
     Nearest neighbours
     gaussian processes
         george package
+        GPFlow
     RF
         deep forest
         regularized greedy forest
@@ -237,6 +269,7 @@ Email   = "giladamar@gmail.com"               #
         auto-ml
         AutoML5
         MLBox
+        Alphapy
     # Evolutionary/Genetic
         gplearn
         deap
@@ -244,7 +277,7 @@ Email   = "giladamar@gmail.com"               #
         sklearn-deap
         tensorlow-neat
     keras-language-modeling
-
+    scikit-rvm
 # Regularization
 
 # Tuning:
@@ -253,6 +286,7 @@ Email   = "giladamar@gmail.com"               #
     hyperopt + sklearn
     optomatic
     sklearn -gridsearch
+    optml
 
 # Scoring:
     confusion matrix and associated scores
@@ -267,20 +301,25 @@ Email   = "giladamar@gmail.com"               #
     mlens
     pycobra
     infiniteboost
+    vecstack
 
 # Explaining:
-    Skater
-    CNN-Vis
-    LSTM-Vis
-    keras-vis
-    Quiver
     Clustering on embeddings
     business add vs thresholds
     probability calibration
+
+    shap - boosting/forest and agnostic
     lime
-    Picasso
-    keras_weight_animator
-    keras-attention
-    apriori-python
     eli5
+    Skater
+    PDPBox
     influence-release
+    NN:
+        keras_weight_animator
+    RNNs:
+        keras-attention
+        LSTM-Vis
+    CNNs:
+        Quiver
+        keras-vis
+        Picasso

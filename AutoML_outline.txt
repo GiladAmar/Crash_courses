@@ -1,0 +1,166 @@
+Error handling:
+    Import Error
+    Memory Errors
+    Too long operation
+    Ongoing Email Updates on status
+    Specified Seed
+   
+ML Types:
+  Classification
+  Regression
+  Clustering
+
+Data Types:
+    Time series
+    Images
+    Tabular
+    Textual
+    Date
+
+Data Preprocessing:
+    Textual
+      String cleaning
+
+    Numeric:
+      Anomaly Handling
+      Binning
+      Cyclic
+      Smoothing
+    Consistency Checking
+    
+    Manual specification of column dtypes
+
+    Visualization:
+      Visualization of correlations
+      Interval scatter plots
+      Visualization of missing-data
+      Dendogram
+      Coloured density scatter-plots
+
+    Scaling variations
+    manual filtering
+    Data versioning
+
+Feature Crafting:
+    manual additions
+    Embeddings
+    Polynomial
+    Clusters
+    Auto feature removal
+    trainable embeddings
+
+Models:
+   alt models with specified api and their own hyper parameter ranges
+   
+   xbg
+   catboost
+   lightgbm
+
+   knn
+   nbayes
+
+   DBScan
+   hierachical clustering
+   spectral clustering
+
+   Autoencoder
+
+Validation:
+   cross-validation
+   random sampling
+   representative validation
+   time-based splitting
+
+Real-time Augmentation:
+    Images
+    Time-series Noise
+    Tabular noise
+    Textual Augmentation (spelling, synonyms, rephrasing)
+    Case-specific augmentation
+    save aug samples
+
+Scoring:
+  Metric
+  Spec loss function
+
+  Precision-vs-Recall
+  residuals
+  pred-vs-true regression
+  Confusion Matrix
+  Cluster scoring
+
+  show misclassified
+    AUC
+    top n error
+    per-class accuracy
+    avg accuracy
+    F1
+    log loss
+    mae
+    median_abs_error
+    +- error
+
+
+
+Optimization:
+    model hyper-parameters (Dask powered, bayes, grid, evolutionary)
+    augmentation parameters
+    Feature Selection
+    Ensembling
+    Data imbalance handling
+    filling missing or using as is
+
+Prediction:
+   preprocessing pipeline
+   model loading
+   batching
+   saving predictions
+   keeping model etc in memory
+   testing on folder/new data source
+   
+Logging
+    Time&date
+    Model tried.
+    (Parameters and results)
+    Training time.
+    ‎failures and causes.
+    Save best of each Model (date and yaml with model params)
+    Save Encoders/Decoders
+
+Model Interpretation:
+    Feature importances
+    complexity curves
+    probability tuning calibration curves
+
+
+
+BaseModelClass
+  {
+  handles_regression
+  handles_classification
+  handles_clustering
+
+  handles_embedding
+  handles_train_embedding
+
+  time_limit
+  memory_limit
+
+  seed
+
+
+  }
+
+  (
+  set_time_limit()
+  set_memory_limit()
+  load_model()
+  save_model()
+  save_params()
+  train()
+  predict_class()
+  predict_proba()
+  test()
+  refit (use ALL the data, not a val fold)
+
+  )
