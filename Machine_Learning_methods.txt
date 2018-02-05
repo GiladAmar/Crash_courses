@@ -192,6 +192,7 @@ Email   = "giladamar@gmail.com"               #
     HDBSCAN
     hierachical clustering
     spectral clustering
+    pyrcc - Robust Continious Clustering
     GMMs
     # Cluster scoring:
         normalized_mutual_info_score
