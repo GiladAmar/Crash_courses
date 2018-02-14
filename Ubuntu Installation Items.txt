@@ -88,9 +88,9 @@ INTEL (MKL DAAL optimised Python etc)
         sudo snap install slack --classic
 
 --  Sublime
-	wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | sudo apt-key add -
-	echo "deb https://download.sublimetext.com/ apt/stable/" | sudo tee /etc/apt/sources.list.d/sublime-text.list
-	sudo apt-get update && sudo apt install -y sublime-text
+    wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | sudo apt-key add -
+    echo "deb https://download.sublimetext.com/ apt/stable/" | sudo tee /etc/apt/sources.list.d/sublime-text.list
+    sudo apt-get update && sudo apt install -y sublime-text
 
 --  Pycharm
         sudo snap install pycharm-professional
@@ -119,7 +119,7 @@ NVIDIA DRIVERS AND CUDA
         sudo chmod a+r /usr/local/cuda/include/cudnn.h
         sudo chmod a+r /usr/local/cuda/lib64/libcudnn*
 
-	* Tensorflow 1.5 requires CUDA 9.0
+    * Tensorflow 1.5 requires CUDA 9.0
 
 --  OpenCV:
 
@@ -159,24 +159,24 @@ NVIDIA DRIVERS AND CUDA
         sudo apt update && sudo apt install -y y-ppa-manager
 
 --  Codecs and encrypted DVD playback
-	    sudo apt install -y ubuntu-restricted-extras libavcodec-extra libdvd-pkg
+        sudo apt install -y ubuntu-restricted-extras libavcodec-extra libdvd-pkg
 
 --  TLP (power saving)
         sudo apt install -y tlp tlp-rdw
         sudo tlp start
 
 --  OPeNJRE
-	    sudo apt install -y  icedtea-8-plugin openjdk-8-jdk
+        sudo apt install -y  icedtea-8-plugin openjdk-8-jdk
 
 --  Unity Tweak Tool
-	    sudo apt install -y unity-tweak-tool
+        sudo apt install -y unity-tweak-tool
 
 --  GIMP
         sudo add-apt-repository -y ppa:otto-kesselgulasch/gimp
         sudo apt update && sudo apt install -y gimp gimp-data gimp-plugin-registry gimp-data-extras
 
 --  VLC
-	    sudo apt install -y vlc browser-plugin-vlc
+        sudo apt install -y vlc browser-plugin-vlc
 
 --  Skype
         sudo apt install -y skype
@@ -187,66 +187,66 @@ NVIDIA DRIVERS AND CUDA
         sudo apt update && sudo apt install -y shutter
 
 --  Flash
-	    sudo apt install -y flashplugin-installer
-    	sudo apt install -y adobe-flashplugin
+        sudo apt install -y flashplugin-installer
+        sudo apt install -y adobe-flashplugin
 
 --  Synaptic
-	    sudo apt install -y synaptic
+        sudo apt install -y synaptic
 
 --  Weather Indicator
         * gave issues with uninstalled requirements (run at end)
-	    sudo apt install gir1.2-osmgpsmap-1.0 gir1.2-webkit gir1.2-geocodeglib-1.0
-	    sudo add-apt-repository -y ppa:atareao/atareao
-	    sudo apt update && sudo apt install -y my-weather-indicator
+        sudo apt install gir1.2-osmgpsmap-1.0 gir1.2-webkit gir1.2-geocodeglib-1.0
+        sudo add-apt-repository -y ppa:atareao/atareao
+        sudo apt update && sudo apt install -y my-weather-indicator
 
 --  Variety Desktop Backgrounds
-	    sudo add-apt-repository -y ppa:peterlevi/ppa
-    	sudo apt update && sudo apt install -y variety
+        sudo add-apt-repository -y ppa:peterlevi/ppa
+        sudo apt update && sudo apt install -y variety
 
 --  Firewall
-	    sudo apt install -y gufw
+        sudo apt install -y gufw
 
 --  Cinnamon
-	    sudo add-apt-repository -y ppa:gwendal-lebihan-dev/cinnamon-nightly
-	    sudo apt update && sudo apt install -y cinnamon
+        sudo add-apt-repository -y ppa:gwendal-lebihan-dev/cinnamon-nightly
+        sudo apt update && sudo apt install -y cinnamon
 
-	    ( following lines has "No such schema 'org.cinnamon.desktop.session'
+        ( following lines has "No such schema 'org.cinnamon.desktop.session'
 " error
-	    gsettings set org.cinnamon.desktop.session settings-daemon-uses-logind true
-	    gsettings set org.cinnamon.desktop.session session-manager-uses-logind true
-	    gsettings set org.cinnamon.desktop.session screensaver-uses-logind false
+        gsettings set org.cinnamon.desktop.session settings-daemon-uses-logind true
+        gsettings set org.cinnamon.desktop.session session-manager-uses-logind true
+        gsettings set org.cinnamon.desktop.session screensaver-uses-logind false
 
 --  Kate
-	    sudo apt install -y kate
+        sudo apt install -y kate
 
 --  Clementine
-	    sudo apt install -y clementine
+        sudo apt install -y clementine
 
 --  R
-	    sudo apt install -y r-base
+        sudo apt install -y r-base
 
 --  R studio
-	    sudo gedit /etc/apt/sources.list
-	    deb https://cloud.r-project.org//bin/linux/ubuntu xenial/
-	    sudo apt update && sudo apt install -y r-base
+        sudo gedit /etc/apt/sources.list
+        deb https://cloud.r-project.org//bin/linux/ubuntu xenial/
+        sudo apt update && sudo apt install -y r-base
 
 --  Teamviewer
         Manual deb/rpm
 
 --  LibreOffice
-	    sudo apt install -y libreoffice-common
+        sudo apt install -y libreoffice-common
 
 --  GParted
-	    sudo apt install -y gparted
+        sudo apt install -y gparted
 
 --  TOR
-	    sudo add-apt-repository -y ppa:webupd8team/tor-browser
-	    sudo apt update && sudo apt install -y tor-browser
+        sudo add-apt-repository -y ppa:webupd8team/tor-browser
+        sudo apt update && sudo apt install -y tor-browser
 
 
 --  Reaver
-	    sudo apt install -y reaver
-	    sudo apt install -y aircrack-ng
+        sudo apt install -y reaver
+        sudo apt install -y aircrack-ng
 
 --  adobe_acrobat reader
         sudo add-apt-repository -y "deb http://archive.canonical.com/ precise partner"
@@ -262,17 +262,17 @@ NVIDIA DRIVERS AND CUDA
         sudo apt install -y openarena
 
 --  wps fonts
-	    cd /tmp
-	    git clone https://github.com/iamdh4/ttf-wps-fonts.git
+        cd /tmp
+        git clone https://github.com/iamdh4/ttf-wps-fonts.git
         sudo mkdir /usr/share/fonts/wps-fonts
         sudo mv ttf-wps-fonts/* /usr/share/fonts/wps-fonts
-	    sudo chmod 644 /usr/share/fonts/wps-fonts/*
-	    sudo fc-cache -vfs
-	    rm -rf /tmp/ttf-wps-fonts
+        sudo chmod 644 /usr/share/fonts/wps-fonts/*
+        sudo fc-cache -vfs
+        rm -rf /tmp/ttf-wps-fonts
 
 --  openshot:
-	    sudo add-apt-repository -y ppa:openshot.developers/ppa
-	    sudo apt update && sudo apt install -y openshot-qt
+        sudo add-apt-repository -y ppa:openshot.developers/ppa
+        sudo apt update && sudo apt install -y openshot-qt
 
 --  Notepad++
         sudo add-apt-repository -y ppa:notepadqq-team/notepadqq
@@ -289,21 +289,21 @@ NVIDIA DRIVERS AND CUDA
         sudo apt update && sudo apt install -y --install-recommends winehq-stable
 
 --  Powertop
-	    sudo apt install -y powertop
+        sudo apt install -y powertop
 
 --  dupe guru
-    	sudo add-apt-repository -y ppa:hsoft/ppa
-    	sudo apt update && sudo apt install -y dupeguru-se
+        sudo add-apt-repository -y ppa:hsoft/ppa
+        sudo apt update && sudo apt install -y dupeguru-se
 
 ---------------------
 ---------TODO--------
 --  Bazel
-	    sudo apt install -y software-properties-common swig
-	    sudo add-apt-repository -y ppa:webupd8team/java
-	    sudo apt update && sudo apt install -y oracle-java8-installer
-	    echo "deb http://storage.googleapis.com/bazel-apt stable jdk1.8" | sudo tee /etc/apt/sources.list.d/bazel.list
-	    curl https://storage.googleapis.com/bazel-apt/doc/apt-key.pub.gpg | sudo apt-key add -
-	    sudo apt update && sudo apt install -y bazel
+        sudo apt install -y software-properties-common swig
+        sudo add-apt-repository -y ppa:webupd8team/java
+        sudo apt update && sudo apt install -y oracle-java8-installer
+        echo "deb http://storage.googleapis.com/bazel-apt stable jdk1.8" | sudo tee /etc/apt/sources.list.d/bazel.list
+        curl https://storage.googleapis.com/bazel-apt/doc/apt-key.pub.gpg | sudo apt-key add -
+        sudo apt update && sudo apt install -y bazel
 
 --  notes
         sudo apt install -y xpad
@@ -418,8 +418,8 @@ pip install ...
 
     Extension Pack:
         sudo apt install -y curl
-            curl -O http://download.virtualbox.org/virtualbox/5.2.0/Oracle_VM_VirtualBox_Extension_Pack-5.2.0-118431.vbox-extpack
-            sudo VBoxManage extpack install Oracle_VM_VirtualBox_Extension_Pack-5.2.0-118431.vbox-extpack
+        curl -O http://download.virtualbox.org/virtualbox/5.2.0/Oracle_VM_VirtualBox_Extension_Pack-5.2.0-118431.vbox-extpack
+        sudo VBoxManage extpack install Oracle_VM_VirtualBox_Extension_Pack-5.2.0-118431.vbox-extpack
 
 
 
