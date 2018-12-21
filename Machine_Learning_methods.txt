@@ -81,6 +81,7 @@ Email   = "giladamar@gmail.com"               #
             kapre
             pydub(audio manipulation)
             pywavelets
+            tick
 
         # Dates:
             maya

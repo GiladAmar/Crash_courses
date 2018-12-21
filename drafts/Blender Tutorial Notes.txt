@@ -1,0 +1,225 @@
+Blender Tutorial Notes:
+    middle: 3D viewboard
+    right: Properties
+Split View:
+    top left hand 3 lines
+    bottom creates horizontal cut
+    collapsing requires a full shared side
+    
+Navigation:
+    Middle mouse: orbiting
+    Shift middle: panning
+
+    Numpad 7, 1, 3 top, front side
+    Numpad . direct into focus
+    Numpad Perspective/Orthographic
+
+    Right click: select
+        *change user_preferences to select with left
+
+
+Objects:
+    Shift + A:  add object
+                usually mesh
+                Change attributes only at start- not alterable afterward
+    X: delete
+    Spacebar: search-bar
+
+
+    s: scaling * mouse now scales object
+    cntrl + s: quantized increments/decrements
+        Scale along axis
+        x:
+        y:
+        z:
+
+    Arrows: move along axis
+        red, green, blue x,y,z
+        x:
+        y:
+        z:
+        or hold middle mouse and 
+        r: rotate
+            rotate along axis
+            x:
+            y:
+            z:
+
+    g: move with mouse parallel to view
+
+
+wrench: modifier Panel
+    'non destructive'
+    subdivision smoother
+    
+Play animation:
+    alt + A
+
+Mode:
+    Object: individual object moving
+    Edit: <TAB> cycle between the two
+        Looks at a particular object
+
+        vertici mode
+                select verticies
+            shift + select: select several
+            alt + select entire row
+        edge mode
+        face select
+
+g: allows scaling rotate etc for edges/vertec selected
+o: proportional editing mode
+    scroll wheel changes area of influence
+    different modes of falloff influence
+    random
+b: left click drag select
+    middle drag deselect
+a: select all/cycle
+    * works in all modes
+c: circle select
+    middle mouse
+        deselect
+Selects what you can actually SEE
+
+limit selection to visible at bottom/ cycle
+
+Z: Solid-view/ wire-frame mode
+
+
+Shift + d : duplicate
+l: select whole mesh linked 
+
+p: separate by selection
+
+e: extrude
+
+
+Modify: solidify add thickness
+    Modifiers have order
+    can be changed
+
+
+Cycles is the new Renderer
+Render slots to compare different renders - J
+
+H: Hiding
+    alt H unhide
+only hides in viewport not renderer
+
+Shading type rendered
+Numpad 0
+Great representation without full rendering
+    Shift Z between render and normal
+
+Shading
+    Toolbar smooth shading
+
+Toolbar: T on/off
+
+
+
+Properties:
+    materials
+
+Diffuse:
+    no reflection
+Glossy:
+    metal
+Can combine them:
+    diffuse + glossy
+
+Node Editor
+    Cube on bottom left
+    shift A add node
+    Mix-shader + multiple nodes to combine shaders
+        release on top of connection with auto combine 
+        node colors should match generally
+
+
+
+
+Perfromance Tips:
+    portals to remove unnecessary lighting
+    bounces
+    use gpu
+    tile size
+    samples
+    denoising
+    clamping - indirect ()
+    caustics - only liquids really
+    shared intacing
+    adaptive subdivision
+        in subsurf modifier
+    remove alpha transparancy
+    strand count/particles
+    volumnetrics/ fog
+    subsurface scattering
+    enable mis -  multiple import enhancing 
+    performance:
+        use spacial splits
+        use hair bvh
+
+
+
+
+Micro-polygon displacement is applied at time of rendering
+Genuine displacement
+
+
+
+
+* on import change division details
+* pro lighting skies
+environmental light
+need to change displacement method
+    Use True
+* needs phys geo
+
+
+
+Experimental SetL
+geom:
+    subdi rate
+
+material
+    change display type
+subserf mod
+     adaptive
+
+
+
+no color data into displacement
+need to subdivide
+subdivide
+subsurf
+
+using adaptive means view levels make no level
+
+    dicing scale
+
+Tab*2 refresh
+
+
+cntrl + alt + num0: set cameras to here
+
+
+cntrl + a : recale to 1
+
+Preview render amount
+    1px to 9px
+
+
+jpg 8 bit image, need 16 bit displacement for finer grain 
+
+    tiff file
+
+
+resolution 100%
+
+
+
+
+
+
+
+

@@ -8,6 +8,7 @@ def _invert(x, limits):
     limits[0] to limits[1]"""
     return limits[1] - (x - limits[0])
 
+
 def _scale_data(data, ranges):
     """scales data[1:] to ranges[0],
     inverts if the scale is reversed"""
@@ -32,6 +33,7 @@ def _scale_data(data, ranges):
         sdata.append((d-y1) / (y2-y1) * (x2 - x1) + x1)
 
     return sdata
+
 
 def set_rgrids(self, radii, labels=None, angle=None, fmt=None,
                **kwargs):
@@ -68,6 +70,7 @@ def set_rgrids(self, radii, labels=None, angle=None, fmt=None,
         t.update(kwargs)
     return self.yaxis.get_gridlines(), self.yaxis.get_ticklabels()
 
+
 class ComplexRadar():
     def __init__(self, fig, variables, ranges,
                  n_ordinate_levels=6):
@@ -101,20 +104,24 @@ class ComplexRadar():
         self.angle = np.deg2rad(np.r_[angles, angles[0]])
         self.ranges = ranges
         self.ax = axes[0]
+
     def plot(self, data, *args, **kw):
         sdata = _scale_data(data, self.ranges)
         self.ax.plot(self.angle, np.r_[sdata, sdata[0]], *args, **kw)
+
     def fill(self, data, *args, **kw):
         sdata = _scale_data(data, self.ranges)
         self.ax.fill(self.angle, np.r_[sdata, sdata[0]], *args, **kw)
 
+
 # example data
 variables = ("Normal Scale", "Inverted Scale", "Inverted 2", 
-            "Normal Scale 2", "Normal 3", "Normal 4 %", "Inverted 3 %")
+             "Normal Scale 2", "Normal 3", "Normal 4 %", "Inverted 3 %")
 data = (-1.76, 1.1, 1.2, 
         4.4, 3.4, 86.8, 20)
 ranges = [(-5, 3), (1.5, 0.3), (1.3, 0.5),
-         (1.7, 4.5), (1.5, 3.7), (70, 87), (100, -50)]            
+         (1.7, 4.5), (1.5, 3.7), (70, 87), (100, -50)]
+
 # plotting
 fig1 = plt.figure(figsize=(6, 6))
 radar = ComplexRadar(fig1, variables, ranges)

@@ -1,0 +1,26 @@
+numpy
+scipy
+cython
+keras
+tensorflow-gpu
+tqdm
+pandas
+matplotlib
+seaborn
+bokeh
+hdf5
+numba
+scikit-learn
+pyyaml
+scikit-image
+pyqt5
+opencv-contrib-python
+ipdb
+ipython
+jupyter notebook
+dask
+bokeh
+pandas-profiling
+sqlalchemy
+imgaug
+autopep8

@@ -155,7 +155,7 @@ It is similar to match() but it doesn’t restrict us to find matches at the beg
 
 
 re.findall (pattern, string):
-
+ **re.finditer(pattern, string)
 It helps to get a list of all matching patterns. It has no constraints of searching from start or end. If we will use method findall to search ‘AV’ in given string it will return both occurrence of AV. While searching a string, I would recommend you to use re.findall() always, it can work like re.search() and re.match() both.
 
 
@@ -173,3 +173,11 @@ It helps to search a pattern and replace with a new sub string. If the pattern i
 re.compile(pattern, repl, string):
 
 We can combine a regular expression pattern into pattern objects, which can be used for pattern matching. It also helps to search a pattern again without rewriting it.
+
+
+For speed compile the expression:
+    reobj = re.compile (r"[0-9]+")
+    for line in myfile:
+        m = reobj.match(line)
+        if m:
+            print(m.string[m.start():m.end()])
