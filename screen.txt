@@ -1,0 +1,21 @@
+screen
+
+screen                  #   create and attach to screen session
+        -r              #   reattach session
+        -h num          #   set history to n lines
+        -L              #   auto logging
+        -S sessionname  #   use name instead of standard id
+        -x              #   steal and attach to screen
+
+
+
+In-screen commands
+ctrl + a: 
+        c       -   create a new window
+        n       -   move to next window
+        p       -   move to previous window
+        d       -   detach
+        esc     -   scroll through window history
+        0-9     -   jump to window no #
+        H       -   log from window
+        S       -   split horizontally
