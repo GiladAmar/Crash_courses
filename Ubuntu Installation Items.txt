@@ -320,6 +320,11 @@ NVIDIA DRIVERS AND CUDA
         curl https://storage.googleapis.com/bazel-apt/doc/apt-key.pub.gpg | sudo apt-key add -
         sudo apt update && sudo apt install -y bazel
 
+
+-- workrave
+        sudo apt install -y workrave
+
+
 --  notes
         sudo apt install -y xpad
 
@@ -437,20 +442,18 @@ pip install ...
         sudo VBoxManage extpack install Oracle_VM_VirtualBox_Extension_Pack-5.2.0-118431.vbox-extpack
 
 
-
-mythes-en-au
-libreoffice-l10n-en-gb
-thunderbird-locale-en-gb
-hyphen-en-gb
-hunspell-en-za
-hunspell-en-ca
-libreoffice-l10n-en-za
-hunspell-en-au
-hunspell-en-gb
-libreoffice-help-en-gb
-gimp-help-en
-
-
 postgres
-cmake-qt-gui
 anydesk
+
+
+Flatpack - package installer
+    sudo add-apt-repository ppa:alexlarsson/flatpak
+    sudo apt update
+    sudo apt install flatpak
+    sudo apt install gnome-software-plugin-flatpak
+    flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+
+Pitivi
+
+#mp3 split
+sudo apt-get install -y mp3splt

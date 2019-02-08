@@ -69,6 +69,9 @@ from numba import vectorize, float64
 def f(x, y):
     return x + y
 
+@vectorize(['float32(float32, float32)'], target='cuda')  # vectorize to form numpy-like function on GPU
+def f(x, y):
+    return x + y
 
 #-------------------------------------------------------------------------------
 from numba import njit, prange_test# use prange instead of range to specify that the loop can be operated in parallel

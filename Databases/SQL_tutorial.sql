@@ -785,3 +785,16 @@ KILL <p_id>
         AND column_surname = 'Jones'
     - Easy to comment out first criteria
     - Easy to reorder
+    
+--  can do COUNT (DISTINCT column-name)
+
+-- This will return only record (n + 1) to (n + 1 + m). See example below.
+   SELECT * FROM table
+   OFFSET n ROWS
+   FETCH NEXT m ROWS ONLY
+
+-- Select random rows:
+  select 500 rows (or less)
+  if you use just TABLESAMPLE it will return 1000/n_total rows rounded
+  REPEATABLE sets the seed used when randomly sampling rows
+Select top(500) * from Orders TABLESAMPLE(1000 rows) repeatable(55)

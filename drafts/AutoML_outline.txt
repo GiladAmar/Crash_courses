@@ -6,9 +6,9 @@ Error handling:
     Specified Seed
    
 ML Types:
-  Classification
-  Regression
-  Clustering
+    Classification
+    Regression
+    Clustering
 
 Data Types:
     Time series

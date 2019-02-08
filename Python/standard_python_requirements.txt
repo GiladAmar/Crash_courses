@@ -24,3 +24,6 @@ pandas-profiling
 sqlalchemy
 imgaug
 autopep8
+line_profiler
+py-heat-magic
+memory_profiler
