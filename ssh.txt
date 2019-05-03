@@ -1,0 +1,14 @@
+ssh username@address
+    -i <fname> use certificate as authentification
+    -X tunnel graphical displays (i.e. plt.show() on instance shows picture on your desktop)
+        if it fails use -Y
+    -A authentification forwarding (make sure ssh-agent is running and ssh-add has been run)
+
+# To tunnel a port ie port 3306 on my pc corresponds to what is on port 3306 on instance
+ssh -L 3306:mysql.suso.org:3306 username@arvo.suso.org
+<local-port>:<connect-to-host>:<connect-to-port>
+
+ssh-agent
+ssh-keygen
+ssh-add
+ssh -A gilad@whatever

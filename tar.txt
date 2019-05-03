@@ -1,0 +1,21 @@
+Compression:
+    tar -cvf
+        -cvf compress, verbose, file/archive
+        -z to-> tar.gz
+        -j -> bz2
+
+    e.g.    tar -cvf output.tar folder_contents/ another_whole_folder
+
+    In terms of archive size:
+        tar > gz > bz2
+
+Extraction:
+    -xvf extract
+    -t list content
+    e.g. tar -xvf input.tar
+
+    # To specify which file to extract
+        tar -xvf it.tar it.doc  #or *.doc
+
+    # To add to the archive
+        tar -r it.tar add_this_file.doc

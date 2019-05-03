@@ -69,6 +69,7 @@ CREATE TABLE table_name                 -- Create a new table or view
 
     p_id int 
         DEFAULT 77                      -- Set default values for column
+        NULL                            -- Can have null values
         NOT NULL                        -- Cannot have null values
         CHECK (p_id > 0)                -- Must be > 0 
         IDENTITY(1, 1)                  -- Key automatically increase by one
@@ -258,6 +259,7 @@ WHERE month = 1                     -- =, !=, >, <, >=, and <=
                                     -- 'day' LIKE 'Mo_day', "_" is a single wildcard character
     OR 'day' LIKE '[mtw]%day'       -- [charlist] Set range of characters to match e.g. [abc] or [a-c]
                                     -- [!charlist] Set range of characters to not match e.g. [!abc]
+
     AND 'artist' IN ('Taylor Swift', 
                      'Ludacris',
                       1, 2, 3)
@@ -346,6 +348,7 @@ LIMIT 100                           -- Result only cut down to limit at end of o
 
 ------------------------------STRING_EXPRESSIONS------------------------------
 LEN(string_var)                         -- Return the length of the string
+                                        -- not including trailing spaces
 LEFT(string_var, index)                 -- Take from char 1 to index
 MID(string_var)                         -- Take mid char
 RIGHT(string_var, index)                -- Take from char 1 to index
@@ -358,14 +361,14 @@ SUBSTRING(stringy, index_1, index_2)    -- Take substring between index_1 and in
 CHARINDEX('-', stringy)                 -- Find Position of character in string
 
 ------------------------------MATHEMATICAL_EXPRESSIONS------------------------
-ABS(x)      -- Absolute value of x
-IGN(x)      -- Sign of input x as -1, 0, or 1
-MOD(x, y)   -- (same as x%y)
-FLOOR(x)    -- Largest integer value that is less than or equal to x
-CEIL(x)     -- Smallest integer value that is greater than or equal to x
-POWER(x, y) -- x raised to the power of y
+ABS(x)        -- Absolute value of x
+SIGN(x)       -- Sign of input x as -1, 0, or 1
+MOD(x, y)     -- (same as x%y)
+FLOOR(x)      -- Largest integer value that is less than or equal to x
+CEIL(x)       -- Smallest integer value that is greater than or equal to x
+POWER(x, y)   -- x raised to the power of y
 ROUND(x, d=0) -- x rounded to the d number of decimal
-SQRT(x)     -- Square-root value of x
+SQRT(x)       -- Square-root value of x
 
 ------------------------------LOGICAL EXPRESSIONS-----------------------------
 IS NULL
@@ -775,7 +778,7 @@ KILL <p_id>
     SELECT * 
     FROM item, author 
     WHERE item.i_a_id = author.a_id 
-    O(Nlog(N)) < between < O(N^2) depending on indicies
+    --O(Nlog(N)) < between < O(N^2) depending on indicies
 
 -- 
     SELECT * 
@@ -789,12 +792,298 @@ KILL <p_id>
 --  can do COUNT (DISTINCT column-name)
 
 -- This will return only record (n + 1) to (n + 1 + m). See example below.
-   SELECT * FROM table
+   SELECT *
+   FROM table
    OFFSET n ROWS
    FETCH NEXT m ROWS ONLY
 
 -- Select random rows:
-  select 500 rows (or less)
+  SELECT 500 ROWS (or less)
   if you use just TABLESAMPLE it will return 1000/n_total rows rounded
   REPEATABLE sets the seed used when randomly sampling rows
-Select top(500) * from Orders TABLESAMPLE(1000 rows) repeatable(55)
+  SELECT TOP(500) *
+  FROM Orders TABLESAMPLE(1000 ROWS ) REPEATABLE (55)
+
+
+
+--- NTiles:
+  -- Setup data:
+  DECLARE @values TABLE (Id INT IDENTITY(1,1) PRIMARY KEY, [VALUE ] FLOAT , ExamId INT)
+  INSERT INTO @values ([VALUE], ExamId) VALUES
+  (65, 1), (40, 1), (99, 1), (100, 1), (90, 1), -- Exam 1 Scores
+  (91, 2), (88, 2), (83, 2), (91, 2), (78, 2), (67, 2), (77, 2) -- Exam 2 Scores
+
+  -- Separate into four buckets per exam:
+  SELECT ExamId,
+  ntile(4) over (partition BY ExamId ORDER BY [VALUE ] DESC) AS Quartile,
+  VALUE, Id
+  FROM @values
+  ORDER BY ExamId, Quartile
+
+
+-- Convert Dates:
+CONVERT(VARCHAR(30), GETDATE(), @convert_code)
+  @convert_code   Result
+  100             "Jul 21 2016 7:56AM"
+  101             "07/21/2016"
+  102             "2016.07.21"
+  103             "21/07/2016"
+  104             "21.07.2016"
+  105             "21-07-2016"
+  106             "21 Jul 2016"
+  107             "Jul 21, 2016"
+  108             "07:57:05"
+  109             "Jul 21 2016 7:57:45:707AM"
+  110             "07-21-2016"
+  111             "2016/07/21"
+  112             "20160721"
+  113             "21 Jul 2016 07:57:59:553"
+  114             "07:57:59:553"
+  120             "2016-07-21 07:57:59"
+  121             "2016-07-21 07:57:59.553"
+  126             "2016-07-21T07:58:34.340"
+  127             "2016-07-21T07:58:34.340"
+  130             "16 ???? 1437 7:58:34:340AM"
+  131             "16/10/1437 7:58:34:340AM"
+
+
+--Format
+DECLARE @Date DATETIME = '2016-09-05 00:01:02.333'
+FORMAT(@Date, N'dddd, MMMM dd, yyyy hh:mm:ss tt')
+  Argument Output
+  yyyy      2016
+  yy        16
+  MMMM      September
+  MM        09
+  M         9
+  dddd      Monday
+  ddd       Mon
+  dd        05
+  d         5
+  HH        00
+  H         0
+  hh        12
+  h         12
+  mm        01
+  m         1
+  ss        02
+  s         2
+  tt        AM
+  t         A
+  fff       333
+  ff        33
+  f         3
+
+-- DATEADD
+  DECLARE @now DATETIME2 = GETDATE();
+  SELECT @now;                          -- 2016-07-21 14:39:46.4170000
+  SELECT DATEADD(YEAR, 1, @now)         -- 2017-07-21 14:39:46.4170000
+  SELECT DATEADD(QUARTER, 1, @now)      -- 2016-10-21 14:39:46.4170000
+  SELECT DATEADD(WEEK, 1, @now)         -- 2016-07-28 14:39:46.4170000
+  SELECT DATEADD(DAY, 1, @now)          -- 2016-07-22 14:39:46.4170000
+  SELECT DATEADD(HOUR, 1, @now)         -- 2016-07-21 15:39:46.4170000
+  SELECT DATEADD(MINUTE, 1, @now)       -- 2016-07-21 14:40:46.4170000
+  SELECT DATEADD(SECOND, 1, @now)       -- 2016-07-21 14:39:47.4170000
+  SELECT DATEADD(MILLISECOND, 1, @now)  -- 2016-07-21 14:39:46.4180000
+
+--eg to check the age today of someone born on 1/1/2000
+  SELECT dbo.Calc_Age('2000-01-01', Getdate())
+
+
+-- End of Month:
+    SELECT EOMONTH('2016-07-21')      -- 2016-07-31
+    SELECT EOMONTH('2016-07-21', 4)   -- 2016-11-30
+    SELECT EOMONTH('2016-07-21', -5)  -- 2016-02-29
+
+-- GETDATE() cast full timestamp to just date
+
+
+-- Timedifferences:
+  DECLARE @now DATETIME2 = GETDATE();
+  DECLARE @oneYearAgo DATETIME2 = DATEADD(YEAR, -1, @now);
+  SELECT @now                                   --2016-07-21 14:49:50.9800000
+  SELECT @oneYearAgo                            --2015-07-21 14:49:50.9800000
+  SELECT DATEDIFF(YEAR, @oneYearAgo, @now)      --1
+  SELECT DATEDIFF(QUARTER, @oneYearAgo, @now)   --4
+  SELECT DATEDIFF(WEEK, @oneYearAgo, @now)      --52
+  SELECT DATEDIFF(DAY, @oneYearAgo, @now)       --366
+  SELECT DATEDIFF(HOUR, @oneYearAgo, @now)      --8784
+  SELECT DATEDIFF(MINUTE, @oneYearAgo, @now)    --527040
+  SELECT DATEDIFF(SECOND, @oneYearAgo, @now)    --31622400
+
+
+-- DATEPARTS:
+  DECLARE @now DATETIME2 = GETDATE();
+  SELECT @now                   -- 2016-07-21 15:05:33.8370000
+  SELECT DATEPART(YEAR, @now)   -- 2016
+  SELECT DATEPART(QUARTER, @now)-- 3
+  SELECT DATEPART(WEEK, @now)   -- 30
+  SELECT DATEPART(HOUR, @now)   -- 15
+  SELECT DATEPART(MINUTE, @now) -- 5
+  SELECT DATEPART(SECOND, @now) -- 33
+
+  -- Differences between DATEPART and DATENAME:
+  SELECT DATEPART(MONTH, @now)   -- 7
+  SELECT DATEPART(WEEKDAY, @now) -- 5
+
+  SELECT DATENAME(MONTH, @now)   -- July
+  SELECT DATENAME(WEEKDAY, @now) -- Tuesday
+
+  --shorthand functions
+  SELECT DAY(@now)      -- 21
+  SELECT MONTH(@now)    -- 7
+  SELECT YEAR(@now)     -- 2016
+
+
+  datepart Abbreviations
+  year        yy, yyyy
+  quarter     qq, q
+  month       mm, m
+  dayofyear   dy, y
+  day         dd, d
+  week        wk, ww
+  weekday     dw, w
+  hour        hh
+  minute      mi, n
+  second      ss, s
+  millisecond ms
+  microsecond mcs
+  nanosecond  ns
+
+-- Create a function:
+  CREATE FUNCTION [dbo].[Calc_Age]
+    (
+    @DOB datetime , @calcDate datetime
+    )
+    RETURNS int
+    AS
+    BEGIN
+      DECLARE @age INT
+      IF (@calcDate < @DOB)
+      RETURN -1
+
+      -- If a DOB is supplied after the comparison date, then return -1
+      SELECT @age = YEAR(@calcDate) - YEAR(@DOB) +
+                  CASE
+                    WHEN DATEADD(year, YEAR(@calcDate) - YEAR(@DOB),@DOB) > @calcDate
+                      THEN -1
+                    ELSE 0
+                  END
+      RETURN @age
+    END
+
+
+
+-- read from a table without locking it (beware a table changing underneath you)
+  SELECT *
+  FROM TableName
+  WITH (nolock)
+
+
+-- create index to optimise select
+  CREATE INDEX ix_scoreboard_score
+  ON scoreboard (score DESC);
+  -- When you execute the query
+      SELECT *
+      FROM scoreboard
+      ORDER BY score DESC;
+
+-- custom ordering scheme:
+-- order by department, city
+-- but department is custom sorted
+  SELECT *
+  FROM DEPT
+  ORDER BY
+    CASE DEPARTMENT
+      WHEN 'MARKETING'  THEN 1
+      WHEN 'SALES'      THEN 2
+      WHEN 'RESEARCH'   THEN 3
+      WHEN 'INNOVATION' THEN 4
+      ELSE 5
+    END,
+    CITY
+
+-- LIKE has basic regex
+  SELECT *
+  FROM table_name
+  WHERE name LIKE '[A-C]%'
+      OR Age LIKE '[0-9]%'
+
+-- can concat strings like:
+  select 'What' || ' the' || '....?'
+
+
+--string split
+  STRING_SPLIT('Lorem ipsum dolor sit amet.', ' ');
+
+
+-- Triggers:
+  CREATE TRIGGER MyTrigger
+  ON MyTable
+  AFTER INSERT
+  AS
+  BEGIN
+  -- insert audit record to MyAudit table
+  INSERT INTO MyAudit(MyTableId, User)
+  (SELECT MyTableId, CURRENT_USER
+   FROM inserted)
+  END
+
+
+  CREATE TRIGGER BooksDeleteTrigger
+  ON MyBooksDB.Books
+  AFTER DELETE
+  AS
+      INSERT INTO BooksRecycleBin
+      SELECT *
+      FROM deleted;
+  GO
+
+
+--- Procedure function
+-- Define a name and parameters
+  CREATE PROCEDURE Northwind.getEmployee
+    @LastName nvarchar(50),
+    @FirstName nvarchar(50)
+  AS
+    -- Define the query to be run
+    SELECT FirstName, LastName, Department
+    FROM Northwind.vEmployeeDepartment
+    WHERE FirstName = @FirstName
+      AND LastName = @LastName
+      AND EndDate IS NULL;
+
+
+  --Calling the procedure:
+    EXECUTE Northwind.getEmployee N'Ackerman', N'Pilar';
+
+
+-- transactions:
+  BEGIN TRY
+    BEGIN TRANSACTION
+      INSERT INTO Users(ID, Name, Age)
+      VALUES(1, 'Bob', 24)
+      DELETE FROM Users
+      WHERE Name = 'Todd'
+    COMMIT TRANSACTION
+  END TRY
+  BEGIN CATCH
+    ROLLBACK TRANSACTION
+  END CATCH
+
+
+--SYNONYMS
+  CREATE SYNONYM EmployeeData
+  FOR MyDatabase.dbo.Employees
+
+-- Order of processing
+  /*(8)*/   SELECT /*9*/ DISTINCT /*11*/ TOP
+  /*(1)*/   FROM
+  /*(3)*/   JOIN
+  /*(2)*/   ON
+  /*(4)*/   WHERE
+  /*(5)*/   GROUP BY
+  /*(6)*/   WITH
+  /*(7)*/   HAVING
+  /*(10)*/  ORDER BY
+  /*(11)*/  LIMIT
