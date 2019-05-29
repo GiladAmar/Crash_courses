@@ -455,3 +455,5 @@ Pitivi
 
 #mp3 split
 sudo apt-get install -y mp3splt
+
+Mega app

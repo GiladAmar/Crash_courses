@@ -74,7 +74,7 @@ def f(x, y):
     return x + y
 
 #-------------------------------------------------------------------------------
-from numba import njit, prange_test# use prange instead of range to specify that the loop can be operated in parallel
+from numba import njit, prange # use prange instead of range to specify that the loop can be operated in parallel
 @njit(parallel=True)
 def prange_test(A):
     s = 0
@@ -87,4 +87,4 @@ def prange_test(A):
 # Environment Variables
     export NUMBA_WARNINGS=1 # Show warnings
     NUMBA_ENABLE_AVX=1      # Enable AVX optimization (not all processors can handle this)
-    NUMBA_DISABLE_JIT=1       # Prevent all numba optimizations
+    NUMBA_DISABLE_JIT=1     # Prevent all numba optimizations

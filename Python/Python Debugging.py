@@ -39,8 +39,9 @@ pip install ipdb
     ? - help
 
 ##### CONTEXT #####
-    l [first, last]    - List source code surrounding present location, 11 lies unless range specified
+    l [first, last]    - List source code surrounding present location, 11 lines unless range specified
     w                  - Print stack trace with most recent frame at the bottom
+    p <variable>       - print value of variable 
 
 ##### NAVIGATION #####
     s              - Step into (stop at first possible location)
