@@ -640,10 +640,10 @@ UNIX_TIMESTAMP()-- Returns a UNIX timestamp
 CONVERT_TZ()    -- Converts from one timezone to another
 MAKEDATE()      -- Creates a date from the year and day of year
 
-------------------------------THE END------------------------------
+                    ------------------------------THE END------------------------------
 
 
---------------------------- TO DO ITEMS ---------------------------
+                    --------------------------- TO DO ITEMS ---------------------------
 
 -- PERMISSIONS
     GRANT privilege_name                    -- System privileges - CREATE, ALTER, or DROP database objects
@@ -1087,3 +1087,9 @@ FORMAT(@Date, N'dddd, MMMM dd, yyyy hh:mm:ss tt')
   /*(7)*/   HAVING
   /*(10)*/  ORDER BY
   /*(11)*/  LIMIT
+
+
+-- TO_CSV
+    COPY (SELECT * FROM example_table) TO 'csv_name.csv' DELIMITER ',' CSV; -- Need admin rights
+    --  else
+    \copy (SELECT * FROM example_table) TO 'csv_name.csv' with csv

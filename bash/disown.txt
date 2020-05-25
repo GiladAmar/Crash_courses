@@ -1,0 +1,15 @@
+#To run a command in the background
+    mv a b/
+    cntl + z
+        bg
+
+# To run it from the background at the start:
+    mv a b/&
+
+# To ensure it keeps running after you kill the terminal
+    disown -a
+
+    # Then to attach to the process from another terminal use:
+    setsid process
+
+** Better yet, use screen or tmux

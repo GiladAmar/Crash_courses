@@ -1,5 +1,3 @@
-/lib/systemd/system/
-
 Step 1 - Create UNIT file
     {fname.service}:
         [Unit]
@@ -26,34 +24,31 @@ Step 1 - Create UNIT file
         WantedBy=multi-user.target
 
 
+Step 2 - Place here
+    /lib/systemd/system/
 
-Step 2 – Set permissions
+
+Step 3 – Set permissions
     sudo chmod 644 {fname.service}
 
 
-Step 3 – Configure systemd
+Step 4 – Configure systemd
     Reload the systemd
         # sudo systemctl daemon-reload
 
     Enable your service on system boots
         # sudo systemctl enable {fname.service}
-
         # sudo systemctl disable {service}
-Step 4 – Check status of your service
-
-You can check the status of your service using :
-$ sudo systemctl status pyrpc.service
-
-    status
-    start
-    stop
-    restart
 
 
-systemctl restart name.service  # after change
+Step 5 – Check status of your service
+    $ sudo systemctl <option> pyrpc.service
+    options:
+        status <service-name>
+        start <service-name>
+        stop <service-name>
+        restart <service-name>  Do this after a change to the service
 
-sudo journalctl -f -u home-assistant@[your user]
 
-
-sudo systemctl restart home-assistant@[your user] && sudo journalctl -f -u home-assistant@[your user]
-e journal for the service with the --follow
+Step 6 - View Logs
+    sudo journalctl -f -u home-assistant@[your user]

@@ -242,3 +242,93 @@ def determine_column_relationships(df, limit_to_columns=None, involving_columns=
 
 determine_column_relationships(test_df)
 
+
+def run_terminal_cmd(command_str, args=None, capture_output=False):
+    import subprocess
+    shell=True if args else False #allows arguments in the command string and not require them to be input separetely
+    
+    return subprocess.run(check=True, shell=shell, capture_output=capture_output)
+   #raises the CalledProcessError if fails
+   
+   
+   
+# An @enforce decorator that checks if types are correct in runtime
+
+def enforce(func):
+  ''' Decorator to enforce type decorators at runtime via
+  type assertion. Usage:
+  @enforce
+  def foo(a : str, b : int, c = True : bool) -> str:
+    return None
+  '''
+  def enforce_wrapper(*args, **kwargs):
+    for k, v in dict(zip(func.__code__.co_varnames, args),
+                     **dict(zip(func.__code__.co_varnames[len(args):func.__code__.co_argcount],
+                                func.__defaults__) if func.__defaults__ else {},
+                            **kwargs)).items():
+      assert type(v) == func.__annotations__.get(k, type(v)), \
+           "Argument `%s : %s` received type `%s`." % (
+              k, func.__annotations__.get(k), type(v))
+    ret = func(*args, **kwargs)
+    assert type(ret) == func.__annotations__.get('return', type(ret)), \
+           "`%s(...) -> %s` returned type `%s`." % (
+              func.__name__, func.__annotations__.get('return'), type(ret)
+            )
+    return ret
+  return enforce_wrapper
+
+# Python program to find SHA256 hash string of a file
+import hashlib
+
+
+def sha256file(fname):
+    sha256_hash = hashlib.sha256()
+    with open(fname, "rb") as f:
+        # Read and update hash string value in blocks of 4K
+        for byte_block in iter(lambda: f.read(4096), b""):
+            sha256_hash.update(byte_block)
+        return sha256_hash.hexdigest()
+
+
+#function caching:
+import functools
+
+
+@functools.lru_cache(maxsize=128)
+def fibonacci(n):
+    if n == 0:
+        return 0
+    elif n == 1:
+        return 1
+    return fibonacci(n - 1) + fibonacci(n - 2)
+
+
+
+from pandas.testing import assert_frame_equal
+
+
+def strip_extra_whitespace(string: str) -> str:
+    r"""
+    Replace consecutive whitespace characters with a single space.
+    Whitespace characters include spaces, tabs, and newlines.
+    Examples
+    --------
+    >>> strip_extra_whitespace("   This\tis    a\nsentence \n")
+    'This is a sentence'
+    """
+    return re.sub(r"\s+", " ", string.strip())
+
+
+
+from pathlib import Path
+from typing import Union
+
+
+PathLike = Union[str, Path]
+
+output_dir = Path(output_dir) / "bob_stats" / current_time
+
+model_dir = Path(model_dir)
+scaler_path = model_dir.parent / "standard_scaler.joblib"
+encoder_file = model_dir / "encoder.h5"
+train_file = model_dir / "train.parquet"

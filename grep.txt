@@ -1,0 +1,28 @@
+grep search_string folder_or_file
+    -r  recursive
+    -R  recursive, follow symbolic links
+
+    -i  ignore_case
+    -v  invert (show lines that dont match)
+    -w  The match must be the full word
+
+    -E  use regex search_string
+    -e add a search term
+    -x entire line match only
+
+    -c count matches
+    -n display line number of matches
+    -m max matches
+
+    -A x Show x lines after matching term
+    -B x Show x lines before matching term
+    -C x Show x lines before and after matching term
+
+    -l display filenames containing matching text
+    -L display filenames NOT containing matching text
+
+Pipe search results into less for easier viewing and searching:
+    grep search_string *.c | less
+
+Find filename containing Aug and sort by filesize
+    ls -l | grep "Aug" | sort +4n

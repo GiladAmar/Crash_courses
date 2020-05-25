@@ -1,17 +1,16 @@
 Compression:
-    tar -cvf
-        -cvf compress, verbose, file/archive
+    tar -cvf compress, verbose, file/archive
         -z to-> tar.gz
         -j -> bz2
-
-    e.g.    tar -cvf output.tar folder_contents/ another_whole_folder
+    e.g.
+        tar -cvzf output.tar folder_contents/ another_whole_folder
 
     In terms of archive size:
         tar > gz > bz2
 
 Extraction:
-    -xvf extract
-    -t list content
+    tar -xvf extract
+        -t   list content
     e.g. tar -xvf input.tar
 
     # To specify which file to extract

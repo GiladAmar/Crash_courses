@@ -74,8 +74,7 @@ INTEL (MKL DAAL optimised Python etc)
     Tensorflow:
         Intel: pip install https://anaconda.org/intel/tensorflow/1.2.1/download/tensorflow-1.2.1-cp36-cp36m-linux_x86_64.whl
 
---  python3.6
-
+--  python3.6 (rather use pyenv)
         < # Maybe  require this code. Skip this paragraph at first. If pip complains of not having ssl then do this
         wget https://github.com/openssl/openssl/archive/OpenSSL_1_0_2l.tar.gz
         tar -zxvf OpenSSL_1_0_2l.tar.gz
@@ -174,6 +173,7 @@ NVIDIA DRIVERS AND CUDA
 
 --  TLP (power saving)
         sudo apt install -y tlp tlp-rdw
+        sudo apt-get install tlpui
         sudo tlp start
 
 --  OPeNJRE
@@ -221,8 +221,7 @@ NVIDIA DRIVERS AND CUDA
         sudo add-apt-repository -y ppa:gwendal-lebihan-dev/cinnamon-nightly
         sudo apt update && sudo apt install -y cinnamon
 
-        ( following lines has "No such schema 'org.cinnamon.desktop.session'
-" error
+        ( following lines has "No such schema 'org.cinnamon.desktop.session'" error
         gsettings set org.cinnamon.desktop.session settings-daemon-uses-logind true
         gsettings set org.cinnamon.desktop.session session-manager-uses-logind true
         gsettings set org.cinnamon.desktop.session screensaver-uses-logind false
@@ -308,8 +307,9 @@ NVIDIA DRIVERS AND CUDA
         sudo add-apt-repository -y ppa:hsoft/ppa
         sudo apt update && sudo apt install -y dupeguru-se
 
----------------------
----------TODO--------
+                                                ---------------------
+                                                ---------TODO--------
+                                                ---------------------
 --  Bazel
         sudo apt install -y software-properties-common swig
         sudo add-apt-repository -y ppa:webupd8team/java
@@ -318,12 +318,10 @@ NVIDIA DRIVERS AND CUDA
         curl https://storage.googleapis.com/bazel-apt/doc/apt-key.pub.gpg | sudo apt-key add -
         sudo apt update && sudo apt install -y bazel
 
-
--- workrave
+--  workrave
         sudo apt install -y workrave
 
-
---  notes
+--  notes (sticky desktop notes)
         sudo apt install -y xpad
 
 --  Space explorer
@@ -348,55 +346,6 @@ NVIDIA DRIVERS AND CUDA
 --  foxit reader
         download_package - https://www.foxitsoftware.com/pdf-reader/
 
-PYTHON PACKAGES
-    venv
-    virtualenv
-    virtualenvwrapper
-    sympy
-    cython
-    scikit-feature
-    statsmodels
-    patsy
-    astropy
-    scikit-image
-    numba
-    tsne
-    pymatbridge
-    oct2py
-    xgboost
-    tpot
-    hdbscan
-    sqlalchemy
-    pymssql
-    tqdm
-    pymc3
-    nltk
-    h5py
-    bokeh
-    scarpy
-    pillow
-    opencv
-    seaborn
-    ggplot
-    plotly
-    pydot
-    colorama
-    python-progressbar
-    orange
-    spyder3
-sudo apt install -y libglu1-mesa libxi-dev libxmu-dev
-sudo apt install -y libhdf5-serial-dev
-sudo apt install -y g++
-sudo apt install -y build-essential
-sudo apt install -y python-virtualenv python-pip python-dev python-numpy python-scipy python-nose python-tk python-yaml
-
-virtualenv --python=<python_path> <venv name>
-source <venv_name>/bin/activate
-pip install ...
-
-< In any Venv>
-    pip install numpy matplotlib scipy numba pandas tensorflow keras scikit-learn ipython jupyter scikit-image h5py --upgrade 
-    pip install jupyter_contrib_nbextensions && jupyter contrib nbextension install --user
 --  The Fuck
         sudo -H pip install thefuck
         eval "$(thefuck --alias)"
@@ -439,21 +388,27 @@ pip install ...
         curl -O http://download.virtualbox.org/virtualbox/5.2.0/Oracle_VM_VirtualBox_Extension_Pack-5.2.0-118431.vbox-extpack
         sudo VBoxManage extpack install Oracle_VM_VirtualBox_Extension_Pack-5.2.0-118431.vbox-extpack
 
+--  Flatpack - package installer
+        sudo add-apt-repository ppa:alexlarsson/flatpak
+        sudo apt update
+        sudo apt install flatpak
+        sudo apt install gnome-software-plugin-flatpak
+        flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 
-postgres
-anydesk
+--  mp3 split
+        sudo apt-get install -y mp3splt
 
+--  SSHFS
+        sudo apt install -y sshfs
 
-Flatpack - package installer
-    sudo add-apt-repository ppa:alexlarsson/flatpak
-    sudo apt update
-    sudo apt install flatpak
-    sudo apt install gnome-software-plugin-flatpak
-    flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+--  Zoom
+    sudo apt install -y libglib2.0-0 libgstreamer-plugins-base0.10-0 libxcb-shape0 libxcb-shm0 libxcb-xfixes0 libxcb-randr0 libxcb-image0 libfontconfig1 libgl1-mesa-glx libxi6 libsm6 libxrender1 libpulse0 libxcomposite1 libxslt1.1 libsqlite3-0 libxcb-keysyms1 libxcb-xtest0
+    Download deb from: www.zoom.us/download
+    sudo apt install -y ./zoom_amd64.deb
+
 
 Pitivi
-
-#mp3 split
-sudo apt-get install -y mp3splt
-
 Mega app
+postgres
+anydesk
+sqlserver

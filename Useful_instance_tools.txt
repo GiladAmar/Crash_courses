@@ -24,8 +24,15 @@ Logging in:
         * may need to do this before plotting
             import matplotlib
             matplotlib.use('GTKAgg')
-            import matplotlib.pyplot as plt  
+            import matplotlib.pyplot as plt
 
+Carrying Access keys with you:
+    1. ssh-agent                        - make sure ssh-agent is running
+    2. ssh-add                          - add you local keys to the agent
+    3. ssh -A username@example_address  - carry keys with you when signing in
+    4. git clone <private repo you can only access on your starting machine>
+        This should be able to clone from your private repo as if you are using a pc with
+        accepted credentials (such as your laptop)
 
 Check CUDA and nvidia drivers are present
     nvcc        - should complain about not having input files

@@ -1,0 +1,11 @@
+rsync
+    -z                          compress
+    -P                          progress
+    --delete                    delete extraneous files from destination
+    -exclude <folder/filename   exclude files
+    -a                          preserves dates/times and permission
+
+folder_name/ #means the contents thereof otherwise the whole folder
+
+default:
+    rsync -azvP

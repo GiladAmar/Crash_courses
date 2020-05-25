@@ -75,3 +75,7 @@ e.g.
     ||          ||          |          ||          |          ||
     || |& tee   ||   yes    |   yes    ||   yes    |   yes    || overwrite
     || |& tee -a||   yes    |   yes    ||   yes    |   yes    ||  append
+
+
+
+wc -l # counts the number of \n. So if your file doesn't end on one the count will not match up

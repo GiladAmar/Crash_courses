@@ -3,12 +3,21 @@ ssh username@address
     -X tunnel graphical displays (i.e. plt.show() on instance shows picture on your desktop)
         if it fails use -Y
     -A authentification forwarding (make sure ssh-agent is running and ssh-add has been run)
+        usefull for git clones/pulls etc
+        e.g.
+            ssh-agent
+            ssh-keygen
+            ssh-add
+            ssh -A gilad@whatever
+
 
 # To tunnel a port ie port 3306 on my pc corresponds to what is on port 3306 on instance
 ssh -L 3306:mysql.suso.org:3306 username@arvo.suso.org
 <local-port>:<connect-to-host>:<connect-to-port>
 
-ssh-agent
-ssh-keygen
-ssh-add
-ssh -A gilad@whatever
+
+#sshfs
+# makes remote directory appear in the local folder sshfs-dir
+    sudo apt install -y sshfs
+    sshfs gilad@thisaddress.dp: sshfs-dir
+    umount sshfs-dir
