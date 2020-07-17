@@ -1,7 +1,7 @@
-Python Debugging
+# Python Debugging
 #############################################
-Author = "Gilad Amar"                       #
-Email = "giladamar@gmail.com"               #
+# Author = "Gilad Amar"                       #
+# Email = "giladamar@gmail.com"               #
 #############################################
 
 ''' A safety pig has been provided for your benefit:
@@ -24,7 +24,7 @@ pip install ipdb
 
 ##### LAUNCH IPDB #####
 
-    1)     import ipdb; ipdb.set_trace(context=3) 
+    1)     import ipdb; ipdb.set_trace(context=3)
             Shows default 3 lines of code
 
     2)    from ipdb import launch_ipdb_on_exception
@@ -82,3 +82,7 @@ q - quit debugging
 ##### MISC #####
 
     %debug - magic used in Jupyter Notebook cell to launch ipdb if error occurs
+
+
+# Sometimes variables "don't exist" in something like a list comprehension in pdb:
+    globals().update(locals())

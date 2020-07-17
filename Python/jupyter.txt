@@ -1,0 +1,113 @@
+pip install jupyter_nbextensions_configurator
+jupyter nbextensions_configurator enable --user
+
+#multi-output
+from IPython.core.interactiveshell import InteractiveShell
+InteractiveShell.ast_node_interactivity = "all"
+
+# alarm after execution
+import os
+os.system('say "your program has finished"')
+
+# extensions
+pip install jupyter_contrib_nbextensions
+jupyter contrib nbextension install --user
+pip install autopep8 --user
+
+codefolding
+collapsible heaidings
+excecution time
+zenmode
+Table Beautifier
+tabel of conetnds
+nb_black
+https://jupyter-contrib-nbextensions.readthedocs.io/en/latest/install.html
+
+execute python file:
+%load basic_imports.py
+
+
+#debugger:
+%pdb
+
+#pandas
+import pandas as pd
+
+def start():
+    options = {
+        'display': {
+            'max_columns': None,
+            'max_colwidth': 25,
+            'expand_frame_repr': False,  # Don't wrap to multiple pages
+            'max_rows': 14,
+            'max_seq_items': 50,         # Max length of printed sequence
+            'precision': 4,
+            'show_dimensions': False
+        },
+        'mode': {
+            'chained_assignment': None   # Controls SettingWithCopyWarning
+        }
+    }
+
+    for category, option in options.items():
+        for op, value in option.items():
+            pd.set_option(f'{category}.{op}', value)  # Python 3.6+
+
+if __name__ == '__main__':
+    start()
+    del start  # Clean up namespace in the interpreter
+
+
+
+#Pandas save memory
+pd.factorize(colors)[0]
+
+
+
+Unde cell delteion
+ESC + Z
+
+Separate cells ar pt:
+    Control + Shift + -
+
+
+Precent cell from running:
+%%script false
+
+
+Add this to first cell, to use cntrl +I to jump to currently running cell:
+%%javascript
+// Go to Running cell shortcut
+Jupyter.keyboard_manager.command_shortcuts.add_shortcut('Alt-I', {
+    help : 'Go to Running cell',
+    help_index : 'zz',
+    handler : function (event) {
+        setTimeout(function() {
+            // Find running cell and click the first one
+            if ($('.running').length > 0) {
+                //alert("found running cell");
+                $('.running')[0].scrollIntoView();
+            }}, 250);
+        return false;
+    }
+});
+
+
+indtll themes:
+pip install jupyterthemes
+jt -t chesterish -  dark theme
+
+
+
+Search for command:
+Ctrl + Shift + P
+
+Shift + up or down to move up and down cell
+
+
+shift + M merge seelcted cells
+
+
+Widen jupyter width:
+from IPython.core.display import display, HTML
+display(HTML("<style>.container { width:80% !important; }</style>"))

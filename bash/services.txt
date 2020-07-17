@@ -2,22 +2,22 @@ Step 1 - Create UNIT file
     {fname.service}:
         [Unit]
         Description="This is a description of the process"
-        Documentation=  # URIs for unit docs
-        After=multi-user.target # Starts service only after these are active
-        Requires=...    # Required services
-        Wants=          # Wants but can start without
-        Conflict=       # Cannot run in conjunction with these
+        Documentation=              # URIs for unit docs
+        After=multi-user.target     # Starts service only after these are active
+        Requires=...                # Required services
+        Wants=                      # Wants but can start without
+        Conflict=                   # Cannot run in conjunction with these
 
         [Service]
-        User={giladamar} # Username
-        Type=simple #forking
+        User={giladamar}            # Username
+        Type=simple                 # forking
         ExecStart=python script.py
-        ExecStop = # run on stopping
-        ExecReload= # when reloading
+        ExecStop =                  # run on stopping
+        ExecReload=                 # when reloading
 
-        Environment=SSH_AUTH_SOCK=%t/keyring/ssh #%t means runtime directory
-        Environment=SYSTEMD_LOG_LEVEL=debug     # debugging mode for journalctl
-        Restart=always  #on-abort
+        Environment=SSH_AUTH_SOCK=%t/keyring/ssh    # %t means runtime directory
+        Environment=SYSTEMD_LOG_LEVEL=debug         # debugging mode for journalctl
+        Restart=always                              # on-abort
         RestartSec=42s
 
         [Install]

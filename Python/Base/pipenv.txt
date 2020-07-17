@@ -1,0 +1,89 @@
+Issues:
+    Resolves dependencies (better than pip)
+    Combines pip and virtualenv
+    Deterministic builds (unlike pip)
+    No need to maintain sub-dependency versions
+    Readable Pipfile (like requirements.txt) - so its apparent what is actually imported
+    pipfile.lock uses hashes so is more secure on an unreliable network
+    can specify required python version
+
+So all you should need is:
+    pyenv to install python versions
+    pipenv to create venvs, un/install packages and maintain dependencies
+
+
+Installation:
+    pip install pipenv --isolated
+    else:
+        curl https://raw.githubusercontent.com/kennethreitz/pipenv/master/get-pipenv.py | python
+
+
+#Makes two files:
+    Pipfile         - like requirements.txt
+    Pipfile.lock    - for deterministic builds
+
+
+#Create Venv:
+    pipenv install --python 3.6 - # create virtualenv
+
+    where your virtual environment is:
+    pipenv --venv
+
+    remove current venv
+    pipenv --rm 
+
+    How to find out where your project home is:
+    pipenv --where
+
+    # Run using pipenv venv:
+    pipenv run python main.py
+
+    pipenv shell     - open terminal with cenv activated
+
+
+#Un/Install packages:
+
+    pipenv install -e git+https://github.com/requests/requests.git#egg=requests # Install from repo
+    -e makes installation editable for resolving depensdency issues
+
+    pip install -r requirements.txt # Can use a requirements.txt too
+
+    pipenv install flask        # Install package (auto added to Pipfile)
+
+    pipenv uninstall flask      # (auto removed from Pipfile)
+
+    Install for development only - reflected in the Pipfile
+
+    pipenv install ipdb --dev   # Under development packages in Pipfile
+
+    pipenv uninstall #--all or --all-dev to remove only dev packages
+
+
+Lock files and deployment:
+
+    pipenv lock     #define exact versions to use for production 
+
+    pipenv install --ignore-pipfile
+        #install from the lockfile  --deterministic
+
+    #creating requirements.txt files from Pipfiles
+    $ pipenv lock -r > requirements.txt
+    $ pipenv lock -r -d > dev-requirements.txt
+
+    pipenv clean --remove packages not in lock file
+
+    pipenv update -- runs lock then sync
+
+
+Useful environment variables to set:
+    PIPENV_IGNORE_VIRTUALENVS=1
+    PIPENV_DEFAULT_PYTHON_VERSION=3.6
+
+
+Misc:
+    pipenv graph:  #use --reverse to sub-dependency -> package order
+        shows dependencies
+
+    Pipenv supports the automatic loading of environmental variables when a .env file exists in the top-level directory. That way, when you pipenv shell to open the virtual environment, it loads your environmental variables from the file. The .env file just contains key-value pairs:  
+        SOME_ENV_CONFIG=some_value
+        SOME_OTHER_ENV_CONFIG=some_other_value

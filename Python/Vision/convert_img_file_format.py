@@ -31,5 +31,5 @@ if source_type in allowed_types and target_type in allowed_types:
         cv2.imwrite(new_fname, img)
 
         if delete_source_afterwards:
-            if os.path.exists((new_fname):
+            if os.path.exists(new_fname):
                 os.remove(fname)

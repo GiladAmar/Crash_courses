@@ -12,4 +12,4 @@
     # Then to attach to the process from another terminal use:
     setsid process
 
-** Better yet, use screen or tmux
+# Better yet, use screen or tmux

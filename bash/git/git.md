@@ -1,9 +1,9 @@
                                 #GIT DISTRIBUTED CONTROL SYSTEM##
 #############################################
-Author = "Gilad Amar"                        #
-Email = "giladamar@gmail.com"                #
-Created = "19/05/2016"                        #
-Last_Modified  =  "18/07/2016"                #
+Author = "Gilad Amar"                       #
+Email = "giladamar@gmail.com"               #
+Created = "19/05/2016"                      #
+Last_Modified  =  "18/07/2016"              #
 #############################################
 '''
     WELCOME TO THE GIT INTRODUCTORY CODE.

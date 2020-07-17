@@ -9,13 +9,28 @@ ssh username@address
             ssh-keygen
             ssh-add
             ssh -A gilad@whatever
+    -p Specify port
 
 
 # To tunnel a port ie port 3306 on my pc corresponds to what is on port 3306 on instance
 ssh -L 3306:mysql.suso.org:3306 username@arvo.suso.org
 <local-port>:<connect-to-host>:<connect-to-port>
 
+# Using a config file for easy login
+~/.ssh/config
+    Host webserver
+        HostName 192.168.225.22
+        User sk
+        Port 2233                               #optional
+        IdentityFIle ~/.ssh/id_rsa_remotesystem #optional when using ssh keyfile
+        ForwardAgent yes                        # If using agent-forwarding (carrying local keys with you)
 
+    Host dhcp
+        HostName 192.168.225.25
+        User ostechnix
+        Port 2233
+
+--> ssh webserver # is now all you need to login
 #sshfs
 # makes remote directory appear in the local folder sshfs-dir
     sudo apt install -y sshfs

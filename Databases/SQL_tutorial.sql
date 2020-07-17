@@ -154,7 +154,7 @@ DROP VIEW                       -- Drop a view
 ----------------COMPLETE SELECT SAMPLE STATEMENT------------------
 USE [schema_name]                               -- Which Schema to use, otherwise it always has to precede the table name
 
-SELECT TOP 100 * + (5 * 2) / 2.5 , year, month, -- Can use arithmetic operations (+, -, *, /) with columns BODMAS brackets
+SELECT TOP 100 + (5 * 2) / 2.5 , year, month,   -- Can use arithmetic operations (+, -, *, /) with columns BODMAS brackets
     a.*,                                        -- Select all columns from Table alias a
     name                    AS new_name,        -- Give column new name, can be used later in query
                                                 -- Use AS "Title with Spaces" for spaces
@@ -166,18 +166,18 @@ SELECT TOP 100 * + (5 * 2) / 2.5 , year, month, -- Can use arithmetic operations
                                                     -- Handles dates, numbers and strings
     MAX(albums_sold)        AS max_sold,        -- Column maximum
                                                     -- Handles dates, numbers and strings
-    ABS(cost)               AS abs_cost         -- Absolute Value
+    ABS(cost)               AS abs_cost,        -- Absolute Value
     STDEV(group_members)    AS std_dev_members, -- Standard Deviation
     VAR(group_members)      AS variance_members,-- Variance
-    ROUND(price, 0),                            -- Round column to 0 decimals
-
+    ROUND(price, 0)         AS round_price,     -- Round column to 0 decimals
     DISTINCT(month)         AS uniq_months,     -- DISTINCT returns unique entries in month column
                                                     -- DISTINCT(year, month) will return unique pairs
                                                     -- "SELECT DISTINCT * ..." will return unique rows
                                                     -- DISTINCT performs slowly
     -- Strings
-    UPPER(),                                    -- Return string in uppercase
-    LOWER(),                                    -- Return string in lowercase
+    UPPER(stringy),                             -- Return string in uppercase
+    LOWER(stringy,                              -- Return string in lowercase
+    STRING_SPLIT('Lorem ipsum', ' ');           -- Split string by char
 
     -- Nulls
     COALESCE(option_1, option_2, ..., 0),       -- Returns first non null argument (here used to replace nulls with zero)
@@ -257,7 +257,7 @@ WHERE month = 1                     -- =, !=, >, <, >=, and <=
     AND 'day' LIKE '%day'           -- Case-sensitive
     OR 'day' ILIKE '%dAY'           -- Case-insensitive, "%"" is a multi-wildcard character
                                     -- 'day' LIKE 'Mo_day', "_" is a single wildcard character
-    OR 'day' LIKE '[mtw]%day'       -- [charlist] Set range of characters to match e.g. [abc] or [a-c]
+    OR 'day' LIKE '[mtw]%day'       -- [charlist] Set range of characters to match e.g. [abc] or [a-c] or [0-9]
                                     -- [!charlist] Set range of characters to not match e.g. [!abc]
 
     AND 'artist' IN ('Taylor Swift', 
@@ -357,6 +357,7 @@ REPLACE (str1, str2, str3)              -- In str1, find where str2 occurs, and 
 TRIM( [ <LOCATION> [remstr] FROM ] str) -- <LOCATION> can be either LEADING, TRAILING, or BOTH
                                         -- If <remstr> pattern is not given white spaces are removed
 CONCAT(str1, str2, str3, ...)           -- Concatenate all strings
+    'What' || ' the' || '....?'
 SUBSTRING(stringy, index_1, index_2)    -- Take substring between index_1 and index_2
 CHARINDEX('-', stringy)                 -- Find Position of character in string
 
@@ -388,7 +389,7 @@ IIF(handicap <= 15, ‘Good’, ‘Bad’)
     +---------------+--------+
 
 ------------------------------PIVOTING-----------------------------------------
--- WHERE Year is categorical column, and Salesamount is to be aggregated
+-- WHERE Year is categorical column, and sales_amount is to be aggregated
 -- Static
 
 SELECT country, [2005], [2006], [2007], [2008], [2009], [2010]
@@ -463,7 +464,7 @@ END
 
     -- Select only columns you need
 
-    -- Aggregate before joining tables where possible
+    -- Aggregate BEFORE joining tables where possible
 
     -- Join on multiple fields (if they're indexed) even if only one is necessary
 
@@ -481,6 +482,8 @@ END
         WHERE id IN (SELECT id
                      FROM Fines
                      WHERE Users.id = Fines.id)
+
+        -- Otherwise sub-queries can actually be much faster
 
     -- Use UNION over OR in this case
         * Worse to read however
@@ -500,7 +503,7 @@ END
     -- These scale rapidly:
         ORDER BY
         DISTINCT
-        LIKE with % or _
+        LIKE --with % or _
 
     -- EXISTS preferred over IN
         SELECT *
@@ -560,6 +563,7 @@ END
                  ON s.id = l.id
 
     -- Favour WHERE over HAVING when aggregation is unnecessary to apply condition
+        -- It will be applied earlier in the process and save time
 
 ------------------------------DATE AND TIME QUERIES------------------------------
 -- Current Time
@@ -590,10 +594,10 @@ MICROSECOND()               -- Returns the microseconds from argument
 SECOND()                    -- Returns the second (0-59)
 MINUTE()                    -- Returns the minute from the argument
 HOUR()                      -- Returns the hour
-DAY()                       -- Synonym for DAYOFMONTH()
+DAY()                       -- Returns the day of the month (1-31)
     DAYNAME()               -- Returns the name of the weekday
     WEEKDAY()               -- Returns the weekday index
-    DAYOFMONTH()            -- Returns the day of the month (1-31)
+    DAYOFMONTH()            -- Synonym for DAY()
     DAYOFWEEK()             -- Returns the weekday index of the argument
     DAYOFYEAR()             -- Returns the day of the year (1-366)
 WEEK()                      -- Returns the week number
@@ -605,9 +609,11 @@ MONTH()                     -- Returns the month from the date passed
 QUARTER()                   -- Returns the quarter from a date argument
 YEAR()                      -- Returns the year
 
+DATENAME(DAY, datetime)     -- Tuesday
+
 -- Extract
 DATE()                      -- Extracts the date part of a date or datetime expression
-EXTRACT                     -- Extracts part of a date
+EXTRACT()                   -- Extracts part of a date
 DATEPART(datepart, date)    -- Returns part, defined by abbreviation below, of the date
     +-------------+---------+
     |   Datepart  |   code  |
@@ -667,33 +673,42 @@ MAKEDATE()      -- Creates a date from the year and day of year
             TO user1
 
         DROP ROLE role_name
--- Processes:
 
+-- Processes:
 SHOW PROCESSLIST
 KILL <p_id>
 
---
+-- See column names available
  SHOW COLUMNS FROM table_name
--- Transactions
-    BEGIN TRAN
-        <sql_script_here>
-    IF @@ERROR <> 0
-        BEGIN
-            ROLLBACK TRAN
-            return 11
-        END
-    COMMIT TRAN
-    GO
+
+-- Transactions:
+  BEGIN TRY
+    BEGIN TRANSACTION
+      <sql_script_here>
+    COMMIT TRANSACTION
+  END TRY
+  BEGIN CATCH
+    ROLLBACK TRANSACTION
+  END CATCH
 
     -- To set automatic rollbacks on transactions:
         SET XACT_ABORT ON
 
---Procedure
-    CREATE PROCEDURE [dbo].[stp_run_feature_generator]
-        AS
-    BEGIN
-        <sql_script_here>
-    END
+--- Procedure function
+-- Define a name and parameters
+  CREATE PROCEDURE Northwind.getEmployee
+    @LastName nvarchar(50),
+    @FirstName nvarchar(50)
+  AS
+    -- Define the query to be run
+    SELECT FirstName, LastName, Department
+    FROM Northwind.vEmployeeDepartment
+    WHERE FirstName = @FirstName
+      AND LastName = @LastName
+      AND EndDate IS NULL;
+
+  --Calling the procedure:
+    EXECUTE Northwind.getEmployee N'Ackerman', N'Pilar';
 
 -- ANY and ALL
     -- Simple way to evaluate an inter-table condition without doing a join
@@ -773,9 +788,7 @@ KILL <p_id>
 
     NESTED JOIN generally O(MN)
 
-
-
-    SELECT * 
+    SELECT *
     FROM item, author 
     WHERE item.i_a_id = author.a_id 
     --O(Nlog(N)) < between < O(N^2) depending on indicies
@@ -786,10 +799,10 @@ KILL <p_id>
     WHERE 1=1
         AND column_name = 'James'
         AND column_surname = 'Jones'
-    - Easy to comment out first criteria
-    - Easy to reorder
+    -- Easy to comment out first 'real' criteria
+    -- Easy to reorder
     
---  can do COUNT (DISTINCT column-name)
+-- COUNT (DISTINCT column-name)
 
 -- This will return only record (n + 1) to (n + 1 + m). See example below.
    SELECT *
@@ -797,13 +810,12 @@ KILL <p_id>
    OFFSET n ROWS
    FETCH NEXT m ROWS ONLY
 
--- Select random rows:
-  SELECT 500 ROWS (or less)
-  if you use just TABLESAMPLE it will return 1000/n_total rows rounded
-  REPEATABLE sets the seed used when randomly sampling rows
+-- Select random rows: (needs checking)
+  -- SELECT 500 ROWS (or less)
+  -- if you use just TABLESAMPLE it will return 1000/n_total rows rounded
+  -- REPEATABLE sets the seed used when randomly sampling rows
   SELECT TOP(500) *
   FROM Orders TABLESAMPLE(1000 ROWS ) REPEATABLE (55)
-
 
 
 --- NTiles:
@@ -895,10 +907,8 @@ FORMAT(@Date, N'dddd, MMMM dd, yyyy hh:mm:ss tt')
     SELECT EOMONTH('2016-07-21', 4)   -- 2016-11-30
     SELECT EOMONTH('2016-07-21', -5)  -- 2016-02-29
 
--- GETDATE() cast full timestamp to just date
 
-
--- Timedifferences:
+-- Time differences:
   DECLARE @now DATETIME2 = GETDATE();
   DECLARE @oneYearAgo DATETIME2 = DATEADD(YEAR, -1, @now);
   SELECT @now                                   --2016-07-21 14:49:50.9800000
@@ -911,44 +921,6 @@ FORMAT(@Date, N'dddd, MMMM dd, yyyy hh:mm:ss tt')
   SELECT DATEDIFF(MINUTE, @oneYearAgo, @now)    --527040
   SELECT DATEDIFF(SECOND, @oneYearAgo, @now)    --31622400
 
-
--- DATEPARTS:
-  DECLARE @now DATETIME2 = GETDATE();
-  SELECT @now                   -- 2016-07-21 15:05:33.8370000
-  SELECT DATEPART(YEAR, @now)   -- 2016
-  SELECT DATEPART(QUARTER, @now)-- 3
-  SELECT DATEPART(WEEK, @now)   -- 30
-  SELECT DATEPART(HOUR, @now)   -- 15
-  SELECT DATEPART(MINUTE, @now) -- 5
-  SELECT DATEPART(SECOND, @now) -- 33
-
-  -- Differences between DATEPART and DATENAME:
-  SELECT DATEPART(MONTH, @now)   -- 7
-  SELECT DATEPART(WEEKDAY, @now) -- 5
-
-  SELECT DATENAME(MONTH, @now)   -- July
-  SELECT DATENAME(WEEKDAY, @now) -- Tuesday
-
-  --shorthand functions
-  SELECT DAY(@now)      -- 21
-  SELECT MONTH(@now)    -- 7
-  SELECT YEAR(@now)     -- 2016
-
-
-  datepart Abbreviations
-  year        yy, yyyy
-  quarter     qq, q
-  month       mm, m
-  dayofyear   dy, y
-  day         dd, d
-  week        wk, ww
-  weekday     dw, w
-  hour        hh
-  minute      mi, n
-  second      ss, s
-  millisecond ms
-  microsecond mcs
-  nanosecond  ns
 
 -- Create a function:
   CREATE FUNCTION [dbo].[Calc_Age]
@@ -973,7 +945,6 @@ FORMAT(@Date, N'dddd, MMMM dd, yyyy hh:mm:ss tt')
     END
 
 
-
 -- read from a table without locking it (beware a table changing underneath you)
   SELECT *
   FROM TableName
@@ -983,14 +954,15 @@ FORMAT(@Date, N'dddd, MMMM dd, yyyy hh:mm:ss tt')
 -- create index to optimise select
   CREATE INDEX ix_scoreboard_score
   ON scoreboard (score DESC);
+
   -- When you execute the query
       SELECT *
       FROM scoreboard
       ORDER BY score DESC;
 
 -- custom ordering scheme:
--- order by department, city
--- but department is custom sorted
+    -- order by department, city
+    -- but department is custom sorted
   SELECT *
   FROM DEPT
   ORDER BY
@@ -1003,74 +975,17 @@ FORMAT(@Date, N'dddd, MMMM dd, yyyy hh:mm:ss tt')
     END,
     CITY
 
--- LIKE has basic regex
-  SELECT *
-  FROM table_name
-  WHERE name LIKE '[A-C]%'
-      OR Age LIKE '[0-9]%'
-
--- can concat strings like:
-  select 'What' || ' the' || '....?'
-
-
---string split
-  STRING_SPLIT('Lorem ipsum dolor sit amet.', ' ');
-
-
 -- Triggers:
   CREATE TRIGGER MyTrigger
   ON MyTable
-  AFTER INSERT
+  AFTER INSERT  -- DELETE / UPDATE ...
   AS
   BEGIN
   -- insert audit record to MyAudit table
-  INSERT INTO MyAudit(MyTableId, User)
-  (SELECT MyTableId, CURRENT_USER
-   FROM inserted)
+      INSERT INTO MyAudit(MyTableId, User)
+      (SELECT MyTableId, CURRENT_USER
+       FROM inserted)
   END
-
-
-  CREATE TRIGGER BooksDeleteTrigger
-  ON MyBooksDB.Books
-  AFTER DELETE
-  AS
-      INSERT INTO BooksRecycleBin
-      SELECT *
-      FROM deleted;
-  GO
-
-
---- Procedure function
--- Define a name and parameters
-  CREATE PROCEDURE Northwind.getEmployee
-    @LastName nvarchar(50),
-    @FirstName nvarchar(50)
-  AS
-    -- Define the query to be run
-    SELECT FirstName, LastName, Department
-    FROM Northwind.vEmployeeDepartment
-    WHERE FirstName = @FirstName
-      AND LastName = @LastName
-      AND EndDate IS NULL;
-
-
-  --Calling the procedure:
-    EXECUTE Northwind.getEmployee N'Ackerman', N'Pilar';
-
-
--- transactions:
-  BEGIN TRY
-    BEGIN TRANSACTION
-      INSERT INTO Users(ID, Name, Age)
-      VALUES(1, 'Bob', 24)
-      DELETE FROM Users
-      WHERE Name = 'Todd'
-    COMMIT TRANSACTION
-  END TRY
-  BEGIN CATCH
-    ROLLBACK TRANSACTION
-  END CATCH
-
 
 --SYNONYMS
   CREATE SYNONYM EmployeeData

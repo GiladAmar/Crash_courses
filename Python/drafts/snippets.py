@@ -332,3 +332,29 @@ model_dir = Path(model_dir)
 scaler_path = model_dir.parent / "standard_scaler.joblib"
 encoder_file = model_dir / "encoder.h5"
 train_file = model_dir / "train.parquet"
+
+
+# Set resource limits
+
+import signal
+import resource
+import os
+
+
+# To Limit CPU time
+def time_exceeded(signo, frame):
+    print("CPU exceeded...")
+    raise SystemExit(1)
+
+
+def set_max_runtime(seconds):
+    # Install the signal handler and set a resource limit
+    soft, hard = resource.getrlimit(resource.RLIMIT_CPU)
+    resource.setrlimit(resource.RLIMIT_CPU, (seconds, hard))
+    signal.signal(signal.SIGXCPU, time_exceeded)
+
+
+# To limit memory usage
+def set_max_memory(size):
+    soft, hard = resource.getrlimit(resource.RLIMIT_AS)
+    resource.setrlimit(resource.RLIMIT_AS, (size, hard))

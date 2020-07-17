@@ -25,7 +25,7 @@ Rename Files/Folders:
 
 
 rsync example:
-    rsync -hztv --partial --progress gilad.amar@omni-intern-gpu.dp:*.jpg /home/giladamar/Documents/DISA_renders/
+    rsync -hztv --partial --progress gilad@address.dp:*.jpg /local/folder/
 
 
 Delete Tiny images (empty files):
@@ -44,7 +44,8 @@ Compress pdf:
 Splitting up mp3 files:
     mp3splt -a -t 5.10 -o Lesson_01-@n -d Lesson_01 Lesson_01.mp3
         -a tells mp3splt to auto-adjust the split point with silence detection.
-        -t 5.10 tells it to make the files 5 minutes and 10 seconds long since the file is a little over 30 minutes long. (This length may vary a bit due to the -a option).
+        -t 5.10 tells it to make the files 5 minutes and 10 seconds long since the file is a little over 30 minutes long.
+           (This length may vary a bit due to the -a option).
         -o Lesson_01-@n tells it to name the files as Lesson_01 followed by a track number.
         -d Lesson_01 tells it to put the files in a directory called Lesson_01.
         And finally, Lesson_01.mp3 is the file you want to split.

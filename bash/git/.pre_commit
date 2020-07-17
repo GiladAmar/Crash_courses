@@ -1,0 +1,55 @@
+Checks to run before allowing a Git commit:
+
+Installation in git repo:
+    1. pip install pre-commit
+
+    2. Create/Copy .pre-commit-config.yaml config file:
+        pre-commit sample_config > .pre-commit-config.yaml
+
+    3. pre-commit install
+        Install config file
+        Must do this whenever config file is changed
+
+    4. git commit *
+        Runs pre-commit first
+        Auto modifies what can be
+
+Good default:
+    # See https://pre-commit.com for more information
+    # See https://pre-commit.com/hooks.html for more hooks
+    repos:
+    -   repo: https://github.com/pre-commit/pre-commit-hooks
+        rev: v2.4.0
+        hooks:
+            # File-system
+            -   id: check-case-conflict
+
+            # Validity\style
+            -   id: check-ast
+            -   id: check-json
+            -   id: pretty-format-json
+            -   id: check-yaml
+            -   id: check-xml
+            -   id: check-toml
+            -   id: check-symlinks
+            -   id: requirements-txt-fixer
+            -   id: trailing-whitespace
+            -   id: end-of-file-fixer
+
+           # Git
+            -   id: check-added-large-files
+            args: ["--maxkb=500"]
+            -   id: no-commit-to-branch
+            args: ["--branch", "master"]
+            -   id: detect-private-key
+            -   id: debug-statements
+
+    -   repo: https://github.com/psf/black
+        rev: stable
+        hooks:
+          - id: black
+
+    -   repo: https://github.com/asottile/reorder_python_imports
+        rev: v2.3.0
+        hooks:
+        -   id: reorder-python-imports

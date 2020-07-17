@@ -1,4 +1,4 @@
-To get the instance id:
+To get the AWS EC2 instance id:
     curl http://169.254.169.254/latest/meta-data/instance-id    -> i-1234567890
     curl http://169.254.169.254/latest/meta-data/local-ipv4     -> i-1234567890
 

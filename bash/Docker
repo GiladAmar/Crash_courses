@@ -1,0 +1,111 @@
+Docker
+
+Why?
+    1. Reproducible
+    2. Portable
+    3. Standard
+    4. Version-Controlled
+
+
+Terms:
+    Image           The blueprint
+    Container       An instance of an image
+    Docker-file     Image recipe
+    Commit          Version controlled
+    DockerHub       Public image repo (hub.docker.com)
+    Layer           Mod to an existing image
+
+
+Example Dockerfile*:
+    ## Base Image: ref https://hub.docker.com/_/ubuntu/
+    FROM ubuntu:16.04
+
+    ## Host Access
+    EXPOSE 7745                         # Signpost to reader what ports are needed
+                                        # By default, EXPOSE assumes TCP.
+                                        # You can also specify UDP: EXPOSE 80/udp
+
+    ## Meta-data
+    LABEL author="Gilad Amar" \
+          version="1.0.0"
+
+    ## File System
+    RUN mkdir home
+    VOLUME /home                        # Where to mount host dir
+                                        # (specified by docker run)
+    WORKDIR /home
+    ADD host_fpath docker_fpath         # Add file/s form host to image
+                                        # ADD [--chown=user:group] <src>... <dest>
+
+    ## Environment variables
+    ENV LANG=C.UTF-8 LC_ALL=C.UTF-8 \   # Wrap lines with \
+        HOME=/home \
+        SHELL=/bin/bash
+
+    ## Setup
+    RUN pip install numpy               # Run when building container
+    
+
+    ## Execute
+    CMD  ["bash"]
+
+* host dir cannot be supplied in image file, only on execution
+* Port exposing is done on execution
+* Only one CMD line allowed
+* Docker auto shutdown if there is nothing to do, 
+  so CMD ["/bin/bash"] is often used to keep it open
+* use "" not ''
+* Escape \ as \\ (esp. for Windows fpaths)
+* For Jupyter Notebook:
+    CMD jupyter notebook --no-browser --allow-root --port=7745 \
+        --NotebookApp.token='tutorial'
+
+
+Images:
+    docker images -a                            # list
+    docker image inspect --format='' img_name   # see labels
+    docker rmi img_name                         # delete
+    docker search search_string                 # look on DockerHub
+    docker pull img_name                        # download
+    docker build                                # create container
+                                                # docker build github.com/this.git
+        ** docker build -t image_name -f dockerfile_path host_working_dir
+
+    Push to DockerHub:
+        docker login
+        docker push img_name:tag
+
+
+Containers:
+    docker run --name container_name    # run container
+               --rm                     # delete on exit
+               --publish 8000:8080      # forward host_port to container_port
+               --net=host               # share all ports
+               -d/--detach              # run in background
+               -it                      # interactive
+    docker ps -a                        # list
+            -f status-running           # only running
+    docker rm id_or_name                # delete
+    docker logs #logs                   # view logs
+    docker attach id_or_name            # jump in
+    docker exec -it container_name bash # run on live container
+    docker commit container_name img_name:optional_tag # create image
+
+
+Volumes:
+    docker volume ls                    # list
+    docker volume rm volume_name        # delete
+
+--------------------------------------------------------------------------------
+TODO
+Multi-stage builds (security and image size)
+good bases - ubuntu, python, node...
+adding a USER
+USER and their workdir for lesser permissoins
+optimising use of build-cahce
+copy vs add
+dockerignore file
+
+Management, deployment and scaling:
+    Docker-compose
+    Kubernetes
