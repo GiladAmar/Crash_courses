@@ -878,3 +878,6 @@ ft.putText(img=img,
            thickness=-1,
            line_type=cv2.LINE_AA,
            bottomLeftOrigin=True)
+
+# write with h264 encoding:
+    vid = cv2.VideoWriter('pyout1.mp4', cv2.VideoWriter_fourcc(*'avc1'), 25, (1280, 720))
