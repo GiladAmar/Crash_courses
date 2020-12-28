@@ -1,9 +1,4 @@
 Machine Learning Resources
-#############################################
-Author  = "Gilad Amar"                       #
-Email   = "giladamar@gmail.com"               #
-#############################################
-
 ''' A safety pig has been provided for your benefit:
  _._ _..._ .-',     _.._(`))
 '-. `     '  /-._.-'    ',/

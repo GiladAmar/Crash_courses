@@ -1,0 +1,254 @@
+/*CSS - Cascading Style Sheets
+
+
+Style sheet language
+
+Elements do have default styles
+Rule-set:
+Define the style of the html element, the selector "p", with a declaration "color: red" where the property "color" is set with a property value "red"
+
+* each selector wrapper in {}
+* separate property and value with :, like python dict
+* separate declarations with ;
+* cascade: on conflicting (equivalent hierarchy) rules, the last one is used
+* specificity: on conflit between selector specificity the more specific is used
+In heritance: some properties such as color and font-family are inherited, others such as width are not
+All accept inherit/initial and unset
+  inherit: same as parent
+  initial: to default
+  unset: if property is naturally inherited then act like inherit, else initial;
+  ;
+;
+*/
+p {
+    color: red;
+    width: 500px;
+    border: 1px solid black
+    background-image: url("images/dinosaur.jpg");
+} 
+
+/*
+Multiple element selector:
+*/
+
+p, 
+li, 
+h1 {
+    ...
+}
+
+/*
+Selector Types and examples: (https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/Selectors)
+    Element         - p             - p
+    ID              - #this_id      - only <p id="this_id"></p>
+    Class           - .this_class   - all  <p class="this_class"></p>
+    Attribute       - img[src]      - only img elements with src attribute
+    Pseudo-Class    - a:hover       - all a elements when hovered over
+*/
+* select elements that have attribute present:
+  a[title] { }
+* with specific value of attribute:
+  a[href="https://example.com"]
+
+* or is equal to or contains value (separated by whitespace)
+  p[class~="special"]
+
+a[attr^=value] - begins with
+a[attr$=value] - ends with
+a[attr*=value] - contains anywhere in str
+
+a[attr*=value i] - do matching in a case insensitve way
+
+* select items with particular parent:
+  article > p { }
+* select items that are descendants (maybe many levels down):
+  article p { }
+*select adjacent items
+  article + p { }
+* same generation, not neccesarily ajacent:
+  article ~ p { }
+* universal selector:
+* * {}
+to select any first-child el of an article el:
+  article *:first-child { 
+
+  } 
+* spaces betweenmeans and
+* no spaces means of the same component
+* select an element PART:
+p::first-line { }
+
+/*or a combination like*/
+li.special {
+  color: orange;
+  font-weight: bold;
+}
+
+/*descendent selectors:*/
+li em {
+  color: rebeccapurple;
+}
+
+
+/*adjacent (one following the other)*/
+h1 + p {
+  font-size: 200%;
+}
+
+
+/*state:*/
+a:link {
+  color: pink;
+}
+
+a:visited {
+  color: green;
+}
+
+
+others:
+hover
+
+can chain
+/* selects any <span> that is inside a <p>, which is inside an <article>  */
+article p span { ... }
+
+/* selects any <p> that comes directly after a <ul>, which comes directly after an <h1>  */
+h1 + ul + p { ... }
+body h1 + p .special {
+  color: yellow;
+  background-color: black;
+  padding: 5px;
+}
+
+
+
+html {
+  font-size: 10px; /* px means "pixels" */
+  font-family: "Open Sans", sans-serif;
+}
+
+h1 {
+  font-size: 60px;
+  text-align: center;
+}
+
+p, li {
+  font-size: 16px;    
+  line-height: 2;
+  letter-spacing: 1px;
+}
+/*
+Box model:
+    padding - padding around content
+    border  - border around padding
+    margin  - space around border
+*/
+/*
+Each box has properties:
+*/
+    width
+    background-color  /*the color behind an element's content and padding.*/
+    color             /*the color of an element's content (usually text).*/
+    text-shadow       /*sets a drop shadow on the text inside an element.*/
+    display           /* sets the display mode of an element.*/
+
+body {
+  width: 600px;
+  margin: 0 auto;   /*1 value is all sides, 2 is t/b and l/r. 3 is t and l/r and b, 4 is t,r,b,l
+                    values are either length */1em /*and */-3px/*, percentage*/ 5% /*or*/ auto
+                    /*% refers to h or w of containing box
+                    auto centers
+                    newer browsers can center with display: flex; justify-content: center; .
+                    beware margin collapsing (https://developer.mozilla.org/en-US/docs/Web/CSS/margin#Syntax)*/
+  background-color: #FF9500;
+  padding: 0 20px 20px 20px;
+                    /*same 1-4 accepted values as margin*/
+  border: 5px solid black;
+}
+
+
+h1 { 
+  color: #00539F;                  /* content colour*/
+  text-shadow: 3px 3px 1px black;  /* h offset, v offsett, blur radius, base colour*/
+}
+
+/*Inheritance:*/
+Importance - 
+Specificity - more specific rule wins
+Source order - last equal rule wins
+  body {
+      color: green;
+  }
+            
+  .my-class-1 a {
+      color: inherit;
+  }
+            
+  .my-class-2 a {
+      color: initial;
+  }
+            
+  .my-class-3 a {
+      color: unset;
+  }
+
+* to unset all inherited properties use all: unset;
+
+/*Weighting importance Sum of:*/
+/*10^3 - using 'style' attribute - inline css*/
+/*10^2 - 1 for each id selector contained in overall selector*/
+/*10   - one for each class, attr or pseudo class contained in overall selector*/
+/*1    - one for each el or pseudo el inside overall selector*/
+
+/*<1><2><3><4>*/
+/*<1> - 1 if inline else 0*/
+/*<2> - count of ids #*/
+/*<3> - count of classes .*/
+/*<4> - count of elements*/
+/*or*/
+
+<inline>#.(el)
+
+To for sure override use:= this but not good coding
+.better {
+    background-color: gray;
+    border: none !important;
+}
+
+invalid selector rules are ignored\
+
+can insert content - not available to screen readers
+.box::after {
+    content: "This should show before the other content."
+}   
+oftern used to insert icon to show not for screen- reading
+.box::after {
+    content: " ➥"
+}   
+
+or fill a block element so it shows up:
+.box::before {
+    content: "";
+    display: block;
+    width: 100px;
+    height: 100px;
+    background-color: rebeccapurple;
+    border: 1px solid black;
+}   
+    
+  
+See list of pseudo classes and pseudo elements:
+https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/Selectors/Pseudo-classes_and_pseudo-elements
+
+
+Block Model:
+block boxes vs inline boxes
+unless display type is changed to inline
+there is an outer type - how siblings and parents see the element
+and an inner type, how it treats internal elements
+set inner type ith:
+display: flex; uses flexbox spec https://developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout/Flexbox
+or grid type
+
+display: inline to display: block or display: inline-flex to display: flex 

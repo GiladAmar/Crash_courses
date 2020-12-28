@@ -290,7 +290,7 @@ def genny():
        'XVID' MPEG-4
        'FFV1' Lossless
        'FMP4' MPEG-4
-   
+   """
    
    
    HSI = cv2.cvtColor(Irgb, cv2.COLOR_RGB2HSV)
@@ -841,3 +841,40 @@ Salieny map:
     
     _filename = "/home/giladamar/Desktop/VID_20181017_141954.mp4"
     video_processing(_filename)
+
+
+
+# Multi thread video read and write:
+    import time
+    import cv2
+    from concurrent.futures import ProcessPoolExecutor
+    pool = ProcessPoolExecutor(max_workers=2)
+
+    def read_and_write(camera, filename):
+        cap = cv2.VideoCapture(camera)
+        writer = cv2.VideoWriter(filename)
+
+        for i in range(1000):
+            ret, frame = cap.read()
+            writer.write(frame)
+        return True
+
+    future_1 = pool.submit(read_and_write, 1, "out1.avi")
+    future_2 = pool.submit(read_and_write, 2, "out2.avi")
+
+    while not (future_1.done() and future_2.done()):
+        print("still running")
+        time.sleep(1)
+
+# use of different fonts
+ft = cv2.freetype.createFreeType2()
+ft.loadFontData(fontFileName='Ubuntu-R.ttf',
+                id=0)
+ft.putText(img=img,
+           text='Quick Fox',
+           org=(15, 70),
+           fontHeight=60,
+           color=(255,  255, 255),
+           thickness=-1,
+           line_type=cv2.LINE_AA,
+           bottomLeftOrigin=True)

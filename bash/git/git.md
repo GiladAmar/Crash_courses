@@ -1,15 +1,8 @@
-                                #GIT DISTRIBUTED CONTROL SYSTEM##
-#############################################
-Author = "Gilad Amar"                       #
-Email = "giladamar@gmail.com"               #
-Created = "19/05/2016"                      #
-Last_Modified  =  "18/07/2016"              #
-#############################################
+                                #GIT DISTRIBUTED CONTROL SYSTEM
 '''
     WELCOME TO THE GIT INTRODUCTORY CODE.
-'''
-''' Warning: the following pseudo-code will make you cry
-     A safety pig has been provided for your benefit:
+    Warning: the following pseudo-code will make you cry
+    A safety pig has been provided for your benefit:
  _._ _..._ .-',     _.._(`))
 '-. `     '  /-._.-'    ',/
    )         \            '.

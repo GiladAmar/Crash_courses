@@ -1,9 +1,3 @@
-#############################################
-Author          = "Gilad Amar"              #
-Email           = "giladamar@gmail.com"     #
-Created         = "2016"                    #
-#############################################
-
 /*
     WELCOME TO THE SQL INTRODUCTORY CODE.
     This is part of a multi-line comment.
@@ -152,7 +146,7 @@ DROP INDEX Table_Name.index_name-- Drop index from a table
 DROP VIEW                       -- Drop a view
 
 ----------------COMPLETE SELECT SAMPLE STATEMENT------------------
-USE [schema_name]                               -- Which Schema to use, otherwise it always has to precede the table name
+USE [schema_name];                              -- Which Schema to use, otherwise it always has to precede the table name
 
 SELECT TOP 100 + (5 * 2) / 2.5 , year, month,   -- Can use arithmetic operations (+, -, *, /) with columns BODMAS brackets
     a.*,                                        -- Select all columns from Table alias a

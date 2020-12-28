@@ -27,11 +27,11 @@ Using Apt-offline:
 Python Packages:
 
     Online PC:
-        pip3 download  <list of packages> -d taget_folder/
+        pip3 download  <list of packages> -d target_folder/
 
         or
 
-        pip3 install -r requirements.txt -d taget_folder/
+        pip3 install -r requirements.txt -d target_folder/
 
     Offline PC:
         pip3 install --no-index --find-links=<target_folder> pip <list of packages> --upgrade

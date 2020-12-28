@@ -40,6 +40,13 @@ Compress pdf:
     sudo apt-get install ghostscript
     ps2pdf LARGE.pdf SMALL.pdf
 
+    Alternative:
+      gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/prepress -dNOPAUSE -dQUIET -dBATCH -sOutputFile=compressed_PDF_file.pdf input_PDF_file.pdf
+
+      dPDFSETTINGS	Description
+        /prepress (default)	Higher quality output (300 dpi) but bigger size
+        /ebook	Medium quality output (150 dpi) with moderate output file size
+        /screen	Lower quality output (72 dpi) but smallest possible output file size
 
 Splitting up mp3 files:
     mp3splt -a -t 5.10 -o Lesson_01-@n -d Lesson_01 Lesson_01.mp3
@@ -80,3 +87,6 @@ e.g.
 
 
 wc -l # counts the number of \n. So if your file doesn't end on one the count will not match up
+
+Find recursive:
+  find . -type d | grep DIRNAME

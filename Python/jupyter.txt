@@ -64,7 +64,7 @@ pd.factorize(colors)[0]
 
 
 
-Unde cell delteion
+Undo cell deletion
 ESC + Z
 
 Separate cells ar pt:
@@ -93,19 +93,21 @@ Jupyter.keyboard_manager.command_shortcuts.add_shortcut('Alt-I', {
 });
 
 
-indtll themes:
-pip install jupyterthemes
-jt -t chesterish -  dark theme
-
+install themes:
+    pip install jupyterthemes
+    jt -t chesterish -  dark theme
 
 
 Search for command:
-Ctrl + Shift + P
-
-Shift + up or down to move up and down cell
+    Ctrl + Shift + P
 
 
-shift + M merge seelcted cells
+to move up and down cell
+    Shift + up or down
+
+
+merge selected cells
+    shift + M
 
 
 Widen jupyter width:

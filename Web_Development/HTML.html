@@ -1,0 +1,241 @@
+HTML
+
+<!-- 
+* better to separate with - rather than _
+* use lower case filenames
+* prefer "" over ''
+* block elements take up space e.g head, in line elements don't
+* link text should immediately explain e.g Download Firefox
+*relative links don't need to use DNS and are more efficient
+* pages display even with syntax errors
+* escape characters:(http://en.wikipedia.org/wiki/
+
+List_of_XML_and_HTML_character_entity_references)
+    <   - &lt;
+    >   - &gt;
+    "   - &quot;
+    '   - &apos;
+    &   - &amp;
+* multi whitespace chars are auto reduce to one ' '
+use escape chars to force more
+    index.html
+    images/
+    styles/     - contains CSS code
+    scripts/    - JS code for interactive functionality -->
+
+HTML Structure:
+    <!DOCTYPE html>
+    <html lang="en-US">             <!-- root element, specify lang-->
+      <head>                        <!-- What should NOT appear, (metadata, keywords, page description, CSS, char-set declarations etc...) -->
+        <meta charset="utf-8">
+        <title>My test page</title> <!-- this does not appear, but is meta-data -->
+        <link rel="icon" href="favicon.ico" type="images/x-icon">   <!-- web-page icon, aka favicon -->
+            You can get more specific with icons for devices and screen sizes etc...
+      </head>
+      <body>
+        <img src="images/firefox-icon.png" alt="My test image">
+      </body>
+    </html>
+
+<!-- open tag, attributes            content              closing tag -->
+<p             class="example_name"> visible content here </p>
+
+    
+
+<!-- Tags: -->
+<span lang="ja">ご飯が熱い。</span> Set span of context language
+<strong></strong>   <!-- - emphasized, semantic -->
+<em></em>               emphasis, semantic, not just visual
+<h1></h1>           <!-- - headings 1-6  (don't use to make text larger bold etc.) -->
+<p></p>             <!-- - paragraph -->
+<li></li>           <!-- - list element -->
+<ul></ul>           <!-- - unordered list (place <li></li> elements in here) -->
+<ol></ol>           <!-- - ordered list  "" -->
+<dl>                 description list, like a dictionary entry
+    <dt>             description term
+        <de></de>    description entry
+    </dt>
+</dl>  
+<blockquote cite="https:www.here.com">  block quote
+    Text here
+</blockquote>    
+<q cite='www.this.com'>Inline quote</q>  
+<abbr title="Hypertext Markup Language">HTML</abbr>
+<sup>th</sup>
+<sub>_0</sub>
+<time datetime="2016-01-20">20 January 2016</time>  --variable datetime formats available
+
+<pre></pre>             - maintain spacing (often used with <code></code>)
+<code></code>           - code
+<var></var>             - variable name
+<kbd></kbd>             - terminal input
+<samp></samp>           - terminal output
+
+<span class="editor-note">[Stage lights off]</span> For custom non-semantic tags (css can style differently)
+<div></div>             non semantic, not an side either, perhaps a separate nameable block
+<a 
+href="https://www.google.com"
+title="text showing on hover"
+target="_blank">Link text</a>   <!-- - Link (include the http/s part for consistency)
+                                - _blank will open the link in a new tab, leave empty for the same tab -->
+<input type="text" 
+disabled>    <!-- - disabled is a boolean flag for uneditable text field -->
+
+DOnt use as they don't support semantic information
+<i></i>     foreign, scientific name
+<u></u>     misspellings
+<b></b>     bold, keywords
+
+Typical Website Layout:
+    header:         <header>.
+    navigation bar: <nav>.
+    main content:   <main>, with various content subsections represented by <article>, <section>, and <div> elements.
+    sidebar:        <aside>; often placed inside <main>.
+    footer:         <footer>.
+
+<article></article> slef contained content
+
+Not supproted in older browser asn treated as inline, can force block with CSS
+article, aside, footer, header, nav, section {
+  display: block;
+}
+
+<noscript>
+  What to show when JS is not enabled
+</noscript>
+
+Links:
+<a href=""></a> can wrap any block type element including <img src="">
+<a href="contacts.html#Mailing_address"></a>    to element id Mailing address on contacts webpage, use just #Mailing_address if already on that page
+<a href=""
+download="default_save_fname.exe"></a>
+<a href="mailto:a@gmail.org?cc=b@gmail.com&bcc=c@gmail.com&subject=The%20subject&body=The%20body">
+  Send mail with cc, bcc, subject and body
+</a>
+
+
+<!-- Head-relevant Tags: -->
+<link href="styles/style.css" rel="stylesheet"> <!-- - Execute CSS code to set style etc -->
+<script src="my-js-file.js" defer></script> Text in between tags can instead be used over src file
+defer means wait till all elements are loaded before executing code, defer scripts are run in order of appearance
+async means run as soon as script is downloaded (order can vary)
+<!-- Empty elements  - These don't wrap content aka in-line element -->
+<img 
+src="images/img.jpg" alt="Text to appear for visually impaired or failed img load"
+display=block>  <!-- - can use .. notation for above root dir
+                - display=block makes this a block element -->
+<br>        line break
+<hr>        horizontal line
+
+meta tags:
+<meta name="author" content="Chris Mills">
+<meta name="description" content="The MDN Web Docs Learning Area aims to provide
+complete beginners to the Web with all they need to know to get
+started with developing web sites and applications."> This shows up in search results 'abstract'
+
+Proprietary tags:
+    Open Graph Data meta tags determine what shows on FB when the site is linked to:
+    <meta property="og:image" content="images/img.png">
+    <meta property="og:title" content="Title here">
+    <meta property="og:description" content="Abstract here">
+
+    Twitter Cards:
+    <meta name="twitter:title" content="Mozilla Developer Network">
+
+
+Debugging:
+    HTML validator: https://validator.w3.org/
+    Browser Tools: Google H12 to investigate elements
+
+
+
+Media
+<img 
+width=640
+height=480  Can speed up loading as browser can set aside space while its downloading
+src="">
+you can, but dont, link to an image at another server
+
+For Captions:
+<figure>
+  <img src="images/dinosaur.jpg">
+  <figcaption>A T-Rex on display in the Manchester University Museum.</figcaption>
+</figure>
+
+<video poster='thumbnai;.jpg' controls>        To support multiple formats browsers platforms etc us MIME types(https://developer.mozilla.org/en-US/docs/Web/Media/Formats)
+  <source src="rabbit320.mp4" type="video/mp4">
+  <source src="rabbit320.webm" type="video/webm">
+  <track kind="subtitles" src="subtitles_en.vtt" srclang="en">
+  <p>Your browser doesn't support HTML5 video. Here is a <a href="rabbit320.mp4">link to the video</a> instead.</p>
+</video>
+extra boolean flags:
+    autoplay
+    loop
+    muted
+
+other params:
+    height 
+    width       auto maintains aspect ratio
+    preload=none/auto/metadata
+webm and mp4 are generally trouble free
+
+<audio controls>
+  <source src="viper.mp3" type="audio/mp3">
+  <source src="viper.ogg" type="audio/ogg">
+  <p>Your browser doesn't support HTML5 audio. Here is a <a href="viper.mp3">link to the audio</a> instead.</p>
+</audio>
+
+<canvas></canvas> JS graphics
+<svg>svg code</svg>
+can embed an svg file with <img src="">
+inline svg can save time vs refering to svg code elsewhere, but cannot be cached
+Iframes - an entire website
+Often pages can provide you wiht this code ine
+best to set with JS, saves time loading webpage
+sandbox feature if ppssible, otherwise specify permissions in sandbox 1by1
+secuiry issues
+you can configure your websirte drom being an iframe in another website
+DOn't embed 3rd party content without https (can use it to access your websites data)
+Flash should not be used, secuity issues
+
+Images Responsiveness:
+Resolution Switching:
+    <img srcset="elva-fairy-480w.jpg 480w,
+             elva-fairy-800w.jpg 800w"  w is intrinsic width
+         sizes="(max-width: 600px) 480px,   conditins for display, width when truw
+                                            uses first matching condition, else last regardless
+                800px"              
+         src="elva-fairy-800w.jpg"
+         alt="Elva dressed as a fairy">
+    Art Direction
+    <picture>
+      <source media="(max-width: 799px)" srcset="elva-480w-close-portrait.jpg">
+      <source media="(min-width: 800px)" srcset="elva-800w.jpg">
+      <img src="elva-800w.jpg" alt="Chris standing up holding his daughter Elva">
+    </picture>
+        
+
+
+Tables:
+DONT use to structure webpage
+<table>
+  <caption>Dinosaurs in the Jurassic period</caption>
+  <colgroup>
+    <col>
+    <col style="background-color: yellow">
+  </colgroup>                               Styles for each column
+  <tr>
+    <th>Name</th>
+    <th>Value</th>
+  </tr>
+  <tr>
+    <td>name</td>
+    <td>value</td>
+  </tr>
+</table>
+
+<col>
+<colgroup></colgroup>
+<th></th>
+<colspan></colspan>
+<rowspan>/<colspan>

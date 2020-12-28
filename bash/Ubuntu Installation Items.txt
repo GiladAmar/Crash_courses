@@ -34,18 +34,6 @@ sudo apt update && sudo apt dist-upgrade && sudo apt autoremove
 --  RAR
         sudo apt install -y p7zip-rar p7zip-full unace unrar zip unzip sharutils rar uudeview mpack arj cabextract file-roller
 
---  Recursive nautilus search
-        gsettings set org.gnome.nautilus.preferences enable-interactive-search false
-
---  Disable Guest Sessions:
-        sudo sh -c "echo 'allow-guest=false' >> /usr/share/lightdm/lightdm.conf.d/50-ubuntu.conf"
-
---  Move Unity launcher to bottom
-        gsettings set com.canonical.Unity.Launcher launcher-position Bottom
-
---  minimize window on on click
-        gsettings set org.compiz.unityshell:/org/compiz/profiles/unity/plugins/unityshell/ launcher-minimize-window true
-
 --  Fortran
         sudo apt install -y gfortran
 
@@ -75,23 +63,6 @@ INTEL (MKL DAAL optimised Python etc)
         Intel: pip install https://anaconda.org/intel/tensorflow/1.2.1/download/tensorflow-1.2.1-cp36-cp36m-linux_x86_64.whl
 
 --  python3.6 (rather use pyenv)
-        < # Maybe  require this code. Skip this paragraph at first. If pip complains of not having ssl then do this
-        wget https://github.com/openssl/openssl/archive/OpenSSL_1_0_2l.tar.gz
-        tar -zxvf OpenSSL_1_0_2l.tar.gz
-        cd openssl-OpenSSL_1_0_2l/
-        ./config shared
-        make -j8
-        sudo make install
-        export LD_LIBRARY_PATH=/usr/local/ssl/lib/>
-
-
-        sudo apt install -y zlib1g-dev python3-dev libffi-dev libssl-dev openssl
-        wget https://www.python.org/ftp/python/3.6.4/Python-3.6.4.tgz
-        tar xvf Python-3.6.4.tgz
-        cd Python-3.6.4
-        ./configure --enable-optimizations
-        make -j8
-        sudo make altinstall
 
 --  slack 
         sudo snap install slack --classic
@@ -100,6 +71,16 @@ INTEL (MKL DAAL optimised Python etc)
     wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | sudo apt-key add -
     echo "deb https://download.sublimetext.com/ apt/stable/" | sudo tee /etc/apt/sources.list.d/sublime-text.list
     sudo apt-get update && sudo apt install -y sublime-text
+
+--  vim
+        sudo apt install -y vim
+
+--  nano
+        sudo apt install -y nano
+
+--  adobe_acrobat reader
+        sudo add-apt-repository -y "deb http://archive.canonical.com/ precise partner"
+        sudo apt update && sudo apt install -y adobereader-enu
 
 --  Pycharm
         sudo snap install pycharm-professional
@@ -127,8 +108,6 @@ NVIDIA DRIVERS AND CUDA
         sudo cp cuda/lib64/libcudnn* /usr/local/cuda/lib64/
         sudo chmod a+r /usr/local/cuda/include/cudnn.h
         sudo chmod a+r /usr/local/cuda/lib64/libcudnn*
-
-    * Tensorflow 1.5 requires CUDA 9.0
 
 --  OpenCV:
 
@@ -164,17 +143,8 @@ NVIDIA DRIVERS AND CUDA
                 You will need to change the CUDA_NVCC_FLAGS to the following if you have CUDA Toolkit 9.0:
                     CUDA_NVCC_FLAGS="-D_FORCE_INLINES --expt-relaxed-constexpr"
 
---  ppa manager
-        sudo add-apt-repository -y ppa:webupd8team/y-ppa-manager
-        sudo apt update && sudo apt install -y y-ppa-manager
-
 --  Codecs and encrypted DVD playback
         sudo apt install -y ubuntu-restricted-extras libavcodec-extra libdvd-pkg
-
---  TLP (power saving)
-        sudo apt install -y tlp tlp-rdw
-        sudo apt-get install tlpui
-        sudo tlp start
 
 --  OPeNJRE
         sudo apt install -y  icedtea-8-plugin openjdk-8-jdk
@@ -189,54 +159,22 @@ NVIDIA DRIVERS AND CUDA
 --  VLC
         sudo apt install -y vlc browser-plugin-vlc
 
---  Skype
-        sudo apt install -y skype
-        sudo apt install -y gtk2-engines-murrine:i386 gtk2-engines-pixbuf:i386
-
 --  Shutter
         sudo add-apt-repository -y ppa:shutter/ppa
         sudo apt update && sudo apt install -y shutter
 
---  Flash
-        sudo apt install -y flashplugin-installer
-        sudo apt install -y adobe-flashplugin
-
 --  Synaptic
         sudo apt install -y synaptic
-
---  Weather Indicator
-        * gave issues with uninstalled requirements (run at end)
-        sudo apt install gir1.2-osmgpsmap-1.0 gir1.2-webkit gir1.2-geocodeglib-1.0
-        sudo add-apt-repository -y ppa:atareao/atareao
-        sudo apt update && sudo apt install -y my-weather-indicator
 
 --  Variety Desktop Backgrounds
         sudo add-apt-repository -y ppa:peterlevi/ppa
         sudo apt update && sudo apt install -y variety
 
---  Firewall
-        sudo apt install -y gufw
-
---  Cinnamon
-        sudo add-apt-repository -y ppa:gwendal-lebihan-dev/cinnamon-nightly
-        sudo apt update && sudo apt install -y cinnamon
-
-        ( following lines has "No such schema 'org.cinnamon.desktop.session'" error
-        gsettings set org.cinnamon.desktop.session settings-daemon-uses-logind true
-        gsettings set org.cinnamon.desktop.session session-manager-uses-logind true
-        gsettings set org.cinnamon.desktop.session screensaver-uses-logind false
-
 --  Spotify
         sudo snap install spotify
 
---  Kate
-        sudo apt install -y kate
-
 --  Clementine
         sudo apt install -y clementine
-
---  R
-        sudo apt install -y r-base
 
 --  R studio
         sudo gedit /etc/apt/sources.list
@@ -245,9 +183,6 @@ NVIDIA DRIVERS AND CUDA
 
 --  Teamviewer
         Manual deb/rpm
-
---  LibreOffice
-        sudo apt install -y libreoffice-common
 
 --  GParted
         sudo apt install -y gparted
@@ -260,35 +195,13 @@ NVIDIA DRIVERS AND CUDA
         sudo apt install -y reaver
         sudo apt install -y aircrack-ng
 
---  adobe_acrobat reader
-        sudo add-apt-repository -y "deb http://archive.canonical.com/ precise partner"
-        sudo apt update && sudo apt install -y adobereader-enu
-    
---  vim
-        sudo apt install -y vim
-
---  nano
-        sudo apt install -y nano
-
 --  openarena
         sudo apt install -y openarena
-
---  wps fonts
-        cd /tmp
-        git clone https://github.com/iamdh4/ttf-wps-fonts.git
-        sudo mkdir /usr/share/fonts/wps-fonts
-        sudo mv ttf-wps-fonts/* /usr/share/fonts/wps-fonts
-        sudo chmod 644 /usr/share/fonts/wps-fonts/*
-        sudo fc-cache -vfs
-        rm -rf /tmp/ttf-wps-fonts
+        * Does not work on Ubuntu 20.4
 
 --  openshot:
         sudo add-apt-repository -y ppa:openshot.developers/ppa
         sudo apt update && sudo apt install -y openshot-qt
-
---  Notepad++
-        sudo add-apt-repository -y ppa:notepadqq-team/notepadqq
-        sudo apt update && sudo apt install -y notepadqq
 
 --  LaTeX (Just use Overleaf.com)
         sudo apt install -y texlive-full
@@ -299,9 +212,6 @@ NVIDIA DRIVERS AND CUDA
         sudo apt-key add Release.key
         sudo apt-add-repository -y 'https://dl.winehq.org/wine-builds/ubuntu/'
         sudo apt update && sudo apt install -y --install-recommends winehq-stable
-
---  Powertop
-        sudo apt install -y powertop
 
 --  dupe guru
         sudo add-apt-repository -y ppa:hsoft/ppa
@@ -321,37 +231,15 @@ NVIDIA DRIVERS AND CUDA
 --  workrave
         sudo apt install -y workrave
 
---  notes (sticky desktop notes)
-        sudo apt install -y xpad
-
 --  Space explorer
         sudo apt install -y ncdu
 
 --  Recursive directory viewer
         sudo apt install -y tree
 
---  BleachBit
-        sudo apt install -y bleachbit
-
---  Menu
-        sudo apt install -y classicmenu-indicator
-
 --  toggl
         sudo add-apt-repository -y ppa:official-toggl/ppa
         sudo apt update && sudo apt install -y desktop-Toggl
-
---  wps office
-        download package - http://wps-community.org/download.html
-
---  foxit reader
-        download_package - https://www.foxitsoftware.com/pdf-reader/
-
---  The Fuck
-        sudo -H pip install thefuck
-        eval "$(thefuck --alias)"
-
---  Synapse
-        sudo apt install -y synapse
 
 --  Docker
         curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
@@ -365,12 +253,19 @@ NVIDIA DRIVERS AND CUDA
         sudo dpkg --install Stacer_1.0.4_amd64.deb
         Stacer
 
+--  BleachBit
+        sudo apt install -y bleachbit
+
+--  Powertop
+        sudo apt install -y powertop
+
 --  LPM -power management
         sudo apt install -y laptop-mode-tools
 
---  Flux
-        sudo add-apt-repository -y ppa:nathan-renniewaldock/flux
-        sudo apt update && sudo apt install -y fluxgui
+--  TLP (power saving)
+        sudo apt install -y tlp tlp-rdw
+        sudo apt-get install tlpui
+        sudo tlp start
 
 --  Aria2 Download Manager
         sudo apt install -y aria2
@@ -406,9 +301,25 @@ NVIDIA DRIVERS AND CUDA
     Download deb from: www.zoom.us/download
     sudo apt install -y ./zoom_amd64.deb
 
+#ToDo
 
-Pitivi
-Mega app
-postgres
-anydesk
-sqlserver
+    Pitivi
+    Mega app
+    postgres
+    anydesk
+    sqlserver
+
+
+
+    Organise
+        System Tools
+            Power
+            Style
+            Terminal
+            Optimizaers
+
+        Entertainment
+        Productivity
+
+    --ffmpeg
+    sudo apt install ffmpeg
