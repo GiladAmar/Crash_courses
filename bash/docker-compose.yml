@@ -1,39 +1,39 @@
-docker-compose
+#  docker-compose
+#
+#    How to manage and run multiple docker containers for a project simultaneously.
+#    Allows you to
+#
+#    1. Open ports
+#    2. Mount Folders
+#    3. Group on/Off
+#    4. add/remove/edit Env vars
+#    5. Use stock docker images
 
-How to manage and run multiple docker containers for a project simultaneosly.
-Allows you to
+#  Std Format:
 
-1. Open ports
-2. Mount Folders
-3. Group on/Off
-4. add/remove/edit Env vars
-5. Use stock docker images
-
-Std Format:
-
-	version: 2
-	services:
-		databases:
-			image: mysql 				#required
-			ports:
-			-"3306:3306"
-			environment:
-			- MYSQL_PASSWORD=password
-			- MYSQL_USER=username
-			volumes:
-			- .:/code
-		web:
-			image: "redis:alpine"		# Using public Redis image
+    version: 2
+    services:
+      databases:
+        image: mysql                #required
+        ports:
+          -"3306:3306"
+        environment:
+          - MYSQL_PASSWORD=password
+          - MYSQL_USER=username
+        volumes:
+          - .:/code
+      web:
+        image: "redis:alpine"        # Using public Redis image
 
 
-Other service tags:
+#  Other service tags:
     build:
-        context: path containing dockerfile or git repo
-        dockerfile: ./docker/web/local/django/Dockerfile alternative_dockerfilename
+      context: "path containing dockerfile or git repo"
+      dockerfile: ./docker/web/local/django/Dockerfile alternative_dockerfilename
     command: python manage.py runserver 0.0.0.0:8000
-    target: which docker stage to user for multi-stage docker files
-    container_name: overwrite default container name
-    depends_on: State which other containers are requirments
+    target: "which docker stage to user for multi-stage docker files"
+    container_name: "overwrite default container name"
+    depends_on: "State which other containers are requirements"
       this_service
       that_service
     deploy:
@@ -45,24 +45,24 @@ Other service tags:
           cpus: '0.25'
           memory: 20M
     restart_policy:
-        condition: on-failure # none/any/on_failure
-        delay: 5s
-        max_attempts: 3
-        window: 120s          # how long to wait before decide if restart has failed
+      condition: on-failure # none/any/on_failure
+      delay: 5s
+      max_attempts: 3
+      window: 120s          # how long to wait before decide if restart has failed
     logging:
       driver: "json-file"
       options:
         max-size: "200k"
         max-file: "10"
-    env_file: 
+    env_file:
       - ./src/backend:/app
 
 
-docker-compose up	- start containers
-	-d 				- detached mode
-
-docker image ls 	-  list images
-docker-compose ps 	- See currently running images
-
-docker-compose down 	- Remove containers
-	--volumes			- destroy data volumes 
+  #docker-compose up	- start containers
+  #	-d 				    - detached mode
+  #
+  #docker image ls 	    -  list images
+  #docker-compose ps 	- See currently running images
+  #
+  #docker-compose down 	- Remove containers
+  #	--volumes			- destroy data volumes

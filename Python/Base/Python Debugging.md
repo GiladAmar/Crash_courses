@@ -1,44 +1,38 @@
 # Python Debugging
-''' A safety pig has been provided for your benefit:
- _._ _..._ .-',     _.._(`))
-'-. `     '  /-._.-'    ',/
-   )         \            '.
-  / _    _    |             \
- |  a    a    /              |
- \   .-.     /               ;  
-  '-('' ).-'       ,'       ;
-     '-;           |      .'
-        \           \    /
-        | 7  .__  _.-\   \
-        | |  |  ``/  /`  /
-       /,_|  |   /,_/   /
-          /,_/      '`-'
-'''
 
-pip install ipdb
+## Installation
+    pip install ipdb
 
-##### LAUNCH IPDB #####
+## Use Cases
+1. Breakpoints
 
-    1)     import ipdb; ipdb.set_trace(context=3)
-            Shows default 3 lines of code
+`import ipdb; ipdb.set_trace(context=3)`
 
-    2)    from ipdb import launch_ipdb_on_exception
-            with launch_ipdb_on_exception():
-                <Try stuff here>
+Context is the number of lines to be shown
 
-    3)    ipdb.pm()
-            Launch ipdb after exception occured
+2. Launch on failure
+```python
+from ipdb import launch_ipdb_on_exception
+    with launch_ipdb_on_exception():
+      # <Try stuff here>
+```
 
+3) Post Mortem
 
-##### HELP #####
+    Launch ipdb after exception occured
+
+    `ipdb.pm()`
+
+## Debugger Options
+### HELP
     ? - help
 
-##### CONTEXT #####
+### CONTEXT
     l [first, last]    - List source code surrounding present location, 11 lines unless range specified
     w                  - Print stack trace with most recent frame at the bottom
     p <variable>       - print value of variable 
 
-##### NAVIGATION #####
+### NAVIGATION
     s              - Step into (stop at first possible location)
     n              - Step over to next line
     c              - Continue to next breakpoint
@@ -47,8 +41,9 @@ pip install ipdb
 
     d              - Go down level in stack trace (i.e up to whatever called this function.)
     u              - Go up level in stack trace (i.e. into called function.)
+    q              - quit debugging
 
-##### BREAKPOINTS #####
+### BREAKPOINTS
     b(reak) [ ([filename:]lineno | function) [, condition] ] - Create breakpoint at location
         Lists all breakpoints if no arguments are given
     tbreak  [ ([filename:]lineno | function) [, condition] ] - Create temporary breakpoint 
@@ -60,7 +55,7 @@ pip install ipdb
     ignore [bpnumber] [count] - Ignore breakpoint for <count> more times. Afterward it is enabled.
     condition [bpnumber] condition
 
-##### SHOW #####
+### SHOW
     a              - print the current function arguments
     pp <var>       - prettyprint variable
         * Helpful with pp locals() and pp globals()
@@ -71,13 +66,11 @@ pip install ipdb
     display <expression> - display value of expression if changed
 
 
-q - quit debugging
-
-
-##### MISC #####
+### MISC
 
     %debug - magic used in Jupyter Notebook cell to launch ipdb if error occurs
 
 
-# Sometimes variables "don't exist" in something like a list comprehension in pdb:
-    globals().update(locals())
+### Known Bug
+Sometimes variables "don't exist" in something like a list comprehension in pdb:
+To gain access to these variables run `globals().update(locals())`

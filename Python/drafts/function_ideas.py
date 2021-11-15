@@ -4,11 +4,11 @@ specified_date: None
 
 
 
-class InstanceManager(object():
+class InstanceManager(object):
 
     def __init__(self, records_fname):
-
-        check if eists, else create csv
+        # check if exists, else create csv
+        pass
 
 
     def save_dated():
@@ -20,15 +20,9 @@ class InstanceManager(object():
 
 
     def append_info(datetime, description, results):
+        pass
 
-
-* | TimeStamp | Description | Train Result | Test_Result |
-
-
-
-
-
-
+# * | TimeStamp | Description | Train Result | Test_Result |
 
 
 def load_latest(folder, matching, reading_func, specific_date):
@@ -38,7 +32,7 @@ def load_latest(folder, matching, reading_func, specific_date):
         fname = fname with specific_date
     
     try:
-        if fname exists:
+        if os.path.exists(fname):
             results = reading_func(fname)
         else:
             print(fname does not exist) + diagnose what dir fails
@@ -66,9 +60,10 @@ def save_dated(data, save_func, base_name, suffix, specific_date=None, descripti
     print(model/data saved as fname)
 
 
-
 def save_sklearn_as_NON_pkl(obj, fname):
-    serialize to fname
+    # serialize to fname
+    pass
 
 
 def load_sklearn_from_NON_pkl(obj, fname):
+    pass

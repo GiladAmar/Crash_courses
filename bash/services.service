@@ -1,0 +1,63 @@
+#Step 1 - Create UNIT file
+{fname.service}:
+[Unit]
+Description="This is a description of the process"
+ # URIs for unit docs
+Documentation=http://google.com
+# Starts service only after these are active
+After=multi-user.target
+# Required services
+Requires=...
+# Wants but can start without
+Wants=
+# Cannot run in conjunction with these
+Conflict=...
+
+[Service]
+User={giladamar}            # Username
+Type=simple                 # forking
+ExecStart=python script.py
+# run on stopping
+ExecStop =
+# run when reloading
+ExecReload=
+
+# %t means runtime directory
+Environment=SSH_AUTH_SOCK=%t/keyring/ssh
+# debugging mode for journalctl
+Environment=SYSTEMD_LOG_LEVEL=debug
+Restart=always                              # on-abort
+RestartSec=42s
+
+[Install]
+WantedBy=multi-user.target
+
+
+#Step 2 - Place here
+#    /lib/systemd/system/
+#
+#
+#Step 3 – Set permissions
+#    sudo chmod 644 {fname.service}
+#
+#
+#Step 4 – Configure systemd
+#    Reload the systemd
+#        # sudo systemctl daemon-reload
+#
+#    Enable your service on system boots
+#        # sudo systemctl enable {fname.service}
+#        # sudo systemctl disable {service}
+#
+#
+#Step 5 – Check status of your service
+#    $ sudo systemctl <option> pyrpc.service
+#    options:
+#        status <service-name>
+#        start <service-name>
+#        stop <service-name>
+#        restart <service-name>  Do this after a change to the service
+#
+#
+#Step 6 - View Logs
+#    sudo journalctl -f -u home-assistant@[your user]

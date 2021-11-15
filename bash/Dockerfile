@@ -5,6 +5,7 @@ Why?
     2. Portable
     3. Standard
     4. Version-Controlled
+    5. Single Responsibility Principle
 
 
 Terms:
@@ -149,3 +150,62 @@ good bases
 Management, deployment and scaling:
     Docker-compose
     Kubernetes
+
+
+Size management:
+    docker history <image_name>
+        lists size per layer of image
+
+    * use docker ignore
+
+    * use small base image
+        e.g. python:3.8-slim not python:3.8
+
+    * DIVE a terminal UI to see size per layers
+
+    * combine layers and clean up
+         pip install --user  --no-cache-dir -r requirements.txt \
+         && find /root/.local/ -follow -type f ( \
+         -name '*.a' -name '*.txt' -name '*.md' -name '*.png' -name '*.jpg' -name '*.jpeg' -name '*.js.map' \
+         -name '*.pyc' -name '*.c' -name '*.pxc' -name '*.pyd' \
+         ) - delete \
+         && find /usr/local/lib/python3.8 -name '__pycache__' | xargs rm -r
+
+    * docker build -f filaneme.Dockerfile -t image_name --squash
+        creates a single layer without you having to write long winded RUNs
+
+    * PYPI wheels not compatible with alpine base images
+        wheels dont require compilation
+
+        BUT you can install these deps and then use multi stae builds to only copy across the results
+            use this: python:3.8-slim-buster
+
+    * clean apt-get installs:
+        RUN apt-get install -y && \
+        unzip \
+        wget && \
+        rm -rf /var/lib/apt/lists/* && \
+        apt-get purge   --auto-remove && \
+        apt-get clean
+
+    * COPY only what is required
+
+    * use --no-cache options when installing packages
+
+
+Cache pip downloads (or other files) between builds for faster builds and reduced bandwidth use
+https://pythonspeed.com/articles/docker-buildkit/
+1. Ensure the buildkit is used
+    $ export DOCKER_BUILDKIT=1
+2.Add # syntax=docker/dockerfile:1.2 as the first line of your Dockerfile.
+
+3. Docker-compose will also need this env variable set:
+    $ export COMPOSE_DOCKER_CLI_BUILD=1
+
+4. Add a cache moint point in the RUN command e.g.:
+    RUN --mount=type=cache,target=/root/.cache \
+    pip install -r requirements.txt
+
+* Build kit can speed up multi-stage builds but doing some in parallel
+
+*Latest versions of Docker may internally prevent apt install from using the cache

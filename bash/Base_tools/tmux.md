@@ -1,26 +1,39 @@
+#TMUX
+Create a session 
+```
 tmux new -s session_name
+```
 
+Join a live session 
+```
 tmux attach-session -t session_name
-    ls  -   list sessions
+```
 
-Cntl+b + <>
-Session Commands
+List sessions: 
+```
+tmux ls
+``` 
+
+## Options
+`Cntl + b + <>`
+
+### Session Commands
     ?: List commands
     S: List sessions.
 
     $: Rename current session.
     d: Detach current session.
 
-Window Commands
-    c   - Create a new window.
-    ,   - Rename the current window.
-    w   - List the windows.
+### Window Commands
+    c           - Create a new window.
+    ,           - Rename the current window.
+    w           - List the windows.
 
-    n   - Move to the next window.
-    p   - Move to the previous window.
-    0-9 - Move to the window number specified.
+    n           - Move to the next window.
+    p           - Move to the previous window.
+    0-9         - Move to the window number specified.
 
-Pane Commands
+### Pane Commands
     %           - Create a horizontal split.
     “           - Create a vertical split.
 

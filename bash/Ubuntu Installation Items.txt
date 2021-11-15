@@ -1,7 +1,12 @@
 sudo apt update && sudo apt dist-upgrade && sudo apt autoremove
 
+Ensure secure-boot is off, it makes Nvidia drivers misbehave
+Or at least installing them as signed is a pain
+
+
 --  copy some of .bashrc
 
+SYSTEM LIBRARIES ---------------------------------------------------------
 --  headers:
         sudo apt install -y gcc make linux-headers-$(uname -r) dkms
         sudo apt install -y linux-image-generic linux-image-extra-virtual
@@ -9,21 +14,6 @@ sudo apt update && sudo apt dist-upgrade && sudo apt autoremove
 
 --  read NTFS drives:
         sudo apt install -y exfat-fuse exfat-utils
-
---  solaar for Logitech Trackball mouse
-        sudo apt install -y solaar
-
---  htop
-        sudo apt install -y htop
-
---  screen/tmux
-        sudo apt install -y screen tmux
-
---  iotop
-        sudo apt install -y iotop
-
---  TERMINATOR
-        sudo apt install -y terminator
 
 --  atlas
         sudo apt install -y libatlas-base-dev
@@ -37,6 +27,80 @@ sudo apt update && sudo apt dist-upgrade && sudo apt autoremove
 --  Fortran
         sudo apt install -y gfortran
 
+--  Codecs and encrypted DVD playback
+        sudo apt install -y ubuntu-restricted-extras libavcodec-extra libdvd-pkg
+
+--  OPeNJRE
+        sudo apt install -y  icedtea-8-plugin openjdk-8-jdk
+
+PROGRAMMING ---------------------------------------------------------------
+-- Node NPM
+        sudo apt install -y nodejs npm
+
+-- Yarn
+        curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+        echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+        sudo apt update
+        sudo apt install -y yarn
+--  git
+        sudo apt install -y git
+            copy git-completion
+            copy git_prompt
+
+--  Docker
+        curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+        sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+        sudo apt update
+        apt-cache policy docker-ce
+        sudo apt install -y docker-ce
+
+-- docker-compose
+        sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+        sudo chmod +x /usr/local/bin/docker-compose
+        sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
+        docker-compose --version
+
+--  Pycharm
+        sudo snap install pycharm-professional
+
+--  R studio
+        sudo gedit /etc/apt/sources.list
+        deb https://cloud.r-project.org//bin/linux/ubuntu xenial/
+        sudo apt update && sudo apt install -y r-base
+
+-- Set swappiness:
+        https://averagelinuxuser.com/after-installing-ubuntu-20-04/#10-configure-hi-dpi-display
+        cat /proc/sys/vm/swappiness # 60 (default)
+        sudo gedit /etc/sysctl.conf
+        Add vm.swappiness=10 at the end and save the file.
+
+-- Pulse audio control:
+        sudo apt install pavucontrol
+
+-- Fortinet
+        https://links.fortinet.com/forticlient/deb/vpnagent
+
+--  solaar for Logitech Trackball mouse
+        sudo apt install -y solaar
+
+--  htop
+        sudo apt install -y htop
+
+--  screen/tmux
+        sudo apt install -y screen tmux
+
+--  iotop
+        sudo apt install -y iotop
+
+-- curl
+        sudo apt install -y curl
+
+-- ffmpeg
+        sudo apt install ffmpeg
+
+--  TERMINATOR
+        sudo apt install -y terminator
+
 --  Google Chrome
         wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
         sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list'
@@ -44,18 +108,6 @@ sudo apt update && sudo apt dist-upgrade && sudo apt autoremove
 
 --  Dropbox
         sudo apt install -y nautilus-dropbox
-
---  git
-        sudo apt install -y git
-            copy git-completion
-            copy git_prompt
-
---  gdebi
-        sudo apt install -y gdebi
-    
---  Timeshift
-        sudo apt-add-repository -y ppa:teejee2008/ppa
-        sudo apt update && sudo apt install -y timeshift
 
 INTEL (MKL DAAL optimised Python etc)
     https://software.intel.com/en-us/articles/installing-intel-free-libs-and-python-apt-repo
@@ -67,10 +119,17 @@ INTEL (MKL DAAL optimised Python etc)
 --  slack 
         sudo snap install slack --classic
 
+DOCUMENTATION ------------------------------------------------------------
+
+--  LaTeX (Just use Overleaf.com)
+        sudo apt install -y texlive-full
+        sudo apt install -y texmaker
+
 --  Sublime
-    wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | sudo apt-key add -
-    echo "deb https://download.sublimetext.com/ apt/stable/" | sudo tee /etc/apt/sources.list.d/sublime-text.list
-    sudo apt-get update && sudo apt install -y sublime-text
+        wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | sudo apt-key add -
+        echo "deb https://download.sublimetext.com/ apt/stable/" | sudo tee /etc/apt/sources.list.d/sublime-text.list
+        sudo apt-get update && sudo apt install -y sublime-text
+        sublime packages and settings files? #ToDo
 
 --  vim
         sudo apt install -y vim
@@ -82,8 +141,8 @@ INTEL (MKL DAAL optimised Python etc)
         sudo add-apt-repository -y "deb http://archive.canonical.com/ precise partner"
         sudo apt update && sudo apt install -y adobereader-enu
 
---  Pycharm
-        sudo snap install pycharm-professional
+-- Okular
+        sudo apt install okular
 
 NVIDIA DRIVERS AND CUDA
     Nvidia:
@@ -108,6 +167,8 @@ NVIDIA DRIVERS AND CUDA
         sudo cp cuda/lib64/libcudnn* /usr/local/cuda/lib64/
         sudo chmod a+r /usr/local/cuda/include/cudnn.h
         sudo chmod a+r /usr/local/cuda/lib64/libcudnn*
+
+        some cuda symlink may be neccesary
 
 --  OpenCV:
 
@@ -143,28 +204,23 @@ NVIDIA DRIVERS AND CUDA
                 You will need to change the CUDA_NVCC_FLAGS to the following if you have CUDA Toolkit 9.0:
                     CUDA_NVCC_FLAGS="-D_FORCE_INLINES --expt-relaxed-constexpr"
 
---  Codecs and encrypted DVD playback
-        sudo apt install -y ubuntu-restricted-extras libavcodec-extra libdvd-pkg
-
---  OPeNJRE
-        sudo apt install -y  icedtea-8-plugin openjdk-8-jdk
-
 --  Unity Tweak Tool
         sudo apt install -y unity-tweak-tool
 
+--  Synaptic
+        sudo apt install -y synaptic
+
+--  Shutter
+        sudo add-apt-repository -y ppa:shutter/ppa
+        sudo apt update && sudo apt install -y shutter
+
+MEDIA ------------------------------------------------------
 --  GIMP
         sudo add-apt-repository -y ppa:otto-kesselgulasch/gimp
         sudo apt update && sudo apt install -y gimp gimp-data gimp-plugin-registry gimp-data-extras
 
 --  VLC
         sudo apt install -y vlc browser-plugin-vlc
-
---  Shutter
-        sudo add-apt-repository -y ppa:shutter/ppa
-        sudo apt update && sudo apt install -y shutter
-
---  Synaptic
-        sudo apt install -y synaptic
 
 --  Variety Desktop Backgrounds
         sudo add-apt-repository -y ppa:peterlevi/ppa
@@ -176,10 +232,72 @@ NVIDIA DRIVERS AND CUDA
 --  Clementine
         sudo apt install -y clementine
 
---  R studio
-        sudo gedit /etc/apt/sources.list
-        deb https://cloud.r-project.org//bin/linux/ubuntu xenial/
-        sudo apt update && sudo apt install -y r-base
+--  openshot:
+        sudo add-apt-repository -y ppa:openshot.developers/ppa
+        sudo apt update && sudo apt install -y openshot-qt
+UTILITIES ------------------------------------------------------
+--  Space explorer
+        sudo apt install -y ncdu
+
+--  Recursive directory viewer
+        sudo apt install -y tree
+
+--  toggl
+        flatpak install flathub com.toggl.TogglDesktop
+
+
+--  Stacer (optimizer and cleaner)
+        wget https://github.com/oguzhaninan/Stacer/releases/download/v1.0.4/Stacer_1.0.4_amd64.deb
+        sudo dpkg --install Stacer_1.0.4_amd64.deb
+        Stacer
+
+--  BleachBit
+        sudo apt install -y bleachbit
+
+--  Powertop
+        sudo apt install -y powertop
+
+--  LPM -power management
+        sudo apt install -y laptop-mode-tools
+
+--  TLP (power saving)
+        sudo add-apt-repository -y ppa:linuxuprising/apps
+        sudo apt update
+        sudo apt install -y tlpui
+
+--  Aria2 Download Manager
+        sudo apt install -y aria2
+
+--  virtualbox
+        sudo apt install -y bcc iasl xsltproc xalan libxalan110-dev uuid-dev zlib1g-dev libidl-dev libsdl1.2-dev libxcursor-dev libqt3-headers libqt3-mt-dev libasound2-dev libstdc++5 linux-headers-`uname -r` build-essential
+
+        wget -q https://www.virtualbox.org/download/oracle_vbox_2016.asc -O- | sudo apt-key add -
+        wget -q https://www.virtualbox.org/download/oracle_vbox.asc -O- | sudo apt-key add -
+        sudo sh -c 'echo "deb http://download.virtualbox.org/virtualbox/debian $(lsb_release -sc) contrib" >> /etc/apt/sources.list'
+        sudo apt update && sudo apt install -y virtualbox-5.2
+
+    Extension Pack:
+        sudo apt install -y curl
+        curl -O http://download.virtualbox.org/virtualbox/5.2.0/Oracle_VM_VirtualBox_Extension_Pack-5.2.0-118431.vbox-extpack
+        sudo VBoxManage extpack install Oracle_VM_VirtualBox_Extension_Pack-5.2.0-118431.vbox-extpack
+
+
+--  Wine
+        wget https://dl.winehq.org/wine-builds/Release.key
+        sudo apt-key add Release.key
+        sudo apt-add-repository -y 'https://dl.winehq.org/wine-builds/ubuntu/'
+        sudo apt update && sudo apt install -y --install-recommends winehq-stable
+
+--  dupe guru
+        sudo add-apt-repository -y ppa:hsoft/ppa
+        sudo apt update && sudo apt install -y dupeguru-se
+
+--  gdebi
+        sudo apt install -y gdebi
+
+--  Timeshift
+        sudo apt-add-repository -y ppa:teejee2008/ppa
+        sudo apt update && sudo apt install -y timeshift
 
 --  Teamviewer
         Manual deb/rpm
@@ -199,24 +317,6 @@ NVIDIA DRIVERS AND CUDA
         sudo apt install -y openarena
         * Does not work on Ubuntu 20.4
 
---  openshot:
-        sudo add-apt-repository -y ppa:openshot.developers/ppa
-        sudo apt update && sudo apt install -y openshot-qt
-
---  LaTeX (Just use Overleaf.com)
-        sudo apt install -y texlive-full
-        sudo apt install -y texmaker
-
---  Wine
-        wget https://dl.winehq.org/wine-builds/Release.key
-        sudo apt-key add Release.key
-        sudo apt-add-repository -y 'https://dl.winehq.org/wine-builds/ubuntu/'
-        sudo apt update && sudo apt install -y --install-recommends winehq-stable
-
---  dupe guru
-        sudo add-apt-repository -y ppa:hsoft/ppa
-        sudo apt update && sudo apt install -y dupeguru-se
-
                                                 ---------------------
                                                 ---------TODO--------
                                                 ---------------------
@@ -231,61 +331,8 @@ NVIDIA DRIVERS AND CUDA
 --  workrave
         sudo apt install -y workrave
 
---  Space explorer
-        sudo apt install -y ncdu
-
---  Recursive directory viewer
-        sudo apt install -y tree
-
---  toggl
-        sudo add-apt-repository -y ppa:official-toggl/ppa
-        sudo apt update && sudo apt install -y desktop-Toggl
-
---  Docker
-        curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-        sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
-        sudo apt update
-        apt-cache policy docker-ce
-        sudo apt install -y docker-ce
-
---  Stacer (optimizer and cleaner)
-        wget https://github.com/oguzhaninan/Stacer/releases/download/v1.0.4/Stacer_1.0.4_amd64.deb
-        sudo dpkg --install Stacer_1.0.4_amd64.deb
-        Stacer
-
---  BleachBit
-        sudo apt install -y bleachbit
-
---  Powertop
-        sudo apt install -y powertop
-
---  LPM -power management
-        sudo apt install -y laptop-mode-tools
-
---  TLP (power saving)
-        sudo apt install -y tlp tlp-rdw
-        sudo apt-get install tlpui
-        sudo tlp start
-
---  Aria2 Download Manager
-        sudo apt install -y aria2
-
---  virtualbox
-        sudo apt install -y bcc iasl xsltproc xalan libxalan110-dev uuid-dev zlib1g-dev libidl-dev libsdl1.2-dev libxcursor-dev libqt3-headers libqt3-mt-dev libasound2-dev libstdc++5 linux-headers-`uname -r` build-essential
-
-        wget -q https://www.virtualbox.org/download/oracle_vbox_2016.asc -O- | sudo apt-key add -
-        wget -q https://www.virtualbox.org/download/oracle_vbox.asc -O- | sudo apt-key add -
-        sudo sh -c 'echo "deb http://download.virtualbox.org/virtualbox/debian $(lsb_release -sc) contrib" >> /etc/apt/sources.list'
-        sudo apt update && sudo apt install -y virtualbox-5.2
-
-    Extension Pack:
-        sudo apt install -y curl
-        curl -O http://download.virtualbox.org/virtualbox/5.2.0/Oracle_VM_VirtualBox_Extension_Pack-5.2.0-118431.vbox-extpack
-        sudo VBoxManage extpack install Oracle_VM_VirtualBox_Extension_Pack-5.2.0-118431.vbox-extpack
 
 --  Flatpack - package installer
-        sudo add-apt-repository ppa:alexlarsson/flatpak
-        sudo apt update
         sudo apt install flatpak
         sudo apt install gnome-software-plugin-flatpak
         flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
@@ -308,6 +355,11 @@ NVIDIA DRIVERS AND CUDA
     postgres
     anydesk
     sqlserver
+    Microsoft meets
+    wormhole
+    npm prettier + pycharm setup
+    python isort + pycharm setup
+    python black + pycharm setup
 
 
 
@@ -316,10 +368,16 @@ NVIDIA DRIVERS AND CUDA
             Power
             Style
             Terminal
-            Optimizaers
+            Optimizers
 
         Entertainment
         Productivity
 
-    --ffmpeg
-    sudo apt install ffmpeg
+
+
+MISC NOTES
+
+	sudo apt install default-jdk
+	sudo apt install default-jre
+	dropbox install
+	sudo apt-get install python3-tk

@@ -1,8 +1,8 @@
 import threading
 
 
-#make a threadsafe generator:
-class threadsafe_iter():
+# Make a threadsafe generator:
+class threadsafe_iter:
     """Takes an iterator/generator and makes it thread-safe by
     serializing call to the `next` method of given iterator/generator.
     """

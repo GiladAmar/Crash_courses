@@ -1,5 +1,7 @@
-   k = cv2.waitKey(1) & 0xff
-    if k == 27:# escape pressed 
+
+for img in images:
+    k = cv2.waitKey(1) & 0xff
+    if k == 27:# escape pressed
         break
     elif k == 115: # s pressed
         fname = input("File name")
@@ -14,15 +16,16 @@
 
 
     timer = cv2.getTickCount()
-    
+
     # Read a new frame
-    success, frame = video.read()
-    if not success:
-        # Frame not successfully read from video capture
-        break
-        
+    while True:
+        success, frame = video.read()
+        if not success:
+            # Frame not successfully read from video capture
+            break
+
     fgmask = fgbg.apply(frame)
-    
+
     # Apply erosion to clean up noise
     if ERODE:
         fgmask = cv2.erode(fgmask, np.ones((3,3), dtype=np.uint8), iterations=1)
@@ -31,47 +34,59 @@
     img = cv2.imread('j.png', 0)
     kernel = np.ones((5, 5), np.uint8)
     erosion = cv2.erode(img, kernel, iterations=1)
-        #where the kernel can be quikly designed with
+        #where the kernel can be quickly designed with
        # Rectangular Kernel
-       >> > cv2.getStructuringElement(cv2.MORPH_RECT, (5, 5))
-       array([[1, 1, 1, 1, 1],
-              [1, 1, 1, 1, 1],
-              [1, 1, 1, 1, 1],
-              [1, 1, 1, 1, 1],
-              [1, 1, 1, 1, 1]], dtype=uint8)
+       # >> cv2.getStructuringElement(cv2.MORPH_RECT, (5, 5))
+       # array([[1, 1, 1, 1, 1],
+       #        [1, 1, 1, 1, 1],
+       #        [1, 1, 1, 1, 1],
+       #        [1, 1, 1, 1, 1],
+       #        [1, 1, 1, 1, 1]], dtype=uint8)
+       #
+       # # Elliptical Kernel
+       # >> > cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (5, 5))
+       # array([[0, 0, 1, 0, 0],
+       #        [1, 1, 1, 1, 1],
+       #        [1, 1, 1, 1, 1],
+       #        [1, 1, 1, 1, 1],
+       #        [0, 0, 1, 0, 0]], dtype=uint8)
+       #
+       # # Cross-shaped Kernel
+       # >> > cv2.getStructuringElement(cv2.MORPH_CROSS, (5, 5))
+       # array([[0, 0, 1, 0, 0],
+       #        [0, 0, 1, 0, 0],
+       #        [1, 1, 1, 1, 1],
+       #        [0, 0, 1, 0, 0],
+       #        [0, 0, 1, 0, 0]], dtype=uint8)
 
-       # Elliptical Kernel
-       >> > cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (5, 5))
-       array([[0, 0, 1, 0, 0],
-              [1, 1, 1, 1, 1],
-              [1, 1, 1, 1, 1],
-              [1, 1, 1, 1, 1],
-              [0, 0, 1, 0, 0]], dtype=uint8)
-
-       # Cross-shaped Kernel
-       >> > cv2.getStructuringElement(cv2.MORPH_CROSS, (5, 5))
-       array([[0, 0, 1, 0, 0],
-              [0, 0, 1, 0, 0],
-              [1, 1, 1, 1, 1],
-              [0, 0, 1, 0, 0],
-              [0, 0, 1, 0, 0]], dtype=uint8)
-
-    # Calculate Frames per second (FPS)
-    fps = cv2.getTickFrequency() / (cv2.getTickCount() - timer)
-
-
+# Calculate Frames per second (FPS)
+fps = cv2.getTickFrequency() / (cv2.getTickCount() - timer)
 
 
-  cv2.putText(foreground_display, "hand pose: error", positions['hand_pose'], cv2.FONT_HERSHEY_SIMPLEX, 0.75, (0, 0, 255), 2)
+
+
+cv2.putText(foreground_display, "hand pose: error", positions['hand_pose'], cv2.FONT_HERSHEY_SIMPLEX, 0.75, (0, 0, 255), 2)
     
         
-    # Draw bounding box
+# Draw bounding box
 
-    cv2.rectangle(foreground_display, p1, p2, (255, 0, 0), 2, 1)
+cv2.rectangle(foreground_display,
+              p1, p2,
+              (255, 0, 0),
+              2,
+              1)
 
-    cv2.circle(display, positions['null_pos'], 5, (0,0,255), -1)
+cv2.circle(display,
+           positions['null_pos'],
+           5,
+           (0,0,255),
+           -1)
 
-    cv2.line(display,positions['null_pos'],hand_pos,(255,0,0),5)
+cv2.line(display,
+         positions['null_pos'],
+         hand_pos,
+         (255,0,0),
+         5)
 
 
 markers = [cv2.MARKER_CROSS,
@@ -145,9 +160,9 @@ def affine_to_components(affine_array):
 
 
 
-v4l2-ctl --list-formats-ext -d N
-uvcdynctrl -l
-vlc v4l2:///dev/videoN:chroma=mjpg:width=1920:height=1080
+# v4l2-ctl --list-formats-ext -d N
+# uvcdynctrl -l
+# vlc v4l2:///dev/videoN:chroma=mjpg:width=1920:height=1080
 import cv2
 
 
@@ -157,16 +172,16 @@ cap = cv2.VideoCapture(0, cv2.CAP_DSHOW) # for windows backed
 cap = cv2.VideoCapture(0)
 cap.set(cv2.CAP_PROP_FOURCC, 1196444237.0) #https://shimat.github.io/opencvsharp_docs/html/5e5a9f7a-b360-809c-b542-799b01ac1aa2.htm
 
-or get number from:
-   cv2.VideoWriter_fourcc(*'MJPG')
-   -> 1196444237.0
+# or get number from:
+#    cv2.VideoWriter_fourcc(*'MJPG')
+#    -> 1196444237.0
 
->>> cv2.cv.FOURCC( *"XVID" )    1145656920
->>> cv2.cv.FOURCC( *"MJPG" )    1196444237
->>> cv2.cv.FOURCC( *"X264" )     875967064
->>> cv2.cv.FOURCC( *"DIB " )     541215044
->>> cv2.cv.FOURCC( *"WMV1" )     827739479
->>> cv2.cv.FOURCC( *"WMV2" )     844516695
+    # cv2.cv.FOURCC( *"XVID" )    1145656920
+    # cv2.cv.FOURCC( *"MJPG" )    1196444237
+    # cv2.cv.FOURCC( *"X264" )     875967064
+    # cv2.cv.FOURCC( *"DIB " )     541215044
+    # cv2.cv.FOURCC( *"WMV1" )     827739479
+    # cv2.cv.FOURCC( *"WMV2" )     844516695
 
 cap.set(cv2.CAP_PROP_FRAME_WIDTH, 1920)
 cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 1080)
@@ -186,224 +201,199 @@ def grayscale_to_jet(img_f):
     return img_gray
 
 
-import threading
-#make a threadsafe generator:
-class threadsafe_iter():
-    """Takes an iterator/generator and makes it thread-safe by
-    serializing call to the `next` method of given iterator/generator.
-    """
-    def __init__(self, it):
-        self.it = it
-        self.lock = threading.Lock()
-
-    def __iter__(self):
-        return self
-
-    def __next__(self):
-        with self.lock:
-            return self.it.__next__()
-
-
-def threadsafe_generator(f):
-    """A decorator that takes a generator function and makes it thread-safe.
-    """
-    def g(*a, **kw):
-        return threadsafe_iter(f(*a, **kw))
-    return g
-
-
-@threadsafe_generator
-def genny():
-    yield 1
-
-
 #events
-   def on_mouse_click(event, x, y, flags, userParams):
-       if event == cv2.EVENT_LBUTTONDOWN:
-           colorArray[:] = snapshot[y, x, :]
-           rgb = snapshot[y, x, [2,1,0]]
+def on_mouse_click(event, x, y, flags, user_params):
+   if event == cv2.EVENT_LBUTTONDOWN:
+       colorArray[:] = snapshot[y, x, :]
+       rgb = snapshot[y, x, [2,1,0]]
 
-           # From stackoverflow/com/questions/1855884/determine-font-color-based-on-background-color
-           luminance = 1 - (0.299*rgb[0] + 0.587*rgb[1] + 0.114*rgb[2]) / 255
-           if luminance < 0.5:
-               textColor = [0,0,0]
-           else:
-               textColor = [255,255,255]
+       # From stackoverflow/com/questions/1855884/determine-font-color-based-on-background-color
+       luminance = 1 - (0.299*rgb[0] + 0.587*rgb[1] + 0.114*rgb[2]) / 255
+       if luminance < 0.5:
+           text_color = [0,0,0]
+       else:
+           text_color = [255,255,255]
 
-           cv2.putText(colorArray, str(rgb), (20, COLOR_ROWS - 20),
-                       fontFace=cv2.FONT_HERSHEY_SIMPLEX, fontScale=0.8, color=textColor)
-           cv2.imshow('Color', colorArray)
+       cv2.putText(colorArray, str(rgb), (20, COLOR_ROWS - 20),
+                   fontFace=cv2.FONT_HERSHEY_SIMPLEX, fontScale=0.8, color=text_color)
+       cv2.imshow('Color', colorArray)
 
-   cv2.setMouseCallback('Snapshot', on_mouse_click)
-
-
+cv2.setMouseCallback('Snapshot', on_mouse_click)
 
 
-   k = cv2.waitKey(1) & 0xff
-   if k == 27:# escape pressed
+
+
+while True:
+    k = cv2.waitKey(1) & 0xff
+    if k == 27:# escape pressed
        break
-   elif k == 115: # s pressed
+    elif k == 115: # s pressed
        fname = input("File name")
        cv2.imwrite(os.path.join(IMAGES_FOLDER, '{}.jpg'.format(fname)), frame)
-   if k != 255: # A key is pressed
+    if k != 255: # A key is pressed
        print(k)
 
 
 
-       timer = cv2.getTickCount()
+    timer = cv2.getTickCount()
 
-       # Apply erosion to clean up noise
-       cv2.erode(fgmask, np.ones((3,3), dtype=np.uint8), iterations=1)
+    # Apply erosion to clean up noise
+    cv2.erode(fgmask, np.ones((3,3), dtype=np.uint8), iterations=1)
 
-       # Calculate Frames per second (FPS)
-       fps = cv2.getTickFrequency() / (cv2.getTickCount() - timer)
-
-
-
-   cv2.putText(foreground_display, "hand pose: error", positions['hand_pose'], cv2.FONT_HERSHEY_SIMPLEX, 0.75, (0, 0, 255), 2)
-
-
-   # Draw bounding box
-
-   cv2.rectangle(foreground_display, p1, p2, (255, 0, 0), 2, 1)
-
-   cv2.circle(display, positions['null_pos'], 5, (0,0,255), -1)
-
-   cv2.line(display,positions['null_pos'],hand_pos,(255,0,0),5)
+    # Calculate Frames per second (FPS)
+    fps = cv2.getTickFrequency() / (cv2.getTickCount() - timer)
 
 
 
-
-   record = True
-   if record:
-       fps = 10
-       capSize = (1200, 675) # Size of video when is resized (original stream 1080x1920)
-       fourcc = cv2.cv.CV_FOURCC('m', 'p', '4', 'v') # note the lower case
-       vout = cv2.VideoWriter()
-       success = vout.open('output.mov', fourcc, fps, capSize, True)
-       vout.write(image)
+cv2.putText(foreground_display, "hand pose: error",
+            positions['hand_pose'],
+            cv2.FONT_HERSHEY_SIMPLEX,
+            0.75,
+            (0, 0, 255),
+            2)
 
 
-   """
-   all of these codecs worked for me on Ubuntu 14.04 and 16.04
-       'MJPG' Motion JPEG
-       'XVID' MPEG-4
-       'FFV1' Lossless
-       'FMP4' MPEG-4
-   """
-   
-   
-   HSI = cv2.cvtColor(Irgb, cv2.COLOR_RGB2HSV)
-   H = HSI[:,:,0]
-   S = HSI[:,:,1]
-   I = HSI[:,:,2]
-   
-   YCrCb = cv2.cvtColor(Irgb, cv2.COLOR_RGB2YCR_CB)
-   
-   cv2.namedWindow(name)
-   # Resize it to the size of the camera image
-       cv2.resizeWindow(name, self.cam_width, self.cam_height)
-   # Move to (xpos,ypos) on the screen
-       cv2.moveWindow(name, xpos, ypos)
-   
-   cv2.useOptimized()
-   cv2.setUseOptimized(True)
-   
-   cv2.GaussianBlur(blur_img, (41, 41), 10)
-   
-   cv2.cvtColor(image.copy(), cv2.COLOR_BGR2RGB)
-   
-   cv2.dilate(dilate_img, np.ones((10,10), dtype=np.uint8), iterations=1)
-   erosion_img = cv2.erode(erosion_img, np.ones((10,10), dtype=np.uint8), iterations=1)
-   
-   # Align input images
-       alignMTB = cv2.createAlignMTB()
-       alignMTB.process(images, images)
-   
-   #HDR
-       mergeMertens = cv2.createMergeMertens()
-       exposureFusion = mergeMertens.process(images)
-   
-   
-   def adjust_gamma(image, gamma=1.0):
-       # build a lookup table mapping the pixel values [0, 255] to
-       # their adjusted gamma values
-       invGamma = 1.0 / gamma
-       table = np.array([((i / 255.0) ** invGamma) * 255
-           for i in np.arange(0, 256)]).astype("uint8")
-    
-       # apply gamma correction using the lookup table
-       return cv2.LUT(image, table)
-   
-   
-   #Multi-scale template matching:
-   
-   
-   # loop over the images to find the template in
-   for imagePath in glob.glob(args["images"] + "/*.jpg"):
-       # load the image, convert it to grayscale, and initialize the
-       # bookkeeping variable to keep track of the matched region
-       image = cv2.imread(imagePath)
-       gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-       found = None
-    
-       # loop over the scales of the image
-       for scale in np.linspace(0.2, 1.0, 20)[::-1]:
-           # resize the image according to the scale, and keep track
-           # of the ratio of the resizing
-           resized = imutils.resize(gray, width = int(gray.shape[1] * scale))
-           r = gray.shape[1] / float(resized.shape[1])
-    
-           # if the resized image is smaller than the template, then break
-           # from the loop
-           if resized.shape[0] < tH or resized.shape[1] < tW:
-               break
-   
-           # detect edges in the resized, grayscale image and apply template
-           # matching to find the template in the image
-           edged = cv2.Canny(resized, 50, 200)
-           result = cv2.matchTemplate(edged, template, cv2.TM_CCOEFF)
-           (_, maxVal, _, maxLoc) = cv2.minMaxLoc(result)
-    
-           # check to see if the iteration should be visualized
-           if args.get("visualize", False):
-               # draw a bounding box around the detected region
-               clone = np.dstack([edged, edged, edged])
-               cv2.rectangle(clone, (maxLoc[0], maxLoc[1]),
-                   (maxLoc[0] + tW, maxLoc[1] + tH), (0, 0, 255), 2)
-               cv2.imshow("Visualize", clone)
-               cv2.waitKey(0)
-    
-           # if we have found a new maximum correlation value, then ipdate
-           # the bookkeeping variable
-           if found is None or maxVal > found[0]:
-               found = (maxVal, maxLoc, r)
-    
-       # unpack the bookkeeping varaible and compute the (x, y) coordinates
-       # of the bounding box based on the resized ratio
-       (_, maxLoc, r) = found
-       (startX, startY) = (int(maxLoc[0] * r), int(maxLoc[1] * r))
-       (endX, endY) = (int((maxLoc[0] + tW) * r), int((maxLoc[1] + tH) * r))
-    
-       # draw a bounding box around the detected result and display the image
-       cv2.rectangle(image, (startX, startY), (endX, endY), (0, 0, 255), 2)
-       cv2.imshow("Image", image)
-       cv2.waitKey(0)
-   
-   # import the necessary packages
-   import numpy as np
-   import argparse
-   import glob
-   import cv2
-    
-   from skimage.measure import structural_similarity as ssim
-   s = ssim(imageA, imageB)
-   
-   # Create depth map from stero images:
-       stereo = cv2.StereoBM_create(numDisparities=16, blockSize=15)
-       disparity = stereo.compute(imgL,imgR)
-       plt.imshow(disparity,'gray')
-       plt.show()
+# Draw bounding box
+
+cv2.rectangle(foreground_display, p1, p2, (255, 0, 0), 2, 1)
+
+cv2.circle(display, positions['null_pos'], 5, (0,0,255), -1)
+
+cv2.line(display,positions['null_pos'],hand_pos,(255,0,0),5)
+
+
+
+
+record = True
+if record:
+   fps = 10
+   capSize = (1200, 675) # Size of video when is resized (original stream 1080x1920)
+   fourcc = cv2.cv.CV_FOURCC('m', 'p', '4', 'v') # note the lower case
+   vout = cv2.VideoWriter()
+   success = vout.open('output.mov', fourcc, fps, capSize, True)
+   vout.write(image)
+
+
+"""
+all of these codecs worked for me on Ubuntu 14.04 and 16.04
+   'MJPG' Motion JPEG
+   'XVID' MPEG-4
+   'FFV1' Lossless
+   'FMP4' MPEG-4
+"""
+
+
+HSI = cv2.cvtColor(Irgb, cv2.COLOR_RGB2HSV)
+H = HSI[:,:,0]
+S = HSI[:,:,1]
+I = HSI[:,:,2]
+
+YCrCb = cv2.cvtColor(Irgb, cv2.COLOR_RGB2YCR_CB)
+
+cv2.namedWindow(name)
+# Resize it to the size of the camera image
+cv2.resizeWindow(name, self.cam_width, self.cam_height)
+# Move to (xpos,ypos) on the screen
+cv2.moveWindow(name, xpos, ypos)
+
+cv2.useOptimized()
+cv2.setUseOptimized(True)
+
+cv2.GaussianBlur(blur_img, (41, 41), 10)
+
+cv2.cvtColor(image.copy(), cv2.COLOR_BGR2RGB)
+
+cv2.dilate(dilate_img, np.ones((10,10), dtype=np.uint8), iterations=1)
+erosion_img = cv2.erode(erosion_img, np.ones((10,10), dtype=np.uint8), iterations=1)
+
+# Align input images
+alignMTB = cv2.createAlignMTB()
+alignMTB.process(images, images)
+
+#HDR
+mergeMertens = cv2.createMergeMertens()
+exposureFusion = mergeMertens.process(images)
+
+
+def adjust_gamma(image, gamma=1.0):
+   # build a lookup table mapping the pixel values [0, 255] to
+   # their adjusted gamma values
+   invGamma = 1.0 / gamma
+   table = np.array([((i / 255.0) ** invGamma) * 255
+       for i in np.arange(0, 256)]).astype("uint8")
+
+   # apply gamma correction using the lookup table
+   return cv2.LUT(image, table)
+
+
+#Multi-scale template matching:
+
+
+# loop over the images to find the template in
+for imagePath in glob.glob(args["images"] + "/*.jpg"):
+   # load the image, convert it to grayscale, and initialize the
+   # bookkeeping variable to keep track of the matched region
+   image = cv2.imread(imagePath)
+   gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+   found = None
+
+   # loop over the scales of the image
+   for scale in np.linspace(0.2, 1.0, 20)[::-1]:
+       # resize the image according to the scale, and keep track
+       # of the ratio of the resizing
+       resized = imutils.resize(gray, width = int(gray.shape[1] * scale))
+       r = gray.shape[1] / float(resized.shape[1])
+
+       # if the resized image is smaller than the template, then break
+       # from the loop
+       if resized.shape[0] < tH or resized.shape[1] < tW:
+           break
+
+       # detect edges in the resized, grayscale image and apply template
+       # matching to find the template in the image
+       edged = cv2.Canny(resized, 50, 200)
+       result = cv2.matchTemplate(edged, template, cv2.TM_CCOEFF)
+       (_, maxVal, _, maxLoc) = cv2.minMaxLoc(result)
+
+       # check to see if the iteration should be visualized
+       if args.get("visualize", False):
+           # draw a bounding box around the detected region
+           clone = np.dstack([edged, edged, edged])
+           cv2.rectangle(clone, (maxLoc[0], maxLoc[1]),
+               (maxLoc[0] + tW, maxLoc[1] + tH), (0, 0, 255), 2)
+           cv2.imshow("Visualize", clone)
+           cv2.waitKey(0)
+
+       # if we have found a new maximum correlation value, then update
+       # the bookkeeping variable
+       if found is None or maxVal > found[0]:
+           found = (maxVal, maxLoc, r)
+
+   # unpack the bookkeeping variable and compute the (x, y) coordinates
+   # of the bounding box based on the resized ratio
+   (_, maxLoc, r) = found
+   (startX, startY) = (int(maxLoc[0] * r), int(maxLoc[1] * r))
+   (endX, endY) = (int((maxLoc[0] + tW) * r), int((maxLoc[1] + tH) * r))
+
+   # draw a bounding box around the detected result and display the image
+   cv2.rectangle(image, (startX, startY), (endX, endY), (0, 0, 255), 2)
+   cv2.imshow("Image", image)
+   cv2.waitKey(0)
+
+# import the necessary packages
+import numpy as np
+import argparse
+import glob
+import cv2
+
+from skimage.measure import structural_similarity as ssim
+s = ssim(imageA, imageB)
+
+# Create depth map from stereo images:
+stereo = cv2.StereoBM_create(numDisparities=16, blockSize=15)
+disparity = stereo.compute(imgL,imgR)
+plt.imshow(disparity,'gray')
+plt.show()
    
    
    ###################################################################################
@@ -523,23 +513,7 @@ output = cv2.seamlessClone(src, dst, mask, center, cv2.NORMAL_CLONE)
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# COntours:
+# Contours:
    # find contours
    coins_contours, _ = cv2.findContours(coins_binary, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
 
@@ -587,7 +561,7 @@ for rho, theta in lines[0]:
    cv2.line(cups_lines, (x1,y1), (x2,y2), (0,0,255), 1)
 
 
-Hough Circles:
+# Hough Circles:
 
    # find hough circles
    circles = cv2.HoughCircles(cups_edges, cv2.cv.CV_HOUGH_GRADIENT, dp=1.5, minDist=50, minRadius=20, maxRadius=130)
@@ -881,3 +855,14 @@ ft.putText(img=img,
 
 # write with h264 encoding:
     vid = cv2.VideoWriter('pyout1.mp4', cv2.VideoWriter_fourcc(*'avc1'), 25, (1280, 720))
+
+
+# Tone mapping:
+import cv2
+hdr = cv2.imread(hdr_path, flags=cv2.IMREAD_ANYDEPTH)
+# Tone-mapping and color space conversion ( There are other tone-mapping methods)
+tonemap = cv2.createTonemapDrago(2.2)
+scale = 5
+ldr = scale * tonemap.process(hdr)
+# Remap to 0-255 for the bit-depth conversion
+cv2.imwrite(ldr_path, ldr*255)

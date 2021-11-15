@@ -113,3 +113,11 @@ merge selected cells
 Widen jupyter width:
 from IPython.core.display import display, HTML
 display(HTML("<style>.container { width:80% !important; }</style>"))
+
+
+%store var - store var in jupyter noteboook without re-running
+% store list all vars
+
+%whos show you all objects you have made
+
+%debug post-mortem debugging

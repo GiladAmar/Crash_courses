@@ -35,4 +35,17 @@ p.glob('**/*.py') -> iterator
 
 p = Path('.')
 
-p.parts() 
+p.parts()
+
+# Pathlib
+from pathlib import Path
+from typing import Union
+
+PathLike = Union[str, Path]
+
+output_dir = Path(output_dir) / "bob_stats" / current_time
+
+model_dir = Path(model_dir)
+scaler_path = model_dir.parent / "standard_scaler.joblib"
+encoder_file = model_dir / "encoder.h5"
+train_file = model_dir / "train.parquet"

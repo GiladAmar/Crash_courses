@@ -19,7 +19,7 @@ conn, addr = mySocket.accept()
 
 print("Test server listening on port {0}\n".format(PORT_NUMBER))
 
-image = np.zeros((800,600))
+image = np.zeros((800, 600))
 
 for i in tqdm(range(200000)):
     data = conn.recv(SIZE)
@@ -34,5 +34,5 @@ for i in tqdm(range(200000)):
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
 
-    #print(image.sum())
+    # print(image.sum())
 sys.exit()

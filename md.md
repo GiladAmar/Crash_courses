@@ -1,19 +1,30 @@
+#Headers
 # Header 1
-
 ## Header 2
+### Header 3
 
 
-List:
+## Lists:
+### Numbered
+1. One
+2. Two
+3. Three
 
-    - 1st level
-    - 1st level too
-        - 2nd level
-            -3rd level
+### Points
+- 1st level
+- 1st level too
+    - 2nd level
+        - 3rd level
 
+### Checkboxes
+- [ ] Empty checkbox
+- [X] Full checkbox
 
-*bold text*, **bolder text**
-_italic_, __moreitalic__
-
+## Text Formatting
+*italic*
+**bold**
+_italic_
+__moreitalic__
 --strikethrough--
 
 > quote this stuff
@@ -21,17 +32,19 @@ _italic_, __moreitalic__
 
 Horizontal rules
 * * *
-
 ***
 
+## Hyperlinks
 [link_name](#header-1)
 
 [library](http://hyperopt.github.io/hyperopt/)
 
+## Code Blocks:
+Code highlighting can be specified for bash, python etc... `inline code`
 ```python
 for i in range(5):
     print("helloworld")
 ```
-Code highlting can be specified for bash, python etc...
 
-`code here' without a cell
+
+

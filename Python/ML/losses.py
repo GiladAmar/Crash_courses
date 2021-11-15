@@ -8,25 +8,20 @@ from keras.losses import binary_crossentropy
 def MSE_metric(y_true, y_pred):
     return K.mean(K.square(y_pred - y_true))
 
-
 def dice_coef(y_true, y_pred):
     smooth = 1.
     intersection = K.sum(y_true * y_pred, axis=[1, 2, 3])
     union = K.sum(y_true, axis=[1, 2, 3]) + K.sum(y_pred, axis=[1, 2, 3])
     return K.mean((2. * intersection + smooth) / (union + smooth), axis=0)
 
-
 def dice_coef_loss(y_true, y_pred):
     return -dice_coef(y_true, y_pred)
-
 
 def bce_dice_loss(y_true, y_pred):
     return binary_crossentropy(y_true, y_pred) + dice_coef_loss(y_true, y_pred)
 
-
 def bce_logdice_loss(y_true, y_pred):
     return binary_crossentropy(y_true, y_pred) - K.log(1. - dice_coef_loss(y_true, y_pred))
-
 
 def tversky_loss(y_true, y_pred):
     alpha = 0.5
@@ -46,7 +41,6 @@ def tversky_loss(y_true, y_pred):
     Ncl = K.cast(K.shape(y_true)[-1], 'float32')
     return Ncl - T
 
-
 def mean_iou(y_true, y_pred, threshold=0.003):
     yt0 = y_true[:, :, :, 0]
     yp0 = K.cast(y_pred[:, :, :, 0] > threshold, 'float32')
@@ -55,14 +49,12 @@ def mean_iou(y_true, y_pred, threshold=0.003):
     iou = tf.where(tf.equal(union, 0), 1., tf.cast(inter / union, 'float32'))
     return iou
 
-
 def get_euclidean_loss(n_points):
     def euclidean_dist_loss(y_true, y_pred):
         differences = K.square(y_true - y_pred)
         return K.mean(K.sqrt(differences[:, 0:n_points] + differences[:, n_points:]))
 
     return euclidean_dist_loss
-
 
 def focal_loss(gamma=2., alpha=.25):
     def focal_loss_fixed(y_true, y_pred):
@@ -73,7 +65,7 @@ def focal_loss(gamma=2., alpha=.25):
         pt_0 = K.clip(pt_0, 1e-3, .999)
 
         return -K.sum(alpha * K.pow(1. - pt_1, gamma) * K.log(pt_1)) - \
-                K.sum((1 - alpha) * K.pow(pt_0, gamma) * K.log(1. - pt_0))
+               K.sum((1 - alpha) * K.pow(pt_0, gamma) * K.log(1. - pt_0))
 
     return focal_loss_fixed
 
@@ -89,7 +81,6 @@ def jaccard_coef(y_true, y_pred):
 
     return K.mean(jac)
 
-
 def jaccard_coef_int(y_true, y_pred):
     y_pred_pos = K.round(K.clip(y_pred, 0, 1))
 
@@ -98,13 +89,11 @@ def jaccard_coef_int(y_true, y_pred):
     jac = (intersection + SMOOTH_LOSS) / (sum_ - intersection + SMOOTH_LOSS)
     return K.mean(jac)
 
-
 def jacard_coef_flat(y_true, y_pred):
     y_true_f = K.flatten(y_true)
     y_pred_f = K.flatten(y_pred)
     intersection = K.sum(y_true_f * y_pred_f)
     return (intersection + SMOOTH_LOSS) / (K.sum(y_true_f) + K.sum(y_pred_f) - intersection + SMOOTH_LOSS)
-
 
 def binary_focal_loss(gamma=2., alpha=.25):
     """
@@ -135,7 +124,6 @@ def binary_focal_loss(gamma=2., alpha=.25):
                - K.sum((1 - alpha) * K.pow(pt_0, gamma) * K.log(1. - pt_0))
 
     return binary_focal_loss_fixed
-
 
 def categorical_focal_loss(gamma=2., alpha=.25):
     """
@@ -182,7 +170,6 @@ def categorical_focal_loss(gamma=2., alpha=.25):
 
     return categorical_focal_loss_fixed
 
-
 def get_weighted_categorical_crossentropy(weights):
     """L = - \sum_i weights[i] y_true[i] \log(y_pred[i])
     :param weights: a list of weights for each class.
@@ -196,7 +183,6 @@ def get_weighted_categorical_crossentropy(weights):
 
     return _loss
 
-
 def get_weighted_sparse_categorical_crossentropy(weights):
     """L = - \sum_i weights[i] y_true[i] \log(y_pred[i])
     :param weights: a list of weights for each class.
@@ -209,7 +195,6 @@ def get_weighted_sparse_categorical_crossentropy(weights):
                * keras.losses.sparse_categorical_crossentropy(y_true, y_pred)
 
     return _loss
-
 
 def get_ranking_loss(gamma=2.0, mp=2.5, mn=0.5):
     """L = log(1 + exp(gamma * (mp - y_pred[true_label]))) +
@@ -232,7 +217,6 @@ def get_ranking_loss(gamma=2.0, mp=2.5, mn=0.5):
 
     return _loss
 
-
 def lovasz_grad(gt_sorted):
     """
     Computes gradient of the Lovasz extension w.r.t sorted errors
@@ -247,8 +231,6 @@ def lovasz_grad(gt_sorted):
 
 
 # --------------------------- BINARY LOSSES ---------------------------
-
-
 def lovasz_hinge(logits, labels, per_image=True, ignore=None):
     """
     Binary Lovasz hinge loss
@@ -263,12 +245,12 @@ def lovasz_hinge(logits, labels, per_image=True, ignore=None):
             log, lab = tf.expand_dims(log, 0), tf.expand_dims(lab, 0)
             log, lab = flatten_binary_scores(log, lab, ignore)
             return lovasz_hinge_flat(log, lab)
+
         losses = tf.map_fn(treat_image, (logits, labels), dtype=tf.float32)
         loss = tf.reduce_mean(losses)
     else:
         loss = lovasz_hinge_flat(*flatten_binary_scores(logits, labels, ignore))
     return loss
-
 
 def lovasz_hinge_flat(logits, labels):
     """
@@ -296,7 +278,6 @@ def lovasz_hinge_flat(logits, labels):
                    name="loss"
                    )
     return loss
-
 
 def flatten_binary_scores(scores, labels, ignore=None):
     """
@@ -332,12 +313,12 @@ def lovasz_softmax(probas, labels, classes='all', per_image=False, ignore=None, 
             prob, lab = tf.expand_dims(prob, 0), tf.expand_dims(lab, 0)
             prob, lab = flatten_probas(prob, lab, ignore, order)
             return lovasz_softmax_flat(prob, lab, classes=classes)
+
         losses = tf.map_fn(treat_image, (probas, labels), dtype=tf.float32)
         loss = tf.reduce_mean(losses)
     else:
         loss = lovasz_softmax_flat(*flatten_probas(probas, labels, ignore, order), classes=classes)
     return loss
-
 
 def lovasz_softmax_flat(probas, labels, classes='all'):
     """
@@ -360,7 +341,7 @@ def lovasz_softmax_flat(probas, labels, classes='all'):
         grad = lovasz_grad(fg_sorted)
         losses.append(
             tf.tensordot(errors_sorted, tf.stop_gradient(grad), 1, name="loss_class_{}".format(c))
-                      )
+        )
     if len(class_to_sum) == 1:  # short-circuit mean when only one class
         return losses[0]
     losses_tensor = tf.stack(losses)
@@ -369,7 +350,6 @@ def lovasz_softmax_flat(probas, labels, classes='all'):
         losses_tensor = tf.boolean_mask(losses_tensor, present)
     loss = tf.reduce_mean(losses_tensor)
     return loss
-
 
 def flatten_probas(probas, labels, ignore=None, order='BHWC'):
     """
@@ -382,7 +362,7 @@ def flatten_probas(probas, labels, ignore=None, order='BHWC'):
         raise NotImplementedError('Order {} unknown'.format(order))
     C = 1
     probas = tf.reshape(probas, (-1, C))
-    labels = tf.reshape(labels, (-1, ))
+    labels = tf.reshape(labels, (-1,))
 
     if ignore is None:
         return probas, labels
@@ -391,10 +371,8 @@ def flatten_probas(probas, labels, ignore=None, order='BHWC'):
     vlabels = tf.boolean_mask(labels, valid, name='valid_labels')
     return vprobas, vlabels
 
-
 def keras_lovasz_softmax(labels, probas):
     return lovasz_softmax(probas, labels)
-
 
 def keras_lovasz_hinge(labels, logits):
     return lovasz_hinge(logits, labels, per_image=True, ignore=None)
@@ -408,22 +386,14 @@ segmentation_objects = {'MSE_metric': MSE_metric,
                         'focal_loss_fixed': focal_loss(),
                         'tversky_loss': tversky_loss}
 
-
 #######################################
 smooth = 1.
-
 
 def dice_coef(y_true, y_pred):
     y_true_f = K.flatten(y_true)
     y_pred_f = K.flatten(y_pred)
     intersection = K.sum(y_true_f * y_pred_f)
     return (2. * intersection + smooth) / (K.sum(y_true_f) + K.sum(y_pred_f) + smooth)
-
-
-def dice_coef_loss(y_true, y_pred):
-    return -dice_coef(y_true, y_pred)
-
-
 
 ######################################
 def mean_length_error(y_true, y_pred):
@@ -432,42 +402,33 @@ def mean_length_error(y_true, y_pred):
     delta = (y_pred_f - y_true_f)
     return K.mean(K.tanh(delta))
 
-
-
-
-
-
-
 ###############
 # Ref: salehi17, "Twersky loss function for image segmentation using 3D FCDN"
 # -> the score is computed for each class separately and then summed
 # alpha=beta=0.5 : dice coefficient
-# alpha=beta=1   : tanimoto coefficient (also known as jaccard)
+# alpha=beta=1   : tanimoto coefficient (also known as Jaccard)
 # alpha+beta=1   : produces set of F*-scores
 # implemented by E. Moebel, 06/04/18
 def tversky_loss(y_true, y_pred):
     alpha = 0.5
-    beta  = 0.5
+    beta = 0.5
 
     ones = K.ones(K.shape(y_true))
-    p0 = y_pred      # proba that voxels are class i
-    p1 = ones - y_pred # proba that voxels are not class i
+    p0 = y_pred  # proba that voxels are class i
+    p1 = ones - y_pred  # proba that voxels are not class i
     g0 = y_true
     g1 = ones - y_true
 
-    num = K.sum(p0*g0, (0, 1, 2, 3))
-    den = num + alpha*K.sum(p0*g1, (0, 1, 2, 3)) + beta*K.sum(p1*g0, (0, 1, 2, 3))
+    num = K.sum(p0 * g0, (0, 1, 2, 3))
+    den = num + alpha * K.sum(p0 * g1, (0, 1, 2, 3)) + beta * K.sum(p1 * g0, (0, 1, 2, 3))
 
-    T = K.sum(num/den) # when summing over classes, T has dynamic range [0 Ncl]
+    T = K.sum(num / den)  # when summing over classes, T has dynamic range [0 Ncl]
 
     Ncl = K.cast(K.shape(y_true)[-1], 'float32')
-    return Ncl-T
-#I would be curious to know if this works for your applications. To adapt from 3D images to 2D images, you should modify all "sum(...,(0,1,2,3))" to "sum(...,(0,1,2))".
+    return Ncl - T
 
 
-
-
-
+# I would be curious to know if this works for your applications. To adapt from 3D images to 2D images, you should modify all "sum(...,(0,1,2,3))" to "sum(...,(0,1,2))".
 
 
 def jaccard_distance_loss(y_true, y_pred, smooth=100):

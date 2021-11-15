@@ -17,12 +17,12 @@ SHELL=/bin/bash
 #Define Variables:
 named_variable = "This is the text here"
 dependencies = test.py
-listy = file1 file2 file3
+listy = file1 file2 file3 # Define a list
 
 # Define commands:
 help:                       # Handy to explain Makefile content and uses (not required)
-    @echo "-install     : installs shizzle"
-    @echo "-test"       : test shizzle"
+    @echo "-install     : install shizzle"
+    @echo "-test        : test shizzle"
 
 use_variable:
     echo $(named_variable)
