@@ -19,7 +19,8 @@ def f(x, y):
 
 
 # -------------------------------------------------------------------------------
-@jit(nopython=True)  # rather throw error than use object mode - i.e. If it fails to compile
+@jit(nopython=True)
+# rather throw error than use object mode - i.e. If it fails to compile
 
 # -------------------------------------------------------------------------------
 @jit(nogil=True)  # Release the GIL - be careful of usual multi-threading issues
@@ -42,8 +43,10 @@ import numpy as np
 from numba import jitclass  # import the decorator
 from numba import int32, float32  # import the types
 
-spec = [('value', int32),  # a simple scalar field
-        ('array', float32[:]), ]  # an array field
+spec = [
+    ("value", int32),  # a simple scalar field
+    ("array", float32[:]),
+]  # an array field
 
 
 @jitclass(spec)
@@ -71,13 +74,15 @@ def f(x, y):
     return x + y
 
 
-@vectorize(['float32(float32, float32)'], target='cuda')  # vectorize to form numpy-like function on GPU
+@vectorize(["float32(float32, float32)"], target="cuda")
+# Vectorize to form numpy-like function on GPU
 def f(x, y):
     return x + y
 
 
 # -------------------------------------------------------------------------------
-from numba import njit, prange  # use prange instead of range to specify that the loop can be operated in parallel
+from numba import (njit, prange)
+# Use prange instead of range to specify that the loop can be operated in parallel
 
 
 @njit(parallel=True)

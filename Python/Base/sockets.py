@@ -10,7 +10,7 @@ from tqdm import tqdm
 PORT_NUMBER = 5000
 SIZE = 150000
 
-hostName = gethostbyname('0.0.0.0')
+hostName = gethostbyname("0.0.0.0")
 
 mySocket = socket(AF_INET, SOCK_STREAM)
 mySocket.bind((hostName, PORT_NUMBER))
@@ -25,13 +25,13 @@ for i in tqdm(range(200000)):
     data = conn.recv(SIZE)
     last_time = time.time()
 
-    tmp_img = np.frombuffer(data, dtype='uint8')
+    tmp_img = np.frombuffer(data, dtype="uint8")
     if sum(tmp_img) > 0:
         image = tmp_img
-    cv2.imshow('window', tmp_img)
+    cv2.imshow("window", tmp_img)
 
     key_press = cv2.waitKey(1)
-    if cv2.waitKey(1) & 0xFF == ord('q'):
+    if cv2.waitKey(1) & 0xFF == ord("q"):
         break
 
     # print(image.sum())

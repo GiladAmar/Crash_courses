@@ -2,8 +2,7 @@ nothing: str
 pi: float = 3.142
 
 
-def headline(text: str,
-             align: bool = True) -> str:
+def headline(text: str, align: bool = True) -> str:
     return "stringy"
 
 
@@ -21,8 +20,7 @@ from typing import Dict, List, Tuple, Sequence
 
 names: List[str] = ["Guido", "Jukka", "Ivan"]
 version: Tuple[int, int, int] = (3, 7, 1)
-options: Dict[str, bool] = {"centered": False,
-                            "capitalize": True}
+options: Dict[str, bool] = {"centered": False, "capitalize": True}
 
 
 # A sequence is either a list or a tuple
@@ -52,9 +50,7 @@ def black_hole() -> NoReturn:
 from typing import Sequence, Optional
 
 
-def player_order(
-        names: Sequence[str],
-        start: Optional[str] = None) -> Sequence[str]:
+def player_order(names: Sequence[str], start: Optional[str] = None) -> Sequence[str]:
     pass
 
 
@@ -71,6 +67,7 @@ class Deck:
     @classmethod
     def create(cls, shuffle: bool = False) -> "Deck":
         import random
+
         """Create a new deck of 52 cards"""
         cards = [Card(s, r) for r in Card.RANKS for s in Card.SUITS]
         if shuffle:
@@ -107,9 +104,9 @@ np.NDArrayOperatorsMixin
 
 from typing import TypeVar, Iterable, Tuple
 
-T = TypeVar('T', int, float, complex)
+T = TypeVar("T", int, float, complex)
 
-AnyStr = TypeVar('AnyStr', Text, bytes)
+AnyStr = TypeVar("AnyStr", Text, bytes)
 
 # Union
 from typing import Union
@@ -125,7 +122,7 @@ def handle_employees(e: Union[Employee, Sequence[Employee]]) -> None:
 
 
 # for a class, not an instance of the class:
-U = TypeVar('U', bound=User)
+U = TypeVar("U", bound=User)
 
 
 def new_user(user_class: Type[U]) -> U:

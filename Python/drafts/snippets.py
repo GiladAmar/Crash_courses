@@ -1,10 +1,10 @@
 import os
 import subprocess
 import sys
-
+import random
 
 def safe_shuffle(xs):
-    import random
+
     new_xs = list(xs)
     random.shuffle(new_xs)
     return new_xs
@@ -18,15 +18,15 @@ def launch(filename):
     """Pass filename to the OS, which should select the correct
     program to open it.
     """
-    if sys.platform == 'win32':
+    if sys.platform == "win32":
         os.startfile(filename)
-    elif sys.platform == 'darwin':
-        subprocess.Popen(['open', filename])
+    elif sys.platform == "darwin":
+        subprocess.Popen(["open", filename])
     else:
         try:
-            subprocess.Popen(['xdg-open', filename])
+            subprocess.Popen(["xdg-open", filename])
         except OSError:
-            print('File open failed: ' + filename)
+            print("File open failed: " + filename)
 
 
 def print_bad_path(path):
@@ -54,8 +54,8 @@ def print_bad_path(path):
         while path != npath:
             path, npath = npath, os.path.dirname(npath)
             res.append(path)
-        msg = {True: 'passed', False: 'failed'}
-        return '\n'.join(['%s: %s' % (msg[os.path.exists(i)], i[4:]) for i in res])
+        msg = {True: "passed", False: "failed"}
+        return "\n".join(["%s: %s" % (msg[os.path.exists(i)], i[4:]) for i in res])
     else:
         path = os.path.abspath(path)
         npath = os.path.dirname(path)
@@ -63,8 +63,8 @@ def print_bad_path(path):
         while path != npath:
             path, npath = npath, os.path.dirname(npath)
             res.append(path)
-        msg = {True: 'passed', False: 'failed'}
-        return '\n'.join(['%s: %s' % (msg[os.path.exists(i)], i) for i in res])
+        msg = {True: "passed", False: "failed"}
+        return "\n".join(["%s: %s" % (msg[os.path.exists(i)], i) for i in res])
 
 
 def flatten(l):
@@ -82,8 +82,8 @@ _cnt = 0
 
 def print_status(msg):
     global _cnt
-    CURSOR_UP_ONE = '\x1b[1A'
-    ERASE_LINE = '\x1b[2K'
+    CURSOR_UP_ONE = "\x1b[1A"
+    ERASE_LINE = "\x1b[2K"
     print(ERASE_LINE + CURSOR_UP_ONE)
     msg = "\r[{0:>2}] - {1}".format(_cnt, msg)
     sys.stdout.write(msg)
@@ -150,6 +150,7 @@ df_reduced, na_list = reduce_mem_usage(df)
 
 def run_terminal_cmd(command_str, args=None, capture_output=False):
     import subprocess
+
     shell = True if args else False
     # allows arguments in the command string and not require them to be input separately
 
@@ -159,26 +160,35 @@ def run_terminal_cmd(command_str, args=None, capture_output=False):
 
 # An @enforce decorator that checks if types are correct in runtime
 def enforce(func):
-    ''' Decorator to enforce type decorators at runtime via
+    """ Decorator to enforce type decorators at runtime via
     type assertion. Usage:
     @enforce
     def foo(a : str, b : int, c = True : bool) -> str:
       return None
-    '''
+    """
 
     def enforce_wrapper(*args, **kwargs):
-        for k, v in dict(zip(func.__code__.co_varnames, args),
-                         **dict(zip(func.__code__.co_varnames[len(args):func.__code__.co_argcount],
-                                    func.__defaults__) if func.__defaults__ else {},
-                                **kwargs)).items():
-            assert type(v) == func.__annotations__.get(k, type(v)), \
-                "Argument `%s : %s` received type `%s`." % (
-                    k, func.__annotations__.get(k), type(v))
-        ret = func(*args, **kwargs)
-        assert type(ret) == func.__annotations__.get('return', type(ret)), \
-            "`%s(...) -> %s` returned type `%s`." % (
-                func.__name__, func.__annotations__.get('return'), type(ret)
+        for k, v in dict(
+            zip(func.__code__.co_varnames, args),
+            **dict(
+                zip(
+                    func.__code__.co_varnames[len(args) : func.__code__.co_argcount],
+                    func.__defaults__,
+                )
+                if func.__defaults__
+                else {},
+                **kwargs
             )
+        ).items():
+            assert type(v) == func.__annotations__.get(k, type(v)), (
+                "Argument `%s : %s` received type `%s`."
+                % (k, func.__annotations__.get(k), type(v))
+            )
+        ret = func(*args, **kwargs)
+        assert type(ret) == func.__annotations__.get("return", type(ret)), (
+            "`%s(...) -> %s` returned type `%s`."
+            % (func.__name__, func.__annotations__.get("return"), type(ret))
+        )
         return ret
 
     return enforce_wrapper

@@ -26,16 +26,24 @@ class RectifiedAdam(Optimizer):
           (https://openreview.net/forum?id=ryQu7f-RZ)
     """
 
-    def __init__(self, lr=0.001, beta_1=0.9, beta_2=0.999,
-                 epsilon=None, decay=0., weight_decay=0.0, **kwargs):
+    def __init__(
+        self,
+        lr=0.001,
+        beta_1=0.9,
+        beta_2=0.999,
+        epsilon=None,
+        decay=0.0,
+        weight_decay=0.0,
+        **kwargs
+    ):
         super(RectifiedAdam, self).__init__(**kwargs)
 
         with K.name_scope(self.__class__.__name__):
-            self.iterations = K.variable(0, dtype='int64', name='iterations')
-            self.lr = K.variable(lr, name='lr')
-            self.beta_1 = K.variable(beta_1, name='beta_1')
-            self.beta_2 = K.variable(beta_2, name='beta_2')
-            self.decay = K.variable(decay, name='decay')
+            self.iterations = K.variable(0, dtype="int64", name="iterations")
+            self.lr = K.variable(lr, name="lr")
+            self.beta_1 = K.variable(beta_1, name="beta_1")
+            self.beta_2 = K.variable(beta_2, name="beta_2")
+            self.decay = K.variable(decay, name="decay")
 
         if epsilon is None:
             epsilon = K.epsilon()
@@ -50,8 +58,9 @@ class RectifiedAdam(Optimizer):
 
         lr = self.lr
         if self.initial_decay > 0:
-            lr = lr * (1. / (1. + self.decay * K.cast(self.iterations,
-                                                      K.dtype(self.decay))))
+            lr = lr * (
+                1.0 / (1.0 + self.decay * K.cast(self.iterations, K.dtype(self.decay)))
+            )
 
         t = K.cast(self.iterations, K.floatx()) + 1
 
@@ -60,15 +69,15 @@ class RectifiedAdam(Optimizer):
         self.weights = [self.iterations] + ms + vs
 
         for p, g, m, v in zip(params, grads, ms, vs):
-            m_t = (self.beta_1 * m) + (1. - self.beta_1) * g
-            v_t = (self.beta_2 * v) + (1. - self.beta_2) * K.square(g)
+            m_t = (self.beta_1 * m) + (1.0 - self.beta_1) * g
+            v_t = (self.beta_2 * v) + (1.0 - self.beta_2) * K.square(g)
 
             beta2_t = self.beta_2 ** t
             N_sma_max = 2 / (1 - self.beta_2) - 1
             N_sma = N_sma_max - 2 * t * beta2_t / (1 - beta2_t)
 
             # apply weight decay
-            if self.weight_decay != 0.:
+            if self.weight_decay != 0.0:
                 p_wd = p - self.weight_decay * lr * p
             else:
                 p_wd = None
@@ -79,9 +88,19 @@ class RectifiedAdam(Optimizer):
                 p_ = p_wd
 
             def gt_path():
-                step_size = lr * K.sqrt(
-                    (1 - beta2_t) * (N_sma - 4) / (N_sma_max - 4) * (N_sma - 2) / N_sma * N_sma_max /
-                    (N_sma_max - 2)) / (1 - self.beta_1 ** t)
+                step_size = (
+                    lr
+                    * K.sqrt(
+                        (1 - beta2_t)
+                        * (N_sma - 4)
+                        / (N_sma_max - 4)
+                        * (N_sma - 2)
+                        / N_sma
+                        * N_sma_max
+                        / (N_sma_max - 2)
+                    )
+                    / (1 - self.beta_1 ** t)
+                )
 
                 denom = K.sqrt(v_t) + self.epsilon
                 p_t = p_ - step_size * (m_t / denom)
@@ -101,18 +120,20 @@ class RectifiedAdam(Optimizer):
             new_p = p_t
 
             # Apply constraints.
-            if getattr(p, 'constraint', None) is not None:
+            if getattr(p, "constraint", None) is not None:
                 new_p = p.constraint(new_p)
 
             self.updates.append(K.update(p, new_p))
         return self.updates
 
     def get_config(self):
-        config = {'lr': float(K.get_value(self.lr)),
-                  'beta_1': float(K.get_value(self.beta_1)),
-                  'beta_2': float(K.get_value(self.beta_2)),
-                  'decay': float(K.get_value(self.decay)),
-                  'epsilon': self.epsilon,
-                  'weight_decay': self.weight_decay}
+        config = {
+            "lr": float(K.get_value(self.lr)),
+            "beta_1": float(K.get_value(self.beta_1)),
+            "beta_2": float(K.get_value(self.beta_2)),
+            "decay": float(K.get_value(self.decay)),
+            "epsilon": self.epsilon,
+            "weight_decay": self.weight_decay,
+        }
         base_config = super(RectifiedAdam, self).get_config()
         return dict(list(base_config.items()) + list(config.items()))
