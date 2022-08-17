@@ -131,6 +131,8 @@ DELETE FROM Tbl_Players         -- Delete rows from table
 
 TRUNCATE TABLE Customers        -- Empty the  Table
 
+-- TRUNCATE is faster than DELETE for a whole table
+
 ------------------------------DROP--------------------------------
 -- A DROP TABLE statement cannot be rolled back
 DROP DATABASE university_db
@@ -627,7 +629,7 @@ DATEPART(datepart, date)    -- Returns part, defined by abbreviation below, of t
     | nanosecond  | ns      |
     +-------------+---------+
 
--- Formating
+-- Formatting
 DATE_FORMAT()   -- Formats date as specified
 FROM_DAYS()     -- Converts a day number to a date
 FROM_UNIXTIME() -- Formats date as a UNIX timestamp
@@ -1002,3 +1004,56 @@ FORMAT(@Date, N'dddd, MMMM dd, yyyy hh:mm:ss tt')
     COPY (SELECT * FROM example_table) TO 'csv_name.csv' DELIMITER ',' CSV; -- Need admin rights
     --  else
     \copy (SELECT * FROM example_table) TO 'csv_name.csv' with csv
+
+
+-- Row Numbering:
+    SELECT Product_Category,
+      Shipping_Address,
+      Shipping_Cost,
+      ROW_NUMBER() OVER
+                  (PARTITION BY Product_Category,
+                                Shipping_Address
+                   ORDER BY Shipping_Cost DESC) as RowNumber,
+      RANK() OVER
+            (PARTITION BY Product_Category,
+                          Shipping_Address
+             ORDER BY Shipping_Cost DESC) as RankValues,
+      DENSE_RANK() OVER
+                  (PARTITION BY Product_Category,
+                                Shipping_Address
+                   ORDER BY Shipping_Cost DESC) as DenseRankValues
+    FROM Dummy_Sales_Data_v1
+    WHERE Product_Category IS NOT NULL
+    AND Shipping_Address IN ('Germany','India')
+    AND Status IN ('Delivered')
+
+-- ROW_NUMBER - as in the name
+-- RANK
+    -- Given a number by the ordering, a tie is handled such that numbers can be skipped
+1
+1
+3
+4
+5
+-- DENSE_RANK
+    -- When there is a tie, no number will be skipped:
+1
+1
+2
+3
+-- TODO
+
+On_DELETE_CASCADE foreign keys
+
+
+-- Rebuilding index:
+ALTER INDEX ix_cars_employee_id ON Cars REBUILD;
+
+-- Using regex:
+SELECT 'bedded' REGEXP '[a-f]' -- returns True
+
+-- A stored view that is updated every so often - useful if slow to compute:
+Materialized views
+
+-- Good resource:
+https://goalkicker.com/SQLBook/
