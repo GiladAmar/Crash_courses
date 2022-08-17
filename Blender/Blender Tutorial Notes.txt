@@ -223,3 +223,260 @@ resolution 100%
 
 
 
+
+m: move object to another layer
+
+n: properties:
+    backgrond images, add image
+    only visible in orthogrpahic (side, left top)
+
+alt-click, select whole edge
+cntrl + R : add edge
+
+gg: slide edge again
+
+cntrl 1,2,3,4, sub-surf modifier
+
+proximity loop to tighten up
+alt +n: merge
+i: inset : fix circular edge
+e: extrude
+z: wireframe view
+
++- keys adds numer to save file
+
+connect faces: select verticies
+f: join edges
+make sure no faces inside an objects volume
+smooth mode shows up mesh issues
+
+cntrl a : rescale
+
+items appear where the curso is
+
+change face to nogon to fill circle
+solidify mod to give thickness
+shift + F5- 3D view
+
+Textures:
+poliigon
+
+texture and normal map
+*image texture*
+looks for uv map
+view to uv injector
+
+edit mode: u: uv menu
+where to put the scicrros
+
+cntrl e to make seam
+
+
+roughnees is normal map
+
+normal map node to convert image to not use colours
+
+can drag in images to blender node editor
+
+
+
+Particles:
+shift + z: scale on every axis except z
+
+mirror modifyer:
+     clipping will join sides
+
+
+particles:
+    second fro mleft
+    hair vs emitter
+
+in properties tab  face normals
+cntrl + shift + n : clear norms
+affected by modifiers
+offset
+advanced settings all the time
+rotation
+physics:
+ size
+
+
+
+group:
+shift select all
+cntrl + g
+
+cntrl and shift 0.1 cntrl shift 0.01
+
+select last
+cntrl + l copy informationbetween objects
+
+click material number to make singular and not sharing material
+painting where more should be
+    vertex groups in particle settings
+
+join objects toether: cntrl + j
+need to apply modifying to individual objects before.
+
+alt+ TAB: weight paint mode
+
+Lighting:
+    sun lamp is globally affected- position doesn't matter
+    blend -  more feather shadows
+    size too affects shadows
+    larger gives smoother light
+    smaller is sharper shadows
+   lamp wont show up in reflections
+   mesh lamp will
+
+
+ world lighting:
+    white washes out scene
+         use black 0
+     blue contributes slight blue
+     never as primary light source
+     HDR: entire lighting scene
+         environment texture
+         to colour of emission
+     Prolighting skies from Blender Guru
+
+
+r + middle mouse button loking through camera to move
+g+ middle zoom
+g + x.y.z
+
+
+assigne in mesh to  change material used around object
+click colour down to viewport
+
+
+Rendering:
+    render settigns use GPU device
+    tiles:
+    grain/noise: low samples is grainy.
+         interior: sample needs high
+         exterior: less
+         resolution percentage
+        fireflies, tiny specks: glass or water caustins is more common
+        fewer colours is better
+        hue-saturation node to tone town texture images
+        duality- both things demanding foucs - bad
+             make one thing in focuus
+         focal lenght is zoom, not position of camera
+depth of field - photo realism - focus on object
+   or use camera limits
+ aperture defines sensitivity to focus
+        rather use f-stop
+
+
+Compositor:
+    liek photoshop
+Node editor - use compositor
+load render into
+tehre is a viewre and ocmposite output node
+glare
+coloour balance
+little orange to make warmer
+
+UV unwrapping
+
+
+lazy way:
+u - msart uv project
+
+cntrl e- mark seam with edge selecxted
+red in z-mode
+with manuak
+use u - unwrap
+
+uv mode
+l to connect to the whole 'island'
+n:  stretch in display, heat map of stretch
+use sync selextion to sleect inboth panes
+
+
+
+bounces
+4  diffuse glossy and treansmission
+06
+
+6 transparancey and 2.00 filter glossy max 6 bounces
+
+tile_size: auto tile size
+
+light settins
+light bounces 4
+multiple importance
+
+hdr maps
+bounces 4ish
+
+use denoising
+
+shift z while scaleing: only scale along x and y
+
+proportional editing - o
+can chnage function
+change size with scrool wheel
+if you hide vericies they arent moved - h
+alt+h - return hidden
+
+
+boolean operation:
+choose object
+often messes mesh
+alt+ click shaows direction
+sub-ser shows issue
+
+k: knife tool draws verticies
+c: constrain to angle
+
+extra edges- gg move all the way to double verticies
+w: to remove doubles
+alt +m: merge indicies
+
+
+object_settings,
+draw type to wire for boolean shape
+
+mirror operator
+
+before apply on a modifier, move to trash layer
+can use clipping
+
+f: make a face
+
+keep mesh lean, use sub-surf
+
+shift+ e -  make a crease (not affected by sub-surf)
+has a magnitude
+not high control, maximum is okay
+midway not so much
+
+loop cuts on both sides for control
+
+
+i: inset to make internal face
+b: will elliminate boundary
+
+
+f: while holding two triangles; - will make a face
+
+loop cut:
+    e: sticks to shape makes even
+    f:
+
+merge verticies
+alt+m
+
+w: remove doubles
+
+
+shadiing:
+matcap to change solid colour
+
+
+
+
+
+

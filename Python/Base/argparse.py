@@ -1,5 +1,5 @@
-import sys
 import argparse
+import sys
 
 parser = argparse.ArgumentParser(description="calculate X to the power of Y")
 

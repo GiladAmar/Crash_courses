@@ -171,22 +171,19 @@ Size management:
          ) - delete \
          && find /usr/local/lib/python3.8 -name '__pycache__' | xargs rm -r
 
-    * docker build -f filaneme.Dockerfile -t image_name --squash
+    * docker build -f filename.Dockerfile -t image_name --squash
         creates a single layer without you having to write long winded RUNs
 
     * PYPI wheels not compatible with alpine base images
         wheels dont require compilation
 
-        BUT you can install these deps and then use multi stae builds to only copy across the results
+        BUT you can install these deps and then use multi state builds to only copy across the results
             use this: python:3.8-slim-buster
 
     * clean apt-get installs:
         RUN apt-get install -y && \
         unzip \
-        wget && \
-        rm -rf /var/lib/apt/lists/* && \
-        apt-get purge   --auto-remove && \
-        apt-get clean
+        wget
 
     * COPY only what is required
 

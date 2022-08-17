@@ -1,7 +1,8 @@
 import os
+import random
 import subprocess
 import sys
-import random
+
 
 def safe_shuffle(xs):
 
@@ -232,10 +233,10 @@ def strip_extra_whitespace(string: str) -> str:
     return re.sub(r"\s+", " ", string.strip())
 
 
+import os
+import resource
 # Set resource limits
 import signal
-import resource
-import os
 
 
 def set_max_runtime(seconds):
@@ -251,5 +252,25 @@ def set_max_memory(size):
     resource.setrlimit(resource.RLIMIT_AS, (size, hard))
 
 
+import os
+import random
+
+import numpy as np
+import tensorflow as tf
 # TODO
 from pandas.testing import assert_frame_equal
+from tfdeterminism import patch
+
+
+def seed(s=42):
+    random.seed(s)
+    np.random.seed(s)
+    tf.random.set_seed(s)
+    tf.experimental.numpy.random.seed(s)
+    tf.set_random_seed(s)
+
+    os.environ['TF_CUDNN_DETERMINISTIC'] = '1'
+    os.environ['TF_DETERMINISTIC_OPS'] = '1'
+    patch()
+
+# https://github.com/NVIDIA/framework-determinism

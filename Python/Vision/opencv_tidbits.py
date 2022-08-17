@@ -165,7 +165,6 @@ def affine_to_components(affine_array):
 # vlc v4l2:///dev/videoN:chroma=mjpg:width=1920:height=1080
 import cv2
 
-
 cap = cv2.VideoCapture(0, cv2.CAP_DSHOW) # for windows backed
 
 
@@ -380,13 +379,13 @@ for imagePath in glob.glob(args["images"] + "/*.jpg"):
    cv2.imshow("Image", image)
    cv2.waitKey(0)
 
-# import the necessary packages
-import numpy as np
 import argparse
 import glob
-import cv2
 
+import cv2
+import numpy as np
 from skimage.measure import structural_similarity as ssim
+
 s = ssim(imageA, imageB)
 
 # Create depth map from stereo images:
@@ -695,12 +694,10 @@ or https://github.com/marrrcin/swt-python
    swt_result = np.reshape(swt_result_raw, (len(swt_result_raw) / 4, 4))
 
 
+# SOBEL
+from scipy import ndimage
 from skimage import exposure
 
-
-
-# SOBEL
-   from scipy import ndimage
    sx = ndimage.sobel(source_image, axis=0, mode='constant')  # x-axis
    sy = ndimage.sobel(source_image, axis=1, mode='constant')  # y-axis
    s = np.sqrt(sx ** 2 + sy ** 2)                             # magnitude
@@ -820,8 +817,9 @@ Salieny map:
 
 # Multi thread video read and write:
     import time
-    import cv2
     from concurrent.futures import ProcessPoolExecutor
+
+    import cv2
     pool = ProcessPoolExecutor(max_workers=2)
 
     def read_and_write(camera, filename):
@@ -859,6 +857,7 @@ ft.putText(img=img,
 
 # Tone mapping:
 import cv2
+
 hdr = cv2.imread(hdr_path, flags=cv2.IMREAD_ANYDEPTH)
 # Tone-mapping and color space conversion ( There are other tone-mapping methods)
 tonemap = cv2.createTonemapDrago(2.2)
@@ -866,3 +865,84 @@ scale = 5
 ldr = scale * tonemap.process(hdr)
 # Remap to 0-255 for the bit-depth conversion
 cv2.imwrite(ldr_path, ldr*255)
+
+
+#Border:
+image = cv2.copyMakeBorder(image,
+                           epn_width, epn_width, epn_width, epn_width,
+                           cv2.BORDER_CONSTANT, value=[0, 0, 0])
+
+
+#Image extensions list:
+image_format_list = ["jpeg", "jpg", "gif", "png", "bmp", "tiff", "ppm", "pgm", "pbm", "pnm"]
+
+
+
+
+
+#Interactive Notebook Plots:
+import matplotlib.pyplot as plt
+from IPython.core.interactiveshell import InteractiveShell
+from tqdm.notebook import tqdm
+
+InteractiveShell.ast_node_interactivity = "all"
+%matplotlib inline
+
+import numpy as np
+import pandas as pd
+from tupy.unified_view import processing
+
+plt.rcParams["figure.dpi"] = 150
+
+options = {
+    'display': {
+        'max_columns': None,
+        'max_colwidth': 200,
+        'expand_frame_repr': False,  # Don't wrap to multiple pages
+        'max_rows': 1000,
+        'max_seq_items': 1000,       # Max length of printed sequence
+        'precision': 4,
+        'show_dimensions': True
+    },
+    'mode': {
+        'chained_assignment': None   # Controls SettingWithCopyWarning
+    }
+}
+
+for category, option in options.items():
+    for op, value in option.items():
+        pd.set_option(f'{category}.{op}', value)  # Python 3.6+
+
+from IPython.core.interactiveshell import InteractiveShell
+
+InteractiveShell.ast_node_interactivity = "all"
+
+import seaborn as sns
+
+sns.set(style="white", palette="muted", color_codes=True)
+
+profile_shape = (10, 5)
+
+
+# Draw class label and confidence:
+pt1, pt2 = (bbox[0], bbox[1]), (bbox[2], bbox[3])
+pt1 = int(pt1[0]), int(pt1[1])
+pt2 = int(pt2[0]), int(pt2[1])
+class_name = class_dict[label]
+((text_width, text_height), _) = cv2.getTextSize(class_name, cv2.FONT_HERSHEY_SIMPLEX, 0.35, 1)
+img = cv2.rectangle(img.copy(), pt1, pt2, color, int(max(img.shape[:2]) / 200))
+img = cv2.putText(img.copy(), class_name, (int(bbox[0]), int(bbox[1]) - int(0.3 * text_height)),
+                  cv2.FONT_HERSHEY_SIMPLEX, fontScale=1, color=(255, 255, 255), lineType=cv2.LINE_AA)
+
+
+
+#plot image matrix:
+def plot_multiple_img(img_matrix_list, title_list, ncols, main_title=""):
+    fig, myaxes = plt.subplots(figsize=(20, 15), nrows=1, ncols=ncols, squeeze=False)
+    fig.suptitle(main_title, fontsize = 30)
+    fig.subplots_adjust(wspace=0.3)
+    fig.subplots_adjust(hspace=0.3)
+    for i, (img, title) in enumerate(zip(img_matrix_list, title_list)):
+        myaxes[i // ncols][i % ncols].imshow(img)
+        myaxes[i // ncols][i % ncols].set_title(title, fontsize=15)
+    plt.show()

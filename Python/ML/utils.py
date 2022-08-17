@@ -1,8 +1,8 @@
-from math import cos, sin, radians
-import numpy as np
-import cv2
-import pandas as pd
+from math import cos, radians, sin
 
+import cv2
+import numpy as np
+import pandas as pd
 from config import Config
 
 config = Config()
@@ -95,8 +95,8 @@ def plot_keypoints(images, keypoints, confidences=None, save_file=None):
 
 
 def plot_superimposed_heatmaps(src_img, heatmaps, save_to_fname=None, keypoints=None):
-    """ src img shape [h, w]
-        heatmaps shape [h, w, n_keypoints]
+    """src img shape [h, w]
+    heatmaps shape [h, w, n_keypoints]
     """
     Nplot = heatmaps.shape[2]
 

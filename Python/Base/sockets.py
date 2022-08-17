@@ -1,10 +1,10 @@
-from socket import socket, gethostbyname, AF_INET, SOCK_STREAM
-import cv2
-from PIL import Image
 import io
 import time
-import numpy as np
+from socket import AF_INET, SOCK_STREAM, gethostbyname, socket
 
+import cv2
+import numpy as np
+from PIL import Image
 from tqdm import tqdm
 
 PORT_NUMBER = 5000

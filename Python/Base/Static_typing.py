@@ -16,7 +16,7 @@ def headline(text: str, align: bool = True) -> str:
     # dict
 
 
-from typing import Dict, List, Tuple, Sequence
+from typing import Dict, List, Sequence, Tuple
 
 names: List[str] = ["Guido", "Jukka", "Ivan"]
 version: Tuple[int, int, int] = (3, 7, 1)
@@ -47,7 +47,7 @@ def black_hole() -> NoReturn:
 
 
 # Optional is type specified or None
-from typing import Sequence, Optional
+from typing import Optional, Sequence
 
 
 def player_order(names: Sequence[str], start: Optional[str] = None) -> Sequence[str]:
@@ -102,7 +102,7 @@ import numpy as np
 
 np.NDArrayOperatorsMixin
 
-from typing import TypeVar, Iterable, Tuple
+from typing import Iterable, Tuple, TypeVar
 
 T = TypeVar("T", int, float, complex)
 

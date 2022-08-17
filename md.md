@@ -47,4 +47,65 @@ for i in range(5):
 ```
 
 
+## Dropdowns
+<details>
+  <summary>
+  Click here for more
+  </summary>
+This is more.
+</details>
 
+
+
+## Image:
+<img src="https://upload.wikimedia.org/wikipedia/commons/d/d3/Albert_Einstein_Head.jpg" width="400x;" height="300px;"/>
+
+
+## Alignment:
+<p align="center"><a href="https://github.com/bregman-arie/system-design-notebook"><img src="https://upload.wikimedia.org/wikipedia/commons/d/d3/Albert_Einstein_Head.jpg"/></a></p>
+
+## Button:
+[![License: CC BY-NC-ND 3.0](https://img.shields.io/badge/License-CC%20BY--NC--ND%203.0-lightgrey.svg)](https://creativecommons.org/licenses/by-nc-nd/3.0/)
+
+
+# Emoji
+:pencil: &nbsp;You can add more exercises by submitting pull requests :) Read about contribution guidelines [here](md.md)
+:bowtie:
+****
+
+[text goes here](#section_name)
+          section_title<a name="section_name"></a>    
+
+# Table:
+| Left aligned Header | Right aligned Header | Center aligned Header |
+|:--------------------|---------------------:|:---------------------:|
+| Content Cell        |         Content Cell |     Content Cell      |
+| Content Cell        |         Content Cell |     Content Cell      |
+
+
+# Quotes
+ > Blockquote
+ >> Nested Blockquote
+ > 
+# Lines
+
+Dashes
+
+---
+
+Hyphens
+***
+
+Asterisks
+___
+
+# Footnotes
+Here is a simple footnote[fox][1].
+
+[1]: My reference.
+
+
+	<sub>This is a subscript text</sub>
+
+
+<!-- This content will not appear in the rendered Markdown -->

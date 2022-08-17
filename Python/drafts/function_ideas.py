@@ -45,6 +45,7 @@ def load_latest(folder, matching, reading_func, specific_date):
 
 from datetime import datetime
 
+
 def save_dated(data, save_func, base_name, suffix, specific_date=None, description):
 
     if folder of base name does not exist:

@@ -176,7 +176,7 @@ git branch -d <branch name>                             # Destroy branch
 # REMOTE REPOSITORIES
 git clone remote_location <clone_name>  # Download origin project
 
-*forking is cloning only on github
+*forking is cloning only on GitHub
 
 git remote -v                           # See all remote projects
 git remote add <def_name: origin> <url>
@@ -199,3 +199,7 @@ git pull  <remote> <branch>                 # downloads bookmark history and inc
 
 # TODOs
     Make a file rename its own commit (so as not to confuse git)
+
+# Switching Branches
+`git switch -c <new_branch>`
+Creates a new branch and brings you local changes over.

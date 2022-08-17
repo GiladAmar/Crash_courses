@@ -6,7 +6,7 @@ hdf5
 imgaug
 ipdb
 ipython
-jupyter notebook
+jupyterlab
 keras
 line_profiler
 matplotlib
@@ -27,3 +27,16 @@ seaborn
 sqlalchemy
 tensorflow-gpu
 tqdm
+
+
+fast-api
+catboost
+xgboost
+umap
+dbscan
+hyperopt
+fbprophet
+sympy
+lightgbm
+torch
+pytorch

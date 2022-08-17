@@ -16,7 +16,7 @@ case-sensitive
     [^abc]    Single wildcard NOT in list [^ ]
     \w        Metacharacter, equivalent to [A-Za-z0-9_]; often used to match characters in English text.
     \W        Non-alphanumeric 
-              e.g. punctuation, and underscore equivalent to [a-zA-Z0-9_]
+              e.g. punctuation, and underscore equivalent to [^a-zA-Z0-9_]
     
     a{3}      Makes 3 repetitions of a
     a{1-3}    Some engines allow a specified range of repetitions
@@ -24,12 +24,13 @@ case-sensitive
     .{2,6}    Any two to six characters
     
     c*        0 or more c's
-    c+        One or more c's
-    \d+       One or more digit
-    [abc]+    One or more of a, b or c.
+    c+        1 or more c's
+    \d+       1 or more digit
+    [abc]+    1 or more of a, b or c.
     ab?c      b is optional, may or may not be there
-      Special characters don't have meaning inside a set 
-      e.g. [*+] means where it matches * or +
+              
+    Special characters don't have meaning inside a set
+    e.g. [*+] means where it matches * or +
 
     ' '       Space
     \t        Tab
@@ -72,6 +73,9 @@ Find urls:
 
     (https?:\/\/)(www\.)?(?<domain>[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6})(?<path>\/[-a-zA-Z0-9@:%_\/+.~#?&=]*)?
 
+Is Prime:
+
+    /^1?$|^(11+?)\1+$/
 Replace date formats:
 ```python
 import re
@@ -122,3 +126,8 @@ Make the next sequence case-insensitive
       test string: stackoverflow
         greedy : s.*o  -> stackoverflo
         lazy   : s.*?o -> stacko
+
+Finding all chars from a different character-set e.g Chinese:
+```[\x{4e00}-\x{9fa5}]+```
+or hebrew
+```[a-z\u0590-\u05fe]+```

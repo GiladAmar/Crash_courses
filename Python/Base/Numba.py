@@ -8,7 +8,9 @@ def f(x, y):
 
 
 # -------------------------------------------------------------------------------
-from numba import jit, int32
+from numba import int32, jit, njit
+# use njit as that will break if there is an issue compiling the function - and not give
+# you the illusion that it is compiling
 
 
 @jit(int32(int32, int32))  # Define expected input and output types
@@ -41,7 +43,7 @@ def add_to_each(items):
 
 import numpy as np
 from numba import jitclass  # import the decorator
-from numba import int32, float32  # import the types
+from numba import float32, int32  # import the types
 
 spec = [
     ("value", int32),  # a simple scalar field
@@ -66,7 +68,7 @@ class Bag(object):
 
 
 # -------------------------------------------------------------------------------
-from numba import vectorize, float64
+from numba import float64, vectorize
 
 
 @vectorize([float64(float64, float64)])  # vectorize to form numpy-like function
@@ -81,7 +83,8 @@ def f(x, y):
 
 
 # -------------------------------------------------------------------------------
-from numba import (njit, prange)
+from numba import njit, prange
+
 # Use prange instead of range to specify that the loop can be operated in parallel
 
 
