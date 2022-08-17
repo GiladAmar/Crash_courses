@@ -1,0 +1,91 @@
+Cameras, Lenses, Lights and Filters, Oh My!
+
+
+
+Camera:
+    Structure
+    Sensor
+        material
+        Bayer
+            demosaicking algo
+            moiré artifacts
+            low pass filters or AA filters
+            micro-lenses
+        Dynamic Range
+        Metering
+        White Balance
+        Bit Depth
+        Sharpness
+        Noise
+        ISO
+        Size
+            crop factor
+
+        Diffraction
+
+        Dead Pixels
+        Clipping
+
+    Lens:
+        Types
+            wide angle
+            telephoto
+        Aperture
+            f-stops
+        Shutter type
+        Shutter SPeed
+        Auto-focus
+        Depth of Field
+
+        MTF
+        Resolution
+        Contrast
+
+
+        Lens Flare
+        Vignetting
+        Distortion
+        Chromatic Aberration
+
+
+    Lights
+        Filaments
+        Geometry
+        Angle
+        Polarization
+        Structured
+
+
+    Filters:
+        Colors
+        Polarization
+        IR and UV
+        ND GND
+
+
+    New:
+
+
+Stacking
+Averaging
+F stop stacking
+
+post capture focusing
+polarization cams
+depth cams
+iR infrared
+
+HDR:
+
+
+Files:
+    Formats
+
+
+
+
+More:
+    compresion algs
+    processing platforms
+    IO rates
+    line scan cameras

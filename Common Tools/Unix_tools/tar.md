@@ -14,8 +14,8 @@ In terms of archive size:
 
     tar > zip > gz > bz2
 
-gz - a compressed collection. Requires whole file to be extracted together
-zip -  a collection of separately compressed files
+- gz - a compressed collection. Requires whole file to be extracted together
+- zip -  a collection of separately compressed files
 ### Add specific file
 
 ```bash

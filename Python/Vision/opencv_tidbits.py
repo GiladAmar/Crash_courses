@@ -63,8 +63,6 @@ for img in images:
 fps = cv2.getTickFrequency() / (cv2.getTickCount() - timer)
 
 
-
-
 cv2.putText(foreground_display, "hand pose: error", positions['hand_pose'], cv2.FONT_HERSHEY_SIMPLEX, 0.75, (0, 0, 255), 2)
     
         
