@@ -1,14 +1,15 @@
 # rsync
 
 ## Options
-```
--a                          preserves dates/times and permission
--z                          compress
--P                          progress
---delete                    delete extraneous files from destination
--exclude <folder/filename   exclude files
--v                          verbose
-```
+|           Option           | Description                              |
+|:--------------------------:|:-----------------------------------------|
+|             -a             | Preserve dates/times and permission      |
+|             -z             | Compress                                 |
+|             -P             | Progress bar                             |
+|          --delete          | Delete extraneous files from destination |
+| -exclude <folder/filename> | Exclude files                            |
+|             -v             | Verbose                                  |
+
 ## Rare use case:
 ```
 -e 'ssh -p 3022'            To access files on remote with specific port
@@ -23,7 +24,7 @@
 `folder_name/` - means the contents thereof.
 `folder_name` - refers to the whole folder.
 
-Useful default:
+## Useful default:
 ```bash
 rsync -azvP
 ```

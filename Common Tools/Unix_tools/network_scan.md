@@ -4,7 +4,7 @@
 ```bash
 sudo nmap -sn 10.0.0-1.0-255    # specifying ranges of search. 
 ```
-Use eth or wifi ip as guide to available networks.
+Use eth or Wi-Fi ip as guide to available networks.
 Sudo allows it to get more information but is not a requirement.
 
 ## Detailed single IP scan

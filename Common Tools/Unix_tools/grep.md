@@ -4,27 +4,40 @@ Find search_string withing a folder or file
 ```grep search_string folder_or_file```
 
 ## Options
-    -r      Recursive
-    -R      Recursive, follow symbolic links
+| Option | Description                                    |
+|:------:|:-----------------------------------------------|
+|   -r   | Recursive                                      |
+|   -R   | Recursive, follow symbolic links               |
 
-    -i      Ignore_case
-    -v      Invert (show lines that don't match)
-    -w      The match must be the full word
 
-    -E      Use regex search_string
-    -e      Add a search term
-    -x      Entire line match only
+| Option | Description                                    |
+|:------:|:-----------------------------------------------|
+|   -i   | Ignore_case                                    |
+|   -v   | Invert (show lines that don't match)           |
+|   -w   | The match must be the full word                |
 
-    -c      Count matches
-    -n      Display line number of matches
-    -m      Max matches
+| Option | Description                                    |
+|:------:|:-----------------------------------------------|
+|   -E   | Use regex search_string                        |
+|   -e   | Add a search term                              |
+|   -x   | Entire line match only                         |
 
-    -A x    Show x lines after matching term
-    -B x    Show x lines before matching term
-    -C x    Show x lines before and after matching term
+| Option | Description                                    |
+|:------:|:-----------------------------------------------|
+|   -c   | Count matches                                  |
+|   -n   | Display line number of matches                 |
+|   -m   | Max matches                                    |
 
-    -l      Display filenames containing matching text
-    -L      Display filenames NOT containing matching text
+| Option | Description                                    |
+|:------:|:-----------------------------------------------|
+|  -A x  | Show x lines after matching term               |
+|  -B x  | Show x lines before matching term              |
+|  -C x  | Show x lines before and after matching term    |
+
+| Option | Description                                    |
+|:------:|:-----------------------------------------------|
+|   -l   | Display filenames containing matching text     |
+|   -L   | Display filenames NOT containing matching text |
 
 Pipe search results into less for easier viewing and searching:
 ```

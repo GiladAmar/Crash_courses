@@ -82,24 +82,26 @@ until !!; do echo Command interrupted, restarting in 5s ...; sleep 5; done
 ```bash
 SomeCommand > SomeFile.txt
 ```
-    ||          || visible in terminal ||   visible in file   || existing
-    ||  Syntax  ||  StdOut  |  StdErr  ||  StdOut  |  StdErr  ||   file
-    ||==========++==========+==========++==========+==========++===========
-    ||    >     ||    no    |   yes    ||   yes    |    no    || overwrite
-    ||    >>    ||    no    |   yes    ||   yes    |    no    ||  append
-    ||          ||          |          ||          |          ||
-    ||   2>     ||   yes    |    no    ||    no    |   yes    || overwrite
-    ||   2>>    ||   yes    |    no    ||    no    |   yes    ||  append
-    ||          ||          |          ||          |          ||
-    ||   &>     ||    no    |    no    ||   yes    |   yes    || overwrite
-    ||   &>>    ||    no    |    no    ||   yes    |   yes    ||  append
-    ||          ||          |          ||          |          ||
-    || | tee    ||   yes    |   yes    ||   yes    |    no    || overwrite
-    || | tee -a ||   yes    |   yes    ||   yes    |    no    ||  append
-    ||          ||          |          ||          |          ||
-    || |& tee   ||   yes    |   yes    ||   yes    |   yes    || overwrite
-    || |& tee -a||   yes    |   yes    ||   yes    |   yes    ||  append
 
+    |           || visible in terminal || visible in file  || existing  |
+    |-----------||---------------------||------------------||-----------|
+    |   Syntax  ||  StdOut  |  StdErr  || StdOut |  StdErr ||   file    |
+    |-----------||---------------------||------------------||-----------|
+    |    >      ||    no    |   yes    ||  yes   |    no   || overwrite |
+    |    >>     ||    no    |   yes    ||  yes   |    no   ||  append   |
+    |-----------||---------------------||------------------||-----------|
+    |   2>      ||   yes    |    no    ||   no   |   yes   || overwrite |
+    |   2>>     ||   yes    |    no    ||   no   |   yes   ||  append   |
+    |-----------||---------------------||------------------||-----------|
+    |   &>      ||    no    |    no    ||  yes   |   yes   || overwrite |
+    |   &>>     ||    no    |    no    ||  yes   |   yes   ||  append   |
+    |-----------||---------------------||------------------||-----------|
+    | | tee     ||   yes    |   yes    ||  yes   |    no   || overwrite |
+    | | tee -a  ||   yes    |   yes    ||  yes   |    no   ||  append   |
+    |-----------||---------------------||------------------||-----------|
+    | |& tee    ||   yes    |   yes    ||  yes   |   yes   || overwrite |
+    | |& tee -a ||   yes    |   yes    ||  yes   |   yes   ||  append   |
+    |-----------||---------------------||------------------||-----------|
 
 ## Find recursive:
 ```
@@ -112,4 +114,4 @@ lsof /dev/video0
 ```
 
 
-wc -l # counts the number of \n. So if your file doesn't end on one the count will not match up
+```wc -l``` counts the number of ```\n```. So if your file doesn't end on one the count will not match up with the actual number or rows.

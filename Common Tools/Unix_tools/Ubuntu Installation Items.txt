@@ -6,6 +6,9 @@ Or at least installing them as signed is a pain.
 
 --  Copy some of .bashrc
 
+--  Bash Autocompletion
+        sudo apt install -y bash-completion
+
 SYSTEM LIBRARIES ---------------------------------------------------------
 --  Headers:
         sudo apt install -y gcc make linux-headers-$(uname -r) dkms
@@ -54,6 +57,9 @@ PROGRAMMING ---------------------------------------------------------------
             copy git-completion
             copy git_prompt
 
+        Bash Completion - needs to be tested:
+            curl -O https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash -o /etc/bash_completion.d/git
+
 --  Docker
         curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
         sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
@@ -65,11 +71,21 @@ PROGRAMMING ---------------------------------------------------------------
             sudo gpasswd -a $USER docker
             newgrp docker
 
+        Bash Completion
+            sudo curl -L https://raw.githubusercontent.com/docker/compose/v2.7.0/contrib/completion/bash/docker-compose -o /etc/bash_completion.d/docker-compose
+
 --  Docker-compose
         sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
         sudo chmod +x /usr/local/bin/docker-compose
         sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
         docker-compose --version
+
+        Bash Completion
+        sudo curl -L https://raw.githubusercontent.com/docker/compose/v2.7.0/contrib/completion/bash/docker-compose -o /etc/bash_completion.d/docker-compose
+
+-- Dive (Docker image exploration tool)
+        wget https://github.com/wagoodman/dive/releases/download/v0.9.2/dive_0.9.2_linux_amd64.deb
+        sudo apt install ./dive_0.9.2_linux_amd64.deb
 
 --  Pycharm
         sudo snap install pycharm-professional --classic
@@ -86,6 +102,7 @@ PROGRAMMING ---------------------------------------------------------------
             Add the following line to /etc/sysctl.conf file
                 fs.inotify.max_user_watches = 524288
             sudo sysctl -p --system
+
 --  Set swappiness:
         https://averagelinuxuser.com/after-installing-ubuntu-20-04/#10-configure-hi-dpi-display
         cat /proc/sys/vm/swappiness # 60 (default)
@@ -104,6 +121,9 @@ PROGRAMMING ---------------------------------------------------------------
 
 --  Screen/tmux
         sudo apt install -y screen tmux
+
+        Bash Completion
+        echo "defshell -bash" >> ~/.screenrc
 
 --  Iotop
         sudo apt install -y iotop
@@ -223,6 +243,7 @@ https://david-littlefield.medium.com/how-to-install-the-nvidia-cuda-driver-toolk
 MEDIA ------------------------------------------------------
 --  GIMP
         sudo apt install -y gimp
+
 --  VLC
         sudo apt install -y vlc
 
@@ -339,12 +360,24 @@ MISC NOTES
         aws-vault add <profile>
         aws-vault exec <profile> -- aws s3 ls
         aws-vault list
+        add ```eval "$(aws-vault --completion-script-bash)"``` to bashrc# Shell completion
 
  is setting sappiness necessary?
 
  python packages
 
  jupyter widgets
+ pip install jupyter_contrib_nbextensions
+ jupyter contrib nbextension install --user
+
+#  ipython history size:
+$ ipython profile create
+Modify the ipython_config.py .ipython/profile_default/ipython_config.py
+
+Uncommented and changed the values for:
+    c.InteractiveShell.history_length = 100000
+    c.InteractiveShell.history_length = 10000
+-----------------------------
 
 for matplotlib backed tkagg
 sudo apt-get install python3-tk
@@ -366,6 +399,10 @@ Dischord:
 AWSCLI
     sudo apt install -y awscli
 
+    Bash Completion:
+    ```which aws_completer``` to get the location then
+    Add ```complete -C '/bin/aws_completer' aws``` to your .bashrc
+
 EPUB:
     sudo apt-get install fbreader
 
@@ -373,3 +410,7 @@ DISABLE CAPS LOCK:
     sudo apt-get install dconf-tools
     setxkbmap -option "caps:none"
     setxkbmap -option "shift:both_capslock"
+
+#TODO add useful dotfiles
+
+#TODO add pycharm Isort installation

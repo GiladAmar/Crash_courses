@@ -1,19 +1,20 @@
 # Basic use
 ssh username@address
 
-    -i <fname> use certificate as authentication
-    -X Tunnel graphical displays 
-        (i.e. plt.show() on instance shows picture on your desktop)
-        If it fails use -Y
-        You may need to use another matplotlib backend using "matplotlib.use('GTKAgg')"
-    -A Authentication forwarding (make sure ssh-agent is running and ssh-add has been run)
-        useful for git clones/pulls etc.
-        e.g.
-            ssh-agent
-            ssh-keygen
-            ssh-add
-            ssh -A gilad@whatever
-    -p Specify port
+|   Option   | Description                                                                         |
+|:----------:|:------------------------------------------------------------------------------------|
+| -i <fname> | use certificate as authentication                                                   |
+|     -X     | Tunnel graphical displays<br/>(i.e. plt.show() on instance shows picture on your desktop)                         |
+|            | If it fails use -Y                                                                  |
+|            | You may need to use another matplotlib backend using "matplotlib.use('GTKAgg')"     |
+|     -A     | Authentication forwarding (make sure ssh-agent is running and ssh-add has been run) |
+|            | useful for git clones/pulls etc.                                                    |
+|            | e.g.                                                                                |
+|            | ssh-agent                                                                           |
+|            | ssh-keygen                                                                          |
+|            | ssh-add                                                                             |
+|            | ssh -A gilad@whatever                                                               |
+|     -p     | Specify port                                                                        |
 
 - ssh-add will add ALL private keys for forwarded
 - ssh -i ~/.ssh/id_ed25519 ... will just use the one.
@@ -55,14 +56,10 @@ umount sshfs-dir
 
 # Creating an ssh key
 ```ssh-keygen -a 100 -t ed25519 -f ~/.ssh/id_ed25519 -C "user@email.com"```
-```
--a 100 
- Perform 100 key derivation function rounds. Larger numbers are harder to brute-force but make verification slower.
--t ed25519
- Use the ed25519 algorithm. The default is rsa which is less secure and a longer string.
--f ~/.ssh/id_ed25519 
-  Place in the filepath ~/.ssh/id_ed25519. This is the default location. 
-  If the flag is ommited ssh-keygen will prompt for a directory.
--C "user@email.com"
- A comment, could be anything, but convention is to specify a means of contact.
-```
+
+|          Option          | Description                                                                                                                                     |
+|:------------------------:|:------------------------------------------------------------------------------------------------------------------------------------------------|
+|         -a  100          | Perform 100 key derivation function rounds.<br/>Larger numbers are harder to brute-force but make verification slower.                          |
+|        -t ed25519        | Use the ed25519 algorithm.<br/>The default is rsa which is less secure and a longer string.                                                     |
+| -f     ~/.ssh/id_ed25519 | Place in the filepath ~/.ssh/id_ed25519.<br/>This is the default location. \<br/>If the flag is omitted ssh-keygen will prompt for a directory. |
+| -C     "user@email.com"  | A comment, could be anything, but convention is to specify a means of contact.                                                                  |

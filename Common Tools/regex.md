@@ -3,39 +3,39 @@
 
 Case-sensitive by default
 
-|        Symbol        | Description                                                                                        |
-|:--------------------:|:---------------------------------------------------------------------------------------------------|
-|          \d          | Digits 0-9                                                                                         |
-|          \D          | Non-digit                                                                                          |
-|          .           | Single wildcard matching anything except a newline. <br/>Use escape to match a period ```\.```     |
-|        [abc]         | Single wildcard of specified list in []                                                            |
-|       [A-Za-z]       | Single wildcard in whole char range                                                                |
-|        [3-9]         | Digits 3 to 9                                                                                      |
-|        [^abc]        | Single wildcard NOT in list [^ ]                                                                   |
-|          \w          | Metacharacter.<br/>Equivalent to [A-Za-z0-9_].                                                     |
-|          \W          | Non-alphanumeric.<br/>Equivalent to [^a-zA-Z0-9_]                                                  |
-|         a{3}         | Makes 3 repetitions of a                                                                           |
-|        a{1-3}        | Some engines allow a specified range of repetitions                                                |
-|       [wxy]{5}       | Five characters of either wxy                                                                      |
-|        .{2,6}        | Any two to six characters                                                                          |
-|          c*          | 0 or more c's                                                                                      |
-|          c+          | 1 or more c's                                                                                      |
-|         \d+          | 1 or more digit                                                                                    |
-|        [abc]+        | 1 or more of a, b or c.                                                                            |
-|         ab?c         | b is optional, may or may not be there                                                             |
-|         [*+]         | **NB** Special chars don't have meaning inside a set.<br/>This matches * or +                           |
-|         ' '          | Space                                                                                              |
-|          \t          | Tab                                                                                                |
-|          \n          | Newline                                                                                            |
-|          \r          | Carriage return                                                                                    |
-|          \b          | Boundary between word and non word                                                                 |
-|          \B          | Not a word boundary e.g. never at the end of a sentence                                            |
-|          \s          | Matches ALL space types                                                                            |
-|          \S          | Non-whitespace                                                                                     |
-|        ^___$:        | ^ is the start and $ the end of the line                                                           |
-|       (X)....        | Whole string is matched but only part in () is returned                                            |
-|        (X(Y))        | Can capture multiple, even nested items                                                            |
-|   (cat &#124; dog)   | The OR operator                                                                                    |
+|      Symbol      | Description                                                                                    |
+|:----------------:|:-----------------------------------------------------------------------------------------------|
+|        \d        | Digits 0-9                                                                                     |
+|        \D        | Non-digit                                                                                      |
+|        .         | Single wildcard matching anything except a newline. <br/>Use escape to match a period ```\.``` |
+|      [abc]       | Single wildcard of specified list in []                                                        |
+|     [A-Za-z]     | Single wildcard in whole char range                                                            |
+|      [3-9]       | Digits 3 to 9                                                                                  |
+|      [^abc]      | Single wildcard NOT in list [^ ]                                                               |
+|        \w        | Metacharacter.<br/>Equivalent to [A-Za-z0-9_].                                                 |
+|        \W        | Non-alphanumeric.<br/>Equivalent to [^a-zA-Z0-9_]                                              |
+|       a{3}       | Makes 3 repetitions of a                                                                       |
+|      a{1-3}      | Some engines allow a specified range of repetitions                                            |
+|     [wxy]{5}     | Five characters of either wxy                                                                  |
+|      .{2,6}      | Any two to six characters                                                                      |
+|        c*        | 0 or more c's                                                                                  |
+|        c+        | 1 or more c's                                                                                  |
+|       \d+        | 1 or more digit                                                                                |
+|      [abc]+      | 1 or more of a, b or c.                                                                        |
+|       ab?c       | b is optional, may or may not be there                                                         |
+|       [*+]       | **NB** Special chars don't have meaning inside a set.<br/>This just matches * or +             |
+|       ' '        | Space                                                                                          |
+|        \t        | Tab                                                                                            |
+|        \n        | Newline                                                                                        |
+|        \r        | Carriage return                                                                                |
+|        \b        | Boundary between word and non word                                                             |
+|        \B        | Not a word boundary e.g. never at the end of a sentence                                        |
+|        \s        | Matches ALL space types                                                                        |
+|        \S        | Non-whitespace                                                                                 |
+|      ^___$:      | ^ is the start and $ the end of the line                                                       |
+|     (X)....      | Whole string is matched but only part in () is returned                                        |
+|      (X(Y))      | Can capture multiple, even nested items                                                        |
+| (cat &#124; dog) | The OR operator                                                                                |
 
 Make the next sequence case-insensitive
 
