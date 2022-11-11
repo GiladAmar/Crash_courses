@@ -22,3 +22,13 @@ print("decoded_byte64: ", len(decoded_byte64))
 
 im = Image.open(BytesIO(decoded_byte64))
 im.save("image.png", "PNG")
+
+
+# To instead make sure it is being compressed with jpeg first:
+def img_to_base64_str(self, img):
+    buffered = BytesIO()
+    img.save(buffered, format="jpeg")
+    buffered.seek(0)
+    img_byte = buffered.getvalue()
+    return base64.b64encode(img_byte).decode()
+

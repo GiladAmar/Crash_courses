@@ -64,6 +64,8 @@ from ipdb import launch_ipdb_on_exception
     interact       - starts an ipython like terminal
                          Exit with cntl + D 
     display <expression> - display value of expression if changed
+    ! list() -  Run the list function from Python and not the PDB command
+               Better yet, use "interact"
 
 
 ### MISC

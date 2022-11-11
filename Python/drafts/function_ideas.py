@@ -68,3 +68,16 @@ def save_sklearn_as_NON_pkl(obj, fname):
 
 def load_sklearn_from_NON_pkl(obj, fname):
     pass
+
+
+# Scheduling
+import schedule
+
+def do_something():
+    print(datetime.now(), "Doing the thing...")
+
+schedule.every(5).minutes.do(do_something)
+
+while True:
+    schedule.run_pending()
+    time.sleep(1)

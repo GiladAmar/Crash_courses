@@ -18,19 +18,19 @@
     Restrict a search so that all the keywords must appear in the title
 7. **intitle**:   
 
-    Restrict a search so some of the keywords must appear in the title
+    Restrict a search so some keywords must appear in the title
 8. **allintext**:  
 
-    Restrict a search so that all of the keywords must appear in the body text
+    Restrict a search so that all keywords must appear in the body text
 9. **allinurl**:   
 
-    Restrict a search so that all of the keywords must appear in the page address
+    Restrict a search so that all keywords must appear in the page address
 10. **inurl**:      
 
     Restrict a search so that some keywords must appear in the page address
 11. **OR**          
 
-    List pages which have at least some of the keywords
+    List pages which have at least some keywords
 12. **\+**
 
     Insist that the search engine includes a given keyword in the search results
@@ -43,21 +43,21 @@
 15. \*           
 
     Include a wildcard match in your search results
-17. [#]...[#]
+16. [#]...[#]
     
     Search a range of numbers as a keyword
-18. **""**          
+17. **""**          
 
     Restrict a search so that the keywords must appear consecutively in a phrase
-19. **date**:
+18. **date**:
 
     Restrict a search to a recent timeframe
-20. **safesearch**: 
+19. **safesearch**: 
 
     Restrict a search to exclude adult-content
-21. **filetype**:   
+20. **filetype**:   
 
     Restrict a search to a given type of file
-22. **language**:  
+21. **language**:  
 
     Restrict search to pages in language

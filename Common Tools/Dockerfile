@@ -194,6 +194,7 @@ Cache pip downloads (or other files) between builds for faster builds and reduce
 https://pythonspeed.com/articles/docker-buildkit/
 1. Ensure the buildkit is used
     $ export DOCKER_BUILDKIT=1
+
 2.Add # syntax=docker/dockerfile:1.2 as the first line of your Dockerfile.
 
 3. Docker-compose will also need this env variable set:
