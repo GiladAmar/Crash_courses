@@ -203,3 +203,32 @@ git pull  <remote> <branch>                 # downloads bookmark history and inc
 # Switching Branches
 `git switch -c <new_branch>`
 Creates a new branch and brings you local changes over.
+
+```bash
+# Finding large files in the git history
+https://stackoverflow.com/questions/10622179/how-to-find-identify-large-commits-in-git-history
+
+git rev-list --objects --all |
+  git cat-file --batch-check='%(objecttype) %(objectname) %(objectsize) %(rest)' |
+  sed -n 's/^blob //p' |
+  sort --numeric-sort --key=2 |
+  cut -c 1-12,41- |
+  $(command -v gnumfmt || echo numfmt) --field=2 --to=iec-i --suffix=B --padding=7 --round=nearest
+```
+
+# Destroying large files from the repo's history
+https://tyricwei.medium.com/how-to-delete-large-files-from-git-history-69826a457e74
+
+```bash
+git filter-repo --force --path <large file path> --invert-paths
+git reflog expire --expire=now --all
+git gc --prune=now
+# Add Your Github URL
+git remote add origin <Your Github URL>
+# Push the result to all the branches
+git push --all --force
+# Push the result to origin repo
+git push -u origin --all
+git push -u origin --tags -f
+
+```

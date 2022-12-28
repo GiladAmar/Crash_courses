@@ -109,3 +109,8 @@ Here is a simple footnote[fox][1].
 
 
 <!-- This content will not appear in the rendered Markdown -->
+
+# Maths
+On GitHub you can have math expressions be rendered like LaTex:
+When $a \ne 0$, there are two solutions to $(ax^2 + bx + c = 0)$ and they are 
+$$ x = {-b \pm \sqrt{b^2-4ac} \over 2a} $$
