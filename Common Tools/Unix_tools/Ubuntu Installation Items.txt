@@ -15,43 +15,27 @@ SYSTEM LIBRARIES ---------------------------------------------------------
         sudo apt install -y linux-image-generic linux-image-extra-virtual
         sudo apt install -y linux-source linux-headers-generic
 
---  Read NTFS drives:
-        sudo apt install -y exfat-fuse exfat-utils
-
---  Atlas
+--  Atlas/Blas/Frotran
         sudo apt install -y libatlas-base-dev
-
---  Blas
         sudo apt install -y libblas-dev liblapack-dev
+        sudo apt install -y gfortran
 
 --  RAR
         sudo apt install -y p7zip-rar p7zip-full unace unrar zip unzip sharutils rar uudeview mpack arj cabextract file-roller
 
---  Fortran
-        sudo apt install -y gfortran
-
 --  Codecs and encrypted DVD playback
-        sudo apt install -y ubuntu-restricted-extras libavcodec-extra libdvd-pkg
-        This may need you to run ```sudo dpkg-reconfigure libdvd-pkg```
-        see here: [https://askubuntu.com/questions/1094062/libdvd-pkg-apt-get-check-failed-you-may-have-broken-packages-aborting]
+       sudo apt-get install ubuntu-restricted-extras
+
 -- Snap
-    sudo apt install -y snapd snap-store
+    sudo apt install -y snapd
+    sudo snap install snap-store
 
 PROGRAMMING ---------------------------------------------------------------
 --  Curl
         sudo apt install -y curl
 
 --  Node NPM
-        curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
         sudo apt-get install -y nodejs
-
-        node --openssl-legacy-provider ./node_modules/.bin/gatsby build
-
---  Yarn
-        curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
-        echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
-        sudo apt update
-        sudo apt install -y yarn
 
 --  Git
         sudo apt install -y git
@@ -61,35 +45,12 @@ PROGRAMMING ---------------------------------------------------------------
         Bash Completion - needs to be tested:
             curl -O https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash -o /etc/bash_completion.d/git
 
---  Docker
-        sudo apt install -y apt-transport-https ca-certificates curl software-properties-common
-        curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-        sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable"
-        apt-cache policy docker-ce
-        sudo apt update && sudo apt install -y docker-ce
-
-        Add User to the docker-group:
-            sudo gpasswd -a $USER docker
-            newgrp docker
-
-        Bash Completion
-        sudo curl https://raw.githubusercontent.com/docker/docker-ce/master/components/cli/contrib/completion/bash/docker -o /etc/bash_completion.d/docker.sh
-
-
---  Docker-compose
-        Find latest release number: https://github.com/docker/compose/releases
-        mkdir -p ~/.docker/cli-plugins/
-        sudo curl -SL https://github.com/docker/compose/releases/download/v2.3.3/docker-compose-linux-x86_64 -o ~/.docker/cli-plugins/docker-compose
-        sudo chmod +x ~/.docker/cli-plugins/docker-compose
-        docker-compose --version
-
-        Bash Completion
-        sudo curl -L https://raw.githubusercontent.com/docker/compose/$(docker-compose version --short)/contrib/completion/bash/docker-compose -o /etc/bash_completion.d/docker-compose
-
+--  Docker/ Docker-compose
+        https://docs.docker.com/desktop/install/ubuntu/
 
 -- Dive (Docker image exploration tool)
         Download latest linux deb release file: https://github.com/wagoodman/dive/releases
-        sudo apt install ./dive_x.x.x_linux_amd64.deb
+        sudo dpkg -i ./dive_x.x.x_linux_amd64.deb
 
 --  Pycharm
         sudo snap install pycharm-professional --classic
@@ -110,22 +71,13 @@ PROGRAMMING ---------------------------------------------------------------
                 fs.inotify.max_user_watches = 524288
             sudo sysctl -p --system
 
---  Set swappiness:
-        See current swapfile size: sudo swapon -s
-        sudo swapoff -a
-        sudo fallocate -l 8G /swapfile # recommended between 1 and 2x your RAM
-        sudo chmod 600 /swapfile
-        sudo mkswap /swapfile
-        sudo swapon /swapfile
-        sudo swapon -s
-        echo '/swapfile none swap sw 0 0' | sudo tee -a /etc/fstab
-
 --  Pulse audio control:
         sudo apt install pavucontrol
 
 --  Fortinet
         sudo apt install -y libappindicator1 libgconf-2-4
         https://links.fortinet.com/forticlient/deb/vpnagent
+        sudo dpkg -i forticlient_vpn_7.0.7.0246_amd64.deb
 
 --  Htop
         sudo apt install -y htop
@@ -157,15 +109,8 @@ PROGRAMMING ---------------------------------------------------------------
         sudo snap install slack --classic
 
 DOCUMENTATION ------------------------------------------------------------
-
---  LaTeX (Just use Overleaf.com)
-        sudo apt install -y texlive-full
-        sudo apt install -y texmaker
-
 --  Sublime
-        wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/sublimehq-archive.gpg > /dev/null
-        echo "deb https://download.sublimetext.com/ apt/stable/" | sudo tee /etc/apt/sources.list.d/sublime-text.list
-        sudo apt-get update && sudo apt install -y sublime-text
+        sudo apt install sublime-text
         sublime packages and settings files? #ToDo
 
 --  Vim
@@ -173,59 +118,6 @@ DOCUMENTATION ------------------------------------------------------------
 
 --  Nano
         sudo apt install -y nano
-
---  Adobe_acrobat reader
-        sudo snap install acrordrdc
-
-NVIDIA DRIVERS AND CUDA
-https://david-littlefield.medium.com/how-to-install-the-nvidia-cuda-driver-toolkit-cudnn-and-tensorrt-on-linux-2b76c1b7b3be
-    Nvidia Drivers:
-	    sudo ubuntu-drivers autoinstall
-
-    CUDA and CUDNN
-        sudo apt-key adv --fetch-keys http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/7fa2af80.pub
-        sudo sh -c 'echo "deb http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64 /" > /etc/apt/sources.list.d/cuda.list'
-        sudo apt-get update
-        sudo apt-get --yes install cuda-toolkit-11-0 cuda-toolkit-10-2
-        sudo sh -c 'echo "deb http://developer.download.nvidia.com/compute/machine-learning/repos/ubuntu1804/x86_64 /" > /etc/apt/sources.list.d/nvidia-machine-learning.list'
-        sudo apt-get update
-        sudo apt-get install --yes --no-install-recommends cuda-11-0 libcudnn8=8.0.5.39-1+cuda11.0 libcudnn8-dev=8.0.5.39-1+cuda11.0
-        sudo apt-get install --yes --no-install-recommends libnvinfer7=7.1.3-1+cuda11.0 libnvinfer-dev=7.1.3-1+cuda11.0 libnvinfer-plugin7=7.1.3-1+cuda11.0
-
-    May need to add ENV vars
-        export PATH=/usr/local/cuda-11.0/bin${PATH:+:${PATH}}
-        export LD_LIBRARY_PATH=/usr/local/cuda-11.0/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
-        add to startup script - bashrc
-
-    Test
-        cd /usr/local/cuda-11.0/samples/4_Finance/BlackScholes
-        sudo make
-        ./BlackScholes
-
---  OpenCV:
-        pip install opencv-contrib-python
-
-        OpenCV Compilation: #TODO update
-            https://github.com/BVLC/caffe/wiki/Ubuntu-16.04-Installation-Guide#the-gpu-support-prerequisites
-
-            download: https://github.com/opencv/opencv/archive/3.3.0.zip
-
-            mkdir build
-            cd build/
-            cmake -D CMAKE_BUILD_TYPE=RELEASE -D CMAKE_INSTALL_PREFIX=/usr/local -D FORCE_VTK=ON -D WITH_TBB=ON -D WITH_V4L=ON -D WITH_QT=ON -D WITH_OPENGL=ON -D WITH_CUBLAS=ON -D CUDA_NVCC_FLAGS="-D_FORCE_INLINES" -D WITH_GDAL=ON -D WITH_XINE=ON -D BUILD_EXAMPLES=ON ..
-            make -j $(($(nproc) + 1))
-            You will need to change the CUDA_NVCC_FLAGS to the following if you have CUDA Toolkit 9.0:
-                CUDA_NVCC_FLAGS="-D_FORCE_INLINES --expt-relaxed-constexpr"
-
---  Unity Tweak Tool
-        sudo apt install -y unity-tweak-tool
-
---  Synaptic
-        sudo apt install -y synaptic
-
---  Shutter
-        sudo add-apt-repository -y ppa:shutter/ppa
-        sudo apt update && sudo apt install -y shutter
 
 MEDIA ------------------------------------------------------
 --  GIMP
@@ -250,37 +142,11 @@ UTILITIES ------------------------------------------------------
 --  Recursive directory viewer
         sudo apt install -y tree
 
---  Flatpack - package installer
-        sudo apt install flatpak
-        sudo apt install gnome-software-plugin-flatpak
-        flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-
---  Toggl
-        flatpak install flathub com.toggl.TogglDesktop
-
---  BleachBit
-        sudo apt install -y bleachbit
-
---  TLP (power saving)
-        sudo add-apt-repository -y ppa:linuxuprising/apps
-        sudo apt update
-        sudo apt install -y tlpui
-
 --  Aria2 Download Manager
         sudo apt install -y aria2
 
 --  Virtualbox
         sudo apt install virtualbox virtualbox-ext-pack
-
---  Wine
-        https://wiki.winehq.org/Ubuntu
-
-        sudo dpkg --add-architecture i386
-        sudo mkdir -pm755 /etc/apt/keyrings
-        sudo wget -O /etc/apt/keyrings/winehq-archive.key https://dl.winehq.org/wine-builds/winehq.key
-        For 22.10: sudo wget -NP /etc/apt/sources.list.d/ https://dl.winehq.org/wine-builds/ubuntu/dists/kinetic/winehq-kinetic.sources
-
-        sudo apt update && sudo apt install -y --install-recommends winehq-stable
 
 --  Dupe guru
         sudo add-apt-repository -y ppa:hsoft/ppa
@@ -294,33 +160,14 @@ UTILITIES ------------------------------------------------------
         Or use alternative app like Anydesk
         Manual deb/rpm
 
---  GParted
-        sudo apt install -y gparted
-
 --  Wormhole
         sudo apt install magic-wormhole
-
---  Bazel
-        sudo apt install apt-transport-https gnupg default-jre
-        curl -fsSL https://bazel.build/bazel-release.pub.gpg | gpg --dearmor >bazel-archive-keyring.gpg
-        sudo mv bazel-archive-keyring.gpg /usr/share/keyrings
-        echo "deb [arch=amd64 signed-by=/usr/share/keyrings/bazel-archive-keyring.gpg] https://storage.googleapis.com/bazel-apt stable jdk1.8" | sudo tee /etc/apt/sources.list.d/bazel.list
-        sudo apt update && sudo apt install -y bazel
 
 --  MP3 split
         sudo apt-get install -y mp3splt
 
 --  SSHFS
         sudo apt install -y sshfs
-
---  Zoom
-    wget https://zoom.us/client/latest/zoom_amd64.deb
-    sudo apt install -y ./zoom_amd64.deb
-    May need these: sudo apt install -y libglib2.0-0 libgstreamer-plugins-base1.0-0 libxcb-shape0 libxcb-shm0 libxcb-xfixes0 libxcb-randr0 libxcb-image0 libfontconfig1 libgl1-mesa-glx libxi6 libsm6 libxrender1 libpulse0 libxcomposite1 libxslt1.1 libsqlite3-0 libxcb-keysyms1 libxcb-xtest0
-
--- MS Teams
-    https://www.microsoft.com/en-za/microsoft-teams/download-app#desktopAppDownloadregion
-    sudo dpkg -i <downloaded_file.deb>
 
 -- Mega app:
     sudo apt-get install -y libmediainfo-dev
@@ -330,15 +177,13 @@ MISC NOTES
 
 	Aws-vault
         Download from https://github.com/99designs/aws-vault/releases
-        cp <fname> /usr/local/bin/aws-vault
-        sudo chmod u+x /usr/local/bin/aws-vault
+        sudo cp <fname> /usr/local/bin/aws-vault
+        sudo chmod 755 /usr/local/bin/aws-vault
         $: aws-vault ....
         aws-vault add <profile>
         aws-vault exec <profile> -- aws s3 ls
         aws-vault list
         add ```eval "$(aws-vault --completion-script-bash)"``` to bashrc# Shell completion
-
- is setting sappiness necessary?
 
  python packages
 
@@ -359,18 +204,24 @@ for matplotlib backed tkagg
 sudo apt-get install python3-tk
 
 pyenv
+	sudo apt update; sudo apt install build-essential libssl-dev zlib1g-dev \
+	libbz2-dev libreadline-dev libsqlite3-dev curl llvm \
+	libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev
+
+	curl https://pyenv.run | bash
+
+	Add to bashrc:
+		export PYENV_ROOT="$HOME/.pyenv"
+		command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+		eval "$(pyenv init -)"
 
 Ubuntu Tweak
     sudo apt install gnome-tweaks
     sudo apt install $(apt search gnome-shell-extension | grep ^gnome | cut -d / -f1)
 #     Disable Caps Lock - "Keyboard and Mouse/ Additional Layout Options /  Disable Caps Lock"
 
-Fan control:
-    CPU: https://github.com/Maldela/Fancontrol-GUI
-    GPU: https://aur.archlinux.org/fancontrol-gui.git
-
 Dischord:
-    https://discord.com/download
+    sudo snap install discord
 
 AWSCLI
     sudo apt install -y awscli
@@ -382,10 +233,29 @@ AWSCLI
 EPUB:
     sudo apt-get install fbreader
 
-DISABLE CAPS LOCK:
-    Use Ubuntu Tweaks:
-        keyboard and Mouse
-        Additional Layout Options
-        Caps Lock behaviour -> Caps Lock is Disabled
-
 #TODO add useful dotfiles
+
+pip install numpy scipy pandas matplotlib seaborn scikit-learn scikit-image imgaug numba keras tensorflow onnxruntime-gpu flask flask_basicauth dynaconf fastapi jupyter jupyter_contrib_nbextensions opencv-contrib-python autopep8 pre-commit ipython  autopep8 bokeh cython h5py ipdb pandas pandas-profiling pyyaml scipy sqlalchemy tqdm torch pandas-profiling natsort awscli bokeh click fastparquet
+
+sshkey:
+    ssh-keygen -a 100 -t ed25519 -f ~/.ssh/id_ed25519 -C "user@email.com"
+
+
+
+ sudo apt-get install simplescreenrecorder
+
+
+nvidia/cuda/cudnn/tensorrt/onnxrruntime
+
+github keys
+aws keys
+
+NVIDIA DRIVERS AND CUDA
+    Nvidia Drivers:
+	    sudo ubuntu-drivers autoinstall
+#         nvidia use performance mode in nvidia-settings otherwise external monitor is slow
+
+    CUDA and CUDNN
+
+--  OpenCV Compilation:
+        OpenCV Compilation: #TODO update

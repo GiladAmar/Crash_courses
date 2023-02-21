@@ -30,6 +30,11 @@ ssh -L 3306:mysql.suso.org:3306 username@arvo.suso.org
 ```
 
 # Using a config file
+
+also   SendEnv LC_CONNECTKEY       <---------secret to access the datastore
+	  LocalForward 8080 localhost:8080
+
+for env vars and forwarding a port
 Add to ~/.ssh/config:
 ```
 Host webserver
