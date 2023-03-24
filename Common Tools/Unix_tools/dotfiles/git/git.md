@@ -232,3 +232,6 @@ git push -u origin --all
 git push -u origin --tags -f
 
 ```
+
+
+If you want to add an empty folder to the repo it is convention to add in an empty file called ".gitkeep" such that the folder is added to the repo.

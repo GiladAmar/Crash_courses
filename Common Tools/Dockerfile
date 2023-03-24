@@ -84,7 +84,7 @@ Example Dockerfile*:
     COPY src/ .
     CMD [ "python", "./server.py" ]
 
-Multi-stage builds (security and image size) - good for deployment
+Multi-stage builds (security and image size) - good for deplofyment
     # first stage
     FROM python:3.8 AS builder
     COPY requirements.txt .

@@ -1,6 +1,6 @@
 # Pytest
 ## Simple Application
-### scripty.py:
+### test_functions.py:
 ```python
 def fx(x, y):
     return x == y
@@ -11,12 +11,13 @@ def test_fx():
 ```
 
 ### How to test
+Pytest auto discovers scripts beginning with "test_"
 ```bash
-pytest scripty.py -> output report  # All test_functions()
+pytest test_functions.py -> output report  # All test_functions()
 
-pytest scripty.py::text_fx          # Specific Function
+pytest test_functions.py::text_fx          # Specific Function
 
-pytest testing/                     # All tests in dir
+pytest testing/                     # All tests in dir, scripts beginning with test_*.py
 ```
 
 # Skipping and adding conditions
@@ -97,7 +98,14 @@ def setup_function():
 def teardown_function():
     pass
 
-def test_thing(tmpdir):
+# tmp_path: pathlib.Path
+def test_thing(tmp_path):
     #pytest passes this location to you
     pass
+```
+
+
+```python
+drop into pdb on failure:
+pytest --pdb 
 ```
