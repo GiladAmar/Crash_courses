@@ -23,7 +23,8 @@ Terms:
 
 Example Dockerfile*:
     ## Base Image: ref https://hub.docker.com/_/ubuntu/
-    FROM ubuntu:16.04                   # use official and small as possible images
+    FROM ubuntu:16.04                   # Use official and small as possible images
+                                        # Use a specific version
 
     ## Host Access
     EXPOSE 7745                         # Signpost to reader what ports are needed
@@ -206,4 +207,27 @@ https://pythonspeed.com/articles/docker-buildkit/
 
 * Build kit can speed up multi-stage builds but doing some in parallel
 
-*Latest versions of Docker may internally prevent apt install from using the cache
+* Latest versions of Docker may internally prevent apt install from using the cache
+
+
+--------------------------
+
+How to increase computer resources
+
+sudo docker run -it --cpus="1.0" --memory="1g" --memory-reservation="750m" ubuntu
+
+
+GPU:
+https://nvidia.github.io/nvidia-container-runtime/
+apt-get install nvidia-container-runtime
+
+Then
+docker run -it --rm --gpus all ubuntu nvidia-smi
+
+
+ports:
+  - "8000:8000"
+It means that anybody on your local network can access that service (unless you have
+a firewall set up). This can be a security risk (code/data leak) on public wifi,
+especially when debug info is enabled. Remember to always restrict it to localhost
+like so:

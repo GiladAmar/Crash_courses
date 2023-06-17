@@ -13,11 +13,11 @@ bg
 mv a b/&
 ```
 
-## Ensure process runs when terminal is closed
+## Ensure the process runs when the terminal is closed
 ```bash
 disown -a
 ```
-## Attach to process from a new terminal
+## Attach to a process from a new terminal
 ```bash
 setsid process
 ```

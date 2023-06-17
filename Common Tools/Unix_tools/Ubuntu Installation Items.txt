@@ -235,8 +235,6 @@ EPUB:
 
 #TODO add useful dotfiles
 
-pip install numpy scipy pandas matplotlib seaborn scikit-learn scikit-image imgaug numba keras tensorflow onnxruntime-gpu flask flask_basicauth dynaconf fastapi jupyter jupyter_contrib_nbextensions opencv-contrib-python autopep8 pre-commit ipython  autopep8 bokeh cython h5py ipdb pandas pandas-profiling pyyaml scipy sqlalchemy tqdm torch pandas-profiling natsort awscli bokeh click fastparquet
-
 sshkey:
     ssh-keygen -a 100 -t ed25519 -f ~/.ssh/id_ed25519 -C "user@email.com"
 

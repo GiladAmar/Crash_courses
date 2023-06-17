@@ -235,3 +235,5 @@ git push -u origin --tags -f
 
 
 If you want to add an empty folder to the repo it is convention to add in an empty file called ".gitkeep" such that the folder is added to the repo.
+
+use git mv so GitHub history is preserved, otherwise all file's lines appear deleted on GitHub and a new file appears to have all its lines new, so if you move a file AND make changes you cant tell what the changes were

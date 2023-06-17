@@ -28,3 +28,7 @@
 ```bash
 rsync -azvP
 ```
+
+# TODO
+On Mac you may need to use '~/*.parquet' to rsync those files, and not rsync ... ~/*.parquet .
+It seems to not find matching results

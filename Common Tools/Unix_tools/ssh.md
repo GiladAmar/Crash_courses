@@ -20,7 +20,7 @@ ssh username@address
 - ssh -i ~/.ssh/id_ed25519 ... will just use the one.
 
 # Port Tunneling
-To tunnel a port ie port 3306 on my pc corresponds to what is on port 3306 on instance:
+To tunnel a port i.e., port 3306 on my pc corresponds to what is on port 3306 on instance:
 ```bash
 ssh -L <local-port>:<connect-to-host>:<connect-to-port>
 ```
