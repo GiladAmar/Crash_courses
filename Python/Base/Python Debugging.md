@@ -19,9 +19,22 @@ from ipdb import launch_ipdb_on_exception
 
 3) Post Mortem
 
-    Launch ipdb after exception occured
+    Launch ipdb after exception occurred
+    e.g. run some code in ipython, or a python script in ipython with "run example.py"
+    Then if there is a failure type the following to enter the stacktrace.
 
     `ipdb.pm()`
+
+In any case you can open an Ipython terminal at the point of failure 
+instead of the ipdb one, with access to all magic commands and better
+experience by doing the following
+
+```bash
+ipdb> from IPython import embed
+ipdb> embed() # drop into an IPython session.
+        # Any variables you define or modify here
+        # will not affect program execution
+```
 
 ## Debugger Options
 ### HELP

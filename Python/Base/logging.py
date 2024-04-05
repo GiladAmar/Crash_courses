@@ -28,8 +28,9 @@ except Exception as e:
     logging.error("Exception occurred", exc_info=True)
     # same as logging.exception("Exception occurred") same level as error
 
+"""
 ---------------project wide config
 https://towardsdatascience.com/why-and-how-to-set-up-logging-for-python-projects-bcdd4a374c7a
-```
+
 https://towardsdatascience.com/basic-to-advanced-logging-with-python-in-10-minutes-631501339650
-```
+"""

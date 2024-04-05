@@ -157,7 +157,7 @@ Size management:
     docker history <image_name>
         lists size per layer of image
 
-    * use docker ignore
+    * use .dockerignore
 
     * use small base image
         e.g. python:3.8-slim not python:3.8
@@ -231,3 +231,5 @@ It means that anybody on your local network can access that service (unless you 
 a firewall set up). This can be a security risk (code/data leak) on public wifi,
 especially when debug info is enabled. Remember to always restrict it to localhost
 like so:
+
+#How to make the docker service auto restart both when it fails, and when the system reboots
