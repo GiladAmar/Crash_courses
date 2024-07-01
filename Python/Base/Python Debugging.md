@@ -89,3 +89,18 @@ ipdb> embed() # drop into an IPython session.
 ### Known Bug
 Sometimes variables "don't exist" in something like a list comprehension in pdb:
 To gain access to these variables run `globals().update(locals())`
+
+---------------------STILL TO ADD--------------
+
+Run a script but go to debugger on fail:
+```bash
+python -m pdb -c cont script.py
+```
+
+```bash
+ipython --pdb -m mymodule -- arg1 arg2
+```
+The -- on the right is to ensure the argument are for the script, and not to be supplied to ipython
+-c is to continue from the start not enter the debugger immediately
+
+The arguments above work with ipdb as well e.g. python -m ipdb -c script.py

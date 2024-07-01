@@ -76,7 +76,15 @@ Example Dockerfile*:
 * Escape \ as \\ (esp. for Windows fpaths)
 * For Jupyter Notebook:
     CMD jupyter notebook --no-browser --allow-root --port=7745 --NotebookApp.token='tutorial'
-* a .dockerignore file (similar to .gitignore) tells which files not to copy across
+* a .dockerignore file (similar to .gitignore NOT THE SAME) tells which files not to copy across
+```
+# comment
+*/temp* # files and folders starting with temp, one directory down
+*/*/temp* # "" but two directories down
+temp? #files and folders in parent dir with one wildcard after temp
+ **/*.go # ** matches any number of directories, including 0, This will ignore ALL .go files
+ !some_script.go # This file will be an exception to the rule above
+```
 * place more frequently changed files , eg source code, as the lowest layers so cache can be maximally used e.g.
   Install rarely updated requirements before copying across code files
     ...

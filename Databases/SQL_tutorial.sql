@@ -43,14 +43,13 @@
 ------------------------------Query Types------------------------------
 ------------------------------SELECT------------------------------
 SELECT [ TOP x ] <fields>   -- STANDARD SELECT STRUCTURE
-                            -- Can also select the top 50%
-                            -- SELECT TOP 50 PERCENT
+                            -- Can also select the top 50% "SELECT TOP 50 PERCENT"
 FROM <Table1>
 [ INNER JOIN <Table2>
     ON <fields> ]
-[ WHERE <condition> ]       -- Restricts records before the groups are summarised
+[ WHERE <condition> ]       -- Filter records before the groups are made
 [ GROUP BY <field>
-[ HAVING <condition> ] ]    -- Restricts summarised records after the groups are summarised
+[ HAVING <condition> ] ]    -- Filter records after the groups are made
 [ ORDER BY <fields> ]
 [ LIMIT y];
 
@@ -71,8 +70,8 @@ CREATE TABLE table_name                 -- Create a new table or view
         PRIMARY KEY,                    -- Primary Key that and not null
   
     CONSTRAINT pk_person_id 
-        PRIMARY KEY (p_id, last_name)   -- Add a named constraint, pk_Person_ID, such that list of columns forms Primary Key
-    
+        PRIMARY KEY (p_id, last_name)   -- Add a named constraint, pk_Person_ID,
+                                        --   such that list of columns forms Primary Key
     FOREIGN KEY (p_id) 
         REFERENCES Persons(p_id)        -- Ensure local key must exist as primary key on foreign table     
 )
@@ -256,11 +255,13 @@ WHERE month = 1                     -- =, !=, >, <, >=, and <=
     OR 'day' LIKE '[mtw]%day'       -- [charlist] Set range of characters to match e.g. [abc] or [a-c] or [0-9]
                                     -- [!charlist] Set range of characters to not match e.g. [!abc]
 
-    AND 'artist' IN ('Taylor Swift', 
-                     'Ludacris',
-                      1, 2, 3)
+    AND 'artist' IN ('Taylor Swift', -- Can be expensive if the list is long.
+                     'Ludacris',     --  Then do a join onto a sub_query table
+                      1, 2, 3)       --  containing all these fields.
     AND year BETWEEN 1999 AND 2016  -- BETWEEN is inclusive of bounds
                                     -- Can use NOT BETWEEN to get outside range
+                                    -- Dont use it for dates because "BETWEEN 2000-01-01 AND 2000-01-02"
+                                    --  will get all the data on both 01-01 and 01-02
     AND band IS NOT NULL            -- band != NULL won't work(arithmetic on a str)
                                     -- Only with conditional statement
     OR band = 'Gotye'
@@ -344,7 +345,7 @@ LIMIT 100                           -- Result only cut down to limit at end of o
 
 ------------------------------STRING_EXPRESSIONS------------------------------
 LEN(string_var)                         -- Return the length of the string
-                                        -- not including trailing spaces
+                                        --   not including trailing spaces
 LEFT(string_var, index)                 -- Take from char 1 to index
 MID(string_var)                         -- Take mid char
 RIGHT(string_var, index)                -- Take from char 1 to index
