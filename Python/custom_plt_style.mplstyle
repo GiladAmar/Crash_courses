@@ -1,0 +1,81 @@
+# Use this style via importing:
+#     import matplotlib.pyplot as plt
+#     plt.style.use("custom_plt_style.mplstyle")
+
+# OR save in directory: venv/site-packages/matplotlib/mpl-data/stylelib/
+#     You should now see it available among all the styles: plt.style.available->List[str]
+#     and you can use it like this, plt.style.use("custom_plt_style")
+
+# You could alternatively just temporarily change some style with a context:
+#     with mpl.rc_context({'lines.linewidth': 2, 'lines.linestyle': ':'}):
+#         plt.plot(data)
+
+
+
+
+
+
+
+# Generic figure tweaks
+figure.figsize: 10, 6
+figure.dpi: 125
+savefig.dpi: 300
+savefig.bbox: tight     # DO not use this for animation!
+savefig.format:    svg         # {png, ps, pdf, svg}
+timezone:    UTC
+interactive: False
+
+    # The colors used by the first n plots
+axes.prop_cycle: cycler("color", ["006ba4", "ff800e", "ababab", "595959", "5f9ed1", "c85200", "898989", "a2c8ec", "ffbc79", "cfcfcf"])
+axes.spines.top: False
+axes.spines.right: False
+
+
+# Text
+text.usetex: False # not sure if this will work...
+font.size: 14
+font.family: sans-serif
+font.sans-serif: IBM Plex Sans
+
+axes.titlesize: 20
+axes.titleweight: bold
+axes.titlelocation: left
+axes.labelsize: large
+axes.formatter.limits: -3, 3  # use scientific notation if log10
+                               # of the axis range is smaller than the
+                               # first or larger than the second
+axes.formatter.use_locale: True  # When True, format tick labels
+   # according to the user's locale.
+   # For example, use ',' as a decimal
+   # separator in the fr_FR locale.
+axes.formatter.use_mathtext: True  # When True, use mathtext for scientific
+                                     # notation. #This may compete with Latex??
+
+xtick.labelsize: medium
+ytick.labelsize: medium
+
+
+# Legend
+legend.loc: "upper right"
+legend.numpoints: 3
+legend.scatterpoints: 3
+
+
+# Grid
+axes.grid: True
+axes.axisbelow: True
+
+grid.color: "#d3d3d3"
+grid.linestyle: :
+grid.linewidth: 1.0
+
+
+# Line chart only
+lines.linewidth: 3
+lines.marker: o
+lines.markersize: 8
+
+## ***************************************************************************
+## * HISTOGRAM PLOTS                                                         *
+## ***************************************************************************
+hist.bins: 50  # The default number of histogram bins or 'auto'.
