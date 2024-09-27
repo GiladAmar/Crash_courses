@@ -104,6 +104,16 @@ df.column_name = df.column_name.astype(np.int64)
 for col in refunds.columns.values:
     refunds[col] = refunds[col].replace("[^0-9]+.-", "", regex=True)
 
+# Repalce is fast that df.a[df.a='something'] = 'something_else'
+#  and it can apply to different columns with different replacements all at once
+adult_income.replace(
+    {
+        "education": {"HS-grad": "High school", "Some-college": "College"},
+        "income": {"<=50K": 0, ">50K": 1},
+    },
+    inplace=True,
+)
+
 # Set DataFrame column values based on other column values (h/t: @mlevkov)
 df.loc[
     (df["column1"] == some_value) & (df["column2"] == some_other_value),

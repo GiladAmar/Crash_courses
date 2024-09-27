@@ -1058,3 +1058,31 @@ Materialized views
 
 -- Good resource:
 https://goalkicker.com/SQLBook/
+
+
+-- Common Table Expressions
+--   A temporary result you can use in following queries
+WITH dept_avg AS (
+    SELECT
+        Department,
+        AVG(Sales_Amount) AS dept_avg
+    FROM
+        promo_sales
+    GROUP BY
+        Department
+)
+
+store_avg AS (
+    SELECT AVG(Sales_Amount) AS store_avg
+    FROM promo_sales
+)
+
+SELECT
+    dep.Department,
+    dep.dept_avg,
+    store.store_avg,
+    dep.dept_avg - store.store_avg AS diff
+FROM
+    dept_avg dep
+CROSS JOIN
+    store_avg store;

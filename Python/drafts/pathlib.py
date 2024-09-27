@@ -1,51 +1,66 @@
 from pathlib import Path
 
+# OS Insensitive and nicer than os.path
+Path.home()
+Path.cwd()
+
 # OS insensitive
-data_folder = Path("source_data/text_files/")
+folder = Path("source_data/text_files/")
+file = folder / "texty.txt" # Easy append not os.join(a,b)
 
-# Easy append not os.join(a,b)
-file_to_open = data_folder / "raw_data.txt"
+##  Attributes
+file.name # "texty.txt"
+file.stem # "texty"
+file.suffix # ".txt"
+file.parents # Generator going up one each time
 
-#Easy read contents
-print(file_to_open.read_text())
-
-
-filename.posix() -> string path
-filename.name -> "raw_data.txt"
-
-filename.suffix -> "txt"
-
-filename.stem -> "raw_data"
-
-filename.exists() -> True/False
-
-filename.absolute() -> '/Desktop/source_data/text_files/raw_data.txt'
-
-filename.isdir() -> True/False
-filename.home()
-cwd
-is_file
-
-mkdir
-rename
-rmdir
+file.stat().st_size # Filesize (For a link this is just the name size, use st_rsize instead)
+file.stat().st_mtime # modified time
 
 
-p.glob('**/*.py') -> iterator
 
-p = Path('.')
+# Methods
+file.mkdir(parents=True, exist_ok=True)
 
-p.parts()
+file.exists()
+file.absolute() # '/Desktop/source_data/text_files/raw_data.txt'
 
-# Pathlib
-from pathlib import Path
-from typing import Union
+file.isdir()
+file.isfile()
+file.posix() # string path
+file.parts() # break up path into parts
 
-PathLike = Union[str, Path]
+# Search
+path.glob('**/*.py')
+path.rglob("*.txt") # Recursive Glob
+folder.iterdir() # Generator listing all folders/files in path
 
-output_dir = Path(output_dir) / "bob_stats" / current_time
+# Rename / Delete / Move
+file.rename()
+folder.rmdir() # Delete did, but only if empty
+file.match(pattern, case_sensitive=None) # See if the path matches some regex
 
-model_dir = Path(model_dir)
-scaler_path = model_dir.parent / "standard_scaler.joblib"
-encoder_file = model_dir / "encoder.h5"
-train_file = model_dir / "train.parquet"
+# To refer to another file in the same directory easily
+with_stem("other_file")
+with_suffix(".other_suffix")
+with_name("whole_name_altogether.tar.gz")
+
+
+## Reading and writing:
+
+# Read
+file_to_open.read_text()
+image_file.read_bytes()
+
+# Write
+file.write_text(b'Binary file contents')
+file.write_bytes(b'Binary file contents')
+
+# Opening
+with p.open(mode='r') as f:
+    f.readline()
+
+# Ownership
+file.owner()
+file.group()
+file.chmod() # Change permissions
