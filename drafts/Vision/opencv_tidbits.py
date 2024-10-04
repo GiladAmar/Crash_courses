@@ -944,3 +944,7 @@ def plot_multiple_img(img_matrix_list, title_list, ncols, main_title=""):
         myaxes[i // ncols][i % ncols].imshow(img)
         myaxes[i // ncols][i % ncols].set_title(title, fontsize=15)
     plt.show()
+
+
+# Fix orientation when reading file
+cv.CAP_PROP_ORIENTATION_AUTO

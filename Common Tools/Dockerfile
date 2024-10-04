@@ -21,7 +21,7 @@ Terms:
     Container Layer The writable layer that is created when making a container
 
 
-Example Dockerfile*:
+Example Dockerfile:
     ## Base Image: ref https://hub.docker.com/_/ubuntu/
     FROM ubuntu:16.04                   # Use official and small as possible images
                                         # Use a specific version

@@ -15,48 +15,6 @@ df = df[~df.column.isin(value_list)]
 # Delete column from DataFrame
 del df["column"]
 
-# Select from DataFrame using criteria from multiple columns
-# (use `|` instead of `&` to do an OR)
-new_df = df[(df["column_one"] > 2004) & (df["column_two"] == 9)]
-
-# Rename several DataFrame columns
-df = df.rename(
-    columns={
-        "col1 old name": "col1 new name",
-        "col2 old name": "col2 new name",
-        "col3 old name": "col3 new name",
-    }
-)
-
-# Lower-case all DataFrame column names
-df.columns = map(str.lower, df.columns)
-
-# Even more fancy DataFrame column re-naming
-# lower-case all DataFrame column names (for example)
-df.rename(columns=lambda x: x.split(".")[-1], inplace=True)
-
-# Loop through rows in a DataFrame
-# (if you must)
-for index, row in df.iterrows():
-    print(index, row["some column"])
-
-# Much faster way to loop through DataFrame rows
-# if you can work with tuples
-# (h/t hughamacmullaniv)
-for row in df.itertuples():
-    print(row)
-
-# Next few examples show how to work with text data in Pandas.
-# Full list of .str functions: http://pandas.pydata.org/pandas-docs/stable/text.html
-
-# Slice values in a DataFrame column (aka Series)
-df.column.str[0:2]
-
-# Lower-case everything in a DataFrame column
-df.column_name = df.column_name.str.lower()
-
-# Get length of data in a DataFrame column
-df.column_name.str.len()
 
 # Sort dataframe by multiple columns
 df = df.sort(["col1", "col2", "col3"], ascending=[1, 1, 0])

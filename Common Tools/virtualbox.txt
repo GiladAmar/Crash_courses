@@ -1,2 +1,0 @@
-# Attach camera to vbox image called windows_template:
-VBoxManage controlvm "windows_template" webcam attach .0'

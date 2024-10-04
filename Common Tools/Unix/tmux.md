@@ -1,4 +1,5 @@
-#TMUX
+# TMUX
+
 Create a session 
 ```
 tmux new -s session_name

@@ -16,6 +16,7 @@ In terms of archive size:
 
 - gz - a compressed collection. Requires whole file to be extracted together
 - zip -  a collection of separately compressed files
+- 
 ### Add specific file
 
 ```bash

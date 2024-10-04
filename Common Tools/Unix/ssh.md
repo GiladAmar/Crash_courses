@@ -1,20 +1,20 @@
 # Basic use
 ssh username@address
 
-|   Option   | Description                                                                         |
-|:----------:|:------------------------------------------------------------------------------------|
-| -i <fname> | use certificate as authentication                                                   |
-|     -X     | Tunnel graphical displays<br/>(i.e. plt.show() on instance shows picture on your desktop)                         |
-|            | If it fails use -Y                                                                  |
-|            | You may need to use another matplotlib backend using "matplotlib.use('GTKAgg')"     |
-|     -A     | Authentication forwarding (make sure ssh-agent is running and ssh-add has been run) |
-|            | useful for git clones/pulls etc.                                                    |
-|            | e.g.                                                                                |
-|            | ssh-agent                                                                           |
-|            | ssh-keygen                                                                          |
-|            | ssh-add                                                                             |
-|            | ssh -A gilad@whatever                                                               |
-|     -p     | Specify port                                                                        |
+|   Option   | Description                                                                               |
+|:----------:|:------------------------------------------------------------------------------------------|
+| -i <fname> | use certificate as authentication                                                         |
+|     -X     | Tunnel graphical displays<br/>(i.e. plt.show() on instance shows picture on your desktop) |
+|            | If it fails use -Y                                                                        |
+|            | May need "matplotlib.use('GTKAgg')"                                                       |
+|     -A     | Authentication forwarding (requires ssh-agent and ssh-add)                                |
+|            | useful for git clones/pulls etc.                                                          |
+|            | e.g.                                                                                      |
+|            | ssh-agent                                                                                 |
+|            | ssh-keygen                                                                                |
+|            | ssh-add                                                                                   |
+|            | ssh -A gilad@whatever                                                                     |
+|     -p     | Specify port                                                                              |
 
 - ssh-add will add ALL private keys for forwarded
 - ssh -i ~/.ssh/id_ed25519 ... will just use the one.
@@ -35,6 +35,7 @@ also   SendEnv LC_CONNECTKEY       <---------secret to access the datastore
 	  LocalForward 8080 localhost:8080
 
 for env vars and forwarding a port
+
 Add to ~/.ssh/config:
 ```
 Host webserver

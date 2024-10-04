@@ -1,30 +1,3 @@
-specified_date: None
-
-
-
-
-
-class InstanceManager(object):
-
-    def __init__(self, records_fname):
-        # check if exists, else create csv
-        pass
-
-
-    def save_dated():
-        pass
-
-
-    def load_latest():
-        pass
-
-
-    def append_info(datetime, description, results):
-        pass
-
-# * | TimeStamp | Description | Train Result | Test_Result |
-
-
 def load_latest(folder, matching, reading_func, specific_date):
     if specific_date is None:
         fname = latest matching decription
@@ -59,16 +32,6 @@ def save_dated(data, save_func, base_name, suffix, specific_date=None, descripti
         print('data failed to save to {fname} from error {e}.\n')
 
     print(model/data saved as fname)
-
-
-def save_sklearn_as_NON_pkl(obj, fname):
-    # serialize to fname
-    pass
-
-
-def load_sklearn_from_NON_pkl(obj, fname):
-    pass
-
 
 # Scheduling
 import schedule
