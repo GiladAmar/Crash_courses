@@ -30,6 +30,7 @@ x<sup>supertext</sup>
 
 x<sub>subtext<sub>
 
+==highlight==
 
 ## Horizontal rules
 * * *
