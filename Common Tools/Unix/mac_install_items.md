@@ -8,38 +8,25 @@
 4. [Stillcolor](https://github.com/aiaf/Stillcolor)
 
 ### CLI
-1. [Brew](https://brew.sh)
-
-    `/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"`
-2. Xcode
+1. Xcode
 
     `xcode-select --install`
-3. Brew installations
+
+2. [Brew](https://brew.sh)
    ```bash
+   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
    brew update
    brew install magic-wormhole bluesnooze pyenv git
    brew install readline xz # for pyenv python installs
-   brew install --cask docker
+   brew install --cask docker pycharm spotify sublime-text obsidian
    ```
-
-4. Rosetta
+3. Rosetta
    
    `softwareupdate --install-rosetta`
-5. Oh My Zsh
+4. Oh My Zsh
 
    `sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"`
-6. Spotify
 
-   `brew install --cask spotify`
-7. Sublime
-
-   `brew install --cask sublime-text`
-8. Pycharm
-
-   `brew install --cask pycharm`
-9. Obsidian
-
-   `brew install --cask obsidian`
 
 ### AppStore
 1. MS Teams
