@@ -7,6 +7,11 @@
     aws ec2 describe-instance-status --instance-ids <instance_id>
     aws ec2 stop-instances --instance-ids <instance_id>
 
+    curl http://169.254.169.254/latest/meta-data/instance-id # Get Instance ID
+    ->i-0eeca1fa22251bc01
+
+    curl http://169.254.169.254/latest/meta-data/local-ipv4 # Get IP address
+
 ## Logging in:
     ssh user@example_address
 

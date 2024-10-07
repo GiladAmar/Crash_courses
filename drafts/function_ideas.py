@@ -33,14 +33,3 @@ def save_dated(data, save_func, base_name, suffix, specific_date=None, descripti
 
     print(model/data saved as fname)
 
-# Scheduling
-import schedule
-
-def do_something():
-    print(datetime.now(), "Doing the thing...")
-
-schedule.every(5).minutes.do(do_something)
-
-while True:
-    schedule.run_pending()
-    time.sleep(1)

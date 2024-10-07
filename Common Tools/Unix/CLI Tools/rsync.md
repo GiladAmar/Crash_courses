@@ -1,5 +1,10 @@
 # rsync
 
+default use:
+```bash
+rsync -hztv --partial --progress from/ to/
+```
+
 ## Options
 |           Option           | Description                              |
 |:--------------------------:|:-----------------------------------------|

@@ -83,3 +83,62 @@ def to_sig_figures(x, n_sig):
     return np.format_float_positional(
         x, precision=n_sig, unique=False, fractional=False, trim="k"
     )
+
+
+
+
+def reduce_pandas_df_mem_usage(df):
+    start_mem_usg = df.memory_usage().sum() / 1024 ** 2
+    print("Memory usage of properties dataframe is :", start_mem_usg, " MB")
+    NAlist = []  # Keeps track of columns that have missing values filled in.
+    for col in df.columns:
+        if df[col].dtype != object:  # Exclude strings
+
+            # Print current column type
+            print("******************************")
+            print("Column: ", col)
+            print("dtype before: ", df[col].dtype)
+
+            # make variables for Int, max and min
+            IsInt = False
+            mx = df[col].max()
+            mn = df[col].min()
+
+            # Integer does not support NA, therefore, NA needs to be filled
+            if not np.isfinite(df[col]).all():
+                NAlist.append(col)
+                df[col].fillna(mn - 1, inplace=True)
+
+            # test if column can be converted to an integer
+            asint = df[col].fillna(0).astype(np.int64)
+            errors_from_convert_to_int = (df[col] - asint).sum()
+
+            if -0.01 < errors_from_convert_to_int < 0.01:
+                info = np.iinfo
+                # Make Integer/unsigned Integer datatypes
+                if mn >= 0:
+                    types = (np.uint8, np.uint16, np.uint32, np.uint64)
+                else:
+                    types = (np.int8, np.int16, np.int32, np.int64)
+            else:
+                info = np.finfo
+                types = (np.float16, np.float32, np.float64)
+
+            for t in types:
+                if info(t).min <= mn and mx <= info(t).max:
+                    df[col] = df[col].astype(t)
+                    break
+
+            # Print new column type
+            print("dtype after: ", df[col].dtype)
+            print("******************************")
+
+    # Print final result
+    print("___MEMORY USAGE AFTER COMPLETION:___")
+    mem_usg = df.memory_usage().sum() / 1024 ** 2
+    print("Memory usage is: ", mem_usg, " MB")
+    print("This is ", 100 * mem_usg / start_mem_usg, "% of the initial size")
+    return df, NAlist
+
+
+df_reduced, na_list = reduce_mem_usage(df)

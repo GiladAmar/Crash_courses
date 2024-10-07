@@ -1,7 +1,5 @@
-System Packages:
-
-#System Packages
-## Online PC:
+# System Packages
+## Online PC
 With Synaptic download deb files and requirements
     
     [ sudo dpkg -i <deb files>
@@ -13,7 +11,7 @@ With Synaptic download deb files and requirements
 
         apt-offline]()
 
-## Using Apt-offline:
+## Using Apt-offline
     files_list = gcc make g++ cmake linux-headers-$(uname -r) dkms linux-image-generic linux-image-extra-virtual linux-source linux-headers-generic gfortran build-essential pkg-config htop libatlas-base-dev libblas-dev liblapack-dev git ffmpeg qtbase5-dev libhdf5-serial-dev python python-dev python-pip
 
 Get signature of offline pc
@@ -29,9 +27,9 @@ Transfer zip file to Offline PC:
     sudo apt-offline install /path/to/aptbundle.zip
     sudo apt install <files_list>
 
-# Python Packages:
+# Python Packages
 
-### Online PC:
+## Online PC:
 
     pip3 download  <list of packages> -d target_folder/
 
@@ -39,5 +37,5 @@ or
 
     pip3 install -r requirements.txt -d target_folder/
 
-### Offline PC:
+## Offline PC:
     pip3 install --no-index --find-links=<target_folder> pip <list of packages> --upgrade

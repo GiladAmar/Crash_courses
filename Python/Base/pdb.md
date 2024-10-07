@@ -13,8 +13,11 @@ Context is the number of lines to be shown
 2. Launch on failure
 ```python
 from ipdb import launch_ipdb_on_exception
-    with launch_ipdb_on_exception():
-      # <Try stuff here>
+
+
+with launch_ipdb_on_exception():
+    pass
+  # <Try stuff here>
 ```
 
 3) Post Mortem

@@ -1,0 +1,53 @@
+# See https://pre-commit.com for more information
+# See https://pre-commit.com/hooks.html for more hooks
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.6.0
+    hooks:
+      - id: check-added-large-files
+        args: ["--maxkb=500"]
+      - id: check-json
+      - id: check-toml
+      - id: check-yaml
+      - id: detect-private-key
+      - id: end-of-file-fixer
+      - id: no-commit-to-branch
+        args: ["--branch", "staging", "--branch", "master"]
+      - id: requirements-txt-fixer
+      - id: trailing-whitespace
+
+  - repo: https://github.com/psf/black
+    rev: 24.8.0
+    hooks:
+      - id: black-jupyter
+
+  - repo: https://github.com/pycqa/flake8
+    rev: 7.1.1
+    hooks:
+    - id: flake8
+      # P103 - disallows "{}" in strings
+      # E203 - ":" with whitespace before it
+      # E501 - line length (black will handle most of the issues, and what it can't - should be ingored)
+      args: ["-j8", "--ignore=E203,E501,P103,W503,C419"]
+      additional_dependencies:
+      - flake8-broken-line
+      - flake8-bugbear
+      - flake8-comprehensions
+      - flake8-debugger
+      - flake8-string-format
+
+  - repo: https://github.com/timothycrosley/isort
+    rev: 5.13.2
+    hooks:
+    - id: isort
+      args: ["--profile", "black"] # solves conflicts between black and isort
+
+  - repo: https://github.com/pre-commit/mirrors-mypy
+    rev: v1.11.2
+    hooks:
+      - id: mypy
+
+  - repo: https://github.com/srstevenson/nb-clean
+    rev: 3.3.0
+    hooks:
+      - id: nb-clean
