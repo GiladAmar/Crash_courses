@@ -18,9 +18,12 @@ logging.info("This is an info message")
 logging.warning("This is a warning message")
 logging.error("This is an error message")
 logging.critical("This is a critical message")
+logging.exception() #Similar to logger.error() but includes a stack trace.
 
+# String formatting
 name = "John"
-logging.error("%s raised an error", name)
+logging.error("%s raised an error", name) # Can do string formatting
+
 
 try:
     c = 1 / 0
