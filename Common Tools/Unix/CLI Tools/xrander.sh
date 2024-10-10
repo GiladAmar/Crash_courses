@@ -4,7 +4,3 @@
 
 # Set displays
 xrandr--output eDP-1-1 --mode 1920x1080 --primary --output HDMI-0 --mode 1920x1080 --right-of eDP-1-1
-
-# run main python script
-source ./bin/activate
-python main.py

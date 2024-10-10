@@ -1,8 +1,7 @@
 import os
-import random
 import subprocess
 import sys
-
+import numpy as np
 
 def launch(filename):
     """Pass filename to the OS, which should select the correct
@@ -114,9 +113,6 @@ def fibonacci(n):
         return 1
     return fibonacci(n - 1) + fibonacci(n - 2)
 
-
-
-import os
 import resource
 # Set resource limits
 import signal
@@ -135,18 +131,6 @@ def set_max_memory(size):
     resource.setrlimit(resource.RLIMIT_AS, (size, hard))
 
 
-import os
-import random
-
-import numpy as np
-import tensorflow as tf
-# TODO
-from pandas.testing import assert_frame_equal
-from tfdeterminism import patch
-
-
-
-
 class NDArrayEncoder(json.JSONEncoder):
     def default(self, obj):
         if isinstance(obj, np.ndarray):
@@ -158,8 +142,6 @@ def jsonify(input):
     return json.dumps(input, cls=NDArrayEncoder, indent=4)
 
 
-
-
 # To instead make sure it is being compressed with jpeg first:
 def img_to_base64_str(self, img):
     buffered = BytesIO()
@@ -167,7 +149,6 @@ def img_to_base64_str(self, img):
     buffered.seek(0)
     img_byte = buffered.getvalue()
     return base64.b64encode(img_byte).decode()
-
 
 
 # Scheduling

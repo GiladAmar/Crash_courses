@@ -2,33 +2,49 @@
 # See https://pre-commit.com/hooks.html for more hooks
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.6.0
+    rev: v5.0.0
     hooks:
       - id: check-added-large-files
         args: ["--maxkb=500"]
       - id: check-json
       - id: check-toml
+      - id: check-xml
       - id: check-yaml
       - id: detect-private-key
       - id: end-of-file-fixer
       - id: no-commit-to-branch
-        args: ["--branch", "staging", "--branch", "master"]
-      - id: requirements-txt-fixer
+        args: ["--branch", "main",
+               "--branch", "master",
+               "--branch", "dev",
+               "--branch", "staging"]
+      - id: requirements-txt-fixer # Sorts entries in requirements.txt
       - id: trailing-whitespace
+      - id: check-illegal-windows-names
+      - id: check-case-conflict # Check filenames don't conflict on case-insensitive OSs
+      - id: pretty-format-json
+        args:
+          - "--autofix"
+          - "--indent=4"
+          - "--no-sort-keys"
 
+  # Auto format .py files to have consistent styling, e.g. line-length, spacing, ...
   - repo: https://github.com/psf/black
-    rev: 24.8.0
+    rev: 24.10.0
     hooks:
-      - id: black-jupyter
+      - id: black-jupyter # Apply black to jupyter notebooks too
+        args: [--line-length=100]
 
+  # Obey the python style guide
   - repo: https://github.com/pycqa/flake8
     rev: 7.1.1
     hooks:
     - id: flake8
-      # P103 - disallows "{}" in strings
+      args: ["-j8", "--ignore=E203,E501,P103,W503,W504"]
       # E203 - ":" with whitespace before it
-      # E501 - line length (black will handle most of the issues, and what it can't - should be ingored)
-      args: ["-j8", "--ignore=E203,E501,P103,W503,C419"]
+      # E501 - line length (black will handle most issues; what can't should be ignored)
+      # P103 - disallows "{}" in strings
+      # W503 - line break before binary operator (skip a line before having + or -)
+      # W504 - binary operator before line break (have + or - before skipping a line)
       additional_dependencies:
       - flake8-broken-line
       - flake8-bugbear
@@ -36,17 +52,24 @@ repos:
       - flake8-debugger
       - flake8-string-format
 
+  # Sort package imports in this order:
+  # 1. Standard Library e.g. "import os"
+  # 2. Known third-party libraries e.g. "import pandas"
+  # 3. Local folder imports e.g. "from . import utils"
   - repo: https://github.com/timothycrosley/isort
     rev: 5.13.2
     hooks:
     - id: isort
       args: ["--profile", "black"] # solves conflicts between black and isort
 
+  # Check type-hinting
   - repo: https://github.com/pre-commit/mirrors-mypy
     rev: v1.11.2
     hooks:
       - id: mypy
 
+  # Remove all cell-outputs from jupyter notebooks
+  # This makes sure diffs are simple, and that plots do not bloat the repo
   - repo: https://github.com/srstevenson/nb-clean
     rev: 3.3.0
     hooks:

@@ -5,14 +5,16 @@ Style sheet language
 
 Elements do have default styles
 Rule-set:
-Define the style of the html element, the selector "p", with a declaration "color: red" where the property "color" is set with a property value "red"
+Define the style of the html element, the selector "p", with a declaration
+"color: red" where the property "color" is set with a property value "red"
 
 * each selector wrapper in {}
 * separate property and value with :, like python dict
 * separate declarations with ;
 * cascade: on conflicting (equivalent hierarchy) rules, the last one is used
-* specificity: on conflit between selector specificity the more specific is used
-In heritance: some properties such as color and font-family are inherited, others such as width are not
+* specificity: on conflict between selector specificity the more specific is used
+Inheritance: some properties such as color and font-family are inherited, others
+such as width are not
 All accept inherit/initial and unset
   inherit: same as parent
   initial: to default
@@ -84,7 +86,7 @@ li.special {
   font-weight: bold;
 }
 
-/*descendent selectors:*/
+/*descendant selectors:*/
 li em {
   color: rebeccapurple;
 }

@@ -48,9 +48,6 @@ PROGRAMMING ---------------------------------------------------------------
 --  Docker/ Docker-compose
         https://docs.docker.com/desktop/install/ubuntu/
 
--- Dive (Docker image exploration tool)
-        Download latest linux deb release file: https://github.com/wagoodman/dive/releases
-        sudo dpkg -i ./dive_x.x.x_linux_amd64.deb
 
 --  Pycharm
         sudo snap install pycharm-professional --classic
@@ -113,9 +110,6 @@ DOCUMENTATION ------------------------------------------------------------
         sudo apt install sublime-text
         sublime packages and settings files? #ToDo
 
---  Vim
-        sudo apt install -y vim
-
 --  Nano
         sudo apt install -y nano
 
@@ -145,9 +139,6 @@ UTILITIES ------------------------------------------------------
 --  Aria2 Download Manager
         sudo apt install -y aria2
 
---  Virtualbox
-        sudo apt install virtualbox virtualbox-ext-pack
-
 --  Dupe guru
         sudo add-apt-repository -y ppa:hsoft/ppa
         sudo apt update && sudo apt install -y dupeguru-se
@@ -168,10 +159,6 @@ UTILITIES ------------------------------------------------------
 
 --  SSHFS
         sudo apt install -y sshfs
-
--- Mega app:
-    sudo apt-get install -y libmediainfo-dev
-    Download dpkgs from here https://mega.nz/desktop
 
 MISC NOTES
 
@@ -243,8 +230,6 @@ sshkey:
  sudo apt-get install simplescreenrecorder
 
 
-nvidia/cuda/cudnn/tensorrt/onnxrruntime
-
 github keys
 aws keys
 
@@ -254,6 +239,3 @@ NVIDIA DRIVERS AND CUDA
 #         nvidia use performance mode in nvidia-settings otherwise external monitor is slow
 
     CUDA and CUDNN
-
---  OpenCV Compilation:
-        OpenCV Compilation: #TODO update

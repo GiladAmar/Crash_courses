@@ -87,31 +87,7 @@ extract () {
     fi
 }
 
-
-# Retries a command on failure.
-	# $1 n   - the max number of attempts
-	# $2 ... - the command to run
-	# example usage:
-	#retry 5 ls -ltr foo
-retry() {
-    local -r -i max_attempts="$1"; shift
-    local -r cmd="$@"
-    local -i attempt_num=1
-
-    until $cmd
-    do
-        if (( attempt_num == max_attempts ))
-        then
-            echo "Attempt $attempt_num failed and there are no more attempts left!"
-            return 1
-        else
-            echo "Attempt $attempt_num failed! Trying again in $attempt_num seconds..."
-            sleep $(( attempt_num++ ))
-        fi
-    done
-}
-
-#Compress folder with a progress bar
+# Compress folder with a progress bar
 tar_progess() {
                tar cf - $1 -P | pv -s $(du -sb $1 | awk '{print $1}') | gzip > $2
               }
@@ -141,15 +117,3 @@ if [ "$color_prompt" = yes ]; then
 else
     PS1='${debian_chroot:+($debian_chroot)}\n [\t] - \u@\h:\w\$ '
 fi
-
-
-# TODO!!!!!!!!!!!!!!!!!!!!!!!!! Need to edit on per person basis
-#NUMBA
-export NUMBAPRO_NVVM=/usr/local/cuda-8.0/nvvm/lib64/libnvvm.so
-export NUMBAPRO_LIBDEVICE=/usr/local/cuda-8.0/nvvm/libdevice/
-
-# CUDA/CUDNN
-export PATH=/usr/local/cuda/bin:$PATH
-export LD_LIBRARY_PATH=/usr/local/cuda/lib64:$LD_LIBRARY_PATH #source /home/gilad/.bashrc
-export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
-export LD_LIBRARY_PATH=/usr/local/cuda/extras/CUPTI/lib64:$LD_LIBRARY_PATH
