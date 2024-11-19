@@ -52,6 +52,16 @@ Host dhcp
 ```
 All you need to log in now is `ssh webserver` or `ssh dhcp`.
 
+## Copy SSK Key to Server
+Use the following command to install your public key on the remote machine.
+This allows you to use public key authentication for SSH instead of
+password-based authentication.
+Replace alias_host_name with the Host value set in the config file
+
+```bash
+ssh-copy-id your_username@alias_host_name
+```
+
 # sshfs
 makes remote directory appear in the local folder sshfs-dir
 ```bash
