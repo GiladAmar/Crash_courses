@@ -85,8 +85,6 @@ def to_sig_figures(x, n_sig):
     )
 
 
-
-
 def reduce_pandas_df_mem_usage(df):
     start_mem_usg = df.memory_usage().sum() / 1024 ** 2
     print("Memory usage of properties dataframe is :", start_mem_usg, " MB")
@@ -142,3 +140,19 @@ def reduce_pandas_df_mem_usage(df):
 
 
 df_reduced, na_list = reduce_mem_usage(df)
+
+
+# Correlation Matrix
+pandas.dataframe.corr(method=’kendall’)
+
+
+# Pandas notesF
+incremental building using pointers in time
+
+Validation along the way
+
+making great expectations config from pandas profiling
+
+infering and setting dtypes - esp categorical to save on size
+
+fancy correlation
