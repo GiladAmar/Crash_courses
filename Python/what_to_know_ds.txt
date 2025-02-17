@@ -1,0 +1,73 @@
+Planning/Teamwork:
+  git + github
+  jira
+  pre-commit
+  CI/CD tools
+  
+  
+Unix Basics:
+  Terminal basics
+    grep
+    ssh
+    cd 
+    resync
+    screen/tmux
+    curl
+    etc...
+  Bash scripts
+  makefiles
+  
+  
+Python:  
+  pip pyPI, other repos, setup.py
+  pyenv/virtualenv
+  pep8/black/isort/mypy
+  python debugging
+  creating cli's/ using click/arqparse whatever
+  matplotlib
+  regex
+  logging
+  pytest
+  typing
+  documentation 
+    (incl. GitHub markdown)
+  Using an API
+  
+IDE's 
+  VSCode/Pycharm
+  Jupyter Notebook
+  
+
+DataScience:
+  SQL
+  advanced pandas
+  scikit-learn
+  keras/tensorflow/pytorch
+  
+  
+Production:
+  docker
+  docker-compose
+    docker repositories
+  AWS
+    ec2 instances
+    s3 buckets
+    aws-cli
+    aws-vault
+   Airflow
+   Sentry
+   
+   
+   -----------Extras
+   Django
+   Redis
+   FastAPI
+   Celery
+   
+DataProphet
+   PRESCRIBE
+   omni modelling
+   datastore
+   prescribe-core
+   DP styles for matplotlib
+   

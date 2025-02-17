@@ -1,0 +1,239 @@
+Notes from Pycon Talks
+
+list comprehensions (doing the same thing) are faster than a for loop
+
+class faster than dataclass faster than namedtuple
+
+reduce the number of function calls by doing that work inline
+e.g. pyinline which makes that function inline, despite looking like a function call
+
+use right datatype
+
+
+
+TIME
+	Dont use
+	datetime.now - system time
+	and .utcnow - does not contain tzinfo
+
+	dont' use
+	date.today() - system time
+
+	Dont do duration arithmatic outside of UTC
+
+
+	dont use pytz
+
+	dont replace tz on tzaware tz
+
+
+	try:
+		from zoneinfor import ZoneInfo
+	except ImportError:
+		from backports.zoneinfo import ZoneInfo
+
+
+	tz = ZoneInfo("America/New_York")
+	dt = datetime(2022,4,6,12, 0. tzinfo=tz)
+
+
+	# get the current time
+	from datetime import datetime, timezone
+	df = datetime.now(timezone.utc)
+
+	to get the date in tz
+
+	date = datetime.now(ZoneInfor('America/New_York')).date()
+
+	.astimezone(tz) to get in their tz
+
+
+	# to make naive dt tz aware:
+	tz = ZoneInfor("America/New_York")
+	naive_dt.replace(tzinfo=tz).astimezone(timezone.utc)
+
+	#iso to utc
+	dt_str = "2022-03-13T03:30:00-04:00"
+	datetime.fromisoformat(dt_str).astimezone(timezone.utc)
+
+	#Calendar math like a day later or two months later
+	do 
+	tz = ZoneInfor("Amaerica/New_York")
+	local_dt = datetime(2022,8,1,0,0, yzinfo = tz)
+
+	local_dt.date() + timedelta(days=120)
+
+
+
+Bug in someone elses code:
+	@functions.lru_cache(1) for a function you only really need to run once
+
+	if has_pandas_bug:
+		apply workaround here
+	else:
+		run as usual
+	maybe a context manager so the 'fix' only applies in one area
+
+
+Memray for memory profiling
+
+Pyarrow
+	pyarrow arrowcsv.read + .to_pandas is sig faster than pd.read_csv(
+
+	only for numerical no-null data
+
+	pyarrow.parquet as pq,
+	 pd.read_parquet longer than
+	vs pq.read_table('.parquet')
+
+	#Memory mapped file:
+
+
+
+
+GEospacial Data
+	Geopandas
+	dask-geopandas
+	parquet file is king
+
+	raster is faster
+	vector is correcter
+	xarray-spatial
+
+	datashader is great...
+
+Serialization:
+	ice-pickle for sklearn models
+	joblib for np arrays 
+
+
+
+Model Review:
+	Transparent
+	Reproducable
+	Showlege sharing
+	( Automated)
+
+Compared to Code Revew
+	code has more eyse on it
+	PR's have record of changes
+	knowledge hsaring ebtween teammates
+
+Model performance
+what data was used + transformations
+entire ML process, what was tried, what worked etc
+
+Model review requires more than JUST code
+
+MLFLOW - 
+	Tracking - parameters
+		metrics
+		arbit files
+		code version
+		training data
+	Projects - format code to reproduce runs
+	Models - way to save model
+	Model Registry
+
+Logging parameters
+
+mlflow ui interminal
+shows all experiments
+bydefaul saves to mlruns/
+
+api as well to access folder contents
+
+auto-logging for several modelling libraries:
+	mlflow.sklearn.autolog() before training
+
+allows comparison between diff models at the same time
+
+
+
+Identifying transitive dependencies:
+pip-compile --anotations-style=line --output-file=requirements.lock dev-requirements-djangoxx.in
+django has good notes on how to do an upgrade
+
+e.g. django-codemod to auto fix deprecations
+
+
+Testing:
+Nice to split each test into:
+Prepare
+Act
+Assert
+
+
+
+ThreadpoolExecutor
+executor = ThreadpoolExecutor()
+
+  
+executor.submit()
+
+
+Documentation Notes:
+Value the readers time, they want to get to use the class/function/whatever not read a novel
+
+Verify you information is correct
+
+Table of contents for easy scanning
+
+show people what it does, don't tell them
+
+
+DOn't say exlusive terms:
+"easy' "trivial", or acronyms
+
+
+
+Editing SMells:
+	in order to 
+	is taken to
+	to ensure
+	can be
+	may
+
+	we
+
+	like
+	you your
+	you're
+
+	our
+	sure
+
+	facilitate
+	utilize
+
+	will do
+	will save etc...
+
+	are to
+
+Pathlib rather than os.path and glob
+
+auto complete bash stuf
+
+
+mpl.rcParams['font.family'] = 'Avenir'
+
+
+find values along a line/polynomial/circle? in an image
+
+an avg hist equalization to be used acroos a dataset
+
+
+
+---------------------------------NVIDIA RAPIDS Ecosystem:
+cudf
+sklearn-like models
+umap 
+xgboost
+cugraph
+numba gpu support
+
+datashader
+hvplot- supports cudf
+
+

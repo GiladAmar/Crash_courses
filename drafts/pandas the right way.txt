@@ -1,0 +1,68 @@
+pandas the right way
+chaining:
+	dropna
+	loc
+	drop_duplicates
+	read_
+	assign
+	sort_values
+	group_by
+	agg
+	set_index\
+	mean
+	median
+	sum
+	resample
+	drop_level
+	sort_index
+	as_type
+	merge
+	fill_na
+	reset_index
+	set_axis
+	loc
+	iloc
+	shift
+	concact
+	interpolate
+	diff
+	set colnames
+	drop
+	isin
+	ffill, bfill
+	unstack
+	replace
+	query
+	rolling
+	append
+	merge_asof
+piping
+using lambdas
+debugging
+loc, iloc, why that ****ing warning shows up, spare you having to make defensive copies
+
+apply
+
+
+Analysis Tools:
+fancy correlation
+Making sense of NaNs
+One-to-One, many_to_one, many_to_many
+
+Processing:
+When Rolling mean makes sense, on sensor data
+Grouping, multi-indexes, 
+
+
+drop_duplcates, or dropna, and others, instead of axis=1, or axis =0 , just say columns = [this, that], or rows, [0,1]
+
+
+Odds are, if you're using a for loop, you're doing it wrong.
+Sometimes, if it's a quick analysis and thinking how to do it 'correctly' will waste time, then fuck it.
+
+
+
+modern working with datetimes, tz, that pendulum
+
+asswerts should return a string as well\
+excpetions should raise up the error
