@@ -6,6 +6,11 @@
 2. [FireFox](https://www.mozilla.org/en-US/firefox/new/)
 3. [iTerm2](https://iterm2.com/downloads.html)
 4. [Stillcolor](https://github.com/aiaf/Stillcolor)
+5. [Spotify](https://www.spotify.com/us/download/android/)
+6. [VSCode](https://code.visualstudio.com/download)
+7. [Dropbox](https://www.dropbox.com/install)
+
+
 
 ### CLI
 1. Xcode
@@ -31,6 +36,7 @@
 ### AppStore
 1. MS Teams
 2. MS Office
+3. Watsapp
 
 ## Configuration
 1. Pycharm
@@ -46,3 +52,4 @@
 
 # TODO Potential adds
 1. Poetry
+2. UV
